@@ -1,0 +1,28 @@
+# Spring properties
+spring:
+  application:
+      name: CaasApi
+  security:
+    username: admin
+    password: openpaasta
+
+project:
+  name: caas-api
+  artifactId: caas-api
+  description: caas-api management service
+
+# HTTP Server
+server:
+  port: 3333 #${PORT:2222}   # HTTP (Tomcat) port
+
+management:     # If you set off security...
+  security:
+    enabled: false
+
+---
+spring:
+  profiles: local
+
+---
+spring:
+  profiles: dev
