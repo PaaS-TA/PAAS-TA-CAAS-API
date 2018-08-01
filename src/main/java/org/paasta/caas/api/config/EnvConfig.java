@@ -15,12 +15,9 @@ import org.springframework.stereotype.Component;
 @Data
 public class EnvConfig {
 
-	@Value("${dashboard.url}")
-	String dashboardUrl;
-
 	@Value("${caas.url}")
 	String caasUrl;
 
-	@Value("${caas.test-user-token}")
+	@Value("${caas.testUserToken}")
 	String testUserToken;
 }
