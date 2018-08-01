@@ -40,9 +40,9 @@ public class ClusterService {
     public Map<String, Object> getNamespaceList() {
         Map result = new HashMap();
         //try {
-            // ToBe 토큰 및 설정값 프로퍼티 참조
-            // response : Map request : vo
-            // 헤더 셋팅 부분 및 공통화 가능부분 리펙토링
+        // ToBe 토큰 및 설정값 프로퍼티 참조
+        // response : Map request : vo
+        // 헤더 셋팅 부분 및 공통화 가능부분 리펙토링
 
         String tempToken = envConfig.getCaasUrl();
         LOGGER.info("tempToken:: "+tempToken);
@@ -65,7 +65,7 @@ public class ClusterService {
         result.put("data", responseEntity.getBody());
         result.put("statusCode", responseEntity.getStatusCode());
 
-       // }
+        // }
 //        // 해당 부분의 exception catch   GlobalControllerExceptionHandler 의 ExceptionHandler 보다 우선순위가 높기에 특정 처리 필요시 작성
 //        catch (Exception e) {
 //            e.printStackTrace();
