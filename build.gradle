@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'jacoco'
 apply plugin: 'io.spring.dependency-management'
 
 repositories {
@@ -18,7 +19,9 @@ repositories {
 ext {
     appGroup = 'org.paasta.caas.api'
     springIoPlatformVersion = 'Cairo-SR3'
+    apacheHttpClientVersion = '4.5.6'
     lombokVersion = '1.18.2'
+    jacocoVersion = '0.8.1'
 }
 
 dependencyManagement {
@@ -38,9 +41,18 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-aop"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    // Apache HttpClient
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+    compile "org.apache.httpcomponents:httpclient:${apacheHttpClientVersion}"
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
 
+jacoco {
+    toolVersion = "${jacocoVersion}"
+}
+
+test {
+    ignoreFailures=true
+    jacoco {
+        destinationFile = file("$buildDir/jacoco/jacoco-overall.exec")
+    }
+}
