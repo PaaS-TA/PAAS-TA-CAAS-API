@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 @Data
 public class EnvConfig {
 
-	@Value("${caas.url}")
-	String caasUrl;
+	@Value("${kubernetes.api.endpoint}")
+	String kubeApiUrl;
 
-	@Value("${caas.testUserToken}")
-	String testUserToken;
+	@Value("${kubernetes.adminToken}")
+	String kubeAdminToken;
 }

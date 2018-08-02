@@ -2,8 +2,6 @@ package org.paasta.caas.api.apis.cluster;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -27,13 +25,13 @@ public class ClusterController {
     /**
      * description.
      *
-     * @param req   HttpServletRequest(자바클래스)
+     * //@param req   HttpServletRequest(자바클래스)
      * @return Map(자바클래스)
      * @throws Exception Exception(자바클래스)
      */
     @GetMapping("/namespaces")
-    public Map<String, Object> getNamespaceList(HttpServletRequest req) throws Exception {
-        return clusterService.getNamespaceList();
+    public Map<String, Object> getNamespaceList(@RequestParam Map<String, Object> map) throws Exception {
+        return clusterService.getNamespaceList(map);
     }
 
 }

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.RestTemplate;
 
 //import org.apache.http.client.HttpClient;
@@ -37,18 +38,25 @@ public class ClusterService {
      *
      * @return int int
      */
-    public Map<String, Object> getNamespaceList() {
+    public Map<String, Object> getNamespaceList(Map<String, Object> map) {
         Map result = new HashMap();
         //try {
         // ToBe 토큰 및 설정값 프로퍼티 참조
         // response : Map request : vo
         // 헤더 셋팅 부분 및 공통화 가능부분 리펙토링
 
-        String tempToken = envConfig.getCaasUrl();
-        LOGGER.info("tempToken:: "+tempToken);
+        String kubeAccountToken;
+
+        if (!ObjectUtils.isEmpty(map.get("token"))) {
+            kubeAccountToken = map.get("token").toString();
+            LOGGER.info("Get InputToken : "+ kubeAccountToken);
+        }else{
+            kubeAccountToken = envConfig.getKubeAdminToken();
+            LOGGER.info("Get AdminToken : "+ kubeAccountToken);
+        }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer "+tempToken);
+        headers.add("Authorization", "Bearer "+kubeAccountToken);
         headers.add("Content-Type", "application/json");
 
         Map<String, Object> param = new HashMap<>();
@@ -56,7 +64,7 @@ public class ClusterService {
         param.put("reqParam_sample_2", "2");
 
         HttpEntity<Map> resetEntity = new HttpEntity(param, headers);
-        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getCaasUrl() + "/api/v1/namespaces", HttpMethod.GET, resetEntity, Map.class);
+        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getKubeApiUrl() + "/api/v1/namespaces", HttpMethod.GET, resetEntity, Map.class);
 
         LOGGER.debug(responseEntity.getBody().toString());
 
@@ -65,8 +73,11 @@ public class ClusterService {
         result.put("data", responseEntity.getBody());
         result.put("statusCode", responseEntity.getStatusCode());
 
+        // restTemplate 에 대한 예외처리는 GlobalControllerExceptionHandler 에서 처리
+        // 서비스단에서 처리하는 exception 처리는
+        // GlobalControllerExceptionHandler 의 ExceptionHandler 보다 우선순위가 높기에 특정 처리 필요시에만 작성
         // }
-//        // 해당 부분의 exception catch   GlobalControllerExceptionHandler 의 ExceptionHandler 보다 우선순위가 높기에 특정 처리 필요시 작성
+//        //
 //        catch (Exception e) {
 //            e.printStackTrace();
 //            result.put("result", "fail");
@@ -75,6 +86,7 @@ public class ClusterService {
 //        }
         return result;
     }
+
 
 
 }
