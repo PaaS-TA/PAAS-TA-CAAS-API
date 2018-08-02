@@ -1,7 +1,7 @@
 # Spring properties
 spring:
   application:
-      name: CaasApi
+      name: caas-api
   security:
     username:
     password:
@@ -11,27 +11,43 @@ project:
   artifactId: caas-api
   description: caas-api management service
 
-# HTTP Server
-server:
-  port: ${PORT:3333}   # HTTP (Tomcat) port
-
 management:     # If you set off security...
   security:
     enabled: false
 
 ---
 spring:
-  profiles: local
+  profiles:
+    active: local
+
+logging:
+  level:
+    ROOT: INFO
+  path: classpath:logback-spring.xml
+  file: logs/application.log
+
+# HTTP Server
+server:
+  port: ${PORT:3333}   # HTTP (Tomcat) port
 
 kubernetes:
   adminToken: ADMIN_TOKEN
   api:
     endpoint: KUBE_API_ENDPOINT
 
-
 ---
 spring:
   profiles: dev
+
+logging:
+  level:
+    ROOT: INFO
+  path: classpath:logback-spring.xml
+  file: logs/application.log
+
+# HTTP Server
+server:
+  port: ${PORT:3333}   # HTTP (Tomcat) port
 
 kubernetes:
   adminToken: ADMIN_TOKEN
