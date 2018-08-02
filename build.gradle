@@ -16,9 +16,9 @@ repositories {
 }
 
 ext {
+    appGroup = 'org.paasta.caas.api'
     springIoPlatformVersion = 'Cairo-SR3'
     lombokVersion = '1.18.2'
-    appGroup = 'org.paasta.caas.api'
 }
 
 dependencyManagement {
