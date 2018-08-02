@@ -11,6 +11,10 @@ project:
   artifactId: caas-api
   description: caas-api management service
 
+caas:
+  url:
+  testUserToken :
+
 # HTTP Server
 server:
   port: ${PORT:3333}   # HTTP (Tomcat) port
