@@ -1,4 +1,4 @@
-package org.paasta.caas.api.apis.cluster;
+package org.paasta.caas.api.cluster;
 
 import org.paasta.caas.api.config.EnvConfig;
 import org.slf4j.Logger;
@@ -71,7 +71,7 @@ public class ClusterService {
         result.put("result", "success");
         result.put("msg", "You have successfully completed the task.");
         result.put("data", responseEntity.getBody());
-        result.put("statusCode", responseEntity.getStatusCode());
+        result.put("statusCode", responseEntity.getStatusCodeValue());
 
         // restTemplate 에 대한 예외처리는 GlobalControllerExceptionHandler 에서 처리
         // 서비스단에서 처리하는 exception 처리는

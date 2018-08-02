@@ -1,4 +1,4 @@
-package org.paasta.caas.api.apis.cluster;
+package org.paasta.caas.api.cluster;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
