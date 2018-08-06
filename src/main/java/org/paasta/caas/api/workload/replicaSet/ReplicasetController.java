@@ -25,6 +25,18 @@ public class ReplicasetController {
     }
 
     /**
+     * ReplicaSet 객체의 리스트를 조회한다.(전체 네임스페이스에서 조회)
+     * @param map RequestParameter
+     * @return ReplicaSetList
+     * @see ReplicasetService#getReplicaSetList
+     */
+    @GetMapping(value = "/replicasets")
+    @ResponseBody
+    public Map<String, Object> getReplicaSetListByAllNameppace(@RequestParam Map<String, Object> map){
+        return replicasetService.getReplicaSetListByAllNamespace(map);
+    }
+
+    /**
      * ReplicaSet 객체의 리스트를 조회한다.
      *
      * @param namespace 조회 대상 네임스페이스
@@ -49,7 +61,7 @@ public class ReplicasetController {
     @GetMapping(value = "/namespaces/{namespace}/replicasets/{replicasetsName}")
     @ResponseBody
     public Map<String, Object> getReplicaSet(@PathVariable("namespace") String namespace, @PathVariable("replicasetsName") String replicasetsName, @RequestParam Map<String, Object> map) {
-        return replicasetService.getReplicaSetList(namespace, map);
+        return replicasetService.getReplicaSet(namespace, replicasetsName, map);
     }
 
 }

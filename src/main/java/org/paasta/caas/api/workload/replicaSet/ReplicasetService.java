@@ -37,6 +37,34 @@ public class ReplicasetService {
     @Autowired
     private EnvConfig envConfig;
 
+
+
+    /**
+     * ReplicaSet List 조회(전체 네임스페이스 조회)
+     *
+     * @return Map
+     */
+    public Map<String, Object> getReplicaSetListByAllNamespace(Map<String, Object> map) {
+        Map result = new HashMap();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer "+envConfig.getKubeAdminToken());
+        headers.add("Content-Type", "application/json");
+
+        Map<String, Object> param = new HashMap<>();
+        HttpEntity<Map> resetEntity = new HttpEntity(param, headers);
+        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getKubeApiUrl() + "/apis/apps/v1/replicasets", HttpMethod.GET, resetEntity, Map.class);
+
+        LOGGER.debug(responseEntity.getBody().toString());
+
+        result.put("result", "success");
+        result.put("msg", "You have successfully completed the task.");
+        result.put("data", responseEntity.getBody());
+        result.put("statusCode", responseEntity.getStatusCodeValue());
+
+        return result;
+    }
+
     /**
      * ReplicaSet List 조회
      *
@@ -51,7 +79,7 @@ public class ReplicasetService {
 
         Map<String, Object> param = new HashMap<>();
         HttpEntity<Map> resetEntity = new HttpEntity(param, headers);
-        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getKubeApiUrl() + "/api/v1/namespaces/"+namespace+"/replicasets", HttpMethod.GET, resetEntity, Map.class);
+        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getKubeApiUrl() + "/apis/apps/v1/namespaces/"+namespace+"/replicasets", HttpMethod.GET, resetEntity, Map.class);
 
         LOGGER.debug(responseEntity.getBody().toString());
 
@@ -63,6 +91,30 @@ public class ReplicasetService {
         return result;
     }
 
+    /**
+     * ReplicaSet 상세 조회
+     *
+     * @return Map
+     */
+    public Map<String, Object> getReplicaSet(String namespace, String replicasetsName, Map<String, Object> map) {
+        Map result = new HashMap();
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer "+envConfig.getKubeAdminToken());
+        headers.add("Content-Type", "application/json");
+
+        Map<String, Object> param = new HashMap<>();
+        HttpEntity<Map> resetEntity = new HttpEntity(param, headers);
+        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getKubeApiUrl() + "/apis/apps/v1/namespaces/"+namespace+"/replicasets/"+replicasetsName, HttpMethod.GET, resetEntity, Map.class);
+
+        LOGGER.debug(responseEntity.getBody().toString());
+
+        result.put("result", "success");
+        result.put("msg", "You have successfully completed the task.");
+        result.put("data", responseEntity.getBody());
+        result.put("statusCode", responseEntity.getStatusCodeValue());
+
+        return result;
+    }
 
 }
