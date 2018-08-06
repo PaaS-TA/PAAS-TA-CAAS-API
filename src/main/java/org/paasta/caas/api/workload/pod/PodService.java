@@ -1,18 +1,22 @@
-package org.paasta.caas.api.cluster;
+package org.paasta.caas.api.workload.pod;
 
 import org.paasta.caas.api.config.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //import org.apache.http.client.HttpClient;
 //import javax.servlet.http.HttpServletResponse;
-
-import java.util.*;
 
 
 /**
@@ -23,9 +27,9 @@ import java.util.*;
  * @since 2018.8.01 최초작성
  */
 @Service
-public class ClusterService {
+public class PodService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClusterService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PodService.class);
 
     @Autowired
     RestTemplate restTemplate;
@@ -38,15 +42,14 @@ public class ClusterService {
      *
      * @return int int
      */
-    public Map<String, Object> getNamespaceList(Map<String, Object> map) {
+    public Map<String, Object> getPodList(String namespace, Map<String, Object> map) {
         Map result = new HashMap();
         //try {
-        // ToBe 토큰 및 설정값 프로퍼티 참조
+        // ToBe
         // response : Map request : vo
         // 헤더 셋팅 부분 및 공통화 가능부분 리펙토링
 
         String kubeAccountToken;
-
         if (!ObjectUtils.isEmpty(map.get("token"))) {
             kubeAccountToken = map.get("token").toString();
             LOGGER.info("Get InputToken : "+ kubeAccountToken);
@@ -64,7 +67,7 @@ public class ClusterService {
         param.put("reqParam_sample_2", "2");
 
         HttpEntity<Map> resetEntity = new HttpEntity(param, headers);
-        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getKubeApiUrl() + "/api/v1/namespaces", HttpMethod.GET, resetEntity, Map.class);
+        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getKubeApiUrl() + "/api/v1/namespaces/"+namespace+"/pods", HttpMethod.GET, resetEntity, Map.class);
 
         LOGGER.debug(responseEntity.getBody().toString());
 

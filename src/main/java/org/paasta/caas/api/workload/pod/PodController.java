@@ -1,7 +1,8 @@
-package org.paasta.caas.api.cluster;
+package org.paasta.caas.api.workload.pod;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 /**
@@ -12,14 +13,14 @@ import java.util.Map;
  * @since 2018.08.01 최초작성
  */
 @RestController
-@RequestMapping("/cluster")
-public class ClusterController {
+@RequestMapping("/workload")
+public class PodController {
     //private static final Logger LOGGER = LoggerFactory.getLogger(ClusterController.class);
-    private final ClusterService clusterService;
+    private final PodService podService;
 
     @Autowired
-    public ClusterController(ClusterService clusterService) {
-        this.clusterService = clusterService;
+    public PodController(PodService podService) {
+        this.podService = podService;
     }
 
     /**
@@ -29,9 +30,10 @@ public class ClusterController {
      * @return Map(자바클래스)
      * @throws Exception Exception(자바클래스)
      */
-    @GetMapping("/namespaces")
-    public Map<String, Object> getNamespaceList(@RequestParam Map<String, Object> map) throws Exception {
-        return clusterService.getNamespaceList(map);
+    @GetMapping(value = "/namespaces/{namespace}/pods")
+    @ResponseBody
+    public Map<String, Object> getPodList(@PathVariable("namespace") String namespace, @RequestParam Map<String, Object> map){
+        return podService.getPodList(namespace, map);
     }
 
 }
