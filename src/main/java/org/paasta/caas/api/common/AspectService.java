@@ -14,18 +14,35 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Objects;
 
+/**
+ * Aspect Service 클래스
+ *
+ * @author REX
+ * @version 1.0
+ * @since 2018.08.06
+ */
 @Aspect
 @Service
 public class AspectService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AspectService.class);
 
+    /**
+     * On before log service access.
+     *
+     * @param joinPoint the join point
+     */
     @Before("execution(* org.paasta.caas..*Service.*(..))")
     public void onBeforeLogServiceAccess(JoinPoint joinPoint) {
         LOGGER.warn("######## ON BEFORE SERVICE ACCESS :: {}", joinPoint);
     }
 
 
+    /**
+     * On before log controller access.
+     *
+     * @param joinPoint the join point
+     */
     @Before("execution(* org.paasta.caas..*Controller.*(..))")
     public void onBeforeLogControllerAccess(JoinPoint joinPoint) {
         LOGGER.warn("#### API :: ON BEFORE CONTROLLER ACCESS :: {}", joinPoint);
