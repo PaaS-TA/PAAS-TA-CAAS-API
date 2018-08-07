@@ -4,12 +4,14 @@ buildscript {
     }
     dependencies {
         classpath 'io.spring.gradle:dependency-management-plugin:1.0.0.RELEASE'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.4.RELEASE")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 repositories {
@@ -38,7 +40,6 @@ jar {
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-loader"
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-aop"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
