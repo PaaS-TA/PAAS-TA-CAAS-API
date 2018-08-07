@@ -11,12 +11,11 @@ import org.springframework.stereotype.Component;
  * @since 2018.07.24
  * @version 20180724
  */
-
+@Component
 @Data
 public class EnvConfig {
 
 	String kubeApiUrl;
-
 
 	String kubeAdminToken;
 }
