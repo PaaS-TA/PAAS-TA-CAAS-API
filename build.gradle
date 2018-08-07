@@ -38,6 +38,7 @@ jar {
 }
 
 dependencies {
+    compile "org.springframework.boot:spring-boot-loader"
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-aop"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
