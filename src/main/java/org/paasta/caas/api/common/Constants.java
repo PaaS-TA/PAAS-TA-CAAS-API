@@ -9,16 +9,18 @@ package org.paasta.caas.api.common;
  */
 public class Constants {
 
-    public Constants(){};
+    /*RESULT STATUS*/
+    public static final String RESULT_STATUS_SUCCESS = "SUCCESS";
 
-    /**
-     * 사용유무 사용
-     */
-    //public static final String USE_YN_Y = "Y";
+    /*TARGET API*/
+    public static final String TARGET_CAAS_API = "caasApi";
+    public static final String TARGET_COMMON_API = "commonApi";
 
-    /**
-     * API REST URL prefix
-     */
-    //public static final String V2_URL = "/v2";
-    //public static final String V3_URL = "/v3";
+    /*CAAS MASTER API*/
+    public static final String API_URL_V1 = "/api/v1";
+    public static final String API_URL_NAMESPACES_LIST = API_URL_V1 + "/namespaces";
+
+    public Constants() {
+        throw new IllegalStateException();
+    }
 }
