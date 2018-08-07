@@ -19,17 +19,12 @@ import java.util.Map;
 @RequestMapping("/cluster")
 public class NamespaceController {
     //private static final Logger LOGGER = LoggerFactory.getLogger(ClusterController.class);
+
     private final NamespaceService namespaceService;
 
     @Autowired
     public NamespaceController(NamespaceService namespaceService) {
         this.namespaceService = namespaceService;
-    }
-
-    // TODO :: REMOVE
-    @GetMapping(value = "/namespaces2")
-    public Map<String, Object> getNamespaceList(@RequestParam Map<String, Object> map){
-        return namespaceService.getNamespaceList(map);
     }
 
     @GetMapping("/namespaces")
