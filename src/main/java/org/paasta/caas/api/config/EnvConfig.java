@@ -11,13 +11,12 @@ import org.springframework.stereotype.Component;
  * @since 2018.07.24
  * @version 20180724
  */
-@Component
+
 @Data
 public class EnvConfig {
 
-	@Value("${kubernetes.api.endpoint}")
 	String kubeApiUrl;
 
-	@Value("${kubernetes.adminToken}")
+
 	String kubeAdminToken;
 }
