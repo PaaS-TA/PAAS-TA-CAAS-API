@@ -1,6 +1,5 @@
 package org.paasta.caas.api.workload.pod;
 
-import org.paasta.caas.api.config.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ public class PodService {
     @Autowired
     RestTemplate restTemplate;
 
-    @Autowired
-    private EnvConfig envConfig;
-
     /**
      * 네임스페이스 리스트 조회
      *
@@ -54,7 +50,7 @@ public class PodService {
             kubeAccountToken = map.get("token").toString();
             LOGGER.info("Get InputToken : "+ kubeAccountToken);
         }else{
-            kubeAccountToken = envConfig.getKubeAdminToken();
+            kubeAccountToken = "";
             LOGGER.info("Get AdminToken : "+ kubeAccountToken);
         }
 
@@ -67,7 +63,7 @@ public class PodService {
         param.put("reqParam_sample_2", "2");
 
         HttpEntity<Map> resetEntity = new HttpEntity(param, headers);
-        ResponseEntity<Map> responseEntity = restTemplate.exchange(envConfig.getKubeApiUrl() + "/api/v1/namespaces/"+namespace+"/pods", HttpMethod.GET, resetEntity, Map.class);
+        ResponseEntity<Map> responseEntity = restTemplate.exchange("" + "/api/v1/namespaces/"+namespace+"/pods", HttpMethod.GET, resetEntity, Map.class);
 
         LOGGER.debug(responseEntity.getBody().toString());
 
