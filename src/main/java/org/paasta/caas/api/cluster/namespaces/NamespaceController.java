@@ -1,4 +1,4 @@
-package org.paasta.caas.api.cluster.namespace;
+package org.paasta.caas.api.cluster.namespaces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
