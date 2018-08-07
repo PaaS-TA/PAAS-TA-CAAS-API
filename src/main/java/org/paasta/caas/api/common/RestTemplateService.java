@@ -76,7 +76,7 @@ public class RestTemplateService {
         String apiUrl = "";
         String authorization = "";
 
-        // CAAS API
+        // CAAS MASTER API
         if (Constants.TARGET_CAAS_MASTER_API.equals(reqApi)) {
             apiUrl = propertyService.getCaasMasterApiUrl();
             authorization = caasApiBase64Authorization;
