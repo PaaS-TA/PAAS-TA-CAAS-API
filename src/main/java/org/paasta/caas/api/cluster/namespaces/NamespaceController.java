@@ -1,4 +1,4 @@
-package org.paasta.caas.api.cluster.namespace;
+package org.paasta.caas.api.cluster.namespaces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,16 +26,15 @@ public class NamespaceController {
         this.namespaceService = namespaceService;
     }
 
-    /**
-     * description.
-     *
-     * //@param req   HttpServletRequest(자바클래스)
-     * @return Map(자바클래스)
-     * @throws Exception Exception(자바클래스)
-     */
-    @GetMapping(value = "/namespaces")
+    // TODO :: REMOVE
+    @GetMapping(value = "/namespaces2")
     public Map<String, Object> getNamespaceList(@RequestParam Map<String, Object> map){
         return namespaceService.getNamespaceList(map);
+    }
+
+    @GetMapping("/namespaces")
+    public Namespace getNamespaceList() {
+        return namespaceService.getNamespaceList();
     }
 
 }

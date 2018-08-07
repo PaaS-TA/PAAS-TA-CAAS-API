@@ -1,5 +1,8 @@
-package org.paasta.caas.api.cluster.namespace;
+package org.paasta.caas.api.cluster.namespaces;
 
+import org.paasta.caas.api.common.CommonService;
+import org.paasta.caas.api.common.Constants;
+import org.paasta.caas.api.common.RestTemplateService;
 import org.paasta.caas.api.config.EnvConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.http.client.HttpClient;
@@ -30,18 +34,23 @@ import java.util.Map;
 public class NamespaceService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NamespaceService.class);
+    private final RestTemplateService restTemplateService;
+    private final CommonService commonService;
 
+//    TODO :: REMOVE
     @Autowired
     RestTemplate restTemplate;
 
+//    TODO :: REMOVE
     @Autowired
     private EnvConfig envConfig;
 
-    /**
-     * 네임스페이스 리스트 조회
-     *
-     * @return int int
-     */
+    @Autowired
+    public NamespaceService(RestTemplateService restTemplateService, CommonService commonService) {this.restTemplateService = restTemplateService;
+        this.commonService = commonService;
+    }
+
+    // TODO :: REMOVE
     public Map<String, Object> getNamespaceList(Map<String, Object> map) {
         Map result = new HashMap();
         //try {
@@ -87,6 +96,19 @@ public class NamespaceService {
 //            result.put("msg", e.getMessage());
 //            result.put("statusCode", e.get);
 //        }
+        return result;
+    }
+
+
+    Namespace getNamespaceList() {
+        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES_LIST, HttpMethod.GET, null, Map.class);
+        LOGGER.info("########## getNamespaceList() :: hashMap.toString() :: {}", hashMap.toString());
+
+        Namespace result = new Namespace();
+        result.setResult(Constants.RESULT_STATUS_SUCCESS);
+        result.setItems(commonService.setListData(Namespace.class, "metadata", (List) hashMap.get("items")));
+//        result.setItems(setListData(new Namespace(), "metadata", (List) hashMap.get("items"))); // SAME RESULT
+
         return result;
     }
 
