@@ -1,4 +1,4 @@
-package org.paasta.caas.api.cluster.namespaces;
+package org.paasta.caas.api.cluster.namespace;
 
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
