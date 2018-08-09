@@ -45,6 +45,9 @@ dependencies {
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     compile "org.apache.httpcomponents:httpclient:${apacheHttpClientVersion}"
 
+    compile group: 'io.kubernetes', name: 'client-java', version: '2.0.0'
+
+
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
 

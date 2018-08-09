@@ -1,13 +1,10 @@
 package org.paasta.caas.api.workload.replicaSet;
 
-import com.fasterxml.jackson.databind.AnnotationIntrospector;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import io.kubernetes.client.models.V1beta1ReplicaSetList;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.RestTemplateService;
+import org.paasta.caas.api.common.model.CommonReplicasetList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +13,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.client.RestTemplate;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-//import org.apache.http.client.HttpClient;
-//import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -52,19 +42,19 @@ public class ReplicasetService {
      *
      * @return Map
      */
-    ReplicasetList getReplicaSetListByAllNamespace() {
+    CommonReplicasetList getReplicaSetListByAllNamespace() {
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_REPLICASET_LIST, HttpMethod.GET, null, Map.class);
         LOGGER.info("########## getNamespaceList() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        ReplicasetList replicasetList = gson.fromJson(gson.toJson(hashMap), ReplicasetList.class);
+        CommonReplicasetList commonReplicasetList = gson.fromJson(gson.toJson(hashMap), CommonReplicasetList.class);
 
 //        Namespace result = new Namespace();
 //        result.setResult(Constants.RESULT_STATUS_SUCCESS);
 //        result.setItems(commonService.setListData(Namespace.class, "metadata", (List) hashMap.get("items")));
 //        result.setItems(setListData(new Namespace(), "metadata", (List) hashMap.get("items"))); // SAME RESULT
 
-        return replicasetList;
+        return commonReplicasetList;
     }
 
 
