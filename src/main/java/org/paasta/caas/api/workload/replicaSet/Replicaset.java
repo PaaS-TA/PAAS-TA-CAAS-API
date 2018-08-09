@@ -3,7 +3,7 @@ package org.paasta.caas.api.workload.replicaSet;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
-import org.paasta.caas.api.common.model.CommonReplicaSetSpec;
+import org.paasta.caas.api.common.model.CommonSpec;
 import org.paasta.caas.api.common.model.CommonStatus;
 
 /**
@@ -20,7 +20,7 @@ public class Replicaset {
     private CommonMetaData metadata = null;
 
     @SerializedName("spec")
-    private CommonReplicaSetSpec spec = null;
+    private CommonSpec spec = null;
 
     @SerializedName("status")
     private CommonStatus status = null;
