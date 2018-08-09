@@ -14,20 +14,20 @@ import lombok.Data;
 public class CommonStatus {
 
     @SerializedName("availableReplicas")
-    private Integer availableReplicas = null;
+    private int availableReplicas;
 
     @SerializedName("fullyLabeledReplicas")
-    private Integer fullyLabeledReplicas = null;
+    private int fullyLabeledReplicas;
 
     @SerializedName("observedGeneration")
-    private Long observedGeneration = null;
+    private long observedGeneration;
 
     @SerializedName("readyReplicas")
-    private Integer readyReplicas = null;
+    private int readyReplicas;
 
     @SerializedName("replicas")
-    private Integer replicas = null;
+    private int replicas;
 
     //@SerializedName("conditions")
-    //private List<ReplicaSetCondition> conditions = null;
+    //private List<ReplicaSetCondition> conditions;
 }

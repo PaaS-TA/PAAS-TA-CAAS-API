@@ -1,5 +1,6 @@
 package org.paasta.caas.api.common.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
@@ -17,54 +18,55 @@ import java.util.Map;
 public class CommonMetaData {
 
     @SerializedName("labels")
-    private Map<String, String> labels = null;
+    private Map<String, String> labels;
 
     @SerializedName("name")
-    private String name = null;
+    private String name;
 
     @SerializedName("namespace")
-    private String namespace = null;
+    private String namespace;
 
     @SerializedName("annotations")
-    private Map<String, String> annotations = null;
+    private Map<String, String> annotations;
 
     @SerializedName("clusterName")
-    private String clusterName = null;
+    private String clusterName;
 
     @SerializedName("creationTimestamp")
-    private String creationTimestamp = null;
+    private String creationTimestamp;
 
     @SerializedName("deletionGracePeriodSeconds")
-    private Long deletionGracePeriodSeconds = null;
+    private long deletionGracePeriodSeconds;
 
     @SerializedName("deletionTimestamp")
-    private String deletionTimestamp = null;
+    private String deletionTimestamp;
 
     @SerializedName("finalizers")
-    private List<String> finalizers = null;
+    private List<String> finalizers;
 
     @SerializedName("generateName")
-    private String generateName = null;
+    private String generateName;
 
     @SerializedName("generation")
-    private Long generation = null;
+    private long generation;
 
     @SerializedName("uid")
-    private String uid = null;
+    private String uid;
 
     @SerializedName("continue")
-    private String _continue = null;
+    @JsonProperty("continue")
+    private String _continue;
 
     @SerializedName("resourceVersion")
-    private String resourceVersion = null;
+    private String resourceVersion;
 
     @SerializedName("selfLink")
-    private String selfLink = null;
+    private String selfLink;
 
 
     //@SerializedName("initializers")
-    //private V1Initializers initializers = null;
+    //private V1Initializers initializers;
 
     //@SerializedName("ownerReferences")
-    //private List<V1OwnerReference> ownerReferences = null;
+    //private List<V1OwnerReference> ownerReferences;
 }

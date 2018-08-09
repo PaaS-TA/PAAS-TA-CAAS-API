@@ -16,95 +16,97 @@ import java.util.Map;
 public class CommonSpec {
 
     @SerializedName("minReadySeconds")
-    private Integer minReadySeconds = null;
+    private int minReadySeconds;
 
     @SerializedName("replicas")
-    private Integer replicas = null;
+    private int replicas;
 
     @SerializedName("selector")
-    private CommonLabelSelector selector = null;
+    private CommonLabelSelector selector;
 
     @SerializedName("template")
-    private CommonTemplateSpec template = null;
+    private CommonTemplateSpec template;
 
     @SerializedName("activeDeadlineSeconds")
-    private Long activeDeadlineSeconds = null;
+    private long activeDeadlineSeconds;
 
     @SerializedName("automountServiceAccountToken")
-    private Boolean automountServiceAccountToken = null;
+    private boolean automountServiceAccountToken;
 
     @SerializedName("dnsPolicy")
-    private String dnsPolicy = null;
+    private String dnsPolicy;
 
     @SerializedName("hostIPC")
-    private Boolean hostIPC = null;
+    private boolean hostIPC;
 
     @SerializedName("hostNetwork")
-    private Boolean hostNetwork = null;
+    private boolean hostNetwork;
 
     @SerializedName("hostPID")
-    private Boolean hostPID = null;
+    private boolean hostPID;
 
     @SerializedName("hostname")
-    private String hostname = null;
+    private String hostname;
 
     @SerializedName("nodeName")
-    private String nodeName = null;
+    private String nodeName;
 
     @SerializedName("nodeSelector")
-    private Map<String, String> nodeSelector = null;
+    private Map<String, String> nodeSelector;
 
     @SerializedName("priority")
-    private Integer priority = null;
+    private int priority;
 
     @SerializedName("priorityClassName")
-    private String priorityClassName = null;
+    private String priorityClassName;
 
     @SerializedName("restartPolicy")
-    private String restartPolicy = null;
+    private String restartPolicy;
 
     @SerializedName("schedulerName")
-    private String schedulerName = null;
+    private String schedulerName;
 
     @SerializedName("serviceAccount")
-    private String serviceAccount = null;
+    private String serviceAccount;
 
     @SerializedName("serviceAccountName")
-    private String serviceAccountName = null;
+    private String serviceAccountName;
 
     @SerializedName("shareProcessNamespace")
-    private Boolean shareProcessNamespace = null;
+    private boolean shareProcessNamespace;
 
     @SerializedName("subdomain")
-    private String subdomain = null;
+    private String subdomain;
 
     @SerializedName("terminationGracePeriodSeconds")
-    private Long terminationGracePeriodSeconds = null;
+    private long terminationGracePeriodSeconds;
+
+
 
 //    @SerializedName("tolerations")
-//    private List<Toleration> tolerations = null;
+//    private List<Toleration> tolerations;
 //
 //    @SerializedName("volumes")
-//    private List<Volume> volumes = null;
+//    private List<Volume> volumes;
 //
 //    @SerializedName("affinity")
-//    private V1Affinity affinity = null;
+//    private V1Affinity affinity;
 //
 //    @SerializedName("securityContext")
-//    private PodSecurityContext securityContext = null;
+//    private PodSecurityContext securityContext;
 //
 //    @SerializedName("imagePullSecrets")
-//    private List<V1LocalObjectReference> imagePullSecrets = null;
+//    private List<V1LocalObjectReference> imagePullSecrets;
 //
 //    @SerializedName("initContainers")
-//    private List<V1Container> initContainers = null;
+//    private List<V1Container> initContainers;
 //
 //    @SerializedName("containers")
 //    private List<Container> containers = new ArrayList<Container>();
 //
 //    @SerializedName("dnsConfig")
-//    private PodDNSConfig dnsConfig = null;
+//    private PodDNSConfig dnsConfig;
 //
 //    @SerializedName("hostAliases")
-//    private List<HostAlias> hostAliases = null;
+//    private List<HostAlias> hostAliases;
 }

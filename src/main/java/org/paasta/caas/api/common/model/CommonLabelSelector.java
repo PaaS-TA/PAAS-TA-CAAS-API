@@ -16,7 +16,7 @@ import java.util.Map;
 public class CommonLabelSelector {
 
     @SerializedName("matchLabels")
-    private Map<String, String> matchLabels = null;
+    private Map<String, String> matchLabels;
 
     //@SerializedName("matchExpressions")
     //private List<V1LabelSelectorRequirement> matchExpressions = null;

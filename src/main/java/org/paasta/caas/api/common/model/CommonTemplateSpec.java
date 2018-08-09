@@ -14,9 +14,9 @@ import lombok.Data;
 public class CommonTemplateSpec {
 
     @SerializedName("metadata")
-    private CommonMetaData metadata = null;
+    private CommonMetaData metadata;
 
     @SerializedName("spec")
-    private CommonSpec spec = null;
+    private CommonSpec spec;
 
 }
