@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.paasta.caas.api.common.model.CommonReplicasetList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,19 +41,19 @@ public class ReplicasetService {
      *
      * @return Map
      */
-    CommonReplicasetList getReplicaSetListByAllNamespace() {
+    ReplicasetList getReplicaSetListByAllNamespace() {
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_REPLICASET_LIST, HttpMethod.GET, null, Map.class);
         LOGGER.info("########## getNamespaceList() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        CommonReplicasetList commonReplicasetList = gson.fromJson(gson.toJson(hashMap), CommonReplicasetList.class);
+        ReplicasetList replicasetList = gson.fromJson(gson.toJson(hashMap), ReplicasetList.class);
 
 //        Namespace result = new Namespace();
 //        result.setResult(Constants.RESULT_STATUS_SUCCESS);
 //        result.setItems(commonService.setListData(Namespace.class, "metadata", (List) hashMap.get("items")));
 //        result.setItems(setListData(new Namespace(), "metadata", (List) hashMap.get("items"))); // SAME RESULT
 
-        return commonReplicasetList;
+        return replicasetList;
     }
 
 

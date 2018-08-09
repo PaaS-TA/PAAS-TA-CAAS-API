@@ -2,9 +2,9 @@ package org.paasta.caas.api.workload.replicaSet;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.paasta.caas.api.common.model.CommonMetaData;
+import org.paasta.caas.api.common.model.CommonReplicaSetSpec;
+import org.paasta.caas.api.common.model.CommonStatus;
 
 /**
  * Replicaset Model 클래스
@@ -14,19 +14,21 @@ import java.util.List;
  * @since 2018.08.07
  */
 @Data
-public class Replicaset{
+public class Replicaset {
+
+    @SerializedName("metadata")
+    private CommonMetaData metadata = null;
+
+    @SerializedName("spec")
+    private CommonReplicaSetSpec spec = null;
+
+    @SerializedName("status")
+    private CommonStatus status = null;
+
 //    @SerializedName("apiVersion")
 //    private String apiVersion = null;
-//
+
 //    @SerializedName("kind")
 //    private String kind = null;
 
-    @SerializedName("metadata")
-    private ObjectMeta metadata = null;
-
-//    @SerializedName("spec")
-//    private ReplicaSetSpec spec = null;
-//
-//    @SerializedName("status")
-//    private ReplicaSetStatus status = null;
 }

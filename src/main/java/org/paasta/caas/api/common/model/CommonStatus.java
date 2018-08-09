@@ -11,7 +11,7 @@ import lombok.Data;
  * @since 2018.08.07
  */
 @Data
-public class CommonReplicaSetStatus {
+public class CommonStatus {
 
     @SerializedName("availableReplicas")
     private Integer availableReplicas = null;

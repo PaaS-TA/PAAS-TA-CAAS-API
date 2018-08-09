@@ -1,6 +1,5 @@
 package org.paasta.caas.api.workload.replicaSet;
 
-import org.paasta.caas.api.common.model.CommonReplicasetList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +32,7 @@ public class ReplicasetController {
      */
     @GetMapping(value = "/replicasets")
     @ResponseBody
-    public CommonReplicasetList getReplicaSetListByAllNameppace(@RequestParam Map<String, Object> map){
+    public ReplicasetList getReplicaSetListByAllNameppace(@RequestParam Map<String, Object> map){
         return replicasetService.getReplicaSetListByAllNamespace();
     }
 

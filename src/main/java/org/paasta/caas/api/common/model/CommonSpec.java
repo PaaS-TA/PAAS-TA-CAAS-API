@@ -13,7 +13,19 @@ import java.util.Map;
  * @since 2018.08.07
  */
 @Data
-public class CommonPodSpec {
+public class CommonSpec {
+
+    @SerializedName("minReadySeconds")
+    private Integer minReadySeconds = null;
+
+    @SerializedName("replicas")
+    private Integer replicas = null;
+
+    @SerializedName("selector")
+    private CommonLabelSelector selector = null;
+
+    @SerializedName("template")
+    private CommonTemplateSpec template = null;
 
     @SerializedName("activeDeadlineSeconds")
     private Long activeDeadlineSeconds = null;

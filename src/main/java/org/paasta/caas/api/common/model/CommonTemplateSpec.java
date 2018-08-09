@@ -11,21 +11,12 @@ import lombok.Data;
  * @since 2018.08.07
  */
 @Data
-public class CommonReplicaset {
+public class CommonTemplateSpec {
 
     @SerializedName("metadata")
     private CommonMetaData metadata = null;
 
     @SerializedName("spec")
-    private CommonReplicaSetSpec spec = null;
-
-    @SerializedName("status")
-    private CommonReplicaSetStatus status = null;
-
-//    @SerializedName("apiVersion")
-//    private String apiVersion = null;
-
-//    @SerializedName("kind")
-//    private String kind = null;
+    private CommonSpec spec = null;
 
 }

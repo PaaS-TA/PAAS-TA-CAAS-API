@@ -1,7 +1,8 @@
-package org.paasta.caas.api.common.model;
+package org.paasta.caas.api.workload.replicaSet;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import org.paasta.caas.api.common.model.CommonMetaData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * @since 2018.08.07
  */
 @Data
-public class CommonReplicasetList {
+public class ReplicasetList {
 
     @SerializedName("kind")
     private String kind = null;
@@ -26,5 +27,5 @@ public class CommonReplicasetList {
     private CommonMetaData metadata = null;
 
     @SerializedName("items")
-    private List<CommonReplicaset> items = new ArrayList<CommonReplicaset>();
+    private List<Replicaset> items = new ArrayList<Replicaset>();
 }
