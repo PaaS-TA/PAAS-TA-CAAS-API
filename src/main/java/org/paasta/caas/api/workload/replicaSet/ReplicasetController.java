@@ -1,5 +1,6 @@
 package org.paasta.caas.api.workload.replicaSet;
 
+import io.kubernetes.client.models.V1beta1ReplicaSetList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,8 @@ public class ReplicasetController {
      */
     @GetMapping(value = "/replicasets")
     @ResponseBody
-    public Map<String, Object> getReplicaSetListByAllNameppace(@RequestParam Map<String, Object> map){
-        return replicasetService.getReplicaSetListByAllNamespace(map);
+    public ReplicasetList getReplicaSetListByAllNameppace(@RequestParam Map<String, Object> map){
+        return replicasetService.getReplicaSetListByAllNamespace();
     }
 
     /**

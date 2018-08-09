@@ -20,6 +20,9 @@ public class Constants {
     public static final String API_URL_V1 = "/api/v1";
     public static final String API_URL_NAMESPACES_LIST = API_URL_V1 + "/namespaces";
 
+    public static final String API_URL_REPLICASET_LIST =  "/apis/apps/v1/replicasets/";
+
+
     public Constants() {
         throw new IllegalStateException();
     }
