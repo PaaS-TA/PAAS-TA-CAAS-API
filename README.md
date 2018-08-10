@@ -18,3 +18,4 @@
 - Apache Http Client 4.5.6
 - Lombok 1.18.2
 - Jacoco 0.8.1
+- GSon 2.8.5
