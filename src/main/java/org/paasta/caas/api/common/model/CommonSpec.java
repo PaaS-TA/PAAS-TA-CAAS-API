@@ -3,6 +3,7 @@ package org.paasta.caas.api.common.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -80,6 +81,15 @@ public class CommonSpec {
 
     @SerializedName("terminationGracePeriodSeconds")
     private long terminationGracePeriodSeconds;
+
+    @SerializedName("type")
+    private String type;
+
+    @SerializedName("clusterIP")
+    private String clusterIP;
+
+    @SerializedName("ports")
+    private List ports;
 
 
 
