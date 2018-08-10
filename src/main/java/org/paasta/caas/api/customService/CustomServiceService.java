@@ -51,7 +51,7 @@ public class CustomServiceService {
      */
     CustomServiceList getCustomServiceList(String namespace) {
         // TODO :: REMOVE
-        namespace = Constants.NAMESPACE_NAME;
+//        namespace = Constants.NAMESPACE_NAME;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListServicesListUrl().replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
@@ -70,8 +70,8 @@ public class CustomServiceService {
      */
     CustomService getCustomService(String namespace, String serviceName) {
         // TODO :: REMOVE
-        namespace = Constants.NAMESPACE_NAME;
-        serviceName = Constants.SERVICE_NAME;
+//        namespace = Constants.NAMESPACE_NAME;
+//        serviceName = Constants.SERVICE_NAME;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListServicesGetUrl()
