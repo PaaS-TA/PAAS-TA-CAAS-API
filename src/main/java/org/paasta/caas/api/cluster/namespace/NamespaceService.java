@@ -33,6 +33,7 @@ public class NamespaceService {
         this.commonService = commonService;
     }
 
+    // TODO :: REMOVE
     Namespace getNamespaceList() {
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES_LIST, HttpMethod.GET, null, Map.class);
         LOGGER.info("########## getNamespaceList() :: hashMap.toString() :: {}", hashMap.toString());
@@ -44,7 +45,5 @@ public class NamespaceService {
 
         return result;
     }
-
-
 
 }

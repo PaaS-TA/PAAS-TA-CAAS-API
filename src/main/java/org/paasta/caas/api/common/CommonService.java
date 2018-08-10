@@ -24,6 +24,7 @@ public class CommonService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CommonService.class);
 
+    // TODO :: REMOVE
     public List setListData(Object reqObject, String itemKey, List apiResultList) {
         List resultList = new ArrayList<>();
 
@@ -66,5 +67,33 @@ public class CommonService {
         }
 
         return resultList;
+    }
+
+    /**
+     * Sets result model.
+     *
+     * @param reqObject           the req object
+     * @param resultStatusCode    the result status code
+     * @param resultStatusMessage the result status message
+     * @return the result model
+     */
+    public Object setResultModel(Object reqObject, String resultStatusCode, String resultStatusMessage) {
+        try {
+            Class<?> aClass = reqObject.getClass();
+
+            Method methodSetResultCode = aClass.getMethod("setResultCode", String.class);
+            Method methodSetResultMessage = aClass.getMethod("setResultMessage", String.class);
+            methodSetResultCode.invoke(reqObject, resultStatusCode);
+            methodSetResultMessage.invoke(reqObject, resultStatusMessage);
+
+        } catch (NoSuchMethodException e) {
+            LOGGER.error("NoSuchMethodException :: {}", e);
+        } catch (IllegalAccessException e1) {
+            LOGGER.error("IllegalAccessException :: {}", e1);
+        } catch (InvocationTargetException e2) {
+            LOGGER.error("InvocationTargetException :: {}", e2);
+        }
+
+        return reqObject;
     }
 }

@@ -23,4 +23,13 @@ public class PropertyService {
 
     @Value("${commonApi.url}")
     private String commonApiUrl;
+
+    @Value("${caasMaster.api.list.services.list}")
+    private String caasMasterApiListServicesListUrl;
+
+    @Value("${caasMaster.api.list.services.get}")
+    private String caasMasterApiListServicesGetUrl;
+
+    @Value("${caasMaster.api.list.endpoints.get}")
+    private String caasMasterApiListEndpointsGetUrl;
 }

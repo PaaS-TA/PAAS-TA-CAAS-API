@@ -32,7 +32,8 @@ public class ReplicasetService {
     private final CommonService commonService;
 
     @Autowired
-    public ReplicasetService(RestTemplateService restTemplateService, CommonService commonService) {this.restTemplateService = restTemplateService;
+    public ReplicasetService(RestTemplateService restTemplateService, CommonService commonService) {
+        this.restTemplateService = restTemplateService;
         this.commonService = commonService;
     }
 
@@ -57,7 +58,6 @@ public class ReplicasetService {
     }
 
 
-
     /**
      * ReplicaSet List 조회
      *
@@ -67,7 +67,7 @@ public class ReplicasetService {
         Map result = new HashMap();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer "+"");
+        headers.add("Authorization", "Bearer " + "");
         headers.add("Content-Type", "application/json");
 
         Map<String, Object> param = new HashMap<>();
@@ -93,7 +93,7 @@ public class ReplicasetService {
         Map result = new HashMap();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", "Bearer "+"");
+        headers.add("Authorization", "Bearer " + "");
         headers.add("Content-Type", "application/json");
 
         Map<String, Object> param = new HashMap<>();

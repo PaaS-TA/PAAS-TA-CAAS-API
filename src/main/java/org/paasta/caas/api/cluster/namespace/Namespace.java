@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Data
 public class Namespace {
+
     private String result;
     private String statusCode;
 
