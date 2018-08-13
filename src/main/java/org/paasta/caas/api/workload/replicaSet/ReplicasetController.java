@@ -24,17 +24,14 @@ public class ReplicasetController {
         this.replicasetService = replicasetService;
     }
 
-    /**
-     * ReplicaSet 객체의 리스트를 조회한다.(전체 네임스페이스에서 조회)
-     * @param map RequestParameter
-     * @return ReplicaSetList
-     * @see ReplicasetService#getReplicaSetList
-     */
+    /*
+    //ReplicaSet 객체의 리스트를 조회한다.(전체 네임스페이스에서 조회)
     @GetMapping(value = "/replicasets")
     @ResponseBody
     public ReplicasetList getReplicaSetListByAllNameppace(@RequestParam Map<String, Object> map){
         return replicasetService.getReplicaSetListByAllNamespace();
     }
+    */
 
     /**
      * ReplicaSet 객체의 리스트를 조회한다.
