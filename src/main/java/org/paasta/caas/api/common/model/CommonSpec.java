@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Replicaset Model 클래스
+ * Common Spec Model 클래스
  *
  * @author 최윤석
  * @version 1.0
@@ -22,8 +22,8 @@ public class CommonSpec {
     @SerializedName("replicas")
     private int replicas;
 
-    @SerializedName("selector")
-    private CommonLabelSelector selector;
+//    @SerializedName("selector")
+//    private CommonLabelSelector selector;
 
     @SerializedName("template")
     private CommonTemplateSpec template;
@@ -89,12 +89,14 @@ public class CommonSpec {
     @SerializedName("clusterIP")
     private String clusterIP;
 
-
     @SerializedName("ports")
     private List ports;
 
     @SerializedName("sessionAffinity")
     private String sessionAffinity;
+
+    @SerializedName("selector")
+    private Map selector;
     // FOR SERVICE :: END
 
 
@@ -124,4 +126,5 @@ public class CommonSpec {
 //
 //    @SerializedName("hostAliases")
 //    private List<HostAlias> hostAliases;
+
 }

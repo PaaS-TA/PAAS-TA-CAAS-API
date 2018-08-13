@@ -1,10 +1,11 @@
-package org.paasta.caas.api.customService;
+package org.paasta.caas.api.endpoint;
 
 import com.google.gson.Gson;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
+import org.paasta.caas.api.customService.CustomServiceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Custom Service Service 클래스
+ * Endpoint Service 클래스
  *
  * @author REX
  * @version 1.0
- * @since 2018.8.09
+ * @since 2018.08.13
  */
 @Service
-public class CustomServiceService {
+public class EndpointService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomServiceService.class);
     private final RestTemplateService restTemplateService;
@@ -30,32 +31,32 @@ public class CustomServiceService {
     private final PropertyService propertyService;
 
     /**
-     * Instantiates a new Custom service service.
+     * Instantiates a new Endpoint service.
      *
      * @param restTemplateService the rest template service
      * @param commonService       the common service
      * @param propertyService     the property service
      */
     @Autowired
-    public CustomServiceService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
+    public EndpointService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
     }
 
     /**
-     * Gets custom service list.
+     * Gets endpoint list.
      *
      * @param namespace the namespace
-     * @return the custom service list
+     * @return the endpoint list
      */
-    CustomServiceList getCustomServiceList(String namespace) {
+    EndpointList getEndpointList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListServicesListUrl().replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
+                propertyService.getCaasMasterApiListEndpointsListUrl().replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (CustomServiceList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), CustomServiceList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (EndpointList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), EndpointList.class), Constants.RESULT_STATUS_SUCCESS, "");
     }
 
     /**
@@ -65,15 +66,15 @@ public class CustomServiceService {
      * @param serviceName the service name
      * @return the custom service
      */
-    CustomService getCustomService(String namespace, String serviceName) {
+    Endpoint getEndpoint(String namespace, String serviceName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListServicesGetUrl()
+                propertyService.getCaasMasterApiListEndpointsGetUrl()
                         .replace("{namespace}", namespace)
                         .replace("{name}", serviceName), HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (CustomService) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), CustomService.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (Endpoint) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Endpoint.class), Constants.RESULT_STATUS_SUCCESS, "");
     }
 
 }
