@@ -58,7 +58,7 @@ public class ReplicasetService {
      *
      * @return Map
      */
-    public ReplicasetList getReplicaSetList(String namespace, Map<String, Object> map) {
+    public ReplicasetList getReplicaSetList(String namespace) {
 
         String apiUrl = propertyService.getCaasMasterApiListReplicasetListUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace);
@@ -75,7 +75,7 @@ public class ReplicasetService {
      *
      * @return Map
      */
-    public Replicaset getReplicaSet(String namespace, String replicasetsName, Map<String, Object> map) {
+    public Replicaset getReplicaSet(String namespace, String replicasetsName) {
         String apiUrl = propertyService.getCaasMasterApiListReplicasetGetUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", replicasetsName);

@@ -46,8 +46,8 @@ public class ReplicasetController {
      */
     @GetMapping(value = "/namespaces/{namespace}/replicasets")
     @ResponseBody
-    public Map<String, Object> getReplicaSetList(@PathVariable("namespace") String namespace, @RequestParam Map<String, Object> map){
-        return replicasetService.getReplicaSetList(namespace, map);
+    public ReplicasetList getReplicaSetList(@PathVariable("namespace") String namespace, @RequestParam Map<String, Object> map){
+        return replicasetService.getReplicaSetList(namespace);
     }
 
     /**
@@ -60,8 +60,8 @@ public class ReplicasetController {
      */
     @GetMapping(value = "/namespaces/{namespace}/replicasets/{replicasetsName}")
     @ResponseBody
-    public Map<String, Object> getReplicaSet(@PathVariable("namespace") String namespace, @PathVariable("replicasetsName") String replicasetsName, @RequestParam Map<String, Object> map) {
-        return replicasetService.getReplicaSet(namespace, replicasetsName, map);
+    public Replicaset getReplicaSet(@PathVariable("namespace") String namespace, @PathVariable("replicasetsName") String replicasetsName, @RequestParam Map<String, Object> map) {
+        return replicasetService.getReplicaSet(namespace, replicasetsName);
     }
 
 }
