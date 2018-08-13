@@ -36,6 +36,8 @@ hs_err_pid*
 
 # idea settings
 *.iml
+*.ipr
+*.iws
 *.idea
 .idea/*
 
