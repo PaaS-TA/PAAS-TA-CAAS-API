@@ -19,6 +19,11 @@ public class PodController {
     //private static final Logger LOGGER = LoggerFactory.getLogger(ClusterController.class);
     private final PodService podService;
 
+    /**
+     * Instantiates a new Pod controller.
+     *
+     * @param podService the pod service
+     */
     @Autowired
     public PodController(PodService podService) {
         this.podService = podService;

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Replicaset Model 클래스
+ * Common Spec Model 클래스
  *
  * @author 최윤석
  * @version 1.0
@@ -126,4 +126,5 @@ public class CommonSpec {
 //
 //    @SerializedName("hostAliases")
 //    private List<HostAlias> hostAliases;
+
 }

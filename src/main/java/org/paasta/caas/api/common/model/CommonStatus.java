@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * Replicaset Model 클래스
+ * Common Status Model 클래스
  *
  * @author 최윤석
  * @version 1.0
@@ -40,4 +40,5 @@ public class CommonStatus {
 
     //@SerializedName("conditions")
     //private List<ReplicaSetCondition> conditions;
+
 }
