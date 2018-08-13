@@ -22,7 +22,7 @@ ext {
     appGroup = 'org.paasta.caas.api'
     springIoPlatformVersion = 'Cairo-SR3'
     apacheHttpClientVersion = '4.5.6'
-    gSonVersion = '2.8.5'
+    gsonVersion = '2.8.5'
     lombokVersion = '1.18.2'
     jacocoVersion = '0.8.1'
 }
@@ -44,7 +44,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-aop"
     compile "org.apache.httpcomponents:httpclient:${apacheHttpClientVersion}"
-    compile "com.google.code.gson:gson:${gSonVersion}"
+    compile "com.google.code.gson:gson:${gsonVersion}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     testCompile "org.springframework.boot:spring-boot-starter-test"
 }
