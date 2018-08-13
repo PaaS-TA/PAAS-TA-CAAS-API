@@ -1,4 +1,4 @@
-package org.paasta.caas.api.customService;
+package org.paasta.caas.api.workload.pod;
 
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
@@ -6,14 +6,14 @@ import org.paasta.caas.api.common.model.CommonSpec;
 import org.paasta.caas.api.common.model.CommonStatus;
 
 /**
- * Custom Service Model 클래스
+ * Pod Model 클래스
  *
  * @author REX
  * @version 1.0
- * @since 2018.08.09
+ * @since 2018.08.13
  */
 @Data
-public class CustomService {
+public class Pod {
 
     private String resultCode;
     private String resultMessage;
@@ -21,5 +21,8 @@ public class CustomService {
     private CommonMetaData metadata;
     private CommonSpec spec;
     private CommonStatus status;
+
+    // FOR DASHBOARD
+    private String selector;
 
 }

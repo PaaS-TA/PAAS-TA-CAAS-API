@@ -30,6 +30,22 @@ public class PropertyService {
     @Value("${caasMaster.api.list.services.get}")
     private String caasMasterApiListServicesGetUrl;
 
+    @Value("${caasMaster.api.list.endpoints.list}")
+    private String caasMasterApiListEndpointsListUrl;
+
     @Value("${caasMaster.api.list.endpoints.get}")
     private String caasMasterApiListEndpointsGetUrl;
+
+    @Value("${caasMaster.api.list.pods.list}")
+    private String caasMasterApiListPodsListUrl;
+
+    @Value("${caasMaster.api.list.pods.get}")
+    private String caasMasterApiListPodsGetUrl;
+
+    @Value("${caasMaster.api.list.nodes.list}")
+    private String caasMasterApiListNodesListUrl;
+
+    @Value("${caasMaster.api.list.nodes.get}")
+    private String caasMasterApiListNodesGetUrl;
+
 }

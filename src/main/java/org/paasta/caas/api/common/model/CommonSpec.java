@@ -22,8 +22,8 @@ public class CommonSpec {
     @SerializedName("replicas")
     private int replicas;
 
-    @SerializedName("selector")
-    private CommonLabelSelector selector;
+//    @SerializedName("selector")
+//    private CommonLabelSelector selector;
 
     @SerializedName("template")
     private CommonTemplateSpec template;
@@ -89,12 +89,14 @@ public class CommonSpec {
     @SerializedName("clusterIP")
     private String clusterIP;
 
-
     @SerializedName("ports")
     private List ports;
 
     @SerializedName("sessionAffinity")
     private String sessionAffinity;
+
+    @SerializedName("selector")
+    private Map selector;
     // FOR SERVICE :: END
 
 

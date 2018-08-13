@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author REX
  * @version 1.0
- * @since 2018.8.09
+ * @since 2018.08.09
  */
 @Data
 public class CustomServiceList {
@@ -19,4 +19,5 @@ public class CustomServiceList {
     private String resultMessage;
 
     private List<CustomService> items = new ArrayList<>();
+
 }

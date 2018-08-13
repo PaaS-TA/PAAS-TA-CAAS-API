@@ -3,6 +3,8 @@ package org.paasta.caas.api.common.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * Replicaset Model 클래스
  *
@@ -27,6 +29,14 @@ public class CommonStatus {
 
     @SerializedName("replicas")
     private int replicas;
+
+    // FOR POD :: BEGIN
+    @SerializedName("phase")
+    private String phase;
+
+    @SerializedName("containerStatuses")
+    private List containerStatuses;
+    // FOR POD :: END
 
     //@SerializedName("conditions")
     //private List<ReplicaSetCondition> conditions;
