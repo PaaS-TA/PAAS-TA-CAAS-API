@@ -38,6 +38,11 @@ public class CommonStatus {
     private List containerStatuses;
     // FOR POD :: END
 
+    // FOR NODE :: BEGIN
+    @SerializedName("conditions")
+    private List<CommonCondition> conditions;
+    // FOR NODE :: BEGIN
+
     //@SerializedName("conditions")
     //private List<ReplicaSetCondition> conditions;
 
