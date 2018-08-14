@@ -26,8 +26,15 @@ public class Constants {
     /*TODO :: REMOVE*/
     /*CAAS MASTER API*/
     public static final String API_URL_V1 = "/api/v1";
+    public static final String API_APPS_URL_V1 = "/apis/apps/v1";
+
     public static final String API_URL_NAMESPACES_LIST = API_URL_V1 + "/namespaces";
     public static final String API_URL_REPLICASET_LIST =  "/apis/apps/v1/replicasets/";
+
+    /* Deployment URL */
+    public static final String API_URL_DEPLOYMENT_LIST = API_APPS_URL_V1 + "/deployments";
+    public static final String API_URL_DEPLOYMENT_LIST_IN_NAMESPACE = API_APPS_URL_V1 + "/namespaces/{namespace}/deployments";
+    public static final String API_URL_DEPLOYMENT_IN_NAMESPACE = API_APPS_URL_V1 + "/namespaces/{namespace}/deployments/{deploymentName}";
 
 
     public Constants() {
