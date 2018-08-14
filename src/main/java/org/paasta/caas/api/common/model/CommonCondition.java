@@ -3,6 +3,8 @@ package org.paasta.caas.api.common.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 /**
  * Common Condition Model 클래스
  *

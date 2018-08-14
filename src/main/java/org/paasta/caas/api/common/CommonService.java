@@ -13,12 +13,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Common Service 클래스
@@ -89,20 +87,21 @@ public class CommonService {
         try {
             Class<?> aClass = reqObject.getClass();
 
-            Method methodSetResultCode = aClass.getMethod("setResultCode", String.class);
-            Method methodSetResultMessage = aClass.getMethod("setResultMessage", String.class);
-            methodSetResultCode.invoke(reqObject, resultStatusCode);
-            methodSetResultMessage.invoke(reqObject, resultStatusMessage);
+            Method methodSetResultCode = aClass.getMethod( "setResultCode", String.class );
+            Method methodSetResultMessage = aClass.getMethod( "setResultMessage", String.class );
+            methodSetResultCode.invoke( reqObject, resultStatusCode );
+            methodSetResultMessage.invoke( reqObject, resultStatusMessage );
 
-        } catch (NoSuchMethodException e) {
-            LOGGER.error("NoSuchMethodException :: {}", e);
-        } catch (IllegalAccessException e1) {
-            LOGGER.error("IllegalAccessException :: {}", e1);
-        } catch (InvocationTargetException e2) {
-            LOGGER.error("InvocationTargetException :: {}", e2);
+        } catch ( NoSuchMethodException e ) {
+            LOGGER.error( "NoSuchMethodException :: {}", e );
+        } catch ( IllegalAccessException e1 ) {
+            LOGGER.error( "IllegalAccessException :: {}", e1 );
+        } catch ( InvocationTargetException e2 ) {
+            LOGGER.error( "InvocationTargetException :: {}", e2 );
         }
 
         return reqObject;
+    }
 
     @Bean
     public Gson gson() {
