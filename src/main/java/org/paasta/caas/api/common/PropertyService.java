@@ -55,4 +55,12 @@ public class PropertyService {
     // ReplicaSet
     @Value("${caasMaster.api.list.replicaset.get}")
     private String caasMasterApiListReplicasetGetUrl;
+
+    // Role List
+    @Value("${caasMaster.api.list.role.list}")
+    private String caasMasterApiListRoleListUrl;
+
+    // Role
+    @Value("${caasMaster.api.list.role.get}")
+    private String caasMasterApiListRoleGetUrl;
 }
