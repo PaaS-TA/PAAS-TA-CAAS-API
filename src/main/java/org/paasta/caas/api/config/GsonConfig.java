@@ -29,11 +29,12 @@ public class GsonConfig {
         private static final DateTimeFormatter dateTimeFormatter =
             DateTimeFormatter.ofPattern( "yyyy-MM-dd'T'HH:mm:ss'Z'" ).withZone( ZoneId.of( "UTC" ) );
 
+        private static final DateTimeFormatter serializeDateTimeFormatter =
+            DateTimeFormatter.ofPattern( "yyyy-MM-dd HH:mm:ss" );
+
         @Override
         public JsonElement serialize ( LocalDateTime src, Type typeOfSrc, JsonSerializationContext context ) {
-            JsonElement element =
-                new JsonPrimitive( src.format( dateTimeFormatter ) );
-            //System.out.println( "serialize : " + element.toString() );
+            JsonElement element = new JsonPrimitive( src.format( serializeDateTimeFormatter ) );
 
             return element;
         }
@@ -42,7 +43,6 @@ public class GsonConfig {
         public LocalDateTime deserialize ( JsonElement json, Type typeOfT, JsonDeserializationContext context ) throws JsonParseException {
             final String timeString = json.getAsString();
             LocalDateTime time = LocalDateTime.from( dateTimeFormatter.parse( timeString ) );
-            //System.out.println( "deserialize : " + time.toString());
 
             return time;
         }

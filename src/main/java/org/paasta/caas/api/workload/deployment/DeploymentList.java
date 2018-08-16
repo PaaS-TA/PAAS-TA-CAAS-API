@@ -27,4 +27,7 @@ public class DeploymentList {
 
     @SerializedName("metadata")
     private CommonMetaData metadata = null;
+
+    private String resultCode;
+    private String resultMessage;
 }

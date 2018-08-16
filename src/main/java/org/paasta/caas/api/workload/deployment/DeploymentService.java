@@ -46,9 +46,12 @@ public class DeploymentService {
             Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_DEPLOYMENT_LIST, HttpMethod.GET, null, Map.class );
         LOGGER.info("#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString());
 
-        DeploymentList deploymentList = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
+        //DeploymentList deploymentList = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
+        //return deploymentList;
 
-        return deploymentList;
+        return (DeploymentList) commonService.setResultModel(
+            gson.fromJson(gson.toJson(responseMap), DeploymentList.class),
+            Constants.RESULT_STATUS_SUCCESS, "");
     }
 
     /**
@@ -64,9 +67,11 @@ public class DeploymentService {
             Constants.TARGET_CAAS_MASTER_API, urlWithNamespace, HttpMethod.GET, null, Map.class );
         LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
 
-        DeploymentList deploymentList = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
-
-        return deploymentList;
+        //DeploymentList deploymentList = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
+        //return deploymentList;
+        return (DeploymentList) commonService.setResultModel(
+            gson.fromJson(gson.toJson(responseMap), DeploymentList.class),
+            Constants.RESULT_STATUS_SUCCESS, "");
     }
 
     /**
@@ -85,8 +90,10 @@ public class DeploymentService {
         LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
             namespace, deploymentName, responseMap.toString() );
 
-        Deployment deployment = gson.fromJson( gson.toJson( responseMap ), Deployment.class );
-
-        return deployment;
+        //Deployment deployment = gson.fromJson( gson.toJson( responseMap ), Deployment.class );
+        //return deployment;
+        return (Deployment) commonService.setResultModel(
+            gson.fromJson(gson.toJson(responseMap), Deployment.class),
+            Constants.RESULT_STATUS_SUCCESS, "");
     }
 }

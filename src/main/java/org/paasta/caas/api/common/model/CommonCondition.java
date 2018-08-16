@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Common Condition Model 클래스

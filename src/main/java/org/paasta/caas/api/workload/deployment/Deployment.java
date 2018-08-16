@@ -29,4 +29,7 @@ public class Deployment {
 
     @SerializedName( "status" )
     private DeploymentStatus status;
+
+    private String resultCode;
+    private String resultMessage;
 }
