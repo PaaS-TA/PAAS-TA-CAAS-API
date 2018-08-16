@@ -37,10 +37,11 @@ public class CommonContainer {
 
    // before : List<CommonResourceRequirement> resources;
    @SerializedName( "resources" )
-   List<Map> resources;
+   CommonResourceRequirement resources;
+   //Map resources;
 
    @SerializedName("command")
-   List<String> command = null;
+   List<String> command;
 
 //   @SerializedName("envFrom")
 //   private List<EnvFromSource> envFrom = null;
