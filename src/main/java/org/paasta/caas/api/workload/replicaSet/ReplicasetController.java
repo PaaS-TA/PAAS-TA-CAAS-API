@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.replicaSet;
+package org.paasta.caas.api.workload.replicaset;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,13 +38,12 @@ public class ReplicasetController {
      *
      * @param namespace 조회 대상 네임스페이스
      * @param map RequestParameter
-     * @return ReplicaSetList
-     * @see ReplicasetService#getReplicaSetList
+     * @return ReplicaSetList#
+     * @see ReplicasetService#getReplicasetList
      */
     @GetMapping(value = "/namespaces/{namespace}/replicasets")
-    @ResponseBody
-    public ReplicasetList getReplicaSetList(@PathVariable("namespace") String namespace, @RequestParam Map<String, Object> map){
-        return replicasetService.getReplicaSetList(namespace);
+    public ReplicasetList getReplicasetList(@PathVariable("namespace") String namespace, @RequestParam Map<String, Object> map){
+        return replicasetService.getReplicasetList(namespace);
     }
 
     /**
@@ -53,12 +52,12 @@ public class ReplicasetController {
      * @param replicasetsName replicasets Name
      * @param map Request Parameter
      * @return ReplicaSet
-     * @see ReplicasetService#getReplicaSetList
+     * @see ReplicasetService#getReplicaset
      */
     @GetMapping(value = "/namespaces/{namespace}/replicasets/{replicasetsName}")
-    @ResponseBody
-    public Replicaset getReplicaSet(@PathVariable("namespace") String namespace, @PathVariable("replicasetsName") String replicasetsName, @RequestParam Map<String, Object> map) {
-        return replicasetService.getReplicaSet(namespace, replicasetsName);
+    public Replicaset getReplicaset(@PathVariable("namespace") String namespace, @PathVariable("replicasetsName") String replicasetsName, @RequestParam Map<String, Object> map) {
+        return replicasetService.getReplicaset(namespace, replicasetsName);
     }
 
+    // TODO :: 세션정보에서 namespace 를 가져올지 front-end 단에서 Param 으로 넘겨줄지 결정
 }

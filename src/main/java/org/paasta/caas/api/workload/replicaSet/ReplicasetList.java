@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.replicaSet;
+package org.paasta.caas.api.workload.replicaset;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -28,4 +28,7 @@ public class ReplicasetList {
 
     @SerializedName("items")
     private List<Replicaset> items = new ArrayList<Replicaset>();
+
+    private String resultCode;
+    private String resultMessage;
 }

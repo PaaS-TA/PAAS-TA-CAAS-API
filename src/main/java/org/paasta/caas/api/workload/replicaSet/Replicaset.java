@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.replicaSet;
+package org.paasta.caas.api.workload.replicaset;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -17,13 +17,16 @@ import org.paasta.caas.api.common.model.CommonStatus;
 public class Replicaset {
 
     @SerializedName("metadata")
-    private CommonMetaData metadata = null;
+    private CommonMetaData metadata;
 
     @SerializedName("spec")
-    private CommonSpec spec = null;
+    private CommonSpec spec;
 
     @SerializedName("status")
-    private CommonStatus status = null;
+    private CommonStatus status;
+
+    private String resultCode;
+    private String resultMessage;
 
 //    @SerializedName("apiVersion")
 //    private String apiVersion = null;

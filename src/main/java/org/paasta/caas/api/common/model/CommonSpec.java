@@ -26,7 +26,7 @@ public class CommonSpec {
 //    private CommonLabelSelector selector;
 
     @SerializedName("template")
-    private CommonTemplateSpec template;
+    private CommonPodTemplateSpec template;
 
     @SerializedName("activeDeadlineSeconds")
     private long activeDeadlineSeconds;

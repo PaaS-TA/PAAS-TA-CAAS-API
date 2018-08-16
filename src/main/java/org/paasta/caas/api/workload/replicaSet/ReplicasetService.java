@@ -1,6 +1,7 @@
-package org.paasta.caas.api.workload.replicaSet;
+package org.paasta.caas.api.workload.replicaset;
 
 import com.google.gson.Gson;
+import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
@@ -25,15 +26,24 @@ import java.util.Map;
 public class ReplicasetService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReplicasetService.class);
+    private final CommonService commonService;
+    private final PropertyService propertyService;
     private final RestTemplateService restTemplateService;
 
+    /**
+     * Instantiates a new Custom service service.
+     *
+     * @param restTemplateService the rest template service
+     * @param commonService       the common service
+     * @param propertyService     the property service
+     */
     @Autowired
-    public ReplicasetService(RestTemplateService restTemplateService) {
+    public ReplicasetService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
+        this.commonService = commonService;
+        this.propertyService = propertyService;
     }
 
-    @Autowired
-    PropertyService propertyService;
 /*
     //ReplicaSet List 조회(전체 네임스페이스 조회)
     ReplicasetList getReplicaSetListByAllNamespace() {
@@ -50,16 +60,13 @@ public class ReplicasetService {
      *
      * @return Map
      */
-    public ReplicasetList getReplicaSetList(String namespace) {
+    ReplicasetList getReplicasetList(String namespace) {
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListReplicasetListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace), HttpMethod.GET, null, Map.class);
 
-        String apiUrl = propertyService.getCaasMasterApiListReplicasetListUrl()
-                .replaceAll("\\{" + "namespace" + "\\}", namespace);
+        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getReplicaSetList() :: hashMap.toString() :: {}", hashMap.toString());
-
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), ReplicasetList.class);
+        return (ReplicasetList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), ReplicasetList.class), Constants.RESULT_STATUS_SUCCESS, "");
     }
 
     /**
@@ -67,17 +74,14 @@ public class ReplicasetService {
      *
      * @return Map
      */
-    public Replicaset getReplicaSet(String namespace, String replicasetsName) {
+    Replicaset getReplicaset(String namespace, String replicasetsName) {
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListReplicasetGetUrl()
+                        .replaceAll("\\{" + "namespace" + "\\}", namespace)
+                        .replaceAll("\\{" + "name" + "\\}", replicasetsName), HttpMethod.GET, null, Map.class);
 
-        String apiUrl = propertyService.getCaasMasterApiListReplicasetGetUrl()
-                .replaceAll("\\{" + "namespace" + "\\}", namespace)
-                .replaceAll("\\{" + "name" + "\\}", replicasetsName);
+        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getReplicaSet() :: hashMap.toString() :: {}", hashMap.toString());
-
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), Replicaset.class);
+        return (Replicaset) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Replicaset.class), Constants.RESULT_STATUS_SUCCESS, "");
     }
-
 }

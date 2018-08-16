@@ -3,6 +3,9 @@ package org.paasta.caas.api.common.model;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Replicaset Model 클래스
  *
@@ -11,12 +14,8 @@ import lombok.Data;
  * @since 2018.08.07
  */
 @Data
-public class CommonTemplateSpec {
+public class CommonPodSpec {
 
-    @SerializedName("metadata")
-    private CommonMetaData metadata;
-
-    @SerializedName("spec")
-    private CommonSpec spec;
-
+    @SerializedName("containers")
+    private List<CommonContainer> containers = new ArrayList<CommonContainer>();
 }
