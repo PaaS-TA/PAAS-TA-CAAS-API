@@ -56,11 +56,15 @@ public class PropertyService {
     @Value("${caasMaster.api.list.replicaset.get}")
     private String caasMasterApiListReplicasetGetUrl;
 
-    // Role List
+    // Role List By All Namespaces
+    @Value("${caasMaster.api.list.role.allList}")
+    private String caasMasterApiListRoleAllListUrl;
+
+    // Role List By Specified Namespace
     @Value("${caasMaster.api.list.role.list}")
     private String caasMasterApiListRoleListUrl;
 
-    // Role
+    // Role By Specified Namespace
     @Value("${caasMaster.api.list.role.get}")
     private String caasMasterApiListRoleGetUrl;
 }

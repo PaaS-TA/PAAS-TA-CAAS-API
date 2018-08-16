@@ -32,8 +32,24 @@ public class RoleService {
     @Autowired
     PropertyService propertyService;
 
+
     /**
-     * RoleList 조회
+     * RoleList 조회 (모든 네임스페이스에서 조회)
+     *
+     * @return Map
+     */
+    public RoleList getRoleListByAllNamespace() {
+        String apiUrl = propertyService.getCaasMasterApiListRoleAllListUrl();
+
+        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+        LOGGER.info("########## getRoleListByAllNamespaces() :: hashMap.toString() :: {}", hashMap.toString());
+
+        Gson gson = new Gson();
+        return gson.fromJson(gson.toJson(hashMap), RoleList.class);
+    }
+
+    /**
+     * RoleList 조회 (특정 네임스페이스에서 조회)
      *
      * @param namespace
      * @return Map
@@ -51,7 +67,7 @@ public class RoleService {
 
 
     /**
-     * Role 상세 조회
+     * Role 상세 조회 (특정 네임스페이스에서 조회)
      *
      * @param namespace
      * @param roleName

@@ -25,7 +25,17 @@ public class RoleController {
     }
 
     /**
-     * Role 객체의 리스트를 조회한다.
+     * Role 객체의 리스트를 조회한다. (모든 네임스페이스에서 조회)
+     *
+     * @return
+     */
+    @GetMapping(value = "/roles")
+    public RoleList getRoleListByAllNamespace(){
+        return roleService.getRoleListByAllNamespace();
+    }
+
+    /**
+     * Role 객체의 리스트를 조회한다. (특정 네임스페이스에서 조회)
      *
      * @param namespace 조회 대상 네임스페이스
      * @return RoleList
@@ -36,7 +46,7 @@ public class RoleController {
     }
 
     /**
-     * Role 객체를 조회한다.
+     * Role 객체를 조회한다. (특정 네임스페이스에서 조회)
      *
      * @param namespace 조회 대상 네임스페이스
      * @param roleName 조회 대상 role 이름
