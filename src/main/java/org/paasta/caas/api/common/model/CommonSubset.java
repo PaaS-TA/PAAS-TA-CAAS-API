@@ -13,14 +13,14 @@ import java.util.List;
  * @since 2018.08.13
  */
 @Data
-public class CommonSubsets {
+public class CommonSubset {
 
     // FOR ENDPOINT :: BEGIN
     @SerializedName("addresses")
     private List<CommonAddresses> addresses;
 
     @SerializedName("ports")
-    private List<CommonPorts> ports;
+    private List<CommonPort> ports;
     // FOR ENDPOINT :: END
 
 }

@@ -11,7 +11,7 @@ import lombok.Data;
  * @since 2018.08.13
  */
 @Data
-public class CommonPorts {
+public class CommonPort {
 
     // FOR ENDPOINT :: BEGIN
     @SerializedName("name")
