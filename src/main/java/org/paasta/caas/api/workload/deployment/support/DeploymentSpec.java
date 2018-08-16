@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonContainer;
 import org.paasta.caas.api.common.model.CommonLabelSelector;
-import org.paasta.caas.api.common.model.CommonTemplateSpec;
+import org.paasta.caas.api.common.model.CommonPodTemplateSpec;
 
 import java.util.*;
 
@@ -39,7 +39,7 @@ public class DeploymentSpec {
     private DeploymentStrategy strategy;
 
     @SerializedName("template")
-    private CommonTemplateSpec template;
+    private CommonPodTemplateSpec template;
 
     @SerializedName( "images" )
     public Set<String> getImages() {

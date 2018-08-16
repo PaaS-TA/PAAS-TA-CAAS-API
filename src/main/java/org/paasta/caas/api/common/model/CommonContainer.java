@@ -1,7 +1,6 @@
 package org.paasta.caas.api.common.model;
 
 import com.google.gson.annotations.SerializedName;
-import io.kubernetes.client.models.V1Container;
 import lombok.Data;
 
 import java.util.List;
