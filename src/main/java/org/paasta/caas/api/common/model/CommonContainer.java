@@ -1,36 +1,87 @@
 package org.paasta.caas.api.common.model;
 
 import com.google.gson.annotations.SerializedName;
+import io.kubernetes.client.models.V1Container;
 import lombok.Data;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- * Common Ports Model 클래스
+ * CommonContainer Model 클래스
  *
  * @author REX
  * @author CISS
+ * @author Hyungu Cho
  * @version 1.0
- * @since 2018.08.13
+ * @since 2018.08.16
  */
 @Data
 public class CommonContainer {
+   /* For PodTemplateSpec -- START */
+   @SerializedName( "name" )
+   String name;
 
-    @SerializedName("image")
-    private String image;
+   @SerializedName( "image" )
+   String image;
 
-    // TODO :: REMOVE CommonPorts 와 동일합니다. 확인후 삭제 해주세요.
-    /*
-    // FOR ENDPOINT :: BEGIN
-    @SerializedName("name")
-    private  String name;
+   @SerializedName( "args" )
+   List<String> args;
 
-    @SerializedName("port")
-    private  String port;
+   // before : List<CommonEnvVariable> env;
+   @SerializedName( "env" )
+   List<Map> env;
 
-    @SerializedName("protocol")
-    private  String protocol;
-    // FOR ENDPOINT :: BEGIN
-    */
+   @SerializedName( "ports" )
+   List<CommonPort> ports;
 
-    // TODO :: REMOVE  guide :항목 추가시 kube client lib 참조하세요. : src/main/java/io/kubernetes/client/models/V1Container.java
+   // before : List<CommonResourceRequirement> resources;
+   @SerializedName( "resources" )
+   List<Map> resources;
 
+   @SerializedName("command")
+   List<String> command = null;
+
+//   @SerializedName("envFrom")
+//   private List<EnvFromSource> envFrom = null;
+//
+//   @SerializedName("imagePullPolicy")
+//   private String imagePullPolicy = null;
+//
+//   @SerializedName("lifecycle")
+//   private CommonLifecycle lifecycle = null;
+//
+//   @SerializedName("livenessProbe")
+//   private CommonProbe livenessProbe = null;
+//
+//   @SerializedName("readinessProbe")
+//   private CommonProbe readinessProbe = null;
+//
+//   @SerializedName("securityContext")
+//   private CommonSecurityContext securityContext = null;
+//
+//   @SerializedName("stdin")
+//   private boolean stdin = null;
+//
+//   @SerializedName("stdinOnce")
+//   private boolean stdinOnce = null;
+//
+//   @SerializedName("terminationMessagePath")
+//   private String terminationMessagePath = null;
+//
+//   @SerializedName("terminationMessagePolicy")
+//   private String terminationMessagePolicy = null;
+//
+//   @SerializedName("tty")
+//   private boolean tty = null;
+//
+//     @SerializedName( "volumeMounts" )
+//     List<VolumeMount> volumeMounts;
+//
+//     @SerializedName( "volumeDevices" )
+//     List<VolumeDevice> volumeDevices;
+//
+//     @SerializedName( "workingDir" )
+//     String workingDir;
+   /* For PodTemplateSpec -- END   */
 }

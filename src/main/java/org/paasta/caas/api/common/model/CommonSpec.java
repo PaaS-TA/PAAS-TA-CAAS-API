@@ -1,8 +1,11 @@
 package org.paasta.caas.api.common.model;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import org.paasta.caas.api.common.CommonService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -99,6 +102,11 @@ public class CommonSpec {
     private Map selector;
     // FOR SERVICE :: END
 
+    // FOR TEMPLATE SPEC :: START
+    @SerializedName("containers")
+    private List<CommonContainer> containers = new ArrayList<CommonContainer>();
+    // FOR TEMPLATE SPEC :: END
+
 
 //    @SerializedName("tolerations")
 //    private List<Toleration> tolerations;
@@ -118,8 +126,6 @@ public class CommonSpec {
 //    @SerializedName("initContainers")
 //    private List<V1Container> initContainers;
 //
-//    @SerializedName("containers")
-//    private List<Container> containers = new ArrayList<Container>();
 //
 //    @SerializedName("dnsConfig")
 //    private PodDNSConfig dnsConfig;
