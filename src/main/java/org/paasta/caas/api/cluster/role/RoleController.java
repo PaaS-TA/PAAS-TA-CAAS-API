@@ -24,8 +24,26 @@ public class RoleController {
         this.roleService = roleService;
     }
 
+    /**
+     * Role 객체의 리스트를 조회한다.
+     *
+     * @param namespace 조회 대상 네임스페이스
+     * @return RoleList
+     */
     @GetMapping(value = "/namespaces/{namespace}/roles")
     public RoleList getRoleList(@PathVariable("namespace") String namespace){
         return roleService.getRoleList(namespace);
+    }
+
+    /**
+     * Role 객체를 조회한다.
+     *
+     * @param namespace 조회 대상 네임스페이스
+     * @param roleName 조회 대상 role 이름
+     * @return Role
+     */
+    @GetMapping(value = "/namespaces/{namespace}/roles/{roleName}")
+    public Role getRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
+        return roleService.getRole(namespace, roleName);
     }
 }
