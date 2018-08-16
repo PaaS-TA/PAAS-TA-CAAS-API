@@ -4,7 +4,7 @@ import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
 import org.paasta.caas.api.common.model.CommonSpec;
 import org.paasta.caas.api.common.model.CommonStatus;
-import org.paasta.caas.api.common.model.CommonSubsets;
+import org.paasta.caas.api.common.model.CommonSubset;
 
 import java.util.List;
 
@@ -24,6 +24,6 @@ public class Endpoint {
     private CommonMetaData metadata;
     private CommonSpec spec;
     private CommonStatus status;
-    private List<CommonSubsets> subsets;
+    private List<CommonSubset> subsets;
 
 }
