@@ -104,7 +104,7 @@ public class CommonSpec {
 
     // FOR TEMPLATE SPEC :: START
     @SerializedName("containers")
-    private List<CommonContainer> containers = new ArrayList<CommonContainer>();
+    private List<CommonContainer> containers;
     // FOR TEMPLATE SPEC :: END
 
 
