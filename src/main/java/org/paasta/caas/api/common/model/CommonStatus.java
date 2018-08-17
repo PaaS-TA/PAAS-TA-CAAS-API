@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 public class CommonStatus {
 
+    // FOR REPLICA :: BEGIN
     @SerializedName("availableReplicas")
     private int availableReplicas;
 
@@ -29,9 +30,10 @@ public class CommonStatus {
 
     @SerializedName("replicas")
     private int replicas;
+    // FOR REPLICA :: END
 
     // FOR POD :: BEGIN
-    @SerializedName("phase")
+    @SerializedName("phase")  // used persistentVolume
     private String phase;
 
     @SerializedName("containerStatuses")

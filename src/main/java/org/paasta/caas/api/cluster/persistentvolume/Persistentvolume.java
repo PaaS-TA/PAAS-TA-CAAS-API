@@ -20,7 +20,7 @@ public class Persistentvolume {
     private CommonMetaData metadata;
 
     @SerializedName("spec")
-    private CommonSpec spec;
+    private PersistentVolumeSpec spec;
 
     @SerializedName("status")
     private CommonStatus status;

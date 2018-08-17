@@ -108,6 +108,7 @@ public class CommonSpec {
     // FOR TEMPLATE SPEC :: END
 
 
+
 //    @SerializedName("tolerations")
 //    private List<Toleration> tolerations;
 //
