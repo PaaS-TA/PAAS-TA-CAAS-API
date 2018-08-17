@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Common Condition Model 클래스
@@ -25,14 +23,17 @@ public class CommonCondition {
      * DaemonSetConditionType : [ ]
      * </pre>
      */
+    // FOR POD, NODE :: BEGIN
     @SerializedName("type")
     private String type;
 
     @SerializedName("status")
     private String status;
-    
+    // FOR POD, NODE :: END
+
+    // TODO :: CHECK VARIABLE TYPE >> LocalDateTime
     @SerializedName("lastTransitionTime")
-    private LocalDateTime lastTransitionTime;
+    private String lastTransitionTime;
 
     @SerializedName("message")
     private String message;

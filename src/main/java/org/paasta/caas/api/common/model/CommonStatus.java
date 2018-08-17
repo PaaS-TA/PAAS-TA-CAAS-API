@@ -40,10 +40,10 @@ public class CommonStatus {
     private List containerStatuses;
     // FOR POD :: END
 
-    // FOR NODE :: BEGIN
+    // FOR POD, NODE :: BEGIN
     @SerializedName("conditions")
     private List<CommonCondition> conditions;
-    // FOR NODE :: BEGIN
+    // FOR POD, NODE :: END
 
     //@SerializedName("conditions")
     //private List<ReplicaSetCondition> conditions;
