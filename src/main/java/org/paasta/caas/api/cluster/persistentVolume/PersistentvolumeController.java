@@ -32,21 +32,20 @@ public class PersistentvolumeController {
      * @see PersistentvolumeService#getPersistentvolumeList
      */
     @GetMapping(value = "/persistentvolumes")
-    public PersistentvolumeList getReplicasetList(@RequestParam Map<String, Object> map){
+    public PersistentvolumeList getPersistentvolumeList(@RequestParam Map<String, Object> map){
         return persistentvolumeService.getPersistentvolumeList();
     }
 
     /**
      * PersistentVolume 객체를 조회한다.
-     * @param namespace namespace
      * @param pvName PersistentVolume Name
      * @param map Request Parameter
      * @return ReplicaSet
      * @see PersistentvolumeService#getPersistentvolume
      */
     @GetMapping(value = "/persistentvolumes/{pvName}")
-    public Persistentvolume getReplicaset(@PathVariable("namespace") String namespace, @PathVariable("pvName") String pvName, @RequestParam Map<String, Object> map) {
-        return persistentvolumeService.getPersistentvolume(namespace, pvName);
+    public Persistentvolume getPersistentvolume(@PathVariable("pvName") String pvName, @RequestParam Map<String, Object> map) {
+        return persistentvolumeService.getPersistentvolume(pvName);
     }
 
 }

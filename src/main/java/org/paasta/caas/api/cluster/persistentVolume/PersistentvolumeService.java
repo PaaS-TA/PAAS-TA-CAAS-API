@@ -63,10 +63,9 @@ public class PersistentvolumeService {
      *
      * @return PersistentVolume
      */
-    Persistentvolume getPersistentvolume(String namespace, String pvcName) {
+    Persistentvolume getPersistentvolume(String pvcName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPersistentvolumesGetUrl()
-                        .replaceAll("\\{" + "namespace" + "\\}", namespace)
                         .replaceAll("\\{" + "name" + "\\}", pvcName), HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
