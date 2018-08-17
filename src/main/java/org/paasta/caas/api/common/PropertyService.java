@@ -48,13 +48,29 @@ public class PropertyService {
     @Value("${caasMaster.api.list.nodes.get}")
     private String caasMasterApiListNodesGetUrl;
 
-    // ReplicaSet List
-    @Value("${caasMaster.api.list.replicaset.list}")
-    private String caasMasterApiListReplicasetListUrl;
+    // ReplicaSets List
+    @Value("${caasMaster.api.list.replicasets.list}")
+    private String caasMasterApiListReplicasetsListUrl;
 
-    // ReplicaSet
-    @Value("${caasMaster.api.list.replicaset.get}")
-    private String caasMasterApiListReplicasetGetUrl;
+    // ReplicaSets
+    @Value("${caasMaster.api.list.replicasets.get}")
+    private String caasMasterApiListReplicasetsGetUrl;
+
+    // Persistentvolumes List
+    @Value("${caasMaster.api.list.persistentvolumes.list}")
+    private String caasMasterApiListPersistentvolumesListUrl;
+
+    // Persistentvolumes
+    @Value("${caasMaster.api.list.persistentvolumes.get}")
+    private String caasMasterApiListPersistentvolumesGetUrl;
+
+    // horizontalpodautoscalers
+    @Value("${caasMaster.api.list.horizontalpodautoscalers.get}")
+    private String caasMasterApiListHorizontalpodautoscalersGetUrl;
+
+    // events
+    @Value("${caasMaster.api.list.events.list}")
+    private String caasMasterApiListEventsListUrl;
 
     // Role List By All Namespaces
     @Value("${caasMaster.api.list.role.allList}")
