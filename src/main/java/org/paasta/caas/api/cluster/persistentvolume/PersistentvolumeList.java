@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Replicaset Model 클래스
+ * persistentvolume Model 클래스
  *
  * @author 최윤석
  * @version 1.0
@@ -28,7 +28,7 @@ public class PersistentvolumeList {
     private CommonMetaData metadata = null;
 
     @SerializedName("items")
-    private List<Replicaset> items = new ArrayList<Replicaset>();
+    private List<Persistentvolume> items = new ArrayList<>();
 
     private String resultCode;
     private String resultMessage;
