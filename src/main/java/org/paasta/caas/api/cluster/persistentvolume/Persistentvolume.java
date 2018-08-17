@@ -3,7 +3,6 @@ package org.paasta.caas.api.cluster.persistentvolume;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
-import org.paasta.caas.api.common.model.CommonSpec;
 import org.paasta.caas.api.common.model.CommonStatus;
 
 /**
@@ -20,7 +19,7 @@ public class Persistentvolume {
     private CommonMetaData metadata;
 
     @SerializedName("spec")
-    private PersistentVolumeSpec spec;
+    private PersistentvolumeSpec spec;
 
     @SerializedName("status")
     private CommonStatus status;

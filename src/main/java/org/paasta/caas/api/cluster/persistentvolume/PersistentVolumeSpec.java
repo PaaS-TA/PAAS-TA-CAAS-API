@@ -16,7 +16,7 @@ import java.util.Map;
  * @since 2018.08.07
  */
 @Data
-public class PersistentVolumeSpec {
+public class PersistentvolumeSpec {
 
     @SerializedName("accessModes")
     private List<String> accessModes;
