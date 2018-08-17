@@ -18,28 +18,12 @@ import java.util.Map;
 @Data
 public class CommonContainer {
    /* For PodTemplateSpec -- START */
-   @SerializedName( "name" )
    String name;
-
-   @SerializedName( "image" )
    String image;
-
-   @SerializedName( "args" )
    List<String> args;
-
-   // before : List<CommonEnvVariable> env;
-   @SerializedName( "env" )
    List<Map> env;
-
-   @SerializedName( "ports" )
    List<CommonPort> ports;
-
-   // before : List<CommonResourceRequirement> resources;
-   @SerializedName( "resources" )
    CommonResourceRequirement resources;
-   //Map resources;
-
-   @SerializedName("command")
    List<String> command;
 
 //   @SerializedName("envFrom")

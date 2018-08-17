@@ -15,10 +15,7 @@ import java.util.Map;
 @Data
 public class CommonResourceRequirement {
     /* ResourceRequirement -- START */
-    @SerializedName("limits")
     Map<String, String> limits;
-
-    @SerializedName("requests")
     Map<String, String> requests;
     /* ResourceRequirement -- END   */
 }

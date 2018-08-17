@@ -103,7 +103,6 @@ public class CommonSpec {
     // FOR SERVICE :: END
 
     // FOR TEMPLATE SPEC :: START
-    @SerializedName("containers")
     private List<CommonContainer> containers;
     // FOR TEMPLATE SPEC :: END
 

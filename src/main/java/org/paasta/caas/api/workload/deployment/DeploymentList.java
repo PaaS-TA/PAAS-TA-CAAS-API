@@ -16,18 +16,8 @@ import java.util.List;
  */
 @Data
 public class DeploymentList {
-//    @SerializedName("kind")
-//    private String kind = null;
-
-//    @SerializedName("apiVersion")
-//    private String apiVersion = null;
-
-    @SerializedName("items")
-    private List<Deployment> items = new ArrayList<>();
-
-    @SerializedName("metadata")
-    private CommonMetaData metadata = null;
-
     private String resultCode;
     private String resultMessage;
+
+    private List<Deployment> items;
 }

@@ -15,7 +15,5 @@ import java.util.List;
  */
 @Data
 public class CommonPodSpec {
-
-    @SerializedName("containers")
     private List<CommonContainer> containers = new ArrayList<CommonContainer>();
 }

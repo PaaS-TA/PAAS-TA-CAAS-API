@@ -41,7 +41,6 @@ public class CommonStatus {
     // FOR POD :: END
 
     // FOR POD, NODE :: BEGIN
-    @SerializedName("conditions")
     private List<CommonCondition> conditions;
     // FOR POD, NODE :: END
 

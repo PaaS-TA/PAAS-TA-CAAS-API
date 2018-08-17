@@ -12,10 +12,6 @@ import lombok.Data;
  */
 @Data
 public class CommonPodTemplateSpec {
-
-    @SerializedName("metadata")
     private CommonMetaData metadata;
-
-    @SerializedName("spec")
     private CommonPodSpec spec;
 }
