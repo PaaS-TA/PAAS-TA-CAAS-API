@@ -62,7 +62,7 @@ public class ReplicasetService {
      */
     ReplicasetList getReplicasetList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListReplicasetListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace), HttpMethod.GET, null, Map.class);
+                propertyService.getCaasMasterApiListReplicasetsListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace), HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
@@ -76,7 +76,7 @@ public class ReplicasetService {
      */
     Replicaset getReplicaset(String namespace, String replicasetsName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListReplicasetGetUrl()
+                propertyService.getCaasMasterApiListReplicasetsGetUrl()
                         .replaceAll("\\{" + "namespace" + "\\}", namespace)
                         .replaceAll("\\{" + "name" + "\\}", replicasetsName), HttpMethod.GET, null, Map.class);
 
