@@ -14,9 +14,9 @@ import java.time.format.DateTimeFormatter;
 public class GsonConfig {
     @Bean
     public GsonBuilder gsonBuilder() {
-        return new GsonBuilder()
-            .setDateFormat( "yyyy-MM-dd HH:mm:ss" )
-            .registerTypeAdapter( LocalDateTime.class, new LocalDateTimeConverter() );
+        return new GsonBuilder();
+            //.setDateFormat( "yyyy-MM-dd HH:mm:ss" );
+            //.registerTypeAdapter( LocalDateTime.class, new LocalDateTimeConverter() );
     }
 
     @Bean

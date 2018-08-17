@@ -29,6 +29,7 @@ public class NodeService {
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
+    private final Gson gson;
 
     /**
      * Instantiates a new Node service.
@@ -38,10 +39,12 @@ public class NodeService {
      * @param propertyService     the property service
      */
     @Autowired
-    public NodeService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
+    public NodeService(RestTemplateService restTemplateService, CommonService commonService,
+                       PropertyService propertyService, Gson gson) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
+        this.gson = gson;
     }
 
 
@@ -56,7 +59,7 @@ public class NodeService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (NodeList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), NodeList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (NodeList) commonService.setResultModel(gson.fromJson(gson.toJson(resultMap), NodeList.class), Constants.RESULT_STATUS_SUCCESS, "");
     }
 
 
@@ -72,7 +75,7 @@ public class NodeService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (Node) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Node.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (Node) commonService.setResultModel(gson.fromJson(gson.toJson(resultMap), Node.class), Constants.RESULT_STATUS_SUCCESS, "");
     }
 
 }
