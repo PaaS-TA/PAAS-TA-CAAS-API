@@ -67,4 +67,15 @@ public class PropertyService {
     // Role By Specified Namespace
     @Value("${caasMaster.api.list.role.get}")
     private String caasMasterApiListRoleGetUrl;
+
+    // Deployment List for all namespaces
+    @Value("${caasMaster.api.list.deployment.allList}")
+    private String caasMasterApiListDeploymentAllList;
+
+    @Value("${caasMaster.api.list.deployment.list}")
+    private String caasMasterApiListDeploymentList;
+
+    @Value("${caasMaster.api.list.deployment.get}")
+    private String caasMasterApiListDeploymentGet;
+
 }

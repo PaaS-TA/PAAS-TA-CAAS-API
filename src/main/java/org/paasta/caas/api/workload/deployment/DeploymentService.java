@@ -27,12 +27,15 @@ public class DeploymentService {
     private static final Logger LOGGER = LoggerFactory.getLogger( DeploymentService.class );
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
+    private final PropertyService propertyService;
     private final Gson gson;
 
     @Autowired
-    public DeploymentService(RestTemplateService restTemplateService, CommonService commonService, Gson gson) {
+    public DeploymentService(RestTemplateService restTemplateService, CommonService commonService,
+                             PropertyService propertyService, Gson gson) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
+        this.propertyService = propertyService;
         this.gson = gson;
     }
 
@@ -42,8 +45,9 @@ public class DeploymentService {
      * @return DeploymentList
      */
     public DeploymentList getDeploymentListByAllNamespace () {
+        final String requestPath = propertyService.getCaasMasterApiListDeploymentAllList();
         HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_DEPLOYMENT_LIST, HttpMethod.GET, null, Map.class );
+            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
         LOGGER.info("#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString());
 
         //DeploymentList deploymentList = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
@@ -62,9 +66,9 @@ public class DeploymentService {
      * @return DeploymentList
      */
     public DeploymentList getDeploymentList (String namespace, Map<String, Object> params) {
-        String urlWithNamespace = Constants.API_URL_DEPLOYMENT_LIST_IN_NAMESPACE.replace( "{namespace}", namespace );
+        String requestPath = propertyService.getCaasMasterApiListDeploymentList().replace( "{namespace}", namespace );
         HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, urlWithNamespace, HttpMethod.GET, null, Map.class );
+            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
         LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
 
         //DeploymentList deploymentList = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
@@ -83,10 +87,10 @@ public class DeploymentService {
      * @return Deployment
      */
     public Deployment getDeployment (String namespace, String deploymentName, Map<String, Object> params) {
-        String urlWithNamespace = Constants.API_URL_DEPLOYMENT_IN_NAMESPACE.replace( "{namespace}", namespace );
-        String urlWithDeploymentName = urlWithNamespace.replace( "{deploymentName}", deploymentName );
+        String requestPath = propertyService.getCaasMasterApiListDeploymentGet()
+            .replace( "{namespace}", namespace ).replace( "{deploymentName}", deploymentName );
         HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, urlWithDeploymentName, HttpMethod.GET, null, Map.class );
+            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
         LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
             namespace, deploymentName, responseMap.toString() );
 
