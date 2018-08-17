@@ -1,6 +1,7 @@
 package org.paasta.caas.api.workload.deployment;
 
 import com.google.gson.Gson;
+import org.apache.tomcat.util.bcel.Const;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
@@ -45,17 +46,25 @@ public class DeploymentService {
      * @return DeploymentList
      */
     public DeploymentList getDeploymentListByAllNamespace () {
-        final String requestPath = propertyService.getCaasMasterApiListDeploymentAllList();
-        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
-        LOGGER.info("#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString());
+        DeploymentList responseObject;
+        String resultCode;
+        String resultStatusMessage = "";
+        try {
+            final String requestPath = propertyService.getCaasMasterApiListDeploymentAllList();
+            HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
+                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
+            LOGGER.info( "#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString() );
 
-        //DeploymentList deploymentList = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
-        //return deploymentList;
+            responseObject = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
+            resultCode = Constants.RESULT_STATUS_SUCCESS;
+        } catch (Exception e) {
+            responseObject = new DeploymentList();
+            resultCode = Constants.RESULT_STATUS_FAIL;
+            resultStatusMessage =
+                "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
+        }
 
-        return (DeploymentList) commonService.setResultModel(
-            gson.fromJson(gson.toJson(responseMap), DeploymentList.class),
-            Constants.RESULT_STATUS_SUCCESS, "");
+        return ( DeploymentList ) commonService.setResultModel(responseObject, resultCode, resultStatusMessage);
     }
 
     /**
@@ -66,16 +75,25 @@ public class DeploymentService {
      * @return DeploymentList
      */
     public DeploymentList getDeploymentList (String namespace, Map<String, Object> params) {
-        String requestPath = propertyService.getCaasMasterApiListDeploymentList().replace( "{namespace}", namespace );
-        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
-        LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
+        DeploymentList responseObject;
+        String resultCode;
+        String resultStatusMessage = "";
+        try {
+            String requestPath = propertyService.getCaasMasterApiListDeploymentList().replace( "{namespace}", namespace );
+            HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
+                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
+            LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
 
-        //DeploymentList deploymentList = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
-        //return deploymentList;
-        return (DeploymentList) commonService.setResultModel(
-            gson.fromJson(gson.toJson(responseMap), DeploymentList.class),
-            Constants.RESULT_STATUS_SUCCESS, "");
+            responseObject = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
+            resultCode = Constants.RESULT_STATUS_SUCCESS;
+        } catch (Exception e) {
+            responseObject = new DeploymentList();
+            resultCode = Constants.RESULT_STATUS_FAIL;
+            resultStatusMessage =
+                "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
+        }
+
+        return (DeploymentList) commonService.setResultModel( responseObject, resultCode, resultStatusMessage);
     }
 
     /**
@@ -87,17 +105,27 @@ public class DeploymentService {
      * @return Deployment
      */
     public Deployment getDeployment (String namespace, String deploymentName, Map<String, Object> params) {
-        String requestPath = propertyService.getCaasMasterApiListDeploymentGet()
-            .replace( "{namespace}", namespace ).replace( "{deploymentName}", deploymentName );
-        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
-        LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
-            namespace, deploymentName, responseMap.toString() );
+        Deployment responseObject;
+        String resultCode;
+        String resultStatusMessage = "";
+        try {
+            String requestPath = propertyService.getCaasMasterApiListDeploymentGet()
+                .replace( "{namespace}", namespace ).replace( "{deploymentName}", deploymentName );
+            HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
+                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
+            LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
+                namespace, deploymentName, responseMap.toString() );
 
-        //Deployment deployment = gson.fromJson( gson.toJson( responseMap ), Deployment.class );
-        //return deployment;
-        return (Deployment) commonService.setResultModel(
-            gson.fromJson(gson.toJson(responseMap), Deployment.class),
-            Constants.RESULT_STATUS_SUCCESS, "");
+            responseObject = gson.fromJson( gson.toJson( responseMap ), Deployment.class );
+            resultCode = Constants.RESULT_STATUS_SUCCESS;
+
+        } catch (Exception e) {
+            responseObject = new Deployment();
+            resultCode = Constants.RESULT_STATUS_FAIL;
+            resultStatusMessage =
+                "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
+        }
+
+        return (Deployment) commonService.setResultModel(responseObject, resultCode, resultStatusMessage);
     }
 }

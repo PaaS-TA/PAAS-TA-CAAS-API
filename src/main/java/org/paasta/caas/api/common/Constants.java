@@ -11,6 +11,7 @@ public class Constants {
 
     /*RESULT STATUS*/
     public static final String RESULT_STATUS_SUCCESS = "SUCCESS";
+    public static final String RESULT_STATUS_FAIL = "FAIL";
 
     /*TARGET API*/
     public static final String TARGET_CAAS_MASTER_API = "caasMasterApi";
