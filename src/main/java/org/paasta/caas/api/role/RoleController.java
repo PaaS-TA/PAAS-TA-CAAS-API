@@ -1,4 +1,4 @@
-package org.paasta.caas.api.cluster.role;
+package org.paasta.caas.api.role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018-08-14
  */
 @RestController
-@RequestMapping("/cluster")
+@RequestMapping("/roles")
 public class RoleController {
 
     private final RoleService roleService;
@@ -29,7 +29,7 @@ public class RoleController {
      *
      * @return
      */
-    @GetMapping(value = "/roles")
+    @GetMapping
     public RoleList getRoleListByAllNamespace(){
         return roleService.getRoleListByAllNamespace();
     }

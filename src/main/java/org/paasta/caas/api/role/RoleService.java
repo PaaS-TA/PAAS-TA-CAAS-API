@@ -1,4 +1,4 @@
-package org.paasta.caas.api.cluster.role;
+package org.paasta.caas.api.role;
 
 import com.google.gson.Gson;
 import org.paasta.caas.api.common.Constants;
