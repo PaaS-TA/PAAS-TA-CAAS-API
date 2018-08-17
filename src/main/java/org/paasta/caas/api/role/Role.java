@@ -2,8 +2,11 @@ package org.paasta.caas.api.role;
 
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
-import org.paasta.caas.api.common.model.CommonSpec;
-import org.paasta.caas.api.common.model.CommonStatus;
+import org.paasta.caas.api.common.model.CommonRoleRule;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Role Model 클래스
@@ -19,9 +22,6 @@ public class Role {
     private String resultMessage;
 
     private CommonMetaData metadata;
-    private CommonSpec spec;
-    private CommonStatus status;
+    private List<CommonRoleRule> rules = new ArrayList<>();
 
-    // FOR DASHBOARD
-    private String selector;
 }
