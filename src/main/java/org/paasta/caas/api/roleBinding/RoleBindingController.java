@@ -55,7 +55,7 @@ public class RoleBindingController {
     }
 
     /**
-     * RoleBind 권한을 할당한다. (특정 네임스페이스에서 조회)
+     * RoleBinding 권한을 할당한다. (특정 네임스페이스에서 조회)
      *
      * @param namespace
      * @param roleBinding
@@ -64,5 +64,17 @@ public class RoleBindingController {
     @PostMapping(value = "/namespaces/{namespace}/rolebindings")
     public RoleBinding createRoleBinding(@PathVariable("namespace") String namespace, @RequestBody RoleBinding roleBinding){
         return roleBindingService.createRoleBinding(namespace, roleBinding);
+    }
+
+    /**
+     * RoleBinding 권한을 해지한다. (특정 네임스페이스에서 조회)
+     *
+     * @param namespace
+     * @param roleBindingName
+     * @return
+     */
+    @DeleteMapping(value = "/namespaces/{namespace}/rolebindings/{roleBindingName}")
+    public String deleteRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName){
+        return roleBindingService.deleteRoleBinding(namespace, roleBindingName);
     }
 }
