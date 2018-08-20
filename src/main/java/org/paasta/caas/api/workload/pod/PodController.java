@@ -69,4 +69,8 @@ public class PodController {
         return podService.getPodList(namespace, selector);
     }
 
+    @GetMapping( value = "/detail/{podName:.+}" )
+    public Pod getPod(@PathVariable String namespace, @PathVariable String podName) {
+        return podService.getPod(namespace, podName);
+    }
 }

@@ -24,5 +24,4 @@ public class Pod {
 
     // FOR DASHBOARD
     private String selector;
-
 }

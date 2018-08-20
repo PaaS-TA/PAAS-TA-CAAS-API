@@ -113,9 +113,14 @@ public class PodService {
      * @return the pod list
      */
     PodList getPodList(String namespace) {
-
-        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
+        HashMap resultMap;
+        if ("_all".equals( namespace )) {
+            resultMap = (HashMap) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
+                "/api/v1/pods", HttpMethod.GET, null, Map.class );
+        } else {
+            resultMap = ( HashMap ) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListPodsListUrl().replace( "{namespace}", namespace ), HttpMethod.GET, null, Map.class );
+        }
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
@@ -138,7 +143,22 @@ public class PodService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PodList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PodList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+    /**
+     * Get pod.
+     * @param namespace the namespace
+     * @param podName the pod's name
+     * @return
+     */
+    Pod getPod ( String namespace, String podName ) {
+        HashMap resultMap = (HashMap) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
+            propertyService.getCaasMasterApiListPodsGetUrl().replace( "{namespace}", namespace ).replace( "{name}", podName ),
+            HttpMethod.GET, null, Map.class );
+
+        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
+
+        return (Pod) commonService.setResultModel( gson.fromJson( gson.toJson( resultMap ), Pod.class ),
+            Constants.RESULT_STATUS_SUCCESS, "" );
+    }
 }
