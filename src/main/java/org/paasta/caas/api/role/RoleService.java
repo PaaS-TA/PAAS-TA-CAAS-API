@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Role Service Class
+ *
  * @author hrjin
  * @version 1.0
  * @since 2018-08-14
