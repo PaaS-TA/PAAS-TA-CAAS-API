@@ -1,0 +1,92 @@
+# Spring properties
+spring:
+  application:
+    name: caas-api
+  security:
+    username:
+    password:
+
+project:
+  name: caas-api
+  artifactId: caas-api
+  description: caas-api management service
+
+management:
+  security:
+    enabled: false
+
+caasMaster:
+  api:
+    token: CAASMASTER-API-TOKEN
+    url: CAASMASTER-API-URL
+    list:
+      services:
+        list: "/api/v1/namespaces/{namespace}/services"
+        get: "/api/v1/namespaces/{namespace}/services/{name}"
+      endpoints:
+        list: "/api/v1/namespaces/{namespace}/endpoints"
+        get: "/api/v1/namespaces/{namespace}/endpoints/{name}"
+      pods:
+        list: "/api/v1/namespaces/{namespace}/pods"
+        get: "/api/v1/namespaces/{namespace}/pods/{name}"
+      nodes:
+        list: "/api/v1/nodes"
+        get: "/api/v1/nodes/{name}"
+      replicasets:
+        list: "/apis/apps/v1/namespaces/{namespace}/replicasets"
+        get: "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}"
+      horizontalpodautoscalers:
+        get: "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
+      persistentvolumes:
+        list: "/api/v1/persistentvolumes"
+        get: "/api/v1/persistentvolumes/{name}"
+      events:
+        list: "/api/v1/namespaces/{namespace}/events"
+      role:
+        allList: "/apis/rbac.authorization.k8s.io/v1/roles"
+        list: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles"
+        get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
+      deployment:
+        allList: "/apis/apps/v1/deployments"
+        list: "/apis/apps/v1/namespaces/{namespace}/deployments"
+        get: "/apis/apps/v1/namespaces/{namespace}/deployments/{deploymentName}"
+
+---
+spring:
+  profiles:
+    active: local
+
+logging:
+  level:
+    ROOT: INFO
+  path: classpath:logback-spring.xml
+  file: logs/application.log
+
+server:
+  port: ${PORT:3333}
+
+commonApi:
+  url: http://localhost:3334
+  authorization:
+    id: admin
+    password: PaaS-TA
+
+---
+spring:
+  profiles: dev
+
+logging:
+  level:
+    ROOT: INFO
+  path: classpath:logback-spring.xml
+  file: logs/application.log
+
+server:
+  port: ${PORT:3333}
+
+commonApi:
+  url: http://localhost:3334
+  authorization:
+    id: admin
+    password: PaaS-TA
+
