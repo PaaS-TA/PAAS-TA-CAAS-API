@@ -1,6 +1,5 @@
 package org.paasta.caas.api.customService;
 
-import com.google.gson.Gson;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
@@ -55,7 +54,7 @@ public class CustomServiceService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (CustomServiceList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), CustomServiceList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (CustomServiceList) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap), CustomServiceList.class), Constants.RESULT_STATUS_SUCCESS, "");
     }
 
     /**
@@ -73,7 +72,7 @@ public class CustomServiceService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (CustomService) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), CustomService.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (CustomService) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap), CustomService.class), Constants.RESULT_STATUS_SUCCESS, "");
     }
 
 }
