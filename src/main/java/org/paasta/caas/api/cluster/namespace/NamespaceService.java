@@ -10,7 +10,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -28,22 +27,30 @@ public class NamespaceService {
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
 
+    /**
+     * Instantiates a new Namespace service.
+     *
+     * @param restTemplateService the rest template service
+     * @param commonService       the common service
+     */
     @Autowired
-    public NamespaceService(RestTemplateService restTemplateService, CommonService commonService) {this.restTemplateService = restTemplateService;
+    public NamespaceService(RestTemplateService restTemplateService, CommonService commonService) {
+        this.restTemplateService = restTemplateService;
         this.commonService = commonService;
     }
 
+
+    /**
+     * Gets namespace list.
+     *
+     * @return the namespace list
+     */
     // TODO :: REMOVE
     Namespace getNamespaceList() {
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES_LIST, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getNamespaceList() :: hashMap.toString() :: {}", hashMap.toString());
 
-        Namespace result = new Namespace();
-        result.setResult(Constants.RESULT_STATUS_SUCCESS);
-        result.setItems(commonService.setListData(Namespace.class, "metadata", (List) hashMap.get("items")));
-//        result.setItems(setListData(new Namespace(), "metadata", (List) hashMap.get("items"))); // SAME RESULT
-
-        return result;
+        return (Namespace) commonService.setResultModel(commonService.fromJson(commonService.toJson(hashMap),
+                Namespace.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }
