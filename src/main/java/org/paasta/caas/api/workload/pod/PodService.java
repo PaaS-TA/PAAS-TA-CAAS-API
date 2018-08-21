@@ -119,7 +119,7 @@ public class PodService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PodList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PodList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (PodList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PodList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
@@ -138,7 +138,7 @@ public class PodService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PodList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PodList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (PodList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PodList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

@@ -1,7 +1,6 @@
 package org.paasta.caas.api.workload.deployment;
 
 import com.google.gson.Gson;
-import org.apache.tomcat.util.bcel.Const;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
@@ -9,7 +8,6 @@ import org.paasta.caas.api.common.RestTemplateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +62,7 @@ public class DeploymentService {
                 "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
         }
 
-        return ( DeploymentList ) commonService.setResultModel(responseObject, resultCode, resultStatusMessage);
+        return ( DeploymentList ) commonService.setResultModel(responseObject, resultCode);
     }
 
     /**
@@ -93,7 +91,7 @@ public class DeploymentService {
                 "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
         }
 
-        return (DeploymentList) commonService.setResultModel( responseObject, resultCode, resultStatusMessage);
+        return (DeploymentList) commonService.setResultModel( responseObject, resultCode);
     }
 
     /**
@@ -126,6 +124,6 @@ public class DeploymentService {
                 "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
         }
 
-        return (Deployment) commonService.setResultModel(responseObject, resultCode, resultStatusMessage);
+        return (Deployment) commonService.setResultModel(responseObject, resultCode);
     }
 }

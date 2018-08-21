@@ -1,6 +1,5 @@
 package org.paasta.caas.api.endpoint;
 
-import com.google.gson.Gson;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
@@ -52,11 +51,11 @@ public class EndpointService {
      */
     EndpointList getEndpointList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListEndpointsListUrl().replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
+                propertyService.getCaasMasterApiListEndpointsListUrl()
+                        .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
-
-        return (EndpointList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), EndpointList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (EndpointList) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
+                EndpointList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
@@ -72,9 +71,8 @@ public class EndpointService {
                         .replace("{namespace}", namespace)
                         .replace("{name}", serviceName), HttpMethod.GET, null, Map.class);
 
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
-
-        return (Endpoint) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Endpoint.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (Endpoint) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
+                Endpoint.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

@@ -66,7 +66,7 @@ public class ReplicasetService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (ReplicasetList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), ReplicasetList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (ReplicasetList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), ReplicasetList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
@@ -82,6 +82,6 @@ public class ReplicasetService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (Replicaset) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Replicaset.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (Replicaset) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Replicaset.class), Constants.RESULT_STATUS_SUCCESS);
     }
 }

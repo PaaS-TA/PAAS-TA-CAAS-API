@@ -59,7 +59,7 @@ public class NodeService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (NodeList) commonService.setResultModel(gson.fromJson(gson.toJson(resultMap), NodeList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (NodeList) commonService.setResultModel(gson.fromJson(gson.toJson(resultMap), NodeList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
@@ -75,7 +75,7 @@ public class NodeService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (Node) commonService.setResultModel(gson.fromJson(gson.toJson(resultMap), Node.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (Node) commonService.setResultModel(gson.fromJson(gson.toJson(resultMap), Node.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

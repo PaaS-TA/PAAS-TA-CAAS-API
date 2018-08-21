@@ -16,8 +16,6 @@ import org.paasta.caas.api.common.model.CommonStatus;
 public class CustomService {
 
     private String resultCode;
-    private String resultMessage;
-
     private CommonMetaData metadata;
     private CommonSpec spec;
     private CommonStatus status;

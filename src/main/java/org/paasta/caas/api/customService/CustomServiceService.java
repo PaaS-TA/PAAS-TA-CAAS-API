@@ -42,6 +42,7 @@ public class CustomServiceService {
         this.propertyService = propertyService;
     }
 
+
     /**
      * Gets custom service list.
      *
@@ -50,12 +51,13 @@ public class CustomServiceService {
      */
     CustomServiceList getCustomServiceList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListServicesListUrl().replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
+                propertyService.getCaasMasterApiListServicesListUrl()
+                        .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
-
-        return (CustomServiceList) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap), CustomServiceList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (CustomServiceList) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
+                CustomServiceList.class), Constants.RESULT_STATUS_SUCCESS);
     }
+
 
     /**
      * Gets custom service.
@@ -70,9 +72,8 @@ public class CustomServiceService {
                         .replace("{namespace}", namespace)
                         .replace("{name}", serviceName), HttpMethod.GET, null, Map.class);
 
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
-
-        return (CustomService) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap), CustomService.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (CustomService) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
+                CustomService.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

@@ -27,6 +27,7 @@ public class CustomServiceController {
     @Autowired
     public CustomServiceController(CustomServiceService customServiceService) {this.customServiceService = customServiceService;}
 
+
     /**
      * Gets custom service list.
      *
@@ -37,6 +38,7 @@ public class CustomServiceController {
     public CustomServiceList getCustomServiceList(@PathVariable("namespace") String namespace) {
         return customServiceService.getCustomServiceList(namespace);
     }
+
 
     /**
      * Gets custom service.
@@ -49,4 +51,5 @@ public class CustomServiceController {
     public CustomService getCustomService(@PathVariable("namespace") String namespace, @PathVariable("serviceName") String serviceName) {
         return customServiceService.getCustomService(namespace, serviceName);
     }
+
 }

@@ -2,7 +2,6 @@ package org.paasta.caas.api.customService;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,8 +15,6 @@ import java.util.List;
 public class CustomServiceList {
 
     private String resultCode;
-    private String resultMessage;
-
-    private List<CustomService> items = new ArrayList<>();
+    private List<CustomService> items;
 
 }
