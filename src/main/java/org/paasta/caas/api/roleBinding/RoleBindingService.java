@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.paasta.caas.api.role.RoleList;
 import org.paasta.caas.api.role.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,7 +87,7 @@ public class RoleBindingService {
 
 
     /**
-     * RoleBind 권한을 할당한다. (특정 네임스페이스에서 조회)
+     * RoleBinding 권한을 할당한다. (특정 네임스페이스에서 조회)
      *
      * @param namespace
      * @param roleBinding
@@ -98,9 +97,30 @@ public class RoleBindingService {
         String apiUrl = propertyService.getCaasMasterApiListRoleBindingCreateUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
 
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.POST, roleBinding, Map.class);
-        LOGGER.info("########## getRoleBindingList() :: hashMap.toString() :: {}", hashMap.toString());
+        LOGGER.info("########## createRoleBinding() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
         return gson.fromJson(gson.toJson(hashMap), RoleBinding.class);
+    }
+
+    /**
+     * RoleBinding 권한을 해지한다. (특정 네임스페이스에서 조회)
+     *
+     * @param namespace
+     * @param roleBindingName
+     * @return
+     */
+    public String deleteRoleBinding(String namespace, String roleBindingName) {
+        String apiUrl = propertyService.getCaasMasterApiListRoleBindingDeleteUrl()
+                .replaceAll("\\{" + "namespace" + "\\}", namespace)
+                .replaceAll("\\{" + "name" + "\\}", roleBindingName);
+
+        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
+        LOGGER.info("########## deleteRoleBinding() :: hashMap.toString() :: {}", hashMap.toString());
+
+        if(hashMap.get("status").equals("Success")){
+            return Constants.RESULT_STATUS_SUCCESS;
+        }
+        return Constants.RESULT_STATUS_FAIL;
     }
 }

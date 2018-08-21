@@ -94,20 +94,24 @@ public class PropertyService {
     @Value("${caasMaster.api.list.deployment.get}")
     private String caasMasterApiListDeploymentGet;
 
-    // Role List By All Namespaces
+    // RoleBinding List By All Namespaces
     @Value("${caasMaster.api.list.roleBinding.allList}")
     private String caasMasterApiListRoleBindingAllListUrl;
 
-    // Role List By Specified Namespace
+    // RoleBinding List By Specified Namespace
     @Value("${caasMaster.api.list.roleBinding.list}")
     private String caasMasterApiListRoleBindingListUrl;
 
-    // Role By Specified Namespace
+    // RoleBinding By Specified Namespace
     @Value("${caasMaster.api.list.roleBinding.get}")
     private String caasMasterApiListRoleBindingGetUrl;
 
-    // Role By Specified Namespace
+    // RoleBinding allocate
     @Value("${caasMaster.api.list.roleBinding.create}")
     private String caasMasterApiListRoleBindingCreateUrl;
+
+    // RoleBinding cancel
+    @Value("${caasMaster.api.list.roleBinding.delete}")
+    private String caasMasterApiListRoleBindingDeleteUrl;
 
 }
