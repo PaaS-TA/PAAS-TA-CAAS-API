@@ -55,7 +55,7 @@ public class PersistentvolumeService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PersistentvolumeList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PersistentvolumeList.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (PersistentvolumeList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PersistentvolumeList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
@@ -70,6 +70,6 @@ public class PersistentvolumeService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (Persistentvolume) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Persistentvolume.class), Constants.RESULT_STATUS_SUCCESS, "");
+        return (Persistentvolume) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Persistentvolume.class), Constants.RESULT_STATUS_SUCCESS);
     }
 }
