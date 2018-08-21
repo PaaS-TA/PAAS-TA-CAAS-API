@@ -105,7 +105,7 @@ public class CustomServiceServiceTest {
                 .replace("{namespace}", NAMESPACE), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.toJson(gResultMap)).thenReturn(gResultListMapString);
         when(commonService.fromJson(gResultListMapString, CustomServiceList.class)).thenReturn(gResultListModel);
-        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS, "")).thenReturn(gFinalResultListModel);
+        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         // TEST
         CustomServiceList resultModel = customServiceService.getCustomServiceList(NAMESPACE);
@@ -128,7 +128,7 @@ public class CustomServiceServiceTest {
                 .replace("{name}", SERVICE_NAME), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.toJson(gResultMap)).thenReturn(gResultMapString);
         when(commonService.fromJson(gResultMapString, CustomService.class)).thenReturn(gResultModel);
-        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS, "")).thenReturn(gFinalResultModel);
+        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
         // TEST
         CustomService resultModel = customServiceService.getCustomService(NAMESPACE, SERVICE_NAME);
