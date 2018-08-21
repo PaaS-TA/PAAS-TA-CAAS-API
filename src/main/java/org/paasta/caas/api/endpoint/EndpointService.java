@@ -43,6 +43,7 @@ public class EndpointService {
         this.propertyService = propertyService;
     }
 
+
     /**
      * Gets endpoint list.
      *
@@ -57,6 +58,7 @@ public class EndpointService {
         return (EndpointList) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
                 EndpointList.class), Constants.RESULT_STATUS_SUCCESS);
     }
+
 
     /**
      * Gets custom service.

@@ -19,8 +19,6 @@ import java.util.List;
 public class Endpoint {
 
     private String resultCode;
-    private String resultMessage;
-
     private CommonMetaData metadata;
     private CommonSpec spec;
     private CommonStatus status;

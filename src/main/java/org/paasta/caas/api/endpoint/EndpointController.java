@@ -27,6 +27,7 @@ public class EndpointController {
     @Autowired
     public EndpointController(EndpointService endpointService) {this.endpointService = endpointService;}
 
+
     /**
      * Gets endpoint list.
      *
@@ -50,4 +51,5 @@ public class EndpointController {
     public Endpoint getEndpoint(@PathVariable("namespace") String namespace, @PathVariable("serviceName") String serviceName) {
         return endpointService.getEndpoint(namespace, serviceName);
     }
+
 }
