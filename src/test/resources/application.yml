@@ -50,6 +50,12 @@ caasMaster:
         allList: "/apis/apps/v1/deployments"
         list: "/apis/apps/v1/namespaces/{namespace}/deployments"
         get: "/apis/apps/v1/namespaces/{namespace}/deployments/{deploymentName}"
+      roleBinding:
+        allList: "/apis/rbac.authorization.k8s.io/v1/rolebindings"
+        list: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings"
+        get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
+        create: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings"
+        delete: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
 
 ---
 spring:
