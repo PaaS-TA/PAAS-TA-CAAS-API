@@ -31,7 +31,6 @@ public class CommonService {
     public CommonService(Gson gson) {this.gson = gson;}
 
 
-
     /**
      * Sets result model.
      *
@@ -59,12 +58,25 @@ public class CommonService {
 
 
     /**
+     * Sets result object.
+     *
+     * @param <T>           the type parameter
+     * @param requestObject the request object
+     * @param requestClass  the request class
+     * @return the result object
+     */
+    public <T> T setResultObject(Object requestObject, Class<T> requestClass) {
+        return this.fromJson(this.toJson(requestObject), requestClass);
+    }
+
+
+    /**
      * To json string.
      *
      * @param requestObject the request object
      * @return the string
      */
-    public String toJson(Object requestObject) {
+    private String toJson(Object requestObject) {
         return gson.toJson(requestObject);
     }
 
@@ -77,7 +89,7 @@ public class CommonService {
      * @param requestClass  the request class
      * @return the t
      */
-    public <T> T fromJson(String requestString, Class<T> requestClass) {
+    private <T> T fromJson(String requestString, Class<T> requestClass) {
         return gson.fromJson(requestString, requestClass);
     }
 }

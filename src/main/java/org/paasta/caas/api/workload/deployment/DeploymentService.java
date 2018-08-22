@@ -1,6 +1,5 @@
 package org.paasta.caas.api.workload.deployment;
 
-import com.google.gson.Gson;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
@@ -51,7 +50,7 @@ public class DeploymentService {
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
             LOGGER.info( "#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString() );
 
-            responseObject = commonService.fromJson( commonService.toJson( responseMap ), DeploymentList.class );
+            responseObject = commonService.setResultObject(responseMap, DeploymentList.class);
             resultCode = Constants.RESULT_STATUS_SUCCESS;
         } catch (Exception e) {
             responseObject = new DeploymentList();
@@ -80,7 +79,7 @@ public class DeploymentService {
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
             LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
 
-            responseObject = commonService.fromJson( commonService.toJson( responseMap ), DeploymentList.class );
+            responseObject = commonService.setResultObject(responseMap, DeploymentList.class);
             resultCode = Constants.RESULT_STATUS_SUCCESS;
         } catch (Exception e) {
             responseObject = new DeploymentList();
@@ -112,7 +111,7 @@ public class DeploymentService {
             LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
                 namespace, deploymentName, responseMap.toString() );
 
-            responseObject = commonService.fromJson( commonService.toJson( responseMap ), Deployment.class );
+            responseObject = commonService.setResultObject(responseMap, Deployment.class);
             resultCode = Constants.RESULT_STATUS_SUCCESS;
 
         } catch (Exception e) {

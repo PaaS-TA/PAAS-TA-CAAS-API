@@ -47,10 +47,9 @@ public class NamespaceService {
      */
     // TODO :: REMOVE
     Namespace getNamespaceList() {
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES_LIST, HttpMethod.GET, null, Map.class);
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES_LIST, HttpMethod.GET, null, Map.class);
 
-        return (Namespace) commonService.setResultModel(commonService.fromJson(commonService.toJson(hashMap),
-                Namespace.class), Constants.RESULT_STATUS_SUCCESS);
+        return (Namespace) commonService.setResultModel(commonService.setResultObject(resultMap, Namespace.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

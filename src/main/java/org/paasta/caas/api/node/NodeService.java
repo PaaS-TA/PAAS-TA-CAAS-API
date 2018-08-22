@@ -1,6 +1,5 @@
 package org.paasta.caas.api.node;
 
-import com.google.gson.Gson;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
@@ -57,7 +56,7 @@ public class NodeService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (NodeList) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap), NodeList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (NodeList) commonService.setResultModel(commonService.setResultObject(resultMap, NodeList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
@@ -73,7 +72,7 @@ public class NodeService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (Node) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap), Node.class), Constants.RESULT_STATUS_SUCCESS);
+        return (Node) commonService.setResultModel(commonService.setResultObject(resultMap, Node.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

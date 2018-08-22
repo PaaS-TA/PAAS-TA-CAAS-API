@@ -51,8 +51,7 @@ public class CustomServiceService {
                 propertyService.getCaasMasterApiListServicesListUrl()
                         .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
-        return (CustomServiceList) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
-                CustomServiceList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (CustomServiceList) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServiceList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
@@ -69,8 +68,7 @@ public class CustomServiceService {
                         .replace("{namespace}", namespace)
                         .replace("{name}", serviceName), HttpMethod.GET, null, Map.class);
 
-        return (CustomService) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
-                CustomService.class), Constants.RESULT_STATUS_SUCCESS);
+        return (CustomService) commonService.setResultModel(commonService.setResultObject(resultMap, CustomService.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

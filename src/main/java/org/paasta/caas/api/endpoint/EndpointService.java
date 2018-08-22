@@ -51,8 +51,7 @@ public class EndpointService {
                 propertyService.getCaasMasterApiListEndpointsListUrl()
                         .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
-        return (EndpointList) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
-                EndpointList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (EndpointList) commonService.setResultModel(commonService.setResultObject(resultMap, EndpointList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
@@ -69,8 +68,7 @@ public class EndpointService {
                         .replace("{namespace}", namespace)
                         .replace("{name}", serviceName), HttpMethod.GET, null, Map.class);
 
-        return (Endpoint) commonService.setResultModel(commonService.fromJson(commonService.toJson(resultMap),
-                Endpoint.class), Constants.RESULT_STATUS_SUCCESS);
+        return (Endpoint) commonService.setResultModel(commonService.setResultObject(resultMap, Endpoint.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }
