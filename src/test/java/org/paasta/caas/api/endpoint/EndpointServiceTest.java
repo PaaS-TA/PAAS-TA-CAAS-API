@@ -99,8 +99,7 @@ public class EndpointServiceTest {
         when(propertyService.getCaasMasterApiListEndpointsListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, LIST_URL
                 .replace("{namespace}", NAMESPACE), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
-        when(commonService.toJson(gResultMap)).thenReturn(gResultListMapString);
-        when(commonService.fromJson(gResultListMapString, EndpointList.class)).thenReturn(gResultListModel);
+        when(commonService.setResultObject(gResultMap, EndpointList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         // TEST
@@ -122,8 +121,7 @@ public class EndpointServiceTest {
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, GET_URL
                 .replace("{namespace}", NAMESPACE)
                 .replace("{name}", SERVICE_NAME), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
-        when(commonService.toJson(gResultMap)).thenReturn(gResultMapString);
-        when(commonService.fromJson(gResultMapString, Endpoint.class)).thenReturn(gResultModel);
+        when(commonService.setResultObject(gResultMap, Endpoint.class)).thenReturn(gResultModel);
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
         // TEST
