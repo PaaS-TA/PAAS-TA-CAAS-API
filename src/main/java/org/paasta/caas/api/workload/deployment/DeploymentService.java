@@ -27,15 +27,13 @@ public class DeploymentService {
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
-    private final Gson gson;
 
     @Autowired
     public DeploymentService(RestTemplateService restTemplateService, CommonService commonService,
-                             PropertyService propertyService, Gson gson) {
+                             PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
-        this.gson = gson;
     }
 
     /**
@@ -53,7 +51,7 @@ public class DeploymentService {
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
             LOGGER.info( "#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString() );
 
-            responseObject = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
+            responseObject = commonService.fromJson( commonService.toJson( responseMap ), DeploymentList.class );
             resultCode = Constants.RESULT_STATUS_SUCCESS;
         } catch (Exception e) {
             responseObject = new DeploymentList();
@@ -82,7 +80,7 @@ public class DeploymentService {
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
             LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
 
-            responseObject = gson.fromJson( gson.toJson( responseMap ), DeploymentList.class );
+            responseObject = commonService.fromJson( commonService.toJson( responseMap ), DeploymentList.class );
             resultCode = Constants.RESULT_STATUS_SUCCESS;
         } catch (Exception e) {
             responseObject = new DeploymentList();
@@ -114,7 +112,7 @@ public class DeploymentService {
             LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
                 namespace, deploymentName, responseMap.toString() );
 
-            responseObject = gson.fromJson( gson.toJson( responseMap ), Deployment.class );
+            responseObject = commonService.fromJson( commonService.toJson( responseMap ), Deployment.class );
             resultCode = Constants.RESULT_STATUS_SUCCESS;
 
         } catch (Exception e) {

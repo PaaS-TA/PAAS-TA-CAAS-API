@@ -124,7 +124,8 @@ public class PodService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PodList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PodList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (PodList) commonService.setResultModel(
+            commonService.fromJson(commonService.toJson(resultMap), PodList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
@@ -139,10 +140,12 @@ public class PodService {
         String requestSelector = "?labelSelector=" + selector;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
+            propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
+        return (PodList) commonService.setResultModel(
+            commonService.fromJson( commonService.toJson( resultMap ), PodList.class ), Constants.RESULT_STATUS_SUCCESS );
     }
 
     /**
@@ -158,7 +161,7 @@ public class PodService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (Pod) commonService.setResultModel( gson.fromJson( gson.toJson( resultMap ), Pod.class ),
-            Constants.RESULT_STATUS_SUCCESS, "" );
+        return (Pod) commonService.setResultModel(
+            commonService.fromJson( commonService.toJson( resultMap ) , Pod.class ), Constants.RESULT_STATUS_SUCCESS );
     }
 }

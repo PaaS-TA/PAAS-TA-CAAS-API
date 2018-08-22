@@ -51,25 +51,14 @@ public class PodController {
      */
     @GetMapping
     @ResponseBody
-    public PodList getPodList(@PathVariable("namespace") String namespace) {
-        return podService.getPodList(namespace);
+    public PodList getPodList(@PathVariable("namespace") String namespace, Pod pod) {
+        if (null != pod && null != pod.getSelector())
+            return podService.getPodList(namespace, pod.getSelector());
+        else
+            return podService.getPodList(namespace);
     }
 
-
-    /**
-     * Gets pod list.
-     *
-     * @param namespace the namespace
-     * @param selector  the selector
-     * @return the pod list
-     */
-    @GetMapping(value = "/{selector:.+}")
-    @ResponseBody
-    public PodList getPodList(@PathVariable("namespace") String namespace, @PathVariable("selector") String selector) {
-        return podService.getPodList(namespace, selector);
-    }
-
-    @GetMapping( value = "/detail/{podName:.+}" )
+    @GetMapping( value = "/{podName:.+}" )
     public Pod getPod(@PathVariable String namespace, @PathVariable String podName) {
         return podService.getPod(namespace, podName);
     }

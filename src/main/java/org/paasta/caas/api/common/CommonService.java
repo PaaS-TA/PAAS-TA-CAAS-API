@@ -80,5 +80,4 @@ public class CommonService {
     public <T> T fromJson(String requestString, Class<T> requestClass) {
         return gson.fromJson(requestString, requestClass);
     }
-
 }
