@@ -17,7 +17,6 @@ import java.util.List;
 @Data
 public class DeploymentList {
     private String resultCode;
-    private String resultMessage;
 
     private List<Deployment> items;
 }

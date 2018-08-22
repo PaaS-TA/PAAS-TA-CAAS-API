@@ -26,7 +26,6 @@ public class Replicaset {
     private CommonStatus status;
 
     private String resultCode;
-    private String resultMessage;
 
 //    @SerializedName("apiVersion")
 //    private String apiVersion = null;

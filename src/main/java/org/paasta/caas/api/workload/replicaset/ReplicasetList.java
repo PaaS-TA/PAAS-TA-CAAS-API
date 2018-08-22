@@ -30,5 +30,4 @@ public class ReplicasetList {
     private List<Replicaset> items = new ArrayList<Replicaset>();
 
     private String resultCode;
-    private String resultMessage;
 }

@@ -14,9 +14,7 @@ import java.util.List;
  */
 @Data
 public class PodList {
-
     private String resultCode;
-    private String resultMessage;
 
     private List<Pod> items = new ArrayList<>();
 

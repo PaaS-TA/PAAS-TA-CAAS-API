@@ -15,12 +15,11 @@ import org.paasta.caas.api.workload.deployment.support.DeploymentStatus;
  */
 @Data
 public class Deployment {
+    private String resultCode;
+
     private CommonMetaData metadata;
     private DeploymentSpec spec;
     private DeploymentStatus status;
-
-    private String resultCode;
-    private String resultMessage;
 
 //    private String kind;
 //    private String apiVersion;

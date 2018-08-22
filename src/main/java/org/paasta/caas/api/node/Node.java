@@ -15,7 +15,6 @@ import org.paasta.caas.api.node.support.NodeStatus;
 @Data
 public class Node {
     private String resultCode;
-    private String resultMessage;
 
     private CommonMetaData metadata;
     private CommonSpec spec;

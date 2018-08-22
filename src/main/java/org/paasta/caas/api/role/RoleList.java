@@ -17,7 +17,6 @@ import java.util.List;
 public class RoleList {
 
     private String resultCode;
-    private String resultMessage;
 
     private List<Pod> items = new ArrayList<>();
 }

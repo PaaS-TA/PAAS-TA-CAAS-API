@@ -18,8 +18,7 @@ import java.util.Map;
 @Data
 public class Role {
 
-    private String result;
-    private String resultMessage;
+    private String resultCode;
 
     private CommonMetaData metadata;
     private List<CommonRoleRule> rules = new ArrayList<>();

@@ -14,9 +14,7 @@ import org.paasta.caas.api.common.model.CommonStatus;
  */
 @Data
 public class Pod {
-
     private String resultCode;
-    private String resultMessage;
 
     private CommonMetaData metadata;
     private CommonSpec spec;

@@ -13,7 +13,6 @@ import java.util.List;
 public class RoleBindingList {
 
     private String resultCode;
-    private String resultMessage;
 
     private List<RoleBinding> items = new ArrayList<>();
 }

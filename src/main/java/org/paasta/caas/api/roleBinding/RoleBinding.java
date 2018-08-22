@@ -15,8 +15,7 @@ import java.util.Map;
 @Data
 public class RoleBinding {
 
-    private String result;
-    private String resultMessage;
+    private String resultCode;
 
     private String apiVersion;
     private String kind;

@@ -15,7 +15,6 @@ import java.util.List;
 @Data
 public class NodeList {
     private String resultCode;
-    private String resultMessage;
 
     private List<Node> items = new ArrayList<>();
 }
