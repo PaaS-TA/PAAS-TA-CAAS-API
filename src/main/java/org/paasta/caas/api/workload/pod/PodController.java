@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2018.08.01 최초작성
  */
 @RestController
-@RequestMapping("/{namespace:.+}/workload/pods")
+@RequestMapping( "/{namespace:.+}/workload/pods" )
 public class PodController {
     private final PodService podService;
 
@@ -21,12 +21,13 @@ public class PodController {
      * @param podService the pod service
      */
     @Autowired
-    public PodController(PodService podService) {
+    public PodController ( PodService podService ) {
         this.podService = podService;
     }
 
 
     // TODO :: MODIFY :: MODEL TO REQUEST PARAM
+
     /**
      * Gets pod list.
      *
@@ -35,17 +36,22 @@ public class PodController {
      */
     @GetMapping
     @ResponseBody
-    public PodList getPodList(@PathVariable("namespace") String namespace, Pod pod) {
+    public PodList getPodList ( @PathVariable( "namespace" ) String namespace, Pod pod ) {
 //    public PodList getPodList(@PathVariable("namespace") String namespace, @RequestParam("selector") String selector) {
 //        return podService.getPodList(namespace, selector);
-        if (null != pod && null != pod.getSelector())
-            return podService.getPodList(namespace, pod.getSelector());
+        if ( null != pod && null != pod.getSelector() )
+            return podService.getPodList( namespace, pod.getSelector() );
         else
-            return podService.getPodList(namespace);
+            return podService.getPodList( namespace );
+    }
+
+    @GetMapping( "/nodes/{nodeName:.+}" )
+    public PodList getPodListByNode ( @PathVariable String namespace, @PathVariable String nodeName ) {
+        return podService.getPodListByNode( namespace, nodeName, false );
     }
 
     @GetMapping( value = "/{podName:.+}" )
-    public Pod getPod(@PathVariable String namespace, @PathVariable String podName) {
-        return podService.getPod(namespace, podName);
+    public Pod getPod ( @PathVariable String namespace, @PathVariable String podName ) {
+        return podService.getPod( namespace, podName );
     }
 }

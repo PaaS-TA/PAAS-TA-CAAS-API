@@ -54,7 +54,7 @@ public class PodService {
         HashMap resultMap;
         if ("_all".equals( namespace )) {
             resultMap = (HashMap) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
-                "/api/v1/pods", HttpMethod.GET, null, Map.class );
+                propertyService.getCaasMasterApiListPodsAllListUrl(), HttpMethod.GET, null, Map.class );
         } else {
             resultMap = ( HashMap ) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPodsListUrl().replace( "{namespace}", namespace ), HttpMethod.GET, null, Map.class );
@@ -64,7 +64,6 @@ public class PodService {
 
         return (PodList) commonService.setResultModel(commonService.setResultObject(resultMap, PodList.class), Constants.RESULT_STATUS_SUCCESS);
     }
-
 
     /**
      * Gets pod list.
@@ -82,6 +81,30 @@ public class PodService {
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
         return (PodList) commonService.setResultModel(commonService.setResultObject(resultMap, PodList.class), Constants.RESULT_STATUS_SUCCESS);
+    }
+
+    PodList getPodListByNode ( String namespace, String nodeName, boolean isIncludedSucceededPods) {
+        StringBuilder requestURLBuilder = new StringBuilder();
+        if ( "_all".equals( namespace ) ) {
+            requestURLBuilder.append( propertyService.getCaasMasterApiListPodsAllListUrl() );
+        } else {
+            requestURLBuilder.append(
+                propertyService.getCaasMasterApiListPodsListUrl().replace( "{namespace}", namespace ) );
+        }
+        requestURLBuilder.append( "/?fieldSelector=spec.nodeName=" ).append( nodeName );
+        if ( !isIncludedSucceededPods )
+            requestURLBuilder.append( ",status.phase!=Succeeded" );
+
+        HashMap resultMap = ( HashMap ) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
+            requestURLBuilder.toString(), HttpMethod.GET, null, Map.class );
+
+        LOGGER.info( "########## resultMap.toString() :: {}", resultMap.toString() );
+
+        return ( PodList ) commonService.setResultModel( commonService.setResultObject( resultMap, PodList.class ), Constants.RESULT_STATUS_SUCCESS );
+    }
+
+    PodList getEmptyPodList() {
+        return (PodList) commonService.setResultModel( new PodList(), Constants.RESULT_STATUS_SUCCESS );
     }
 
     /**
