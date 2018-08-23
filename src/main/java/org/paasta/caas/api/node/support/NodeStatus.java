@@ -17,11 +17,10 @@ public class NodeStatus {
     private Map<String, Object> capacity;
     private Map<String, Object> allocatable;
 
-    // TODO : Map<String, Object> to CommonCondition?
     private List<Map<String, Object>> conditions;
+    private Map<String, Object> nodeInfo;
 
 //    private List<Map<String, Object>> addresses;
 //    private Map<String, Object> daemonEndpoints;
-//    private Map<String, Object> nodeInfo;
 //    private Map<String, Object> images;
 }
