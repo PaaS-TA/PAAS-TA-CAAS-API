@@ -84,4 +84,19 @@ public class ReplicasetService {
 
         return (Replicaset) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), Replicaset.class), Constants.RESULT_STATUS_SUCCESS);
     }
+
+    /**
+     * ReplicaSet List 조회
+     *
+     * @return Map
+     */
+    ReplicasetList getReplicasetListLabelSelector(String namespace, String selectors) {
+        String requestSelector = "?labelSelector=" + selectors;
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListReplicasetsListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
+
+        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
+
+        return (ReplicasetList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), ReplicasetList.class), Constants.RESULT_STATUS_SUCCESS);
+    }
 }

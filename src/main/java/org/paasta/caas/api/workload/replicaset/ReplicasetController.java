@@ -59,5 +59,17 @@ public class ReplicasetController {
         return replicasetService.getReplicaset(namespace, replicasetsName);
     }
 
-    // TODO :: 세션정보에서 namespace 를 가져올지 front-end 단에서 Param 으로 넘겨줄지 결정
+    /**
+     * ReplicaSet 객체를 label Selector를 써서 조회한다.
+     * @param namespace namespace
+     * @param selector
+     * @return ReplicasetList
+     * @see ReplicasetService#getReplicaset
+     */
+    @GetMapping(value = "/namespaces/{namespace}/replicasets/resource/{selector}")
+    public ReplicasetList getReplicasetLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
+        return replicasetService.getReplicasetListLabelSelector(namespace, selectors);
+    }
+
+
 }
