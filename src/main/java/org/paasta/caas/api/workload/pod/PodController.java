@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
  * 클러스터 API 를 호출 받는 컨트롤러이다.
  *
  * @author 최윤석
+ * @author Hyungu Cho
  * @version 1.0
  * @since 2018.08.01 최초작성
  */
@@ -25,9 +26,6 @@ public class PodController {
         this.podService = podService;
     }
 
-
-    // TODO :: MODIFY :: MODEL TO REQUEST PARAM
-
     /**
      * Gets pod list.
      *
@@ -36,11 +34,10 @@ public class PodController {
      */
     @GetMapping
     @ResponseBody
-    public PodList getPodList ( @PathVariable( "namespace" ) String namespace, Pod pod ) {
-//    public PodList getPodList(@PathVariable("namespace") String namespace, @RequestParam("selector") String selector) {
-//        return podService.getPodList(namespace, selector);
-        if ( null != pod && null != pod.getSelector() )
-            return podService.getPodList( namespace, pod.getSelector() );
+    public PodList getPodList ( @PathVariable( "namespace" ) String namespace,
+                                @RequestParam( value = "selector", required = false) String selector ) {
+        if ( null != selector )
+            return podService.getPodListWithLabelSelector( namespace, selector );
         else
             return podService.getPodList( namespace );
     }

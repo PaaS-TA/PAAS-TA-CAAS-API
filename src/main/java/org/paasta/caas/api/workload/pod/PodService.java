@@ -72,7 +72,7 @@ public class PodService {
      * @param selector  the selector
      * @return the pod list
      */
-    PodList getPodList(String namespace, String selector) {
+    PodList getPodListWithLabelSelector(String namespace, String selector) {
         String requestSelector = "?labelSelector=" + selector;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -101,10 +101,6 @@ public class PodService {
         LOGGER.info( "########## resultMap.toString() :: {}", resultMap.toString() );
 
         return ( PodList ) commonService.setResultModel( commonService.setResultObject( resultMap, PodList.class ), Constants.RESULT_STATUS_SUCCESS );
-    }
-
-    PodList getEmptyPodList() {
-        return (PodList) commonService.setResultModel( new PodList(), Constants.RESULT_STATUS_SUCCESS );
     }
 
     /**
