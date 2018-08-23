@@ -2,19 +2,15 @@ package org.paasta.caas.api.event;
 
 import lombok.Data;
 import org.paasta.caas.api.common.Constants;
-import org.paasta.caas.api.common.model.CommonMetaData;
-import org.paasta.caas.api.common.model.CommonSpec;
-import org.paasta.caas.api.common.model.CommonStatus;
-import org.paasta.caas.api.common.model.CommonSubset;
+import org.paasta.caas.api.common.model.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 /**
- * Endpoint Model 클래스
+ * Event Model 클래스
  *
- * @author REX
+ * @author CISS
  * @version 1.0
  * @since 2018.08.13
  */
@@ -23,16 +19,16 @@ public class Event {
 
     private String resultCode;
     private CommonMetaData metadata;
-    //private String action = null;
-
+    //private String action;
     private int count;
-    //private DateTime eventTime = null;
+    //private String eventTime;
     private String firstTimestamp;
     private String lastTimestamp;
     private String message;
     //private String reason;
     private EventSource source;
     private String type;
+    private CommonObjectReference involvedObject;
 
     public String getFirstTimestamp() {
         try {
