@@ -1,4 +1,4 @@
-package org.paasta.caas.api.role;
+package org.paasta.caas.api.roles;
 
 import com.google.gson.Gson;
 import org.paasta.caas.api.common.Constants;
@@ -21,13 +21,13 @@ import java.util.Map;
  * @since 2018-08-14
  */
 @Service
-public class RoleService {
+public class RolesService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RoleService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
 
     @Autowired
-    public RoleService(RestTemplateService restTemplateService) {
+    public RolesService(RestTemplateService restTemplateService) {
         this.restTemplateService = restTemplateService;
     }
 
@@ -40,14 +40,14 @@ public class RoleService {
      *
      * @return Map
      */
-    public RoleList getRoleListByAllNamespace() {
-        String apiUrl = propertyService.getCaasMasterApiListRoleAllListUrl();
+    public RolesList getRoleListByAllNamespace() {
+        String apiUrl = propertyService.getCaasMasterApiListRolesAllListUrl();
 
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
         LOGGER.info("########## getRoleListByAllNamespaces() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleList.class);
+        return gson.fromJson(gson.toJson(hashMap), RolesList.class);
     }
 
     /**
@@ -56,15 +56,15 @@ public class RoleService {
      * @param namespace
      * @return Map
      */
-    public RoleList getRoleList(String namespace) {
-        String apiUrl = propertyService.getCaasMasterApiListRoleListUrl()
+    public RolesList getRoleList(String namespace) {
+        String apiUrl = propertyService.getCaasMasterApiListRolesListUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace);
 
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
         LOGGER.info("########## getRoleList() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleList.class);
+        return gson.fromJson(gson.toJson(hashMap), RolesList.class);
     }
 
 
@@ -75,8 +75,8 @@ public class RoleService {
      * @param roleName
      * @return Map
      */
-    public Role getRole(String namespace, String roleName) {
-        String apiUrl = propertyService.getCaasMasterApiListRoleGetUrl()
+    public Roles getRole(String namespace, String roleName) {
+        String apiUrl = propertyService.getCaasMasterApiListRolesGetUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleName);
 
@@ -84,6 +84,6 @@ public class RoleService {
         LOGGER.info("########## getRole() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), Role.class);
+        return gson.fromJson(gson.toJson(hashMap), Roles.class);
     }
 }

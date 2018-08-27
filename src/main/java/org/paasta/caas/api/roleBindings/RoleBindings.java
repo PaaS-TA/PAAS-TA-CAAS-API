@@ -1,4 +1,4 @@
-package org.paasta.caas.api.roleBinding;
+package org.paasta.caas.api.roleBindings;
 
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @since 2018-08-17
  */
 @Data
-public class RoleBinding {
+public class RoleBindings {
 
     private String resultCode;
 

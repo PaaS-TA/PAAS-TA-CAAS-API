@@ -1,4 +1,4 @@
-package org.paasta.caas.api.role;
+package org.paasta.caas.api.roles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/roles")
-public class RoleController {
+public class RolesController {
 
-    private final RoleService roleService;
+    private final RolesService roleService;
 
     @Autowired
-    public RoleController(RoleService roleService) {
+    public RolesController(RolesService roleService) {
         this.roleService = roleService;
     }
 
@@ -30,7 +30,7 @@ public class RoleController {
      * @return
      */
     @GetMapping
-    public RoleList getRoleListByAllNamespace(){
+    public RolesList getRoleListByAllNamespace(){
         return roleService.getRoleListByAllNamespace();
     }
 
@@ -41,7 +41,7 @@ public class RoleController {
      * @return RoleList
      */
     @GetMapping(value = "/namespaces/{namespace}/roles")
-    public RoleList getRoleList(@PathVariable("namespace") String namespace){
+    public RolesList getRoleList(@PathVariable("namespace") String namespace){
         return roleService.getRoleList(namespace);
     }
 
@@ -53,7 +53,7 @@ public class RoleController {
      * @return Role
      */
     @GetMapping(value = "/namespaces/{namespace}/roles/{roleName}")
-    public Role getRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
+    public Roles getRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
         return roleService.getRole(namespace, roleName);
     }
 }

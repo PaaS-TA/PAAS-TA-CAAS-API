@@ -1,10 +1,10 @@
-package org.paasta.caas.api.roleBinding;
+package org.paasta.caas.api.roleBindings;
 
 import com.google.gson.Gson;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.paasta.caas.api.role.RoleService;
+import org.paasta.caas.api.roles.RolesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ import java.util.Map;
  * @since 2018-08-17
  */
 @Service
-public class RoleBindingService {
+public class RoleBindingsService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RoleService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
 
     @Autowired
-    public RoleBindingService(RestTemplateService restTemplateService) {
+    public RoleBindingsService(RestTemplateService restTemplateService) {
         this.restTemplateService = restTemplateService;
     }
 
@@ -41,14 +41,14 @@ public class RoleBindingService {
      *
      * @return Map
      */
-    public RoleBindingList getRoleBindingListByAllNamespace() {
-        String apiUrl = propertyService.getCaasMasterApiListRoleBindingAllListUrl();
+    public RoleBindingsList getRoleBindingListByAllNamespace() {
+        String apiUrl = propertyService.getCaasMasterApiListRoleBindingsAllListUrl();
 
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
         LOGGER.info("########## getRoleBindingListByAllNamespaces() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleBindingList.class);
+        return gson.fromJson(gson.toJson(hashMap), RoleBindingsList.class);
     }
 
     /**
@@ -56,14 +56,14 @@ public class RoleBindingService {
      *
      * @return Map
      */
-    public RoleBindingList getRoleBindingList(String namespace) {
-        String apiUrl = propertyService.getCaasMasterApiListRoleBindingListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
+    public RoleBindingsList getRoleBindingList(String namespace) {
+        String apiUrl = propertyService.getCaasMasterApiListRoleBindingsListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
 
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
         LOGGER.info("########## getRoleBindingList() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleBindingList.class);
+        return gson.fromJson(gson.toJson(hashMap), RoleBindingsList.class);
     }
 
     /**
@@ -73,8 +73,8 @@ public class RoleBindingService {
      * @param roleBindingName
      * @return
      */
-    public RoleBinding getRoleBinding(String namespace, String roleBindingName) {
-        String apiUrl = propertyService.getCaasMasterApiListRoleBindingGetUrl()
+    public RoleBindings getRoleBinding(String namespace, String roleBindingName) {
+        String apiUrl = propertyService.getCaasMasterApiListRoleBindingsGetUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleBindingName);
 
@@ -82,7 +82,7 @@ public class RoleBindingService {
         LOGGER.info("########## getRole() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleBinding.class);
+        return gson.fromJson(gson.toJson(hashMap), RoleBindings.class);
     }
 
 
@@ -93,14 +93,14 @@ public class RoleBindingService {
      * @param roleBinding
      * @return
      */
-    public RoleBinding createRoleBinding(String namespace, RoleBinding roleBinding) {
-        String apiUrl = propertyService.getCaasMasterApiListRoleBindingCreateUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
+    public RoleBindings createRoleBinding(String namespace, RoleBindings roleBinding) {
+        String apiUrl = propertyService.getCaasMasterApiListRoleBindingsCreateUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
 
         HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.POST, roleBinding, Map.class);
         LOGGER.info("########## createRoleBinding() :: hashMap.toString() :: {}", hashMap.toString());
 
         Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleBinding.class);
+        return gson.fromJson(gson.toJson(hashMap), RoleBindings.class);
     }
 
     /**
@@ -111,7 +111,7 @@ public class RoleBindingService {
      * @return
      */
     public String deleteRoleBinding(String namespace, String roleBindingName) {
-        String apiUrl = propertyService.getCaasMasterApiListRoleBindingDeleteUrl()
+        String apiUrl = propertyService.getCaasMasterApiListRoleBindingsDeleteUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleBindingName);
 

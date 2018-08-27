@@ -1,4 +1,4 @@
-package org.paasta.caas.api.roleBinding;
+package org.paasta.caas.api.roleBindings;
 
 import lombok.Data;
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.List;
  * @since 2018-08-17
  */
 @Data
-public class RoleBindingList {
+public class RoleBindingsList {
 
     private String resultCode;
 
-    private List<RoleBinding> items = new ArrayList<>();
+    private List<RoleBindings> items = new ArrayList<>();
 }

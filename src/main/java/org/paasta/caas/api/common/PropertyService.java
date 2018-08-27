@@ -76,16 +76,16 @@ public class PropertyService {
     private String caasMasterApiListEventsListUrl;
 
     // Role List By All Namespaces
-    @Value("${caasMaster.api.list.role.allList}")
-    private String caasMasterApiListRoleAllListUrl;
+    @Value("${caasMaster.api.list.roles.allList}")
+    private String caasMasterApiListRolesAllListUrl;
 
     // Role List By Specified Namespace
-    @Value("${caasMaster.api.list.role.list}")
-    private String caasMasterApiListRoleListUrl;
+    @Value("${caasMaster.api.list.roles.list}")
+    private String caasMasterApiListRolesListUrl;
 
     // Role By Specified Namespace
-    @Value("${caasMaster.api.list.role.get}")
-    private String caasMasterApiListRoleGetUrl;
+    @Value("${caasMaster.api.list.roles.get}")
+    private String caasMasterApiListRolesGetUrl;
 
     // Deployments List for all namespaces
     @Value("${caasMaster.api.list.deployment.allList}")
@@ -98,23 +98,23 @@ public class PropertyService {
     private String caasMasterApiListDeploymentGet;
 
     // RoleBinding List By All Namespaces
-    @Value("${caasMaster.api.list.roleBinding.allList}")
-    private String caasMasterApiListRoleBindingAllListUrl;
+    @Value("${caasMaster.api.list.roleBindings.allList}")
+    private String caasMasterApiListRoleBindingsAllListUrl;
 
     // RoleBinding List By Specified Namespace
-    @Value("${caasMaster.api.list.roleBinding.list}")
-    private String caasMasterApiListRoleBindingListUrl;
+    @Value("${caasMaster.api.list.roleBindings.list}")
+    private String caasMasterApiListRoleBindingsListUrl;
 
     // RoleBinding By Specified Namespace
-    @Value("${caasMaster.api.list.roleBinding.get}")
-    private String caasMasterApiListRoleBindingGetUrl;
+    @Value("${caasMaster.api.list.roleBindings.get}")
+    private String caasMasterApiListRoleBindingsGetUrl;
 
     // RoleBinding allocate
-    @Value("${caasMaster.api.list.roleBinding.create}")
-    private String caasMasterApiListRoleBindingCreateUrl;
+    @Value("${caasMaster.api.list.roleBindings.create}")
+    private String caasMasterApiListRoleBindingsCreateUrl;
 
     // RoleBinding cancel
-    @Value("${caasMaster.api.list.roleBinding.delete}")
-    private String caasMasterApiListRoleBindingDeleteUrl;
+    @Value("${caasMaster.api.list.roleBindings.delete}")
+    private String caasMasterApiListRoleBindingsDeleteUrl;
 
 }
