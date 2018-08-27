@@ -81,7 +81,7 @@ public class ReplicasetService {
                         .replaceAll("\\{" + "namespace" + "\\}", namespace)
                         .replaceAll("\\{" + "name" + "\\}", replicasetsName), HttpMethod.GET, null, Map.class);
 
-        resultMap.put("originResult",new LinkedHashMap(resultMap));
+        resultMap.put("source",new LinkedHashMap(resultMap));
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
