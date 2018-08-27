@@ -6,6 +6,8 @@ import org.paasta.caas.api.common.model.CommonMetaData;
 import org.paasta.caas.api.common.model.CommonSpec;
 import org.paasta.caas.api.common.model.CommonStatus;
 
+import java.util.Map;
+
 /**
  * Replicaset Model 클래스
  *
@@ -24,6 +26,8 @@ public class Replicaset {
 
     @SerializedName("status")
     private CommonStatus status;
+
+    private Map<String, Object> originResult;
 
     private String resultCode;
 

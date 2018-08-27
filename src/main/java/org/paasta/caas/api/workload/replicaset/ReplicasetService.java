@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -79,6 +80,8 @@ public class ReplicasetService {
                 propertyService.getCaasMasterApiListReplicasetsGetUrl()
                         .replaceAll("\\{" + "namespace" + "\\}", namespace)
                         .replaceAll("\\{" + "name" + "\\}", replicasetsName), HttpMethod.GET, null, Map.class);
+
+        resultMap.put("originResult",new LinkedHashMap(resultMap));
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
