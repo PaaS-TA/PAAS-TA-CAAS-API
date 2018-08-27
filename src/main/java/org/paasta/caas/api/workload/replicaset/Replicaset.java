@@ -27,7 +27,7 @@ public class Replicaset {
     @SerializedName("status")
     private CommonStatus status;
 
-    private Map<String, Object> originResult;
+    private Map<String, Object> source;
 
     private String resultCode;
 
