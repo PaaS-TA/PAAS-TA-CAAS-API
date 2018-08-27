@@ -43,7 +43,7 @@ caasMaster:
         get: "/api/v1/persistentvolumes/{name}"
       events:
         list: "/api/v1/namespaces/{namespace}/events"
-      role:
+      roles:
         allList: "/apis/rbac.authorization.k8s.io/v1/roles"
         list: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles"
         get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
@@ -51,7 +51,7 @@ caasMaster:
         allList: "/apis/apps/v1/deployments"
         list: "/apis/apps/v1/namespaces/{namespace}/deployments"
         get: "/apis/apps/v1/namespaces/{namespace}/deployments/{deploymentName}"
-      roleBinding:
+      roleBindings:
         allList: "/apis/rbac.authorization.k8s.io/v1/rolebindings"
         list: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings"
         get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
