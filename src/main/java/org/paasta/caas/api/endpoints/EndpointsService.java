@@ -1,4 +1,4 @@
-package org.paasta.caas.api.endpoint;
+package org.paasta.caas.api.endpoints;
 
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
@@ -12,28 +12,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Endpoint Service 클래스
+ * Endpoints Service 클래스
  *
  * @author REX
  * @version 1.0
  * @since 2018.08.13
  */
 @Service
-public class EndpointService {
+public class EndpointsService {
 
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
 
     /**
-     * Instantiates a new Endpoint service.
+     * Instantiates a new Endpoints service.
      *
      * @param restTemplateService the rest template service
      * @param commonService       the common service
      * @param propertyService     the property service
      */
     @Autowired
-    public EndpointService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
+    public EndpointsService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
@@ -41,34 +41,34 @@ public class EndpointService {
 
 
     /**
-     * Gets endpoint list.
+     * Gets endpoints list.
      *
      * @param namespace the namespace
-     * @return the endpoint list
+     * @return the endpoints list
      */
-    EndpointList getEndpointList(String namespace) {
+    EndpointsList getEndpointsList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListEndpointsListUrl()
                         .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
-        return (EndpointList) commonService.setResultModel(commonService.setResultObject(resultMap, EndpointList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (EndpointsList) commonService.setResultModel(commonService.setResultObject(resultMap, EndpointsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
     /**
-     * Gets custom service.
+     * Gets endpoints.
      *
      * @param namespace   the namespace
      * @param serviceName the service name
-     * @return the custom service
+     * @return the endpoints
      */
-    Endpoint getEndpoint(String namespace, String serviceName) {
+    Endpoints getEndpoints(String namespace, String serviceName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListEndpointsGetUrl()
                         .replace("{namespace}", namespace)
                         .replace("{name}", serviceName), HttpMethod.GET, null, Map.class);
 
-        return (Endpoint) commonService.setResultModel(commonService.setResultObject(resultMap, Endpoint.class), Constants.RESULT_STATUS_SUCCESS);
+        return (Endpoints) commonService.setResultModel(commonService.setResultObject(resultMap, Endpoints.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

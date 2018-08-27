@@ -4,7 +4,6 @@ import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.paasta.caas.api.customService.CustomServiceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ import java.util.Map;
 @Service
 public class NodeService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CustomServiceService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NodeService.class);
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;

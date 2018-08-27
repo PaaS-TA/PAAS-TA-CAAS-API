@@ -1,4 +1,4 @@
-package org.paasta.caas.api.customService;
+package org.paasta.caas.api.customServices;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,26 +25,24 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
- * The type Custom service service test.
+ * The type Custom services service test.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @TestPropertySource("classpath:application.yml")
-public class CustomServiceServiceTest {
+public class CustomServiceServicesTest {
 
     private static final String NAMESPACE = "test-namespace";
     private static final String SERVICE_NAME = "test-service-name";
     private static final String LIST_URL = "test-list-url";
     private static final String GET_URL = "test-get-url";
-    private static final String gResultListMapString = "test-result-list-map-string";
-    private static final String gResultMapString = "test-result-map-string";
 
     private static HashMap gResultMap = null;
-    private static CustomServiceList gResultListModel = null;
-    private static CustomServiceList gFinalResultListModel = null;
-    private static CustomService gResultModel = null;
-    private static CustomService gFinalResultModel = null;
+    private static CustomServicesList gResultListModel = null;
+    private static CustomServicesList gFinalResultListModel = null;
+    private static CustomServices gResultModel = null;
+    private static CustomServices gFinalResultModel = null;
 
 
     @Mock
@@ -57,7 +55,7 @@ public class CustomServiceServiceTest {
     private PropertyService propertyService;
 
     @InjectMocks
-    private CustomServiceService customServiceService;
+    private CustomServicesService customServicesService;
 
 
     /**
@@ -66,12 +64,12 @@ public class CustomServiceServiceTest {
     @Before
     public void setUp() {
         gResultMap = new HashMap();
-        gResultListModel = new CustomServiceList();
-        gFinalResultListModel = new CustomServiceList();
+        gResultListModel = new CustomServicesList();
+        gFinalResultListModel = new CustomServicesList();
         gFinalResultListModel.setResultCode(Constants.RESULT_STATUS_SUCCESS);
 
-        gResultModel = new CustomService();
-        gFinalResultModel = new CustomService();
+        gResultModel = new CustomServices();
+        gFinalResultModel = new CustomServices();
         gFinalResultModel.setResultCode(Constants.RESULT_STATUS_SUCCESS);
     }
 
@@ -90,19 +88,19 @@ public class CustomServiceServiceTest {
 
 
     /**
-     * Gets custom service list valid return model.
+     * Gets custom services list valid return model.
      */
     @Test
-    public void getCustomServiceList_Valid_ReturnModel() {
+    public void getCustomServicesList_Valid_ReturnModel() {
         // CONDITION
         when(propertyService.getCaasMasterApiListServicesListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, LIST_URL
                 .replace("{namespace}", NAMESPACE), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
-        when(commonService.setResultObject(gResultMap, CustomServiceList.class)).thenReturn(gResultListModel);
+        when(commonService.setResultObject(gResultMap, CustomServicesList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         // TEST
-        CustomServiceList resultModel = customServiceService.getCustomServiceList(NAMESPACE);
+        CustomServicesList resultModel = customServicesService.getCustomServicesList(NAMESPACE);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
@@ -111,20 +109,20 @@ public class CustomServiceServiceTest {
 
 
     /**
-     * Gets custom service valid return model.
+     * Gets custom services valid return model.
      */
     @Test
-    public void getCustomService_Valid_ReturnModel() {
+    public void getCustomServices_Valid_ReturnModel() {
         // CONDITION
         when(propertyService.getCaasMasterApiListServicesGetUrl()).thenReturn(GET_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, GET_URL
                 .replace("{namespace}", NAMESPACE)
                 .replace("{name}", SERVICE_NAME), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
-        when(commonService.setResultObject(gResultMap, CustomService.class)).thenReturn(gResultModel);
+        when(commonService.setResultObject(gResultMap, CustomServices.class)).thenReturn(gResultModel);
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
         // TEST
-        CustomService resultModel = customServiceService.getCustomService(NAMESPACE, SERVICE_NAME);
+        CustomServices resultModel = customServicesService.getCustomServices(NAMESPACE, SERVICE_NAME);
 
         // VERIFY
         assertThat(resultModel).isNotNull();

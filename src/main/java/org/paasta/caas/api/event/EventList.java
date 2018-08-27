@@ -1,7 +1,6 @@
 package org.paasta.caas.api.event;
 
 import lombok.Data;
-import org.paasta.caas.api.endpoint.Endpoint;
 
 import java.util.List;
 
