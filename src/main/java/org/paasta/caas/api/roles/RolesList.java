@@ -1,4 +1,4 @@
-package org.paasta.caas.api.role;
+package org.paasta.caas.api.roles;
 
 import lombok.Data;
 import org.paasta.caas.api.workload.pods.Pods;
@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2018-08-14
  */
 @Data
-public class RoleList {
+public class RolesList {
 
     private String resultCode;
 

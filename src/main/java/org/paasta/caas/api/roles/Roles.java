@@ -1,4 +1,4 @@
-package org.paasta.caas.api.role;
+package org.paasta.caas.api.roles;
 
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
@@ -6,7 +6,6 @@ import org.paasta.caas.api.common.model.CommonRoleRule;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Role Model 클래스
@@ -16,7 +15,7 @@ import java.util.Map;
  * @since 2018-08-14
  */
 @Data
-public class Role {
+public class Roles {
 
     private String resultCode;
 

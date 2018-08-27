@@ -1,4 +1,4 @@
-package org.paasta.caas.api.roleBinding;
+package org.paasta.caas.api.roleBindings;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(value = "/roleBindings")
-public class RoleBindingController {
+public class RoleBindingsController {
 
-    private final RoleBindingService roleBindingService;
+    private final RoleBindingsService roleBindingService;
 
     @Autowired
-    public RoleBindingController(RoleBindingService roleBindingService) {
+    public RoleBindingsController(RoleBindingsService roleBindingService) {
         this.roleBindingService = roleBindingService;
     }
 
@@ -27,7 +27,7 @@ public class RoleBindingController {
      * @return
      */
     @GetMapping
-    public RoleBindingList getRoleBindingListByAllNamespace(){
+    public RoleBindingsList getRoleBindingListByAllNamespace(){
         return roleBindingService.getRoleBindingListByAllNamespace();
     }
 
@@ -38,7 +38,7 @@ public class RoleBindingController {
      * @return Map
      */
     @GetMapping(value = "/namespaces/{namespace}/roleBindings")
-    public RoleBindingList getRoleBindingList(@PathVariable("namespace") String namespace){
+    public RoleBindingsList getRoleBindingList(@PathVariable("namespace") String namespace){
         return roleBindingService.getRoleBindingList(namespace);
     }
 
@@ -50,7 +50,7 @@ public class RoleBindingController {
      * @return
      */
     @GetMapping(value = "/namespaces/{namespace}/roleBindings/{roleBindingName}")
-    public RoleBinding getRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName){
+    public RoleBindings getRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName){
         return roleBindingService.getRoleBinding(namespace, roleBindingName);
     }
 
@@ -62,7 +62,7 @@ public class RoleBindingController {
      * @return
      */
     @PostMapping(value = "/namespaces/{namespace}/rolebindings")
-    public RoleBinding createRoleBinding(@PathVariable("namespace") String namespace, @RequestBody RoleBinding roleBinding){
+    public RoleBindings createRoleBinding(@PathVariable("namespace") String namespace, @RequestBody RoleBindings roleBinding){
         return roleBindingService.createRoleBinding(namespace, roleBinding);
     }
 
