@@ -35,7 +35,7 @@ public class CustomServicesController {
      * @return the custom services list
      */
     @GetMapping
-    public CustomServicesList getCustomServicesList(@PathVariable("namespace") String namespace) {
+    public CustomServicesList getCustomServicesList(@PathVariable(value = "namespace") String namespace) {
         return customServicesService.getCustomServicesList(namespace);
     }
 
@@ -48,7 +48,7 @@ public class CustomServicesController {
      * @return the custom services
      */
     @GetMapping(value = "/{serviceName:.+}")
-    public CustomServices getCustomServices(@PathVariable("namespace") String namespace, @PathVariable("serviceName") String serviceName) {
+    public CustomServices getCustomServices(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "serviceName") String serviceName) {
         return customServicesService.getCustomServices(namespace, serviceName);
     }
 
