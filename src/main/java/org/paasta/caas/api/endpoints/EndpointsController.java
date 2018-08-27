@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018.08.13
  */
 @RestController
-@RequestMapping("/{namespace:.+}/endpoints")
+@RequestMapping("/namespaces/{namespace:.+}/endpoints")
 public class EndpointsController {
 
     private final EndpointsService endpointsService;

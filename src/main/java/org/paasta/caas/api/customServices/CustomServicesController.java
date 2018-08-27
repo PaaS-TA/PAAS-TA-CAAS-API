@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018.08.09
  */
 @RestController
-@RequestMapping("/{namespace:.+}/services")
+@RequestMapping("/namespaces/{namespace:.+}/services")
 public class CustomServicesController {
 
     private final CustomServicesService customServicesService;
