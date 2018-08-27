@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.pod;
+package org.paasta.caas.api.workload.pods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

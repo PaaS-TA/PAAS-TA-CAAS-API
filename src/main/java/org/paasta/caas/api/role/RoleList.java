@@ -1,7 +1,7 @@
 package org.paasta.caas.api.role;
 
 import lombok.Data;
-import org.paasta.caas.api.workload.pod.Pod;
+import org.paasta.caas.api.workload.pods.Pod;
 
 import java.util.ArrayList;
 import java.util.List;

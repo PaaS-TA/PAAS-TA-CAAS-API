@@ -1,10 +1,9 @@
-package org.paasta.caas.api.workload.deployment;
+package org.paasta.caas.api.workload.deployments;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
-import org.paasta.caas.api.workload.deployment.support.DeploymentSpec;
-import org.paasta.caas.api.workload.deployment.support.DeploymentStatus;
+import org.paasta.caas.api.workload.deployments.support.DeploymentSpec;
+import org.paasta.caas.api.workload.deployments.support.DeploymentStatus;
 
 /**
  * Deployment Model 클래스

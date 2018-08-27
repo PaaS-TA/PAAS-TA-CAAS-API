@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.deployment.support;
+package org.paasta.caas.api.workload.deployments.support;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;

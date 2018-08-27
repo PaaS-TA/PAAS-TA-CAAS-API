@@ -1,22 +1,25 @@
-package org.paasta.caas.api.node;
+package org.paasta.caas.api.workload.pods;
 
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
 import org.paasta.caas.api.common.model.CommonSpec;
-import org.paasta.caas.api.node.support.NodeStatus;
+import org.paasta.caas.api.common.model.CommonStatus;
 
 /**
- * Node Model 클래스
+ * Pod Model 클래스
  *
  * @author REX
  * @version 1.0
  * @since 2018.08.13
  */
 @Data
-public class Node {
+public class Pod {
     private String resultCode;
 
     private CommonMetaData metadata;
     private CommonSpec spec;
-    private NodeStatus status;
+    private CommonStatus status;
+
+    // FOR DASHBOARD
+    private String selector;
 }

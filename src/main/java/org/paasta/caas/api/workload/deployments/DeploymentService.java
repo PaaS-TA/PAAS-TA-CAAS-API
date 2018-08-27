@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.deployment;
+package org.paasta.caas.api.workload.deployments;
 
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;

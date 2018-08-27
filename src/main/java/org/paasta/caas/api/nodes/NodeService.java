@@ -1,4 +1,4 @@
-package org.paasta.caas.api.node;
+package org.paasta.caas.api.nodes;
 
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;

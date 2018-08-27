@@ -1,10 +1,7 @@
-package org.paasta.caas.api.workload.deployment;
+package org.paasta.caas.api.workload.deployments;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import org.paasta.caas.api.common.model.CommonMetaData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

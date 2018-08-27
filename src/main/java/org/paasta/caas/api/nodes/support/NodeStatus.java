@@ -1,4 +1,4 @@
-package org.paasta.caas.api.node.support;
+package org.paasta.caas.api.nodes.support;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.pod;
+package org.paasta.caas.api.workload.pods;
 
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
