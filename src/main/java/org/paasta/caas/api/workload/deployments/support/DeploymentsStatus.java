@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.deployment.support;
+package org.paasta.caas.api.workload.deployments.support;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -7,14 +7,14 @@ import org.paasta.caas.api.common.model.CommonCondition;
 import java.util.List;
 
 /**
- * DeploymentStatus Model 클래스
+ * DeploymentsStatus Model 클래스
  *
  * @author Hyungu Cho
  * @version 1.0
  * @since 2018.08.13
  */
 @Data
-public class DeploymentStatus {
+public class DeploymentsStatus {
     @SerializedName("availableReplicas")
     private int availableReplicas;
 

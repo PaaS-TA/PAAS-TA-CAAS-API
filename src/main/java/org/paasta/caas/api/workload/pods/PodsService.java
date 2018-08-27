@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.pod;
+package org.paasta.caas.api.workload.pods;
 
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
@@ -22,23 +22,23 @@ import java.util.Map;
  * @since 2018.8.01 최초작성
  */
 @Service
-public class PodService {
+public class PodsService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PodService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PodsService.class);
 
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
 
     /**
-     * Instantiates a new Pod service.
+     * Instantiates a new Pods service.
      *
      * @param restTemplateService the rest template service
      * @param commonService       the common service
      * @param propertyService     the property service
      */
     @Autowired
-    public PodService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
+    public PodsService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
@@ -50,7 +50,7 @@ public class PodService {
      * @param namespace the namespace
      * @return the pod list
      */
-    PodList getPodList(String namespace) {
+    PodsList getPodList(String namespace) {
         HashMap resultMap;
         if ("_all".equals( namespace )) {
             resultMap = (HashMap) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
@@ -62,7 +62,7 @@ public class PodService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PodList) commonService.setResultModel(commonService.setResultObject(resultMap, PodList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (PodsList) commonService.setResultModel(commonService.setResultObject(resultMap, PodsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
@@ -72,7 +72,7 @@ public class PodService {
      * @param selector  the selector
      * @return the pod list
      */
-    PodList getPodListWithLabelSelector(String namespace, String selector) {
+    PodsList getPodListWithLabelSelector(String namespace, String selector) {
         String requestSelector = "?labelSelector=" + selector;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -80,10 +80,10 @@ public class PodService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PodList) commonService.setResultModel(commonService.setResultObject(resultMap, PodList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (PodsList) commonService.setResultModel(commonService.setResultObject(resultMap, PodsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
-    PodList getPodListByNode ( String namespace, String nodeName, boolean isIncludedSucceededPods) {
+    PodsList getPodListByNode (String namespace, String nodeName, boolean isIncludedSucceededPods) {
         StringBuilder requestURLBuilder = new StringBuilder();
         if ( "_all".equals( namespace ) ) {
             requestURLBuilder.append( propertyService.getCaasMasterApiListPodsAllListUrl() );
@@ -100,7 +100,7 @@ public class PodService {
 
         LOGGER.info( "########## resultMap.toString() :: {}", resultMap.toString() );
 
-        return ( PodList ) commonService.setResultModel( commonService.setResultObject( resultMap, PodList.class ), Constants.RESULT_STATUS_SUCCESS );
+        return (PodsList) commonService.setResultModel( commonService.setResultObject( resultMap, PodsList.class ), Constants.RESULT_STATUS_SUCCESS );
     }
 
     /**
@@ -109,13 +109,13 @@ public class PodService {
      * @param podName the pod's name
      * @return
      */
-    Pod getPod ( String namespace, String podName ) {
+    Pods getPod (String namespace, String podName ) {
         HashMap resultMap = (HashMap) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
             propertyService.getCaasMasterApiListPodsGetUrl().replace( "{namespace}", namespace ).replace( "{name}", podName ),
             HttpMethod.GET, null, Map.class );
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (Pod) commonService.setResultModel(commonService.setResultObject(resultMap, Pod.class), Constants.RESULT_STATUS_SUCCESS);
+        return (Pods) commonService.setResultModel(commonService.setResultObject(resultMap, Pods.class), Constants.RESULT_STATUS_SUCCESS);
     }
 }

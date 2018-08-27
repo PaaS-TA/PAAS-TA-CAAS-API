@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.deployment.support;
+package org.paasta.caas.api.workload.deployments.support;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -9,14 +9,14 @@ import org.paasta.caas.api.common.model.CommonPodTemplateSpec;
 import java.util.*;
 
 /**
- * DeploymentSpec Model 클래스
+ * DeploymentsSpec Model 클래스
  *
  * @author Hyungu Cho
  * @version 1.0
  * @since 2018.08.13
  */
 @Data
-public class DeploymentSpec {
+public class DeploymentsSpec {
     @SerializedName("minReadySeconds")
     private int minReadySeconds;
 
@@ -36,7 +36,7 @@ public class DeploymentSpec {
     private CommonLabelSelector selector;
 
     @SerializedName("strategy")
-    private DeploymentStrategy strategy;
+    private DeploymentsStrategy strategy;
 
     @SerializedName("template")
     private CommonPodTemplateSpec template;

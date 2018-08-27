@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workload.deployment;
+package org.paasta.caas.api.workload.deployments;
 
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
@@ -14,34 +14,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Deployment 관련 API에 대해 CaaS API를 향해 호출하고, 결과값을 처리하는 서비스이다.
+ * Deployments 관련 API에 대해 CaaS API를 향해 호출하고, 결과값을 처리하는 서비스이다.
  *
  * @author Hyungu Cho
  * @version 1.0
  * @since 2018.08.13
  */
 @Service
-public class DeploymentService {
-    private static final Logger LOGGER = LoggerFactory.getLogger( DeploymentService.class );
+public class DeploymentsService {
+    private static final Logger LOGGER = LoggerFactory.getLogger( DeploymentsService.class );
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
 
     @Autowired
-    public DeploymentService(RestTemplateService restTemplateService, CommonService commonService,
-                             PropertyService propertyService) {
+    public DeploymentsService(RestTemplateService restTemplateService, CommonService commonService,
+                              PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
     }
 
     /**
-     * Deployment List 조회 (전체 네임스페이스 대상)
+     * Deployments List 조회 (전체 네임스페이스 대상)
      *
-     * @return DeploymentList
+     * @return DeploymentsList
      */
-    public DeploymentList getDeploymentListByAllNamespace () {
-        DeploymentList responseObject;
+    public DeploymentsList getDeploymentListByAllNamespace () {
+        DeploymentsList responseObject;
         String resultCode;
         String resultStatusMessage = "";
         try {
@@ -50,27 +50,27 @@ public class DeploymentService {
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
             LOGGER.info( "#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString() );
 
-            responseObject = commonService.setResultObject(responseMap, DeploymentList.class);
+            responseObject = commonService.setResultObject(responseMap, DeploymentsList.class);
             resultCode = Constants.RESULT_STATUS_SUCCESS;
         } catch (Exception e) {
-            responseObject = new DeploymentList();
+            responseObject = new DeploymentsList();
             resultCode = Constants.RESULT_STATUS_FAIL;
             resultStatusMessage =
                 "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
         }
 
-        return ( DeploymentList ) commonService.setResultModel(responseObject, resultCode);
+        return (DeploymentsList) commonService.setResultModel(responseObject, resultCode);
     }
 
     /**
-     * Deployment List 조회 (특정 네임스페이스 대상)
+     * Deployments List 조회 (특정 네임스페이스 대상)
      *
      * @param namespace namespace
      * @param params Request parameters
-     * @return DeploymentList
+     * @return DeploymentsList
      */
-    public DeploymentList getDeploymentList (String namespace, Map<String, Object> params) {
-        DeploymentList responseObject;
+    public DeploymentsList getDeploymentList (String namespace, Map<String, Object> params) {
+        DeploymentsList responseObject;
         String resultCode;
         String resultStatusMessage = "";
         try {
@@ -79,28 +79,28 @@ public class DeploymentService {
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
             LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
 
-            responseObject = commonService.setResultObject(responseMap, DeploymentList.class);
+            responseObject = commonService.setResultObject(responseMap, DeploymentsList.class);
             resultCode = Constants.RESULT_STATUS_SUCCESS;
         } catch (Exception e) {
-            responseObject = new DeploymentList();
+            responseObject = new DeploymentsList();
             resultCode = Constants.RESULT_STATUS_FAIL;
             resultStatusMessage =
                 "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
         }
 
-        return (DeploymentList) commonService.setResultModel( responseObject, resultCode);
+        return (DeploymentsList) commonService.setResultModel( responseObject, resultCode);
     }
 
     /**
-     * Deployment 조회 (특정 네임스페이스에 있는 deployment)
+     * Deployments 조회 (특정 네임스페이스에 있는 deployment)
      *
      * @param namespace namespace
      * @param deploymentName deployment name
      * @param params request parameters
-     * @return Deployment
+     * @return Deployments
      */
-    public Deployment getDeployment (String namespace, String deploymentName, Map<String, Object> params) {
-        Deployment responseObject;
+    public Deployments getDeployment (String namespace, String deploymentName, Map<String, Object> params) {
+        Deployments responseObject;
         String resultCode;
         String resultStatusMessage = "";
         try {
@@ -111,16 +111,16 @@ public class DeploymentService {
             LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
                 namespace, deploymentName, responseMap.toString() );
 
-            responseObject = commonService.setResultObject(responseMap, Deployment.class);
+            responseObject = commonService.setResultObject(responseMap, Deployments.class);
             resultCode = Constants.RESULT_STATUS_SUCCESS;
 
         } catch (Exception e) {
-            responseObject = new Deployment();
+            responseObject = new Deployments();
             resultCode = Constants.RESULT_STATUS_FAIL;
             resultStatusMessage =
                 "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
         }
 
-        return (Deployment) commonService.setResultModel(responseObject, resultCode);
+        return (Deployments) commonService.setResultModel(responseObject, resultCode);
     }
 }

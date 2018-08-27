@@ -87,7 +87,7 @@ public class PropertyService {
     @Value("${caasMaster.api.list.role.get}")
     private String caasMasterApiListRoleGetUrl;
 
-    // Deployment List for all namespaces
+    // Deployments List for all namespaces
     @Value("${caasMaster.api.list.deployment.allList}")
     private String caasMasterApiListDeploymentAllList;
 
