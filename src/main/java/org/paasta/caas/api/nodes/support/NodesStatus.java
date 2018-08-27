@@ -13,7 +13,7 @@ import java.util.Map;
  * @since 2018.08.17
  */
 @Data
-public class NodeStatus {
+public class NodesStatus {
     private Map<String, Object> capacity;
     private Map<String, Object> allocatable;
 

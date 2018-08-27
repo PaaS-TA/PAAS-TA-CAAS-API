@@ -14,30 +14,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Node Service 클래스
+ * Nodes Service 클래스
  *
  * @author REX
  * @version 1.0
  * @since 2018.8.13
  */
 @Service
-public class NodeService {
+public class NodesService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NodeService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NodesService.class);
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
 
     /**
-     * Instantiates a new Node service.
+     * Instantiates a new Nodes service.
      *
      * @param restTemplateService the rest template service
      * @param commonService       the common service
      * @param propertyService     the property service
      */
     @Autowired
-    public NodeService(RestTemplateService restTemplateService, CommonService commonService,
-                       PropertyService propertyService) {
+    public NodesService(RestTemplateService restTemplateService, CommonService commonService,
+                        PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
@@ -49,13 +49,13 @@ public class NodeService {
      *
      * @return the node list
      */
-    NodeList getNodeList() {
+    NodesList getNodeList() {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListNodesListUrl(), HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (NodeList) commonService.setResultModel(commonService.setResultObject(resultMap, NodeList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (NodesList) commonService.setResultModel(commonService.setResultObject(resultMap, NodesList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
@@ -65,13 +65,13 @@ public class NodeService {
      * @param nodeName the node name
      * @return the node
      */
-    Node getNode(String nodeName) {
+    Nodes getNode(String nodeName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListNodesGetUrl().replace("{name}", nodeName), HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (Node) commonService.setResultModel(commonService.setResultObject(resultMap, Node.class), Constants.RESULT_STATUS_SUCCESS);
+        return (Nodes) commonService.setResultModel(commonService.setResultObject(resultMap, Nodes.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 }

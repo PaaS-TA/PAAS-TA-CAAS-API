@@ -1,7 +1,7 @@
 package org.paasta.caas.api.role;
 
 import lombok.Data;
-import org.paasta.caas.api.workload.pods.Pod;
+import org.paasta.caas.api.workload.pods.Pods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,5 +18,5 @@ public class RoleList {
 
     private String resultCode;
 
-    private List<Pod> items = new ArrayList<>();
+    private List<Pods> items = new ArrayList<>();
 }
