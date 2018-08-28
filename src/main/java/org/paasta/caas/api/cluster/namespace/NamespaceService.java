@@ -41,13 +41,12 @@ public class NamespaceService {
 
 
     /**
-     * Gets namespace list.
+     * Gets namespaces.
      *
-     * @return the namespace list
+     * @return the namespaces
      */
-    // TODO :: REMOVE
-    Namespace getNamespaceList() {
-        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES_LIST, HttpMethod.GET, null, Map.class);
+    Namespace getNamespaces(String namespace) {
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES+"/"+namespace, HttpMethod.GET, null, Map.class);
 
         return (Namespace) commonService.setResultModel(commonService.setResultObject(resultMap, Namespace.class), Constants.RESULT_STATUS_SUCCESS);
     }

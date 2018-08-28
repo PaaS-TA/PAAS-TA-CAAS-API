@@ -2,6 +2,7 @@ package org.paasta.caas.api.cluster.namespace;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +25,9 @@ public class NamespaceController {
         this.namespaceService = namespaceService;
     }
 
-    @GetMapping("/namespaces")
-    public Namespace getNamespaceList() {
-        return namespaceService.getNamespaceList();
+    @GetMapping("/namespaces/{namespace}")
+    public Namespace getNamespaces(@PathVariable("namespace") String namespace) {
+        return namespaceService.getNamespaces(namespace);
     }
 
 }
