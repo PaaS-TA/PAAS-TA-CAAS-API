@@ -36,24 +36,21 @@ public class DeploymentsController {
     /**
      * Deployments 객체의 리스트를 조회한다. (지정한 네임스페이스에서 조회)
      * @param namespace 조회하려는 객체가 속한 namespace
-     * @param params request parameters
      * @return
      */
     @GetMapping( "/namespaces/{namespace}/deployments" )
-    public DeploymentsList getDeploymentList(@PathVariable String namespace, @RequestParam Map<String, Object> params) {
-        return deploymentsService.getDeploymentList(namespace, params);
+    public DeploymentsList getDeploymentList(@PathVariable String namespace) {
+        return deploymentsService.getDeploymentList(namespace);
     }
 
     /**
      * Deployments 객체를 조회한다. (지정한 네임스페이스에 있는 Deployment를 조회)
      * @param namespace 조회하려는 객체가 속한 namespace
      * @param deploymentName 조회하려는 deployment 객체의 이름
-     * @param params request parameters
      * @return
      */
     @GetMapping( "/namespaces/{namespace}/deployments/{deploymentName}" )
-    public Deployments getDeployment(@PathVariable String namespace, @PathVariable String deploymentName,
-                                     @RequestParam Map<String, Object> params) {
-        return deploymentsService.getDeployment(namespace, deploymentName, params);
+    public Deployments getDeployment(@PathVariable String namespace, @PathVariable String deploymentName) {
+        return deploymentsService.getDeployment(namespace, deploymentName);
     }
 }
