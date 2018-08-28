@@ -1,26 +1,28 @@
 package org.paasta.caas.api.clusters.namespace;
 
 import lombok.Data;
+import org.paasta.caas.api.common.model.CommonMetaData;
+import org.paasta.caas.api.common.model.CommonSpec;
+import org.paasta.caas.api.common.model.CommonStatus;
 
 import java.util.List;
 
 /**
  * Namespace Model 클래스
  *
- * @author REX
+ * @author kdh
  * @version 1.0
- * @since 2018.08.07
+ * @since 2018.08.28
  */
 @Data
 public class Namespace {
 
-    private String result;
-    private String statusCode;
+    private String resultCode;
 
-    private String name;
-    private String uid;
-    private String clusterName;
+    private String kind;
+    private String apiVersion;
 
-    private List items;
-
+    private CommonMetaData metadata;
+    private CommonSpec spec;
+    private CommonStatus status;
 }
