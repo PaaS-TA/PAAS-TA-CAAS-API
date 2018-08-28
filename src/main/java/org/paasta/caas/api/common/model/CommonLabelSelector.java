@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Map;
 
 /**
- * Replicaset Model 클래스
+ * CommonLabelSelector Model 클래스
  *
  * @author 최윤석
  * @version 1.0

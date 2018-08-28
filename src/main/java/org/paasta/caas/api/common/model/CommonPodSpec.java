@@ -1,13 +1,12 @@
 package org.paasta.caas.api.common.model;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Replicaset Model 클래스
+ * CommonPodSpec Model 클래스
  *
  * @author 최윤석
  * @version 1.0
