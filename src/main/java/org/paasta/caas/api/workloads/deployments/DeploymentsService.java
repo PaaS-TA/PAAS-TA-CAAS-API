@@ -69,7 +69,7 @@ public class DeploymentsService {
      * @param params Request parameters
      * @return DeploymentsList
      */
-    public DeploymentsList getDeploymentList (String namespace, Map<String, Object> params) {
+    public DeploymentsList getDeploymentList (String namespace) {
         DeploymentsList responseObject;
         String resultCode;
         String resultStatusMessage = "";
@@ -99,7 +99,7 @@ public class DeploymentsService {
      * @param params request parameters
      * @return Deployments
      */
-    public Deployments getDeployment (String namespace, String deploymentName, Map<String, Object> params) {
+    public Deployments getDeployment (String namespace, String deploymentName) {
         Deployments responseObject;
         String resultCode;
         String resultStatusMessage = "";
