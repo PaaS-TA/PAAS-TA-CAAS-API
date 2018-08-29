@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -67,6 +68,9 @@ public class CustomServicesService {
                 propertyService.getCaasMasterApiListServicesGetUrl()
                         .replace("{namespace}", namespace)
                         .replace("{name}", serviceName), HttpMethod.GET, null, Map.class);
+
+        //noinspection unchecked
+        resultMap.put("source", new LinkedHashMap(resultMap));
 
         return (CustomServices) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServices.class), Constants.RESULT_STATUS_SUCCESS);
     }
