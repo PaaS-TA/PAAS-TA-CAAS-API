@@ -1,11 +1,9 @@
-package org.paasta.caas.api.clusters.namespace;
+package org.paasta.caas.api.clusters.namespaces;
 
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
 import org.paasta.caas.api.common.model.CommonSpec;
 import org.paasta.caas.api.common.model.CommonStatus;
-
-import java.util.List;
 
 /**
  * Namespace Model 클래스
@@ -15,7 +13,7 @@ import java.util.List;
  * @since 2018.08.28
  */
 @Data
-public class Namespace {
+public class Namespaces {
 
     private String resultCode;
 

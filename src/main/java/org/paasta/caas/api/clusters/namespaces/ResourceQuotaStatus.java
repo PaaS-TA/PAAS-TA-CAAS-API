@@ -11,7 +11,7 @@
  */
 
 
-package org.paasta.caas.api.clusters.namespace;
+package org.paasta.caas.api.clusters.namespaces;
 
 import lombok.Data;
 

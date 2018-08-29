@@ -11,20 +11,22 @@
  */
 
 
-package org.paasta.caas.api.clusters.namespace;
+package org.paasta.caas.api.clusters.namespaces;
 
 import lombok.Data;
-
-import java.util.List;
+import org.paasta.caas.api.common.model.CommonMetaData;
 
 /**
- * ResourceQuotaList is a list of ResourceQuota items.
+ * ResourceQuota sets aggregate quota restrictions enforced per namespace
  */
 @Data
-public class ResourceQuotaList {
+public class ResourceQuota {
 
-  private String resultCode;
-  private List<ResourceQuota> items;
+  private String apiVersion;
+  private String kind;
+  private CommonMetaData metadata;
+  private ResourceQuotaSpec spec;
+  private ResourceQuotaStatus status;
 
 }
 

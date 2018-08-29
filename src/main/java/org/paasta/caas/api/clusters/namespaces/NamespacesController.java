@@ -1,4 +1,4 @@
-package org.paasta.caas.api.clusters.namespace;
+package org.paasta.caas.api.clusters.namespaces;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
 
 /**
  * 클러스터 API 를 호출 받는 컨트롤러이다.
@@ -19,24 +17,24 @@ import java.util.HashMap;
  */
 @RestController
 @RequestMapping("/cluster")
-public class NamespaceController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NamespaceController.class);
+public class NamespacesController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NamespacesController.class);
 
-    private final NamespaceService namespaceService;
+    private final NamespacesService namespacesService;
 
     @Autowired
-    public NamespaceController(NamespaceService namespaceService) {
-        this.namespaceService = namespaceService;
+    public NamespacesController(NamespacesService namespacesService) {
+        this.namespacesService = namespacesService;
     }
 
     @GetMapping("/namespaces/{namespace}")
-    public Namespace getNamespaces(@PathVariable("namespace") String namespace) {
-        return namespaceService.getNamespaces(namespace);
+    public Namespaces getNamespaces(@PathVariable("namespace") String namespace) {
+        return namespacesService.getNamespaces(namespace);
     }
 
     @GetMapping("/namespaces/{namespace}/getResourceQuotaList")
     public ResourceQuotaList getResourceQuotaList(@PathVariable("namespace") String namespace) {
-        return namespaceService.getResourceQuotaList(namespace);
+        return namespacesService.getResourceQuotaList(namespace);
     }
 
 }
