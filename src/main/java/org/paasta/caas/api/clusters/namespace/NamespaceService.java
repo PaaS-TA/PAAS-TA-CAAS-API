@@ -51,4 +51,10 @@ public class NamespaceService {
         return (Namespace) commonService.setResultModel(commonService.setResultObject(resultMap, Namespace.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+    ResourceQuotaList getResourceQuotaList(String namespace) {
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES+"/"+namespace+"/resourcequotas", HttpMethod.GET, null, Map.class);
+
+        return (ResourceQuotaList) commonService.setResultModel(commonService.setResultObject(resultMap, ResourceQuotaList.class), Constants.RESULT_STATUS_SUCCESS);
+    }
+
 }
