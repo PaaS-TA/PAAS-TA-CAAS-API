@@ -13,7 +13,7 @@ import java.util.Map;
  * @since 2018.08.13
  */
 @RestController                 // included ResponseBody annotation.
-@RequestMapping( "/workload" )
+@RequestMapping( "/workloads" )
 public class DeploymentsController {
 
     private final DeploymentsService deploymentsService;
