@@ -11,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -66,7 +67,6 @@ public class DeploymentsService {
      * Deployments List 조회 (특정 네임스페이스 대상)
      *
      * @param namespace namespace
-     * @param params Request parameters
      * @return DeploymentsList
      */
     public DeploymentsList getDeploymentList (String namespace) {
@@ -96,7 +96,6 @@ public class DeploymentsService {
      *
      * @param namespace namespace
      * @param deploymentName deployment name
-     * @param params request parameters
      * @return Deployments
      */
     public Deployments getDeployment (String namespace, String deploymentName) {
@@ -108,6 +107,8 @@ public class DeploymentsService {
                 .replace( "{namespace}", namespace ).replace( "{deploymentName}", deploymentName );
             HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
+
+            responseMap.put("source",new LinkedHashMap(responseMap));
             LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
                 namespace, deploymentName, responseMap.toString() );
 
