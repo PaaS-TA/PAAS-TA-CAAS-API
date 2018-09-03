@@ -12,7 +12,7 @@ import java.util.List;
  * @since 2018.8.13
  */
 @Data
-class EndpointsList {
+public class EndpointsList {
 
     private String resultCode;
     private List<Endpoints> items;
