@@ -45,20 +45,13 @@ public class DeploymentsService {
         DeploymentsList responseObject;
         String resultCode;
         String resultStatusMessage = "";
-        try {
-            final String requestPath = propertyService.getCaasMasterApiListDeploymentAllList();
-            HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
-            LOGGER.info( "#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString() );
+        final String requestPath = propertyService.getCaasMasterApiListDeploymentAllList();
+        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
+            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
+        LOGGER.info( "#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString() );
 
-            responseObject = commonService.setResultObject(responseMap, DeploymentsList.class);
-            resultCode = Constants.RESULT_STATUS_SUCCESS;
-        } catch (Exception e) {
-            responseObject = new DeploymentsList();
-            resultCode = Constants.RESULT_STATUS_FAIL;
-            resultStatusMessage =
-                "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
-        }
+        responseObject = commonService.setResultObject(responseMap, DeploymentsList.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
 
         return (DeploymentsList) commonService.setResultModel(responseObject, resultCode);
     }
@@ -73,20 +66,13 @@ public class DeploymentsService {
         DeploymentsList responseObject;
         String resultCode;
         String resultStatusMessage = "";
-        try {
-            String requestPath = propertyService.getCaasMasterApiListDeploymentList().replace( "{namespace}", namespace );
-            HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
-            LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
+        String requestPath = propertyService.getCaasMasterApiListDeploymentList().replace( "{namespace}", namespace );
+        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
+            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
+        LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
 
-            responseObject = commonService.setResultObject(responseMap, DeploymentsList.class);
-            resultCode = Constants.RESULT_STATUS_SUCCESS;
-        } catch (Exception e) {
-            responseObject = new DeploymentsList();
-            resultCode = Constants.RESULT_STATUS_FAIL;
-            resultStatusMessage =
-                "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
-        }
+        responseObject = commonService.setResultObject(responseMap, DeploymentsList.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
 
         return (DeploymentsList) commonService.setResultModel( responseObject, resultCode);
     }
@@ -102,32 +88,24 @@ public class DeploymentsService {
         Deployments responseObject;
         String resultCode;
         String resultStatusMessage = "";
-        try {
-            String requestPath = propertyService.getCaasMasterApiListDeploymentGet()
-                .replace( "{namespace}", namespace ).replace( "{deploymentName}", deploymentName );
-            HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
+        String requestPath = propertyService.getCaasMasterApiListDeploymentGet()
+            .replace( "{namespace}", namespace ).replace( "{deploymentName}", deploymentName );
+        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
+            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
 
 
-            String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                    requestPath, HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                requestPath, HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
 
-            //noinspection unchecked
-            responseMap.put("sourceTypeYaml", resultString);
+        //noinspection unchecked
+        responseMap.put("sourceTypeYaml", resultString);
 
-            responseMap.put("source",new LinkedHashMap(responseMap));
-            LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
-                namespace, deploymentName, responseMap.toString() );
+        responseMap.put("source",new LinkedHashMap(responseMap));
+        LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
+            namespace, deploymentName, responseMap.toString() );
 
-            responseObject = commonService.setResultObject(responseMap, Deployments.class);
-            resultCode = Constants.RESULT_STATUS_SUCCESS;
-
-        } catch (Exception e) {
-            responseObject = new Deployments();
-            resultCode = Constants.RESULT_STATUS_FAIL;
-            resultStatusMessage =
-                "Occurs unexpected exception(" + e.getClass().getSimpleName() + ") :: " + e.getMessage();
-        }
+        responseObject = commonService.setResultObject(responseMap, Deployments.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
 
         return (Deployments) commonService.setResultModel(responseObject, resultCode);
     }
