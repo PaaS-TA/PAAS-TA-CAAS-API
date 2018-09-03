@@ -72,6 +72,14 @@ public class CustomServicesService {
         //noinspection unchecked
         resultMap.put("source", new LinkedHashMap(resultMap));
 
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListServicesGetUrl()
+                        .replace("{namespace}", namespace)
+                        .replace("{name}", serviceName), HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+
+        //noinspection unchecked
+        resultMap.put("sourceTypeYaml", resultString);
+
         return (CustomServices) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServices.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
