@@ -108,6 +108,13 @@ public class DeploymentsService {
             HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
 
+
+            String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                    requestPath, HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+
+            //noinspection unchecked
+            responseMap.put("sourceTypeYaml", resultString);
+
             responseMap.put("source",new LinkedHashMap(responseMap));
             LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
                 namespace, deploymentName, responseMap.toString() );
