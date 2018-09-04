@@ -58,6 +58,8 @@ caasMaster:
         get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
         create: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings"
         delete: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
+      users:
+        delete: "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
 
 ---
 spring:

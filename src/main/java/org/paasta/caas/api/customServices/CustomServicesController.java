@@ -52,4 +52,15 @@ public class CustomServicesController {
         return customServicesService.getCustomServices(namespace, serviceName);
     }
 
+    /**
+     * Service 객체를 label Selector로 조회한다.
+     * @param namespace namespace
+     * @param selectors selectors
+     * @return ReplicaSetsList
+     */
+    @GetMapping(value = "/resource/{selector}")
+    public CustomServicesList getCustomServicesListLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
+        return customServicesService.getCustomServicesListLabelSelector(namespace, selectors);
+    }
+
 }

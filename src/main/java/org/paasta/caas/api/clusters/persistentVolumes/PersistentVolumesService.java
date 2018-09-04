@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -67,6 +68,8 @@ public class PersistentVolumesService {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPersistentvolumesGetUrl()
                         .replaceAll("\\{" + "name" + "\\}", pvcName), HttpMethod.GET, null, Map.class);
+
+        resultMap.put("source",new LinkedHashMap(resultMap));
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 

@@ -1,9 +1,10 @@
 package org.paasta.caas.api.clusters.persistentVolumes;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
 import org.paasta.caas.api.common.model.CommonStatus;
+
+import java.util.Map;
 
 /**
  * PersistentVolumes Model 클래스
@@ -15,22 +16,10 @@ import org.paasta.caas.api.common.model.CommonStatus;
 @Data
 public class PersistentVolumes {
 
-    @SerializedName("metadata")
     private CommonMetaData metadata;
-
-    @SerializedName("spec")
     private PersistentVolumesSpec spec;
-
-    @SerializedName("status")
     private CommonStatus status;
-
+    private Map<String, Object> source;
     private String resultCode;
-    private String resultMessage;
-
-//    @SerializedName("apiVersion")
-//    private String apiVersion = null;
-
-//    @SerializedName("kind")
-//    private String kind = null;
 
 }

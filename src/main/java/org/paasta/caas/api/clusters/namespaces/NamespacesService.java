@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * CLUSTER Service
  *
- * @author 최윤석
+ * @author indra
  * @version 1.0
  * @since 2018.8.01 최초작성
  */
