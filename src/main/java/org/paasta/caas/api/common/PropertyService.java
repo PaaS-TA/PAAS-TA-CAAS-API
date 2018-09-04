@@ -117,4 +117,7 @@ public class PropertyService {
     @Value("${caasMaster.api.list.roleBindings.delete}")
     private String caasMasterApiListRoleBindingsDeleteUrl;
 
+    @Value("${caasMaster.api.list.users.delete}")
+    private String caasMasterApiListUsersDeleteUrl;
+
 }
