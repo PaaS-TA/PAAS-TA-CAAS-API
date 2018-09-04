@@ -78,6 +78,6 @@ public class CommonMetaData {
     //@SerializedName("initializers")
     //private V1Initializers initializers;
 
-    //@SerializedName("ownerReferences")
-    //private List<V1OwnerReference> ownerReferences;
+    @SerializedName("ownerReferences")
+    private List<OwnerReferences> ownerReferences;
 }
