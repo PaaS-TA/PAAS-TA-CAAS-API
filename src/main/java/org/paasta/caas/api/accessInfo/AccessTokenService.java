@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,8 +34,15 @@ public class AccessTokenService {
         Map map = (Map) responseMap.get("data");
         token = map.get("token").toString();
 
+        Base64.Decoder decoder = Base64.getDecoder();
+        String decodeToken = new String(decoder.decode(token));
+
+        LOGGER.info("get access token :: {}", decodeToken);
+
         AccessToken accessToken = new AccessToken();
-        accessToken.setUserAccessToken(token);
+        accessToken.setUserAccessToken(decodeToken);
+
+
 
         return accessToken;
     }
