@@ -119,8 +119,8 @@ public class CommonSpec {
 //    @SerializedName("tolerations")
 //    private List<Toleration> tolerations;
 //
-//    @SerializedName("volumes")
-//    private List<Volume> volumes;
+    @SerializedName("volumes")
+    private List<Volume> volumes;
 //
 //    @SerializedName("affinity")
 //    private V1Affinity affinity;
