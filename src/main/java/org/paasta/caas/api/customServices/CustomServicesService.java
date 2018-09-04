@@ -75,4 +75,17 @@ public class CustomServicesService {
         return (CustomServices) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServices.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+    /**
+     * custom services Label 조회
+     *
+     * @return Map
+     */
+    CustomServicesList getCustomServicesListLabelSelector(String namespace, String selectors) {
+        String requestSelector = "?labelSelector=" + selectors;
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListServicesListUrl()
+                        .replace("{namespace}", namespace)+ requestSelector, HttpMethod.GET, null, Map.class);
+
+        return (CustomServicesList) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServicesList.class), Constants.RESULT_STATUS_SUCCESS);
+    }
 }

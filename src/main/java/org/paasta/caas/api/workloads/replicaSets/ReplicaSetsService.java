@@ -1,7 +1,5 @@
 package org.paasta.caas.api.workloads.replicaSets;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.paasta.caas.api.common.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,7 +15,7 @@ import java.util.Map;
 /**
  * CLUSTER Service
  *
- * @author 최윤석
+ * @author CISS
  * @version 1.0
  * @since 2018.8.01 최초작성
  */
@@ -60,13 +57,14 @@ public class ReplicaSetsService {
      *
      * @return Map
      */
-    ReplicaSetsList getReplicasetList(String namespace) {
+    public ReplicaSetsList getReplicasetList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListReplicasetsListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace), HttpMethod.GET, null, Map.class);
+                propertyService.getCaasMasterApiListReplicasetsListUrl()
+                        .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (ReplicaSetsList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), ReplicaSetsList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (ReplicaSetsList) commonService.setResultModel(commonService.setResultObject(resultMap, ReplicaSetsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
@@ -74,39 +72,43 @@ public class ReplicaSetsService {
      *
      * @return Map
      */
-    ReplicaSets getReplicaset(String namespace, String replicasetsName) {
+    public ReplicaSets getReplicaset(String namespace, String replicasetsName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListReplicasetsGetUrl()
-                        .replaceAll("\\{" + "namespace" + "\\}", namespace)
-                        .replaceAll("\\{" + "name" + "\\}", replicasetsName), HttpMethod.GET, null, Map.class);
+                        .replace("{namespace}", namespace)
+                        .replace("{name}", replicasetsName)
+                        , HttpMethod.GET, null, Map.class);
 
         resultMap.put("source",new LinkedHashMap(resultMap));
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        Gson gson = new GsonBuilder()
-                //.registerTypeAdapter(Integer.class, new IntegerSerializer())
-                .registerTypeAdapter(Double.class, new GsonDeserializer())
-                .registerTypeAdapter(Integer.class, new GsonDeserializer())
-                .registerTypeAdapter(BigDecimal.class, new GsonDeserializer())
-                .registerTypeAdapter(Number.class, new GsonDeserializer())
-                .create();
+        // TODO : 삭제 및 업데이트 예정 CISS 2018.08.31
+        // 아래 GsonBuilder 는 Gson내에서 map 처리시 숫자형(integer)가 double(소수점)형으로 출력되는 부분을 수정 처리하는 테스트 중입니다.
+//        Gson gson = new GsonBuilder()
+//                //.registerTypeAdapter(Integer.class, new IntegerSerializer())
+//                .registerTypeAdapter(Double.class, new GsonDeserializer())
+//                .registerTypeAdapter(Integer.class, new GsonDeserializer())
+//                .registerTypeAdapter(BigDecimal.class, new GsonDeserializer())
+//                .registerTypeAdapter(Number.class, new GsonDeserializer())
+//                .create();
 
-        return (ReplicaSets) commonService.setResultModel(gson.fromJson(gson.toJson(resultMap), ReplicaSets.class), Constants.RESULT_STATUS_SUCCESS);
+        return (ReplicaSets) commonService.setResultModel(commonService.setResultObject(resultMap, ReplicaSets.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
-     * ReplicaSet List 조회
+     * ReplicaSet List Label 조회
      *
      * @return Map
      */
-    ReplicaSetsList getReplicasetListLabelSelector(String namespace, String selectors) {
+    public ReplicaSetsList getReplicasetListLabelSelector(String namespace, String selectors) {
         String requestSelector = "?labelSelector=" + selectors;
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListReplicasetsListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
+                propertyService.getCaasMasterApiListReplicasetsListUrl()
+                        .replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (ReplicaSetsList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), ReplicaSetsList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (ReplicaSetsList) commonService.setResultModel(commonService.setResultObject(resultMap, ReplicaSetsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 }

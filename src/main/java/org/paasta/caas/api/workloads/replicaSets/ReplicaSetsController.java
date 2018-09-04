@@ -14,7 +14,7 @@ import java.util.Map;
  * @since 2018.08.01 최초작성
  */
 @RestController
-@RequestMapping("/workloads/namespaces/{namespace}/replicasets")
+@RequestMapping("/workloads/namespaces/{namespace:.+}/replicasets")
 public class ReplicaSetsController {
     //private static final Logger LOGGER = LoggerFactory.getLogger(ClusterController.class);
     private final ReplicaSetsService replicaSetsService;
@@ -45,7 +45,7 @@ public class ReplicaSetsController {
      * @return ReplicaSet
      * @see ReplicaSetsService#getReplicaset
      */
-    @GetMapping(value = "/{replicasetsName}")
+    @GetMapping(value = "/{replicasetsName:.+}")
     public ReplicaSets getReplicaset(@PathVariable("namespace") String namespace, @PathVariable("replicasetsName") String replicasetsName, @RequestParam Map<String, Object> map) {
         return replicaSetsService.getReplicaset(namespace, replicasetsName);
     }
