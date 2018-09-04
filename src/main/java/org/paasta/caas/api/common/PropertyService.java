@@ -71,7 +71,11 @@ public class PropertyService {
     @Value("${caasMaster.api.list.horizontalpodautoscalers.get}")
     private String caasMasterApiListHorizontalpodautoscalersGetUrl;
 
-    // events
+    // events (all)
+    @Value("${caasMaster.api.list.events.allList}")
+    private String caasMasterApiListEventsAllListUrl;
+
+    // events (namespace)
     @Value("${caasMaster.api.list.events.list}")
     private String caasMasterApiListEventsListUrl;
 
@@ -116,5 +120,8 @@ public class PropertyService {
     // RoleBinding cancel
     @Value("${caasMaster.api.list.roleBindings.delete}")
     private String caasMasterApiListRoleBindingsDeleteUrl;
+
+    @Value("${caasMaster.api.list.users.delete}")
+    private String caasMasterApiListUsersDeleteUrl;
 
 }

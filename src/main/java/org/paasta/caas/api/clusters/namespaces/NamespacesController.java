@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018.08.01 최초작성
  */
 @RestController
-@RequestMapping("/cluster")
+@RequestMapping("/clusters")
 public class NamespacesController {
     private static final Logger LOGGER = LoggerFactory.getLogger(NamespacesController.class);
 

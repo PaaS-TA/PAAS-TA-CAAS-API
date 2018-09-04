@@ -22,4 +22,7 @@ public class Pods {
 
     // FOR DASHBOARD
     private String selector;
+
+    // FOR DASHBOARD - YAML
+    private String sourceTypeYaml;
 }

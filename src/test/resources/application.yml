@@ -42,6 +42,7 @@ caasMaster:
         list: "/api/v1/persistentvolumes"
         get: "/api/v1/persistentvolumes/{name}"
       events:
+        allList: "/api/v1/events"
         list: "/api/v1/namespaces/{namespace}/events"
       roles:
         allList: "/apis/rbac.authorization.k8s.io/v1/roles"
