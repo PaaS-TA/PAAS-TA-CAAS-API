@@ -93,23 +93,6 @@ public class DeploymentsServiceTest {
 
 
     @Test
-    public void getDeploymentListByAllNamespace_Throw_Exception(){
-
-        //when 서술
-        when(propertyService.getCaasMasterApiListDeploymentAllList()).thenReturn("/apis/apps/v1/deployments");
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/deployments", HttpMethod.GET, null, Map.class)).thenThrow(HttpClientErrorException.class);
-        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_FAIL)).thenReturn(gFinalResultListFailModel);
-
-        //실제 테스트할 함수 호출
-        DeploymentsList resultList = deploymentsService.getDeploymentListByAllNamespace();
-
-        //실제 결과 값 비교
-        assertThat(resultList).isNotNull();
-        assertEquals(Constants.RESULT_STATUS_FAIL, resultList.getResultCode());
-    }
-
-
-    @Test
     public void getDeploymentList_Valid_ReturnModel() {
 
         //when
@@ -125,23 +108,6 @@ public class DeploymentsServiceTest {
         assertThat(resultList).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
     }
-
-    @Test
-    public void getDeploymentList_Throw_Exception() {
-
-        //when
-        when(propertyService.getCaasMasterApiListDeploymentList()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments");
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments", HttpMethod.GET, null, Map.class)).thenThrow(HttpClientErrorException.class);
-        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_FAIL)).thenReturn(gFinalResultListFailModel);
-        
-        //call method
-        DeploymentsList resultList = deploymentsService.getDeploymentList(NAMESPACE);
-
-        //compare result
-        assertThat(resultList).isNotNull();
-        assertEquals(Constants.RESULT_STATUS_FAIL, resultList.getResultCode());
-    }
-
 
     @Test
     public void getDeployment_Valid_ReturnModel() {
@@ -160,24 +126,5 @@ public class DeploymentsServiceTest {
         assertEquals(Constants.RESULT_STATUS_SUCCESS, result.getResultCode());
 
     }
-
-    @Test
-    public void getDeployment_Throw_Exception() {
-
-        //when
-        when(propertyService.getCaasMasterApiListDeploymentGet()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments/{deploymentName}");
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments/" + DEPLOYMENT_NAME, HttpMethod.GET, null, Map.class)).thenThrow(HttpClientErrorException.class);
-        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_FAIL)).thenReturn(gFinalResultFailModel);
-        
-
-        //call method
-        Deployments result = deploymentsService.getDeployment(NAMESPACE, DEPLOYMENT_NAME);
-
-        //compare result
-        assertThat(result).isNotNull();
-        assertEquals(Constants.RESULT_STATUS_FAIL, result.getResultCode());
-
-    }
-
 
 }

@@ -27,10 +27,9 @@ public class RestTemplateService {
     private final String commonApiBase64Authorization;
     private final String caasApiBase64Authorization;
     private final RestTemplate restTemplate;
+    private final PropertyService propertyService;
     private String base64Authorization;
     private String baseUrl;
-
-    private final PropertyService propertyService;
 
     @Autowired
     public RestTemplateService(RestTemplate restTemplate,
@@ -49,12 +48,18 @@ public class RestTemplateService {
 
 
     public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType) {
+        return send(reqApi, reqUrl, httpMethod, bodyObject, responseType, Constants.ACCEPT_TYPE_JSON);
+    }
+
+
+    public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType, String acceptType) {
 
         setApiUrlAuthorization(reqApi);
 
         HttpHeaders reqHeaders = new HttpHeaders();
         reqHeaders.add(AUTHORIZATION_HEADER_KEY, base64Authorization);
         reqHeaders.add(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        reqHeaders.add("ACCEPT", acceptType);
 
         HttpEntity<Object> reqEntity = new HttpEntity<>(bodyObject, reqHeaders);
 

@@ -22,5 +22,6 @@ public class CustomServices {
     private CommonSpec spec;
     private CommonStatus status;
     private Map<String, Object> source;
+    private String sourceTypeYaml;
 
 }
