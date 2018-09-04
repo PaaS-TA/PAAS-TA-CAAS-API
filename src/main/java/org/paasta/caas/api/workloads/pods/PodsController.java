@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2018.08.01 최초작성
  */
 @RestController
-@RequestMapping( "/{namespace:.+}/workload/pods" )
+@RequestMapping( "/workloads/{namespace:.+}/pods" )
 public class PodsController {
     private final PodsService podsService;
 
