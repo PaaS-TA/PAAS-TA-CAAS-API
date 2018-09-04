@@ -34,12 +34,15 @@ public class PodsController {
      */
     @GetMapping
     @ResponseBody
-    public PodsList getPodList (@PathVariable( "namespace" ) String namespace,
-                                @RequestParam( value = "selector", required = false) String selector ) {
-        if ( null != selector )
-            return podsService.getPodListWithLabelSelector( namespace, selector );
-        else
-            return podsService.getPodList( namespace );
+    public PodsList getPodList(@PathVariable("namespace") String namespace) {
+        return podsService.getPodList(namespace);
+    }
+
+    @GetMapping(value = "/resource/{selector:.+}")
+    @ResponseBody
+    public PodsList getPodListWithLabelSelector(@PathVariable("namespace") String namespace,
+                                                @PathVariable(value = "selector") String selector) {
+        return podsService.getPodListWithLabelSelector(namespace, selector);
     }
 
     @GetMapping( "/nodes/{nodeName:.+}" )
