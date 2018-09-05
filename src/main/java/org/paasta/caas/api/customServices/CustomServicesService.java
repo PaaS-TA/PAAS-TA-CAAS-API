@@ -9,7 +9,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -42,7 +41,7 @@ public class CustomServicesService {
 
 
     /**
-     * Gets custom services list.
+     * Services 목록을 조회한다.
      *
      * @param namespace the namespace
      * @return the custom services list
@@ -57,7 +56,7 @@ public class CustomServicesService {
 
 
     /**
-     * Gets custom services.
+     * Services 상세 정보를 조회한다.
      *
      * @param namespace   the namespace
      * @param serviceName the service name
@@ -69,9 +68,19 @@ public class CustomServicesService {
                         .replace("{namespace}", namespace)
                         .replace("{name}", serviceName), HttpMethod.GET, null, Map.class);
 
-        //noinspection unchecked
-        resultMap.put("source", new LinkedHashMap(resultMap));
+        return (CustomServices) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServices.class), Constants.RESULT_STATUS_SUCCESS);
+    }
 
+
+    /**
+     * Services YAML을 조회한다.
+     *
+     * @param namespace   the namespace
+     * @param serviceName the service name
+     * @return the custom services yaml
+     */
+    CustomServices getCustomServicesYaml(String namespace, String serviceName) {
+        HashMap resultMap = new HashMap();
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListServicesGetUrl()
                         .replace("{namespace}", namespace)
@@ -84,15 +93,17 @@ public class CustomServicesService {
     }
 
     /**
-     * custom services Label 조회
+     * Services 목록을 조회한다. (Label Selector)
      *
-     * @return Map
+     * @param namespace the namespace
+     * @param selectors the selectors
+     * @return the custom services list
      */
     CustomServicesList getCustomServicesListLabelSelector(String namespace, String selectors) {
         String requestSelector = "?labelSelector=" + selectors;
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListServicesListUrl()
-                        .replace("{namespace}", namespace)+ requestSelector, HttpMethod.GET, null, Map.class);
+                        .replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
 
         return (CustomServicesList) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServicesList.class), Constants.RESULT_STATUS_SUCCESS);
     }

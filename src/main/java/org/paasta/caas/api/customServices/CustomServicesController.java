@@ -29,7 +29,7 @@ public class CustomServicesController {
 
 
     /**
-     * Gets custom services list.
+     * Services 목록을 조회한다.
      *
      * @param namespace the namespace
      * @return the custom services list
@@ -41,7 +41,7 @@ public class CustomServicesController {
 
 
     /**
-     * Gets custom services.
+     * Services 상세 정보를 조회한다.
      *
      * @param namespace   the namespace
      * @param serviceName the service name
@@ -52,14 +52,29 @@ public class CustomServicesController {
         return customServicesService.getCustomServices(namespace, serviceName);
     }
 
+
     /**
-     * Service 객체를 label Selector로 조회한다.
+     * Services YAML을 조회한다.
+     *
+     * @param namespace   the namespace
+     * @param serviceName the service name
+     * @return the custom services yaml
+     */
+    @GetMapping(value = "/{serviceName:.+}/yaml")
+    public CustomServices getCustomServicesYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "serviceName") String serviceName) {
+        return customServicesService.getCustomServicesYaml(namespace, serviceName);
+    }
+
+
+    /**
+     * Services 목록을 조회한다. (Label Selector)
+     *
      * @param namespace namespace
      * @param selectors selectors
-     * @return ReplicaSetsList
+     * @return the custom services list
      */
     @GetMapping(value = "/resource/{selector}")
-    public CustomServicesList getCustomServicesListLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
+    public CustomServicesList getCustomServicesListLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors) {
         return customServicesService.getCustomServicesListLabelSelector(namespace, selectors);
     }
 
