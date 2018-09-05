@@ -1,10 +1,7 @@
 package org.paasta.caas.api.roles;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Role API 를 호출받는 컨트롤러이다.
@@ -55,5 +52,18 @@ public class RolesController {
     @GetMapping(value = "/namespaces/{namespace}/roles/{roleName}")
     public Roles getRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
         return roleService.getRole(namespace, roleName);
+    }
+
+
+    /**
+     * Role 을 삭제한다.
+     *
+     * @param namespace
+     * @param roleName
+     * @return
+     */
+    @DeleteMapping(value = "/namespaces/{namespace}/roles/{roleName}")
+    public String deleteRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
+        return roleService.deleteRole(namespace, roleName);
     }
 }
