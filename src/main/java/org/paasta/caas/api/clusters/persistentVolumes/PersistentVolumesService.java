@@ -56,7 +56,7 @@ public class PersistentVolumesService {
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PersistentVolumesList) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PersistentVolumesList.class), Constants.RESULT_STATUS_SUCCESS);
+        return (PersistentVolumesList) commonService.setResultModel(commonService.setResultObject(resultMap, PersistentVolumesList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
@@ -67,12 +67,11 @@ public class PersistentVolumesService {
     PersistentVolumes getPersistentvolume(String pvcName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPersistentvolumesGetUrl()
-                        .replaceAll("\\{" + "name" + "\\}", pvcName), HttpMethod.GET, null, Map.class);
-
-        resultMap.put("source",new LinkedHashMap(resultMap));
+                        .replace("{name}", pvcName), HttpMethod.GET, null, Map.class);
 
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
-        return (PersistentVolumes) commonService.setResultModel(new Gson().fromJson(new Gson().toJson(resultMap), PersistentVolumes.class), Constants.RESULT_STATUS_SUCCESS);
+        return (PersistentVolumes) commonService.setResultModel(commonService.setResultObject(resultMap, PersistentVolumes.class), Constants.RESULT_STATUS_SUCCESS);
     }
+
 }
