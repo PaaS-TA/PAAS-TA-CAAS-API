@@ -18,17 +18,10 @@ import java.util.Map;
 @Data
 public class ReplicaSets {
 
-    @SerializedName("metadata")
     private CommonMetaData metadata;
-
-    @SerializedName("spec")
     private CommonSpec spec;
-
-    @SerializedName("status")
     private CommonStatus status;
-
-    private Map<String, Object> source;
-
+    private String sourceTypeYaml;
     private String resultCode;
 
 //    @SerializedName("apiVersion")

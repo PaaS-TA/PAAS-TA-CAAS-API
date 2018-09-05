@@ -81,6 +81,14 @@ public class ReplicaSetsService {
 
         resultMap.put("source",new LinkedHashMap(resultMap));
 
+        String resultString =restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListReplicasetsGetUrl()
+                        .replace("{namespace}", namespace)
+                        .replace("{name}", replicasetsName)
+                , HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+
+        resultMap.put("sourceTypeYaml", resultString);
+
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
         // TODO : 삭제 및 업데이트 예정 CISS 2018.08.31

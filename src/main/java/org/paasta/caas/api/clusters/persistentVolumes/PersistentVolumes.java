@@ -19,7 +19,7 @@ public class PersistentVolumes {
     private CommonMetaData metadata;
     private PersistentVolumesSpec spec;
     private CommonStatus status;
-    private Map<String, Object> source;
+    private String sourceTypeYaml;
     private String resultCode;
 
 }
