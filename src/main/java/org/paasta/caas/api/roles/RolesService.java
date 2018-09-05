@@ -86,4 +86,26 @@ public class RolesService {
         Gson gson = new Gson();
         return gson.fromJson(gson.toJson(hashMap), Roles.class);
     }
+
+    /**
+     * Role 을 삭제한다.
+     *
+     * @param namespace
+     * @param roleName
+     * @return
+     */
+    public String deleteRole(String namespace, String roleName) {
+        String apiUrl = propertyService.getCaasMasterApiListRolesDeleteUrl()
+                .replaceAll("\\{" + "namespace" + "\\}", namespace)
+                .replaceAll("\\{" + "name" + "\\}", roleName);
+
+        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
+        LOGGER.info("########## deleteRole() :: hashMap.toString() :: {}", hashMap.toString());
+
+        if(hashMap != null){
+            return Constants.RESULT_STATUS_SUCCESS;
+        }
+        return Constants.RESULT_STATUS_FAIL;
+    }
+
 }
