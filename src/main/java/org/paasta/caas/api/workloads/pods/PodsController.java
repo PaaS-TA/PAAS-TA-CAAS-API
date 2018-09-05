@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2018.08.01 최초작성
  */
 @RestController
-@RequestMapping( "/workloads/{namespace:.+}/pods" )
+@RequestMapping( "/workloads/namespaces/{namespace:.+}/pods" )
 public class PodsController {
     private final PodsService podsService;
 
@@ -45,7 +45,7 @@ public class PodsController {
         return podsService.getPodListWithLabelSelector(namespace, selector);
     }
 
-    @GetMapping( "/nodes/{nodeName:.+}" )
+    @GetMapping( "/node/{nodeName:.+}" )
     public PodsList getPodListByNode (@PathVariable String namespace, @PathVariable String nodeName ) {
         return podsService.getPodListByNode( namespace, nodeName, false );
     }

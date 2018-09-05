@@ -77,19 +77,21 @@ public class PodsService {
         return (PodsList) commonService.setResultModel(commonService.setResultObject(resultMap, PodsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+    /**
+     * Gets pod list by node
+     * @param namespace
+     * @param nodeName
+     * @param isIncludedSucceededPods
+     * @return
+     */
     public PodsList getPodListByNode (String namespace, String nodeName, boolean isIncludedSucceededPods) {
-        StringBuilder requestURLBuilder = new StringBuilder();
-        if ( "_all".equals( namespace ) ) {
-            requestURLBuilder.append( propertyService.getCaasMasterApiListPodsAllListUrl() );
-        } else {
-            requestURLBuilder.append( propertyService.getCaasMasterApiListPodsListUrl().replace( "{namespace}", namespace ) );
-        }
-        requestURLBuilder.append( "/?fieldSelector=spec.nodeName=" ).append( nodeName );
+        String requestURL = propertyService.getCaasMasterApiListPodsListUrl().replace( "{namespace}", namespace )
+                + "/?fieldSelector=spec.nodeName=" + nodeName;
         if ( !isIncludedSucceededPods )
-            requestURLBuilder.append( ",status.phase!=Succeeded" );
+            requestURL += ",status.phase!=Succeeded";
 
-        HashMap resultMap = ( HashMap ) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
-            requestURLBuilder.toString(), HttpMethod.GET, null, Map.class );
+        HashMap resultMap = ( HashMap ) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API, requestURL,
+                HttpMethod.GET, null, Map.class );
 
         LOGGER.info( "########## resultMap.toString() :: {}", resultMap.toString() );
 
