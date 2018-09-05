@@ -1,6 +1,5 @@
 package org.paasta.caas.api.roles;
 
-import com.google.gson.Gson;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
