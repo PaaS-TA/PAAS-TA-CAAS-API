@@ -131,24 +131,24 @@ public class CustomServiceServicesTest {
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
     }
 
-
-    /**
-     * Gets custom services list valid return model.
-     */
-    @Test
-    public void getCustomServicesListLabeSelector_Valid_ReturnModel() {
-        // CONDITION
-        when(propertyService.getCaasMasterApiListServicesListUrl()).thenReturn(LIST_URL);
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, LIST_URL
-                .replace("{namespace}", NAMESPACE)+ "?labelSelector=" +LABEL_SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
-        when(commonService.setResultObject(gResultMap, CustomServicesList.class)).thenReturn(gResultListModel);
-        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
-
-        // TEST
-        CustomServicesList resultModel = customServicesService.getCustomServicesList(NAMESPACE);
-
-        // VERIFY
-        assertThat(resultModel).isNotNull();
-        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
-    }
+//TODO :: 구성 필요
+//    /**
+//     * Gets custom services list valid return model.
+//     */
+//    @Test
+//    public void getCustomServicesListLabeSelector_Valid_ReturnModel() {
+//        // CONDITION
+//        when(propertyService.getCaasMasterApiListServicesListUrl()).thenReturn(LIST_URL);
+//        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, LIST_URL
+//                .replace("{namespace}", NAMESPACE)+ "?labelSelector=" +LABEL_SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+//        when(commonService.setResultObject(gResultMap, CustomServicesList.class)).thenReturn(gResultListModel);
+//        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
+//
+//        // TEST
+//        CustomServicesList resultModel = customServicesService.getCustomServicesList(NAMESPACE);
+//
+//        // VERIFY
+//        assertThat(resultModel).isNotNull();
+//        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
+//    }
 }
