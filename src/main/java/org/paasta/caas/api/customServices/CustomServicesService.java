@@ -77,10 +77,10 @@ public class CustomServicesService {
      *
      * @param namespace   the namespace
      * @param serviceName the service name
+     * @param resultMap   the result map
      * @return the custom services yaml
      */
-    CustomServices getCustomServicesYaml(String namespace, String serviceName) {
-        HashMap resultMap = new HashMap();
+    CustomServices getCustomServicesYaml(String namespace, String serviceName, HashMap resultMap) {
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListServicesGetUrl()
                         .replace("{namespace}", namespace)
