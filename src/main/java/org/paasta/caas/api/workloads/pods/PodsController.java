@@ -45,7 +45,7 @@ public class PodsController {
         return podsService.getPodListWithLabelSelector(namespace, selector);
     }
 
-    @GetMapping( "/nodes/{nodeName:.+}" )
+    @GetMapping( "/node/{nodeName:.+}" )
     public PodsList getPodListByNode (@PathVariable String namespace, @PathVariable String nodeName ) {
         return podsService.getPodListByNode( namespace, nodeName, false );
     }
