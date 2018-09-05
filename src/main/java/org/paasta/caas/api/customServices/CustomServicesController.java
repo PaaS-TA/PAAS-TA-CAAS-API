@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 /**
  * Custom Services Controller 클래스
  *
@@ -62,7 +64,7 @@ public class CustomServicesController {
      */
     @GetMapping(value = "/{serviceName:.+}/yaml")
     public CustomServices getCustomServicesYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "serviceName") String serviceName) {
-        return customServicesService.getCustomServicesYaml(namespace, serviceName);
+        return customServicesService.getCustomServicesYaml(namespace, serviceName, new HashMap<>());
     }
 
 
