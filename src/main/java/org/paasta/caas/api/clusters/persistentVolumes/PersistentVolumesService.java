@@ -69,6 +69,11 @@ public class PersistentVolumesService {
                 propertyService.getCaasMasterApiListPersistentvolumesGetUrl()
                         .replace("{name}", pvcName), HttpMethod.GET, null, Map.class);
 
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListPersistentvolumesListUrl(), HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+
+        resultMap.put("sourceTypeYaml", resultString);
+
         LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
         return (PersistentVolumes) commonService.setResultModel(commonService.setResultObject(resultMap, PersistentVolumes.class), Constants.RESULT_STATUS_SUCCESS);
