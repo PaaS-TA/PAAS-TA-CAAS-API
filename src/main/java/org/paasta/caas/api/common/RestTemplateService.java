@@ -31,6 +31,15 @@ public class RestTemplateService {
     private String base64Authorization;
     private String baseUrl;
 
+    /**
+     * Instantiates a new Rest template service.
+     *
+     * @param restTemplate                   the rest template
+     * @param commonApiAuthorizationId       the common api authorization id
+     * @param commonApiAuthorizationPassword the common api authorization password
+     * @param caasApiToken                   the caas api token
+     * @param propertyService                the property service
+     */
     @Autowired
     public RestTemplateService(RestTemplate restTemplate,
                                @Value("${commonApi.authorization.id}") String commonApiAuthorizationId,
@@ -47,15 +56,52 @@ public class RestTemplateService {
     }
 
 
+    /**
+     * Send t.
+     *
+     * @param <T>          the type parameter
+     * @param reqApi       the req api
+     * @param reqUrl       the req url
+     * @param httpMethod   the http method
+     * @param bodyObject   the body object
+     * @param responseType the response type
+     * @return the t
+     */
     public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType) {
         return send(reqApi, reqUrl, httpMethod, bodyObject, responseType, Constants.ACCEPT_TYPE_JSON, MediaType.APPLICATION_JSON_VALUE);
     }
 
+
+    /**
+     * Send t.
+     *
+     * @param <T>          the type parameter
+     * @param reqApi       the req api
+     * @param reqUrl       the req url
+     * @param httpMethod   the http method
+     * @param bodyObject   the body object
+     * @param responseType the response type
+     * @param acceptType   the accept type
+     * @return the t
+     */
     public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType, String acceptType) {
         return send(reqApi, reqUrl, httpMethod, bodyObject, responseType, acceptType, MediaType.APPLICATION_JSON_VALUE);
     }
 
 
+    /**
+     * Send t.
+     *
+     * @param <T>          the type parameter
+     * @param reqApi       the req api
+     * @param reqUrl       the req url
+     * @param httpMethod   the http method
+     * @param bodyObject   the body object
+     * @param responseType the response type
+     * @param acceptType   the accept type
+     * @param contentType  the content type
+     * @return the t
+     */
     public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType, String acceptType, String contentType) {
 
         setApiUrlAuthorization(reqApi);
@@ -65,11 +111,10 @@ public class RestTemplateService {
         reqHeaders.add(CONTENT_TYPE, contentType);
         reqHeaders.add("ACCEPT", acceptType);
 
-//        HttpEntity<Object> reqEntity = new HttpEntity<>(bodyObject, reqHeaders);
         HttpEntity<Object> reqEntity;
-        if(bodyObject == null) {  //null이면
+        if (bodyObject == null) {
             reqEntity = new HttpEntity<>(reqHeaders);
-        } else { // null이 아니면
+        } else {
             reqEntity = new HttpEntity<>(bodyObject, reqHeaders);
         }
 
@@ -106,4 +151,5 @@ public class RestTemplateService {
         this.base64Authorization = authorization;
         this.baseUrl = apiUrl;
     }
+
 }
