@@ -6,11 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.paasta.caas.api.workloads.deployments.DeploymentsList;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringRunner;
 
