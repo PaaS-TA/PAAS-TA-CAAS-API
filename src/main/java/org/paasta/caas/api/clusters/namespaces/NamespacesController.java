@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 클러스터 API 를 호출 받는 컨트롤러이다.
+ * Namespaces API 를 호출 받는 컨트롤러.
  *
  * @author 최윤석
  * @version 1.0

@@ -48,20 +48,30 @@ public class RestTemplateService {
 
 
     public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType) {
-        return send(reqApi, reqUrl, httpMethod, bodyObject, responseType, Constants.ACCEPT_TYPE_JSON);
+        return send(reqApi, reqUrl, httpMethod, bodyObject, responseType, Constants.ACCEPT_TYPE_JSON, MediaType.APPLICATION_JSON_VALUE);
+    }
+
+    public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType, String acceptType) {
+        return send(reqApi, reqUrl, httpMethod, bodyObject, responseType, Constants.ACCEPT_TYPE_JSON, acceptType);
     }
 
 
-    public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType, String acceptType) {
+    public <T> T send(String reqApi, String reqUrl, HttpMethod httpMethod, Object bodyObject, Class<T> responseType, String acceptType, String contentType) {
 
         setApiUrlAuthorization(reqApi);
 
         HttpHeaders reqHeaders = new HttpHeaders();
         reqHeaders.add(AUTHORIZATION_HEADER_KEY, base64Authorization);
-        reqHeaders.add(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        reqHeaders.add(CONTENT_TYPE, contentType);
         reqHeaders.add("ACCEPT", acceptType);
 
-        HttpEntity<Object> reqEntity = new HttpEntity<>(bodyObject, reqHeaders);
+//        HttpEntity<Object> reqEntity = new HttpEntity<>(bodyObject, reqHeaders);
+        HttpEntity<Object> reqEntity;
+        if(bodyObject == null) {  //null이면
+            reqEntity = new HttpEntity<>(reqHeaders);
+        } else { // null이 아니면
+            reqEntity = new HttpEntity<>(bodyObject, reqHeaders);
+        }
 
         LOGGER.info("<T> T SEND :: REQUEST: {} BASE-URL: {}, CONTENT-TYPE: {}", httpMethod, reqUrl, reqHeaders.get(CONTENT_TYPE));
         ResponseEntity<T> resEntity = restTemplate.exchange(baseUrl + reqUrl, httpMethod, reqEntity, responseType);

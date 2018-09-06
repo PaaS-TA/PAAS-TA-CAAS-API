@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 /**
- * CLUSTER Service
+ * Namespaces API 를 호출 받는 서비스.
  *
  * @author indra
  * @version 1.0
@@ -39,7 +39,6 @@ public class NamespacesService {
         this.commonService = commonService;
     }
 
-
     /**
      * Gets namespaces.
      *
@@ -51,6 +50,11 @@ public class NamespacesService {
         return (Namespaces) commonService.setResultModel(commonService.setResultObject(resultMap, Namespaces.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+    /**
+     * Gets ResourceQuotaList.
+     *
+     * @return the ResourceQuotaList
+     */
     ResourceQuotaList getResourceQuotaList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES+"/"+namespace+"/resourcequotas", HttpMethod.GET, null, Map.class);
 

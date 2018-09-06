@@ -23,7 +23,9 @@ public class Constants {
     public static final String ACCEPT_TYPE_YAML = String.valueOf(MediaType.valueOf("application/yaml"));
     static final String TARGET_COMMON_API = "commonApi";
     private static final String API_URL_V1 = "/api/v1";
+    private static final String APIS_URL_V1 = "/apis/rbac.authorization.k8s.io/v1";
     public static final String API_URL_NAMESPACES = API_URL_V1 + "/namespaces";
+    public static final String APIS_URL_NAMESPACES = APIS_URL_V1 + "/namespaces";
 
 
     public Constants() {
