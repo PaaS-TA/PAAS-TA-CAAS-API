@@ -1,6 +1,6 @@
 package org.paasta.caas.api.roles;
 
-import com.google.gson.Gson;
+import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
@@ -25,10 +25,12 @@ public class RolesService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
+    private final CommonService commonService;
 
     @Autowired
-    public RolesService(RestTemplateService restTemplateService) {
+    public RolesService(RestTemplateService restTemplateService, CommonService commonService) {
         this.restTemplateService = restTemplateService;
+        this.commonService = commonService;
     }
 
     @Autowired
@@ -36,54 +38,71 @@ public class RolesService {
 
 
     /**
-     * RoleList 조회 (모든 네임스페이스에서 조회)
-     *
-     * @return Map
-     */
-    public RolesList getRoleListByAllNamespace() {
-        String apiUrl = propertyService.getCaasMasterApiListRolesAllListUrl();
-
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRoleListByAllNamespaces() :: hashMap.toString() :: {}", hashMap.toString());
-
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RolesList.class);
-    }
-
-    /**
-     * RoleList 조회 (특정 네임스페이스에서 조회)
+     * RoleList 조회
      *
      * @param namespace
      * @return Map
      */
     public RolesList getRoleList(String namespace) {
+        RolesList rolesList;
+        String resultCode;
+
         String apiUrl = propertyService.getCaasMasterApiListRolesListUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace);
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRoleList() :: hashMap.toString() :: {}", hashMap.toString());
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+        LOGGER.info("########## getRoleList() :: responseMap.toString() :: {}", responseMap.toString());
 
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RolesList.class);
+        rolesList = commonService.setResultObject(responseMap, RolesList.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
+
+        return (RolesList) commonService.setResultModel(rolesList, resultCode);
     }
 
 
     /**
-     * Role 상세 조회 (특정 네임스페이스에서 조회)
+     * Role 상세 조회
      *
      * @param namespace
      * @param roleName
      * @return Map
      */
     public Roles getRole(String namespace, String roleName) {
+        Roles roles;
+        String resultCode;
+
         String apiUrl = propertyService.getCaasMasterApiListRolesGetUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleName);
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRole() :: hashMap.toString() :: {}", hashMap.toString());
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+        LOGGER.info("########## getRole() :: responseMap.toString() :: {}", responseMap.toString());
 
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), Roles.class);
+        roles = commonService.setResultObject(responseMap, Roles.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
+
+        return (Roles) commonService.setResultModel(roles, resultCode);
     }
+
+    /**
+     * Role 을 삭제한다.
+     *
+     * @param namespace
+     * @param roleName
+     * @return
+     */
+    public String deleteRole(String namespace, String roleName) {
+        String apiUrl = propertyService.getCaasMasterApiListRolesDeleteUrl()
+                .replaceAll("\\{" + "namespace" + "\\}", namespace)
+                .replaceAll("\\{" + "name" + "\\}", roleName);
+
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
+        LOGGER.info("########## deleteRole() :: responseMap.toString() :: {}", responseMap.toString());
+
+        if(responseMap != null){
+            return Constants.RESULT_STATUS_SUCCESS;
+        }
+        return Constants.RESULT_STATUS_FAIL;
+    }
+
 }

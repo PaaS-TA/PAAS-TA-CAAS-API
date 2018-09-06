@@ -1,6 +1,6 @@
 package org.paasta.caas.api.roleBindings;
 
-import com.google.gson.Gson;
+import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
@@ -26,10 +26,12 @@ public class RoleBindingsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
+    private final CommonService commonService;
 
     @Autowired
-    public RoleBindingsService(RestTemplateService restTemplateService) {
+    public RoleBindingsService(RestTemplateService restTemplateService, CommonService commonService) {
         this.restTemplateService = restTemplateService;
+        this.commonService = commonService;
     }
 
     @Autowired
@@ -37,33 +39,23 @@ public class RoleBindingsService {
 
 
     /**
-     * RoleBindingList 조회 (모든 네임스페이스에서 조회)
-     *
-     * @return Map
-     */
-    public RoleBindingsList getRoleBindingListByAllNamespace() {
-        String apiUrl = propertyService.getCaasMasterApiListRoleBindingsAllListUrl();
-
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRoleBindingListByAllNamespaces() :: hashMap.toString() :: {}", hashMap.toString());
-
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleBindingsList.class);
-    }
-
-    /**
      * RoleBindingList 조회 (특정 네임스페이스에서 조회)
      *
      * @return Map
      */
     public RoleBindingsList getRoleBindingList(String namespace) {
+        RoleBindingsList roleBindingsList;
+        String resultCode;
+
         String apiUrl = propertyService.getCaasMasterApiListRoleBindingsListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRoleBindingList() :: hashMap.toString() :: {}", hashMap.toString());
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+        LOGGER.info("########## getRoleBindingList() :: responseMap.toString() :: {}", responseMap.toString());
 
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleBindingsList.class);
+        roleBindingsList = commonService.setResultObject(responseMap, RoleBindingsList.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
+
+        return (RoleBindingsList) commonService.setResultModel(roleBindingsList, resultCode);
     }
 
     /**
@@ -74,15 +66,20 @@ public class RoleBindingsService {
      * @return
      */
     public RoleBindings getRoleBinding(String namespace, String roleBindingName) {
+        RoleBindings roleBindings;
+        String resultCode;
+
         String apiUrl = propertyService.getCaasMasterApiListRoleBindingsGetUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleBindingName);
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRole() :: hashMap.toString() :: {}", hashMap.toString());
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+        LOGGER.info("########## getRole() :: responseMap.toString() :: {}", responseMap.toString());
 
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleBindings.class);
+        roleBindings = commonService.setResultObject(responseMap, RoleBindings.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
+
+        return (RoleBindings) commonService.setResultModel(roleBindings, resultCode);
     }
 
 
@@ -94,13 +91,18 @@ public class RoleBindingsService {
      * @return
      */
     public RoleBindings createRoleBinding(String namespace, RoleBindings roleBinding) {
+        RoleBindings roleBindings;
+        String resultCode;
+
         String apiUrl = propertyService.getCaasMasterApiListRoleBindingsCreateUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.POST, roleBinding, Map.class);
-        LOGGER.info("########## createRoleBinding() :: hashMap.toString() :: {}", hashMap.toString());
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.POST, roleBinding, Map.class);
+        LOGGER.info("########## createRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
 
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), RoleBindings.class);
+        roleBindings = commonService.setResultObject(responseMap, RoleBindings.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
+
+        return (RoleBindings) commonService.setResultModel(roleBindings, resultCode);
     }
 
     /**
@@ -115,10 +117,10 @@ public class RoleBindingsService {
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleBindingName);
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
-        LOGGER.info("########## deleteRoleBinding() :: hashMap.toString() :: {}", hashMap.toString());
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
+        LOGGER.info("########## deleteRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
 
-        if(hashMap.get("status").equals("Success")){
+        if(responseMap.get("status").equals("Success")){
             return Constants.RESULT_STATUS_SUCCESS;
         }
         return Constants.RESULT_STATUS_FAIL;

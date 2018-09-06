@@ -22,17 +22,7 @@ public class RoleBindingsController {
     }
 
     /**
-     * RoleBinding 객체의 리스트를 조회한다. (모든 네임스페이스에서 조회)
-     *
-     * @return
-     */
-    @GetMapping
-    public RoleBindingsList getRoleBindingListByAllNamespace(){
-        return roleBindingService.getRoleBindingListByAllNamespace();
-    }
-
-    /**
-     * RoleBindingList 객체의 리스트를 조회한다. (특정 네임스페이스에서 조회)
+     * RoleBindingList 객체의 리스트를 조회한다.
      *
      * @param namespace
      * @return Map
@@ -43,7 +33,7 @@ public class RoleBindingsController {
     }
 
     /**
-     * RoleBinding 객체를 조회한다. (특정 네임스페이스에서 조회)
+     * RoleBinding 객체를 조회한다.
      *
      * @param namespace
      * @param roleBindingName
@@ -55,7 +45,7 @@ public class RoleBindingsController {
     }
 
     /**
-     * RoleBinding 권한을 할당한다. (특정 네임스페이스에서 조회)
+     * RoleBinding 권한을 할당한다.
      *
      * @param namespace
      * @param roleBinding
@@ -67,7 +57,7 @@ public class RoleBindingsController {
     }
 
     /**
-     * RoleBinding 권한을 해지한다. (특정 네임스페이스에서 조회)
+     * RoleBinding 권한을 해지한다.
      *
      * @param namespace
      * @param roleBindingName

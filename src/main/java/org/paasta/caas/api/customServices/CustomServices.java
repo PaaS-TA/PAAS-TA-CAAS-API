@@ -5,8 +5,6 @@ import org.paasta.caas.api.common.model.CommonMetaData;
 import org.paasta.caas.api.common.model.CommonSpec;
 import org.paasta.caas.api.common.model.CommonStatus;
 
-import java.util.Map;
-
 /**
  * Custom Services Model 클래스
  *
@@ -21,7 +19,6 @@ public class CustomServices {
     private CommonMetaData metadata;
     private CommonSpec spec;
     private CommonStatus status;
-    private Map<String, Object> source;
     private String sourceTypeYaml;
 
 }

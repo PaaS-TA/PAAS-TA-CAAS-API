@@ -37,6 +37,9 @@ public class CustomServiceServicesTest {
     private static final String SERVICE_NAME = "test-service-name";
     private static final String LIST_URL = "test-list-url";
     private static final String GET_URL = "test-get-url";
+    private static final String YAML_STRING = "test-yaml-string";
+    private static final String LABEL_SELECTOR = "test-label-selector";
+
 
     private static HashMap gResultMap = null;
     private static CustomServicesList gResultListModel = null;
@@ -70,6 +73,7 @@ public class CustomServiceServicesTest {
 
         gResultModel = new CustomServices();
         gFinalResultModel = new CustomServices();
+        gFinalResultModel.setSourceTypeYaml(YAML_STRING);
         gFinalResultModel.setResultCode(Constants.RESULT_STATUS_SUCCESS);
     }
 
@@ -123,6 +127,50 @@ public class CustomServiceServicesTest {
 
         // TEST
         CustomServices resultModel = customServicesService.getCustomServices(NAMESPACE, SERVICE_NAME);
+
+        // VERIFY
+        assertThat(resultModel).isNotNull();
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
+    }
+
+
+    /**
+     * Gets custom services yaml valid return model.
+     */
+    @Test
+    public void getCustomServicesYaml_Valid_ReturnModel() {
+        // CONDITION
+        when(propertyService.getCaasMasterApiListServicesGetUrl()).thenReturn(GET_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, GET_URL
+                .replace("{namespace}", NAMESPACE)
+                .replace("{name}", SERVICE_NAME), HttpMethod.GET, null, String.class)).thenReturn(YAML_STRING);
+        when(commonService.setResultObject(gResultMap, CustomServices.class)).thenReturn(gResultModel);
+        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
+
+        // TEST
+        CustomServices resultModel = customServicesService.getCustomServicesYaml(NAMESPACE, SERVICE_NAME, gResultMap);
+
+        // VERIFY
+        assertThat(resultModel).isNotNull();
+        assertEquals(YAML_STRING, resultModel.getSourceTypeYaml());
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
+    }
+
+
+    /**
+     * Gets custom services list valid return model.
+     */
+    @Test
+    public void getCustomServicesListLabeSelector_Valid_ReturnModel() {
+        // CONDITION
+        when(propertyService.getCaasMasterApiListServicesListUrl()).thenReturn(LIST_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, LIST_URL
+                .replace("{namespace}", NAMESPACE) + "?labelSelector=" + LABEL_SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+        when(commonService.setResultObject(gResultMap, CustomServicesList.class)).thenReturn(gResultListModel);
+        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
+
+        // TEST
+        CustomServicesList resultModel = customServicesService.getCustomServicesListLabelSelector(NAMESPACE, LABEL_SELECTOR);
 
         // VERIFY
         assertThat(resultModel).isNotNull();

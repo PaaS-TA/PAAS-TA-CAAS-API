@@ -29,7 +29,7 @@ public class EndpointsController {
 
 
     /**
-     * Gets endpoints list.
+     * Endpoints 목록을 조회한다.
      *
      * @param namespace the namespace
      * @return the endpoints list
@@ -41,7 +41,7 @@ public class EndpointsController {
 
 
     /**
-     * Gets endpoints.
+     * Endpoints 상세 정보를 조회한다.
      *
      * @param namespace   the namespace
      * @param serviceName the service name

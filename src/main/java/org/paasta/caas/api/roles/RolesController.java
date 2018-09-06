@@ -1,10 +1,7 @@
 package org.paasta.caas.api.roles;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Role API 를 호출받는 컨트롤러이다.
@@ -24,18 +21,9 @@ public class RolesController {
         this.roleService = roleService;
     }
 
-    /**
-     * Role 객체의 리스트를 조회한다. (모든 네임스페이스에서 조회)
-     *
-     * @return
-     */
-    @GetMapping
-    public RolesList getRoleListByAllNamespace(){
-        return roleService.getRoleListByAllNamespace();
-    }
 
     /**
-     * Role 객체의 리스트를 조회한다. (특정 네임스페이스에서 조회)
+     * Role 객체의 리스트를 조회한다.
      *
      * @param namespace 조회 대상 네임스페이스
      * @return RoleList
@@ -46,7 +34,7 @@ public class RolesController {
     }
 
     /**
-     * Role 객체를 조회한다. (특정 네임스페이스에서 조회)
+     * Role 객체를 조회한다.
      *
      * @param namespace 조회 대상 네임스페이스
      * @param roleName 조회 대상 role 이름
@@ -55,5 +43,18 @@ public class RolesController {
     @GetMapping(value = "/namespaces/{namespace}/roles/{roleName}")
     public Roles getRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
         return roleService.getRole(namespace, roleName);
+    }
+
+
+    /**
+     * Role 을 삭제한다.
+     *
+     * @param namespace
+     * @param roleName
+     * @return
+     */
+    @DeleteMapping(value = "/namespaces/{namespace}/roles/{roleName}")
+    public String deleteRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
+        return roleService.deleteRole(namespace, roleName);
     }
 }
