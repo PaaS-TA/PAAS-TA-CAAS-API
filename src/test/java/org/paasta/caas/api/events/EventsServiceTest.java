@@ -39,7 +39,6 @@ public class EventsServiceTest {
     private static final String RESOURCE = "test-resource";
     private static final String NODE_NAME = "test-node";
     private static final String LIST_URL = "test-list-url";
-    private static final String LIST_BY_NODE_URL = "test-list-by-node-url";
     private static final String EVENTLIST_RESULT_KEY = "items";
     private static final String SOURCEHOST_METAKEY = "source";
     private static final String SOURCEHOST_KEY = "host";
@@ -53,6 +52,9 @@ public class EventsServiceTest {
     private static List<Map<String, Object>> gFilterMapList = null;
     private static Map<String, Object> gOriginalMap = null;
     private static Map<String, Object> gSource = null;
+
+    private static Map<String, Object> gOriginalMapAnotherHost = null;
+    private static Map<String, Object> gSourceAnotherHost = null;
 
     @Mock
     private RestTemplateService restTemplateService;
@@ -78,12 +80,18 @@ public class EventsServiceTest {
 
         gOriginalMapList = new LinkedList<>();
         gFilterMapList = new LinkedList<>();
+
+        // items
         gOriginalMap = new HashMap<>();
-        gSource = new HashMap<>();
-
-        gSource.put(SOURCEHOST_KEY, SOURCEHOST_VALUE);
-
+        gOriginalMapAnotherHost = new HashMap<>();
         gOriginalMapList.add(gOriginalMap);
+        gOriginalMapList.add(gOriginalMapAnotherHost);
+
+        // source
+        gSource = new HashMap<>();
+        gSourceAnotherHost = new HashMap<>();
+        gSource.put(SOURCEHOST_KEY, SOURCEHOST_VALUE);
+        gSourceAnotherHost.put(SOURCEHOST_KEY, SOURCEHOST_VALUE + "2");
     }
 
     /**
@@ -112,13 +120,13 @@ public class EventsServiceTest {
     }
 
     @Test
-    public void getEventListByNode_Valid_ReturnModel() {
+    public void getEventListByNode_AllNamespace_Valid_ReturnModel() {
         // CONDITION
         when(propertyService.getCaasMasterApiListEventsAllListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 LIST_URL, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
 
-        // not-existing value of "source"
+        // don't add "source"; not-existing value of "source"
         gResultMap.put(EVENTLIST_RESULT_KEY, gOriginalMapList);
 
         // filter items
@@ -134,15 +142,16 @@ public class EventsServiceTest {
     }
 
     @Test
-    public void getEventListByNode_ALL_NAMESPACE_Invalid_ReturnModel() {
+    public void getEventListByNode_Invalid_ReturnModel() {
         // CONDITION
-        when(propertyService.getCaasMasterApiListEventsListUrl()).thenReturn(LIST_BY_NODE_URL);
+        when(propertyService.getCaasMasterApiListEventsListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                LIST_BY_NODE_URL, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+                LIST_URL, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
 
-        // existing value of "source"
-        gOriginalMap.put(SOURCEHOST_METAKEY, gSource);
+        // add "source"; existing value of "source"
         gResultMap.put(EVENTLIST_RESULT_KEY, gOriginalMapList);
+        gOriginalMap.put(SOURCEHOST_METAKEY, gSource);
+        gOriginalMapAnotherHost.put(SOURCEHOST_METAKEY, gSourceAnotherHost);
 
         // filter items
         when(commonService.setResultObject(gResultMap, EventsList.class)).thenReturn(gResultListModel);
