@@ -53,4 +53,15 @@ public class DeploymentsController {
     public Deployments getDeployment(@PathVariable String namespace, @PathVariable String deploymentName) {
         return deploymentsService.getDeployment(namespace, deploymentName);
     }
+
+    /**
+     * Deployments 객체를 label Selector를 써서 조회한다.
+     * @param namespace namespace
+     * @param selectors selectors
+     * @return DeploymentsList
+     */
+    @GetMapping(value = "/namespaces/{namespace}/deployments/resource/{selector}")
+    public DeploymentsList getDeploymentsListLabelSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
+        return deploymentsService.getDeploymentsListLabelSelector(namespace, selectors);
+    }
 }

@@ -48,7 +48,7 @@ public class EventsService {
      * @param resourceName the resourceName
      * @return the event list
      */
-    EventsList getEventList(String namespace, String resourceName) {
+    public EventsList getEventList(String namespace, String resourceName) {
         String requestSelector = "?fieldSelector=involvedObject.name=" + resourceName;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -61,10 +61,11 @@ public class EventsService {
 
     EventsList getEventListByNode(String namespace, String nodeName) {
         String requestURL;
-        if ("_all".equals(namespace))
+        if ("_all".equals(namespace)) {
             requestURL = propertyService.getCaasMasterApiListEventsAllListUrl();
-        else
+        }else {
             requestURL = propertyService.getCaasMasterApiListEventsListUrl().replace("{namespace}", namespace);
+        }
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 requestURL, HttpMethod.GET, null, Map.class);
@@ -73,11 +74,13 @@ public class EventsService {
 
         for(Map<String, Object> item : originalItems) {
             Map<String, Object> source = (Map<String, Object>)item.get("source");
-            if (null == source)
+            if (null == source) {
                 continue;
+            }
             String sourceHostname = (String) source.get("host");
-            if (nodeName.equals(sourceHostname))
+            if (nodeName.equals(sourceHostname)) {
                 filterItems.add(item);
+            }
         }
 
         resultMap.put("items", filterItems);

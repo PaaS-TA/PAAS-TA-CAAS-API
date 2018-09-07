@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @author CISS
  * @version 1.0
- * @since 2018.8.01 최초작성
+ * @since 2018.8.01
  */
 @Service
 public class ReplicaSetsService {
@@ -41,36 +41,26 @@ public class ReplicaSetsService {
         this.propertyService = propertyService;
     }
 
-/*
-    //ReplicaSet List 조회(전체 네임스페이스 조회)
-    ReplicaSetsList getReplicaSetListByAllNamespace() {
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_REPLICASET_LIST, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getNamespaceList() :: hashMap.toString() :: {}", hashMap.toString());
-
-        Gson gson = new Gson();
-        return gson.fromJson(gson.toJson(hashMap), ReplicaSetsList.class);
-    }
-*/
-
     /**
-     * ReplicaSet List 조회
+     * ReplicaSet 목록을 조회한다.
      *
-     * @return Map
+     * @param namespace the namespace
+     * @return the custom replicaset list
      */
     public ReplicaSetsList getReplicasetList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListReplicasetsListUrl()
                         .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
-
         return (ReplicaSetsList) commonService.setResultModel(commonService.setResultObject(resultMap, ReplicaSetsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
-     * ReplicaSet 상세 조회
+     * ReplicaSet 상세 정보를 조회한다.
      *
-     * @return Map
+     * @param namespace   the namespace
+     * @param replicasetsName the replicasets name
+     * @return the custom services
      */
     public ReplicaSets getReplicaset(String namespace, String replicasetsName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -79,43 +69,41 @@ public class ReplicaSetsService {
                         .replace("{name}", replicasetsName)
                         , HttpMethod.GET, null, Map.class);
 
-        resultMap.put("source",new LinkedHashMap(resultMap));
+        return (ReplicaSets) commonService.setResultModel(commonService.setResultObject(resultMap, ReplicaSets.class), Constants.RESULT_STATUS_SUCCESS);
+    }
 
-        String resultString =restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+    /**
+     * ReplicaSet YAML을 조회한다.
+     *
+     * @param namespace   the namespace
+     * @param replicasetsName the ReplicaSets name
+     * @return the custom ReplicaSets yaml
+     */
+    public ReplicaSets getReplicasetYaml(String namespace, String replicasetsName) {
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListReplicasetsGetUrl()
                         .replace("{namespace}", namespace)
-                        .replace("{name}", replicasetsName)
-                , HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+                        .replace("{name}", replicasetsName), HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
 
+        //noinspection unchecked
+        HashMap<String,Object> resultMap = new HashMap<>();
         resultMap.put("sourceTypeYaml", resultString);
-
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
-
-        // TODO : 삭제 및 업데이트 예정 CISS 2018.08.31
-        // 아래 GsonBuilder 는 Gson내에서 map 처리시 숫자형(integer)가 double(소수점)형으로 출력되는 부분을 수정 처리하는 테스트 중입니다.
-//        Gson gson = new GsonBuilder()
-//                //.registerTypeAdapter(Integer.class, new IntegerSerializer())
-//                .registerTypeAdapter(Double.class, new GsonDeserializer())
-//                .registerTypeAdapter(Integer.class, new GsonDeserializer())
-//                .registerTypeAdapter(BigDecimal.class, new GsonDeserializer())
-//                .registerTypeAdapter(Number.class, new GsonDeserializer())
-//                .create();
 
         return (ReplicaSets) commonService.setResultModel(commonService.setResultObject(resultMap, ReplicaSets.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
-     * ReplicaSet List Label 조회
+     * ReplicaSet 목록을 조회한다. (Label Selector)
      *
-     * @return Map
+     * @param namespace the namespace
+     * @param selectors the selectors
+     * @return the custom services list
      */
     public ReplicaSetsList getReplicasetListLabelSelector(String namespace, String selectors) {
         String requestSelector = "?labelSelector=" + selectors;
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListReplicasetsListUrl()
                         .replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
-
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
         return (ReplicaSetsList) commonService.setResultModel(commonService.setResultObject(resultMap, ReplicaSetsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
