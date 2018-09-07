@@ -24,15 +24,17 @@ public class UsersService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
+    private final PropertyService propertyService;
 
     @Autowired
-    public UsersService(RestTemplateService restTemplateService, CommonService commonService) {
+    public UsersService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
+        this.propertyService = propertyService;
     }
-
-    @Autowired
-    PropertyService propertyService;
+//
+//    @Autowired
+//    PropertyService propertyService;
 
 
     /**

@@ -27,7 +27,7 @@ public class UsersServiceTest {
 
     private static final String NAMESPACE = "test-namespace";
     private static final String CAAS_ACCOUNT_NAME = "test-caas-account-name";
-    private static final String DELETE_URL = "test-delete-url";
+    private static final String DELETE_URL = "/api/v1/namespaces/test-namespace/serviceaccounts/test-caas-account-name";
 
     private static HashMap gResultMap = null;
     private static Users gResultModel = null;
@@ -56,8 +56,9 @@ public class UsersServiceTest {
     @Test
     public void deleteServiceAccount(){
         // CONDITION
-        when(propertyService.getCaasMasterApiListUsersDeleteUrl()).thenReturn(DELETE_URL);
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,DELETE_URL.replace("{namespace}", NAMESPACE).replace("{name}", CAAS_ACCOUNT_NAME), HttpMethod.DELETE, null, Map.class)).thenReturn(gResultMap);
+
+        when(propertyService.getCaasMasterApiListUsersDeleteUrl()).thenReturn("/api/v1/namespaces/{namespace}/serviceaccounts/{name}");
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, DELETE_URL, HttpMethod.DELETE, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, Users.class)).thenReturn(gResultModel);
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
