@@ -105,4 +105,23 @@ public class RolesService {
         return Constants.RESULT_STATUS_FAIL;
     }
 
+    /**
+     * Role 을 수정한다.
+     *
+     * @param namespace
+     * @param roleName
+     * @param yml
+     * @return
+     */
+    public String updateRole(String namespace, String roleName, String yml) {
+
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + namespace + "/roles/" + roleName, HttpMethod.PUT, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+
+        LOGGER.info("########## updateRole() :: responseMap.toString() :: {}", responseMap.toString());
+
+        if(responseMap != null){
+            return Constants.RESULT_STATUS_SUCCESS;
+        }
+        return Constants.RESULT_STATUS_FAIL;
+    }
 }
