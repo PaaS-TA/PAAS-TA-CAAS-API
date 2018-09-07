@@ -30,7 +30,8 @@ public class AccessTokenService {
 
     public AccessToken getSecret(String namespace, String accessTokenName){
         String token = null;
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/api/v1/namespaces/" + namespace + "/secrets/" + accessTokenName, HttpMethod.GET, null, Map.class);
+        String requestUrl = "/api/v1/namespaces/" + namespace + "/secrets/" + accessTokenName;
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, requestUrl, HttpMethod.GET, null, Map.class);
         Map map = (Map) responseMap.get("data");
         token = map.get("token").toString();
 

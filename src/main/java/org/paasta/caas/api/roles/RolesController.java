@@ -57,4 +57,14 @@ public class RolesController {
     public String deleteRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
         return roleService.deleteRole(namespace, roleName);
     }
+
+    /**
+     * Role 을 수정한다.
+     *
+     * @return
+     */
+    @PutMapping(value = "/namespaces/{namespace}/roles/{roleName}")
+    public String updateRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName, @RequestBody String yml){
+        return roleService.updateRole(namespace, roleName, yml);
+    }
 }

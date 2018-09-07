@@ -67,4 +67,14 @@ public class RoleBindingsController {
     public String deleteRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName){
         return roleBindingService.deleteRoleBinding(namespace, roleBindingName);
     }
+
+    /**
+     * RoleBinding 권한을 수정한다.
+     *
+     * @return
+     */
+    @PutMapping(value = "/namespaces/{namespace}/rolebindings/{roleBindingName}")
+    public String updateRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName, @RequestBody String yml){
+        return roleBindingService.updateRoleBinding(namespace, roleBindingName, yml);
+    }
 }
