@@ -26,15 +26,14 @@ public class RolesService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
+    private final PropertyService propertyService;
 
     @Autowired
-    public RolesService(RestTemplateService restTemplateService, CommonService commonService) {
+    public RolesService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
+        this.propertyService = propertyService;
     }
-
-    @Autowired
-    PropertyService propertyService;
 
 //
 //    /**
@@ -97,9 +96,9 @@ public class RolesService {
                 .replaceAll("\\{" + "name" + "\\}", roleName);
 
         HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
-        LOGGER.info("########## deleteRole() :: responseMap.toString() :: {}", responseMap.toString());
 
         if(responseMap != null){
+            LOGGER.info("########## deleteRole() :: responseMap.toString() :: {}", responseMap.toString());
             return Constants.RESULT_STATUS_SUCCESS;
         }
         return Constants.RESULT_STATUS_FAIL;
@@ -117,9 +116,8 @@ public class RolesService {
 
         HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + namespace + "/roles/" + roleName, HttpMethod.PUT, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
 
-        LOGGER.info("########## updateRole() :: responseMap.toString() :: {}", responseMap.toString());
-
         if(responseMap != null){
+            LOGGER.info("########## updateRole() :: responseMap.toString() :: {}", responseMap.toString());
             return Constants.RESULT_STATUS_SUCCESS;
         }
         return Constants.RESULT_STATUS_FAIL;
