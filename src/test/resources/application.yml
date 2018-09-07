@@ -49,6 +49,7 @@ caasMaster:
         list: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles"
         get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
         delete: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
+        update: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
       deployment:
         allList: "/apis/apps/v1/deployments"
         list: "/apis/apps/v1/namespaces/{namespace}/deployments"
@@ -59,6 +60,7 @@ caasMaster:
         get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
         create: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings"
         delete: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
+        update: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
       users:
         delete: "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
 

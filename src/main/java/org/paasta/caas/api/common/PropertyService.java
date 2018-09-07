@@ -95,6 +95,9 @@ public class PropertyService {
     @Value("${caasMaster.api.list.roles.delete}")
     private String caasMasterApiListRolesDeleteUrl;
 
+    @Value("${caasMaster.api.list.roles.update}")
+    private String caasMasterApiListRolesUpdateUrl;
+
     // Deployments List for all namespaces
     @Value("${caasMaster.api.list.deployment.allList}")
     private String caasMasterApiListDeploymentAllList;
@@ -124,6 +127,9 @@ public class PropertyService {
     // RoleBinding cancel
     @Value("${caasMaster.api.list.roleBindings.delete}")
     private String caasMasterApiListRoleBindingsDeleteUrl;
+
+    @Value("caasMaster.api.list.roleBindings.update")
+    private String caasMasterApiListRoleBindingsUpdateUrl;
 
     @Value("${caasMaster.api.list.users.delete}")
     private String caasMasterApiListUsersDeleteUrl;
