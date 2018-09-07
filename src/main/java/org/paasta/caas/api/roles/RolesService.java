@@ -26,63 +26,62 @@ public class RolesService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
+    private final PropertyService propertyService;
 
     @Autowired
-    public RolesService(RestTemplateService restTemplateService, CommonService commonService) {
+    public RolesService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
+        this.propertyService = propertyService;
     }
 
-    @Autowired
-    PropertyService propertyService;
-
-
-    /**
-     * RoleList 조회
-     *
-     * @param namespace
-     * @return Map
-     */
-    public RolesList getRoleList(String namespace) {
-        RolesList rolesList;
-        String resultCode;
-
-        String apiUrl = propertyService.getCaasMasterApiListRolesListUrl()
-                .replaceAll("\\{" + "namespace" + "\\}", namespace);
-
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRoleList() :: responseMap.toString() :: {}", responseMap.toString());
-
-        rolesList = commonService.setResultObject(responseMap, RolesList.class);
-        resultCode = Constants.RESULT_STATUS_SUCCESS;
-
-        return (RolesList) commonService.setResultModel(rolesList, resultCode);
-    }
-
-
-    /**
-     * Role 상세 조회
-     *
-     * @param namespace
-     * @param roleName
-     * @return Map
-     */
-    public Roles getRole(String namespace, String roleName) {
-        Roles roles;
-        String resultCode;
-
-        String apiUrl = propertyService.getCaasMasterApiListRolesGetUrl()
-                .replaceAll("\\{" + "namespace" + "\\}", namespace)
-                .replaceAll("\\{" + "name" + "\\}", roleName);
-
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRole() :: responseMap.toString() :: {}", responseMap.toString());
-
-        roles = commonService.setResultObject(responseMap, Roles.class);
-        resultCode = Constants.RESULT_STATUS_SUCCESS;
-
-        return (Roles) commonService.setResultModel(roles, resultCode);
-    }
+//
+//    /**
+//     * RoleList 조회
+//     *
+//     * @param namespace
+//     * @return Map
+//     */
+//    public RolesList getRoleList(String namespace) {
+//        RolesList rolesList;
+//        String resultCode;
+//
+//        String apiUrl = propertyService.getCaasMasterApiListRolesListUrl()
+//                .replaceAll("\\{" + "namespace" + "\\}", namespace);
+//
+//        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+//        LOGGER.info("########## getRoleList() :: responseMap.toString() :: {}", responseMap.toString());
+//
+//        rolesList = commonService.setResultObject(responseMap, RolesList.class);
+//        resultCode = Constants.RESULT_STATUS_SUCCESS;
+//
+//        return (RolesList) commonService.setResultModel(rolesList, resultCode);
+//    }
+//
+//
+//    /**
+//     * Role 상세 조회
+//     *
+//     * @param namespace
+//     * @param roleName
+//     * @return Map
+//     */
+//    public Roles getRole(String namespace, String roleName) {
+//        Roles roles;
+//        String resultCode;
+//
+//        String apiUrl = propertyService.getCaasMasterApiListRolesGetUrl()
+//                .replaceAll("\\{" + "namespace" + "\\}", namespace)
+//                .replaceAll("\\{" + "name" + "\\}", roleName);
+//
+//        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+//        LOGGER.info("########## getRole() :: responseMap.toString() :: {}", responseMap.toString());
+//
+//        roles = commonService.setResultObject(responseMap, Roles.class);
+//        resultCode = Constants.RESULT_STATUS_SUCCESS;
+//
+//        return (Roles) commonService.setResultModel(roles, resultCode);
+//    }
 
     /**
      * Role 을 삭제한다.
@@ -97,9 +96,9 @@ public class RolesService {
                 .replaceAll("\\{" + "name" + "\\}", roleName);
 
         HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
-        LOGGER.info("########## deleteRole() :: responseMap.toString() :: {}", responseMap.toString());
 
         if(responseMap != null){
+            LOGGER.info("########## deleteRole() :: responseMap.toString() :: {}", responseMap.toString());
             return Constants.RESULT_STATUS_SUCCESS;
         }
         return Constants.RESULT_STATUS_FAIL;
@@ -117,9 +116,8 @@ public class RolesService {
 
         HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + namespace + "/roles/" + roleName, HttpMethod.PUT, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
 
-        LOGGER.info("########## updateRole() :: responseMap.toString() :: {}", responseMap.toString());
-
         if(responseMap != null){
+            LOGGER.info("########## updateRole() :: responseMap.toString() :: {}", responseMap.toString());
             return Constants.RESULT_STATUS_SUCCESS;
         }
         return Constants.RESULT_STATUS_FAIL;

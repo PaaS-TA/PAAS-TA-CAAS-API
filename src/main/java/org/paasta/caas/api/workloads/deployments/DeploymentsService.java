@@ -109,4 +109,20 @@ public class DeploymentsService {
 
         return (Deployments) commonService.setResultModel(responseObject, resultCode);
     }
+
+    /**
+     * Deployments List Label 조회
+     *
+     * @return Map
+     */
+    public DeploymentsList getDeploymentsListLabelSelector(String namespace, String selectors) {
+        String requestSelector = "?labelSelector=" + selectors;
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListDeploymentList()
+                        .replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
+
+        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
+
+        return (DeploymentsList) commonService.setResultModel(commonService.setResultObject(resultMap, DeploymentsList.class), Constants.RESULT_STATUS_SUCCESS);
+    }
 }
