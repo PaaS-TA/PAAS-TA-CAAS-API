@@ -20,7 +20,7 @@ public class UsersController {
     }
 
     @DeleteMapping(value = "/namespaces/{namespace}/serviceaccounts/{caasAccountName}")
-    public String deleteUser(@PathVariable("namespace") String namespace, @PathVariable("caasAccountName") String caasAccountName){
+    public Users deleteUser(@PathVariable("namespace") String namespace, @PathVariable("caasAccountName") String caasAccountName){
         return usersService.deleteServiceAccount(namespace, caasAccountName);
     }
 }

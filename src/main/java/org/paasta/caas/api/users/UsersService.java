@@ -1,5 +1,6 @@
 package org.paasta.caas.api.users;
 
+import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
@@ -22,10 +23,12 @@ import java.util.Map;
 public class UsersService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
+    private final CommonService commonService;
 
     @Autowired
-    public UsersService(RestTemplateService restTemplateService) {
+    public UsersService(RestTemplateService restTemplateService, CommonService commonService) {
         this.restTemplateService = restTemplateService;
+        this.commonService = commonService;
     }
 
     @Autowired
@@ -39,17 +42,20 @@ public class UsersService {
      * @param caasAccountName
      * @return
      */
-    public String deleteServiceAccount(String namespace, String caasAccountName) {
+    public Users deleteServiceAccount(String namespace, String caasAccountName) {
+        Users responseObject;
+        String resultCode;
+
         String apiUrl = propertyService.getCaasMasterApiListUsersDeleteUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", caasAccountName);
 
-        HashMap hashMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
-        LOGGER.info("########## deleteServiceAccount() :: hashMap.toString() :: {}", hashMap.toString());
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
+        LOGGER.info("########## deleteServiceAccount() :: responseMap.toString() :: {}", responseMap.toString());
 
-        if(hashMap != null){
-            return Constants.RESULT_STATUS_SUCCESS;
-        }
-        return Constants.RESULT_STATUS_FAIL;
+        responseObject = commonService.setResultObject(responseMap, Users.class);
+        resultCode = Constants.RESULT_STATUS_SUCCESS;
+
+        return (Users) commonService.setResultModel(responseObject, resultCode);
     }
 }
