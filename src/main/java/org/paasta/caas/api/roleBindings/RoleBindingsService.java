@@ -125,4 +125,23 @@ public class RoleBindingsService {
         }
         return Constants.RESULT_STATUS_FAIL;
     }
+
+    /**
+     * RoleBinding 권한을 수정한다.
+     *
+     * @param namespace
+     * @param roleBindingName
+     * @param yml
+     * @return
+     */
+    public String updateRoleBinding(String namespace, String roleBindingName, String yml) {
+        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + namespace + "/rolebindings/" + roleBindingName, HttpMethod.PUT, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+
+        LOGGER.info("########## updateRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
+
+        if(responseMap != null){
+            return Constants.RESULT_STATUS_SUCCESS;
+        }
+        return Constants.RESULT_STATUS_FAIL;
+    }
 }
