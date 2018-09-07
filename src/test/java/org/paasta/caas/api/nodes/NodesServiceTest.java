@@ -94,13 +94,14 @@ public class NodesServiceTest {
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
     }
 
+    @Test
     public void getNodes_Valid_ReturnModel() {
         // CONDITION
         when(propertyService.getCaasMasterApiListNodesGetUrl()).thenReturn(GET_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListNodesGetUrl().replace("{name}", NODE_NAME), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+                GET_URL, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, Nodes.class)).thenReturn(gResultModel);
-        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
+        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
         // TEST
         Nodes resultModel = nodesService.getNode(NODE_NAME);
