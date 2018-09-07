@@ -30,6 +30,7 @@ public class DeploymentsServiceTest {
 
     private static final String NAMESPACE = "test-namespace";
     private static final String DEPLOYMENT_NAME = "test-deployment-name";
+    private static final String LABEL_SELECTOR = "test-label-selector";
 
     private static HashMap gResultMap = null;
     
@@ -126,5 +127,27 @@ public class DeploymentsServiceTest {
         assertEquals(Constants.RESULT_STATUS_SUCCESS, result.getResultCode());
 
     }
+
+    @Test
+    public void getDeploymentsListLabelSelector_Valid_ReturnModel() {
+
+        //when
+        when(propertyService.getCaasMasterApiListDeploymentList()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments");
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments?labelSelector="+LABEL_SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+        when(commonService.setResultObject(gResultMap, DeploymentsList.class)).thenReturn(gResultListModel);
+        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
+
+        //call method
+        DeploymentsList resultList = deploymentsService.getDeploymentsListLabelSelector(NAMESPACE,LABEL_SELECTOR);
+
+        //compare result
+        assertThat(resultList).isNotNull();
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
+    }
+
+
+
+
+
 
 }
