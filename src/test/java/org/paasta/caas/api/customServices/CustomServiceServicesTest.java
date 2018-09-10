@@ -40,7 +40,6 @@ public class CustomServiceServicesTest {
     private static final String YAML_STRING = "test-yaml-string";
     private static final String LABEL_SELECTOR = "test-label-selector";
 
-
     private static HashMap gResultMap = null;
     private static CustomServicesList gResultListModel = null;
     private static CustomServicesList gFinalResultListModel = null;

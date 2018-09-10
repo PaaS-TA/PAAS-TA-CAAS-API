@@ -27,15 +27,14 @@ public class RoleBindingsService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
+    private final PropertyService propertyService;
 
     @Autowired
-    public RoleBindingsService(RestTemplateService restTemplateService, CommonService commonService) {
+    public RoleBindingsService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
+        this.propertyService = propertyService;
     }
-
-    @Autowired
-    PropertyService propertyService;
 
 
     /**
@@ -43,19 +42,21 @@ public class RoleBindingsService {
      *
      * @return Map
      */
-    public RoleBindingsList getRoleBindingList(String namespace) {
-        RoleBindingsList roleBindingsList;
-        String resultCode;
+    RoleBindingsList getRoleBindingList(String namespace) {
+        /*TODO :: CHECK AND MODIFY*/
+//        RoleBindingsList roleBindingsList;
+//        String resultCode;
 
         String apiUrl = propertyService.getCaasMasterApiListRoleBindingsListUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
 
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRoleBindingList() :: responseMap.toString() :: {}", responseMap.toString());
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+//        LOGGER.info("########## getRoleBindingList() :: responseMap.toString() :: {}", responseMap.toString());
 
-        roleBindingsList = commonService.setResultObject(responseMap, RoleBindingsList.class);
-        resultCode = Constants.RESULT_STATUS_SUCCESS;
+//        roleBindingsList = commonService.setResultObject(responseMap, RoleBindingsList.class);
+//        resultCode = Constants.RESULT_STATUS_SUCCESS;
 
-        return (RoleBindingsList) commonService.setResultModel(roleBindingsList, resultCode);
+//        return (RoleBindingsList) commonService.setResultModel(roleBindingsList, resultCode);
+        return (RoleBindingsList) commonService.setResultModel(commonService.setResultObject(responseMap, RoleBindingsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
@@ -65,21 +66,23 @@ public class RoleBindingsService {
      * @param roleBindingName
      * @return
      */
-    public RoleBindings getRoleBinding(String namespace, String roleBindingName) {
-        RoleBindings roleBindings;
-        String resultCode;
+    RoleBindings getRoleBinding(String namespace, String roleBindingName) {
+        /*TODO :: CHECK AND MODIFY*/
+//        RoleBindings roleBindings;
+//        String resultCode;
 
         String apiUrl = propertyService.getCaasMasterApiListRoleBindingsGetUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleBindingName);
 
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
-        LOGGER.info("########## getRole() :: responseMap.toString() :: {}", responseMap.toString());
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.GET, null, Map.class);
+//        LOGGER.info("########## getRole() :: responseMap.toString() :: {}", responseMap.toString());
 
-        roleBindings = commonService.setResultObject(responseMap, RoleBindings.class);
-        resultCode = Constants.RESULT_STATUS_SUCCESS;
+//        roleBindings = commonService.setResultObject(responseMap, RoleBindings.class);
+//        resultCode = Constants.RESULT_STATUS_SUCCESS;
 
-        return (RoleBindings) commonService.setResultModel(roleBindings, resultCode);
+//        return (RoleBindings) commonService.setResultModel(roleBindings, resultCode);
+        return (RoleBindings) commonService.setResultModel(commonService.setResultObject(responseMap, RoleBindings.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
 
@@ -90,19 +93,21 @@ public class RoleBindingsService {
      * @param roleBinding
      * @return
      */
-    public RoleBindings createRoleBinding(String namespace, RoleBindings roleBinding) {
-        RoleBindings roleBindings;
-        String resultCode;
+    RoleBindings createRoleBinding(String namespace, RoleBindings roleBinding) {
+        /*TODO :: CHECK AND MODIFY*/
+//        RoleBindings roleBindings;
+//        String resultCode;
 
         String apiUrl = propertyService.getCaasMasterApiListRoleBindingsCreateUrl().replaceAll("\\{" + "namespace" + "\\}", namespace);
 
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.POST, roleBinding, Map.class);
-        LOGGER.info("########## createRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.POST, roleBinding, Map.class);
+//        LOGGER.info("########## createRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
 
-        roleBindings = commonService.setResultObject(responseMap, RoleBindings.class);
-        resultCode = Constants.RESULT_STATUS_SUCCESS;
+//        roleBindings = commonService.setResultObject(responseMap, RoleBindings.class);
+//        resultCode = Constants.RESULT_STATUS_SUCCESS;
 
-        return (RoleBindings) commonService.setResultModel(roleBindings, resultCode);
+//        return (RoleBindings) commonService.setResultModel(roleBindings, resultCode);
+        return (RoleBindings) commonService.setResultModel(commonService.setResultObject(responseMap, RoleBindings.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
@@ -112,13 +117,14 @@ public class RoleBindingsService {
      * @param roleBindingName
      * @return
      */
-    public String deleteRoleBinding(String namespace, String roleBindingName) {
+    String deleteRoleBinding(String namespace, String roleBindingName) {
+        /*TODO :: CHECK AND MODIFY*/
         String apiUrl = propertyService.getCaasMasterApiListRoleBindingsDeleteUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleBindingName);
 
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
-        LOGGER.info("########## deleteRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
+//        LOGGER.info("########## deleteRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
 
         if(responseMap.get("status").equals("Success")){
             return Constants.RESULT_STATUS_SUCCESS;
@@ -134,10 +140,21 @@ public class RoleBindingsService {
      * @param yml
      * @return
      */
-    public String updateRoleBinding(String namespace, String roleBindingName, String yml) {
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + namespace + "/rolebindings/" + roleBindingName, HttpMethod.PUT, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+    String updateRoleBinding(String namespace, String roleBindingName, String yml) {
+        /*TODO :: CHECK AND MODIFY*/
+        String apiUrl = propertyService.getCaasMasterApiListRoleBindingsUpdateUrl()
+                .replaceAll("\\{" + "namespace" + "\\}", namespace)
+                .replaceAll("\\{" + "name" + "\\}", roleBindingName);
 
-        LOGGER.info("########## updateRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.PUT, yml, Map.class,
+                "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+
+//        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+//                Constants.APIS_URL_NAMESPACES + "/" + namespace + "/rolebindings/" + roleBindingName,
+//                HttpMethod.PUT, yml, Map.class,
+//                "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+
+//        LOGGER.info("########## updateRoleBinding() :: responseMap.toString() :: {}", responseMap.toString());
 
         if(responseMap != null){
             return Constants.RESULT_STATUS_SUCCESS;
