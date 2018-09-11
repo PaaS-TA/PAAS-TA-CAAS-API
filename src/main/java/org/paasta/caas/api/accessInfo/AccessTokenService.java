@@ -29,19 +29,26 @@ public class AccessTokenService {
     }
 
     public AccessToken getSecret(String namespace, String accessTokenName){
-        String token = null;
+        String caCertToken = null;
+        String userToken = null;
         String requestUrl = "/api/v1/namespaces/" + namespace + "/secrets/" + accessTokenName;
         HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, requestUrl, HttpMethod.GET, null, Map.class);
         Map map = (Map) responseMap.get("data");
-        token = map.get("token").toString();
+
+        caCertToken = map.get("ca.crt").toString();
+        userToken = map.get("token").toString();
 
         Base64.Decoder decoder = Base64.getDecoder();
-        String decodeToken = new String(decoder.decode(token));
+        String caCertDecodeToken = new String(decoder.decode(caCertToken));
+        String userDecodeToken = new String(decoder.decode(userToken));
 
-        LOGGER.info("get access token :: {}", decodeToken);
+
+        LOGGER.info("get access caCertToken :: {}", caCertDecodeToken);
+        LOGGER.info("get access userToken :: {}", userDecodeToken);
 
         AccessToken accessToken = new AccessToken();
-        accessToken.setUserAccessToken(decodeToken);
+        accessToken.setCaCertToken(caCertDecodeToken);
+        accessToken.setUserAccessToken(userDecodeToken);
 
 
 

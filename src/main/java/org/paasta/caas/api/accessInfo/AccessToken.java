@@ -15,5 +15,6 @@ import java.util.Map;
  */
 @Data
 public class AccessToken {
+    private String caCertToken;
     private String userAccessToken;
 }

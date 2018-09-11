@@ -33,9 +33,10 @@ public class AccessTokenServiceTest {
     private static final String ENCODE_TOKEN = "YWNjZXNzVG9rZW4=";
     private static final String DECODE_TOKEN = "accessToken";
 
+    private static final String ENCODE_CERT_TOKEN = "Y2VydEFjY2Vzc1Rva2Vu";
+    private static final String DECODE_CERT_TOKEN = "certAccessToken";
+
     private static HashMap gResultMap = null;
-    private static AccessToken gResultModel = null;
-    private static AccessToken gFinalResultModel = null;
     private static HashMap gResultDataMap = null;
 
     @Mock
@@ -50,11 +51,8 @@ public class AccessTokenServiceTest {
         gResultMap = new HashMap();
         gResultDataMap = new HashMap<>();
         gResultDataMap.put("token", ENCODE_TOKEN);
+        gResultDataMap.put("ca.crt", ENCODE_CERT_TOKEN);
         gResultMap.put("data", gResultDataMap);
-
-
-        gResultModel = new AccessToken();
-        gFinalResultModel = new AccessToken();
 
     }
 
@@ -75,6 +73,7 @@ public class AccessTokenServiceTest {
         // VERIFY
         assertThat(resultModel).isNotNull();
         assertEquals(resultModel.getUserAccessToken(), DECODE_TOKEN);
+        assertEquals(resultModel.getCaCertToken(), DECODE_CERT_TOKEN);
     }
 
 }
