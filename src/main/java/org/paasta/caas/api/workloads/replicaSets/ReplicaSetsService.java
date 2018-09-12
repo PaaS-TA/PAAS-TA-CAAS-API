@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 /**
- * CLUSTER Service
+ * ReplicaSet Service 클래스
  *
  * @author CISS
  * @version 1.0
@@ -20,9 +20,9 @@ import java.util.Map;
 @Service
 public class ReplicaSetsService {
 
+    private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
-    private final RestTemplateService restTemplateService;
 
     /**
      * Instantiates a new Custom service service.
@@ -42,7 +42,7 @@ public class ReplicaSetsService {
      * ReplicaSet 목록을 조회한다.
      *
      * @param namespace the namespace
-     * @return the custom replicaset list
+     * @return the replicaset list
      */
     public ReplicaSetsList getReplicasetList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -55,7 +55,7 @@ public class ReplicaSetsService {
     /**
      * ReplicaSet 상세 정보를 조회한다.
      *
-     * @param namespace   the namespace
+     * @param namespace       the namespace
      * @param replicasetsName the replicasets name
      * @return the custom services
      */

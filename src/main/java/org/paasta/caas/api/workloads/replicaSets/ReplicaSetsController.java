@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author CISS
  * @version 1.0
- * @since 2018.08.01 최초작성
+ * @since 2018.08.01
  */
 @RestController
 @RequestMapping("/namespaces/{namespace:.+}/replicasets")
@@ -25,9 +25,7 @@ public class ReplicaSetsController {
      * @param replicaSetsService the replicaset service
      */
     @Autowired
-    public ReplicaSetsController(ReplicaSetsService replicaSetsService) {
-        this.replicaSetsService = replicaSetsService;
-    }
+    public ReplicaSetsController(ReplicaSetsService replicaSetsService) { this.replicaSetsService = replicaSetsService;}
 
     /**
      * ReplicaSet 목록을 조회한다.
