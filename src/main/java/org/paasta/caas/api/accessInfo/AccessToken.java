@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * AccessToken Model 클래스
+ *
  * @author hrjin
  * @version 1.0
  * @since 2018-09-04

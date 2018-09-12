@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * AccessToken Service 클래스
+ *
  * @author hrjin
  * @version 1.0
  * @since 2018-09-04
@@ -23,16 +25,29 @@ public class AccessTokenService {
     private final RestTemplateService restTemplateService;
     private static final Logger LOGGER = LoggerFactory.getLogger(AccessTokenService.class);
 
+    /**
+     * Instantiates a new accessToken service
+     *
+     * @param restTemplateService the rest template service
+     */
     @Autowired
     public AccessTokenService(RestTemplateService restTemplateService) {
         this.restTemplateService = restTemplateService;
     }
 
-    public AccessToken getSecret(String namespace, String accessTokenName){
+    /**
+     * Secret 에서 cluster certification token 과 user token 을 조회한다.
+     *
+     * @param namespace the namespace
+     * @param accessTokenName the accessTokenName
+     * @return the AccessToken
+     */
+    AccessToken getSecret(String namespace, String accessTokenName){
         String caCertToken = null;
         String userToken = null;
         String requestUrl = "/api/v1/namespaces/" + namespace + "/secrets/" + accessTokenName;
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, requestUrl, HttpMethod.GET, null, Map.class);
+
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, requestUrl, HttpMethod.GET, null, Map.class);
         Map map = (Map) responseMap.get("data");
 
         caCertToken = map.get("ca.crt").toString();
@@ -42,15 +57,9 @@ public class AccessTokenService {
         String caCertDecodeToken = new String(decoder.decode(caCertToken));
         String userDecodeToken = new String(decoder.decode(userToken));
 
-
-        LOGGER.info("get access caCertToken :: {}", caCertDecodeToken);
-        LOGGER.info("get access userToken :: {}", userDecodeToken);
-
         AccessToken accessToken = new AccessToken();
         accessToken.setCaCertToken(caCertDecodeToken);
         accessToken.setUserAccessToken(userDecodeToken);
-
-
 
         return accessToken;
     }
