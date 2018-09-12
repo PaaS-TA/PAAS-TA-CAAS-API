@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * RoleBinding API 를 호출받는 컨트롤러이다.
+ * RoleBinding Controller 클래스
  *
  * @author hrjin
  * @version 1.0
@@ -16,6 +16,11 @@ public class RoleBindingsController {
 
     private final RoleBindingsService roleBindingService;
 
+    /**
+     * Instantiates a new RoleBinding controller
+     *
+     * @param roleBindingService the roleBinding service
+     */
     @Autowired
     public RoleBindingsController(RoleBindingsService roleBindingService) {
         this.roleBindingService = roleBindingService;
@@ -24,8 +29,8 @@ public class RoleBindingsController {
     /**
      * RoleBindingList 객체의 리스트를 조회한다.
      *
-     * @param namespace
-     * @return Map
+     * @param namespace the namespace
+     * @return the RoleBindingsList
      */
     @GetMapping(value = "/namespaces/{namespace}/roleBindings")
     public RoleBindingsList getRoleBindingList(@PathVariable("namespace") String namespace){
@@ -35,9 +40,9 @@ public class RoleBindingsController {
     /**
      * RoleBinding 객체를 조회한다.
      *
-     * @param namespace
-     * @param roleBindingName
-     * @return
+     * @param namespace the namespace
+     * @param roleBindingName the roleBindingName
+     * @return the RoleBindings
      */
     @GetMapping(value = "/namespaces/{namespace}/roleBindings/{roleBindingName}")
     public RoleBindings getRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName){
@@ -47,9 +52,9 @@ public class RoleBindingsController {
     /**
      * RoleBinding 권한을 할당한다.
      *
-     * @param namespace
-     * @param roleBinding
-     * @return
+     * @param namespace the namespace
+     * @param roleBinding the roleBinding
+     * @return the roleBindings
      */
     @PostMapping(value = "/namespaces/{namespace}/rolebindings")
     public RoleBindings createRoleBinding(@PathVariable("namespace") String namespace, @RequestBody RoleBindings roleBinding){
@@ -59,9 +64,9 @@ public class RoleBindingsController {
     /**
      * RoleBinding 권한을 해지한다.
      *
-     * @param namespace
-     * @param roleBindingName
-     * @return
+     * @param namespace the namespace
+     * @param roleBindingName the roleBindingName
+     * @return String
      */
     @DeleteMapping(value = "/namespaces/{namespace}/rolebindings/{roleBindingName}")
     public String deleteRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName){
@@ -69,9 +74,12 @@ public class RoleBindingsController {
     }
 
     /**
-     * RoleBinding 권한을 수정한다.
+     * RoleBinding 권한을 변경한다.
      *
-     * @return
+     * @param namespace the namespace
+     * @param roleBindingName the roleBindingName
+     * @param yml the yml
+     * @return String
      */
     @PutMapping(value = "/namespaces/{namespace}/rolebindings/{roleBindingName}")
     public String updateRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName, @RequestBody String yml){

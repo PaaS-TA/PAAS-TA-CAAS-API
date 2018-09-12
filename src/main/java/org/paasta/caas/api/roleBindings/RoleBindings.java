@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * RoleBindings Model 클래스
+ *
  * @author hrjin
  * @version 1.0
  * @since 2018-08-17
