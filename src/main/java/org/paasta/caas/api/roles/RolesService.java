@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Role Service Class
+ * Role Service 클래스
  *
  * @author hrjin
  * @version 1.0
@@ -28,6 +28,13 @@ public class RolesService {
     private final CommonService commonService;
     private final PropertyService propertyService;
 
+    /**
+     * Instantiates a new Roles service
+     *
+     * @param restTemplateService the rest template service
+     * @param commonService the common service
+     * @param propertyService the property service
+     */
     @Autowired
     public RolesService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
@@ -86,16 +93,16 @@ public class RolesService {
     /**
      * Role 을 삭제한다.
      *
-     * @param namespace
-     * @param roleName
-     * @return
+     * @param namespace the namespace
+     * @param roleName the roleName
+     * @return String
      */
-    public String deleteRole(String namespace, String roleName) {
+    String deleteRole(String namespace, String roleName) {
         String apiUrl = propertyService.getCaasMasterApiListRolesDeleteUrl()
                 .replaceAll("\\{" + "namespace" + "\\}", namespace)
                 .replaceAll("\\{" + "name" + "\\}", roleName);
 
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
 
         if(responseMap != null){
             LOGGER.info("########## deleteRole() :: responseMap.toString() :: {}", responseMap.toString());
@@ -107,14 +114,14 @@ public class RolesService {
     /**
      * Role 을 수정한다.
      *
-     * @param namespace
-     * @param roleName
-     * @param yml
-     * @return
+     * @param namespace the namespace
+     * @param roleName the roleName
+     * @param yml the yml
+     * @return String
      */
-    public String updateRole(String namespace, String roleName, String yml) {
+    String updateRole(String namespace, String roleName, String yml) {
 
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + namespace + "/roles/" + roleName, HttpMethod.PUT, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + namespace + "/roles/" + roleName, HttpMethod.PUT, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
 
         if(responseMap != null){
             LOGGER.info("########## updateRole() :: responseMap.toString() :: {}", responseMap.toString());

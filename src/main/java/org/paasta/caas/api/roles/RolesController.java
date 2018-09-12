@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Role API 를 호출받는 컨트롤러이다.
+ * Role Controller 클래스
  *
  * @author hrjin
  * @version 1.0
@@ -16,6 +16,11 @@ public class RolesController {
 
     private final RolesService roleService;
 
+    /**
+     * Instantiates a new Roles controller
+     *
+     * @param roleService the role service
+     */
     @Autowired
     public RolesController(RolesService roleService) {
         this.roleService = roleService;
@@ -49,9 +54,9 @@ public class RolesController {
     /**
      * Role 을 삭제한다.
      *
-     * @param namespace
-     * @param roleName
-     * @return
+     * @param namespace the namespace
+     * @param roleName the roleName
+     * @return String
      */
     @DeleteMapping(value = "/namespaces/{namespace}/roles/{roleName}")
     public String deleteRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
@@ -61,7 +66,10 @@ public class RolesController {
     /**
      * Role 을 수정한다.
      *
-     * @return
+     * @param namespace the namespace
+     * @param roleName the roleName
+     * @param yml the yml
+     * @return String
      */
     @PutMapping(value = "/namespaces/{namespace}/roles/{roleName}")
     public String updateRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName, @RequestBody String yml){

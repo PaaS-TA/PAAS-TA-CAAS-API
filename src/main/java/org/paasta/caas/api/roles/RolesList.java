@@ -18,5 +18,5 @@ public class RolesList {
 
     private String resultCode;
 
-    private List<Pods> items = new ArrayList<>();
+    private List<Roles> items;
 }
