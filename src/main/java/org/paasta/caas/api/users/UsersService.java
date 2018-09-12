@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * User(Service Account) Service 클래스
+ *
  * @author hrjin
  * @version 1.0
  * @since 2018-09-03
@@ -26,25 +28,29 @@ public class UsersService {
     private final CommonService commonService;
     private final PropertyService propertyService;
 
+    /**
+     * Instantiates a new Users service
+     *
+     * @param restTemplateService the rest template service
+     * @param commonService the common service
+     * @param propertyService the property service
+     */
     @Autowired
     public UsersService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
     }
-//
-//    @Autowired
-//    PropertyService propertyService;
 
 
     /**
      * Service Account 를 삭제한다.
      *
-     * @param namespace
-     * @param caasAccountName
-     * @return
+     * @param namespace the namespace
+     * @param caasAccountName the caasAccountNmae
+     * @return the Users
      */
-    public Users deleteServiceAccount(String namespace, String caasAccountName) {
+    Users deleteServiceAccount(String namespace, String caasAccountName) {
         Users responseObject;
         String resultCode;
 
