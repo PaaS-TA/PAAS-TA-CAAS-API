@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Namespaces API 를 호출 받는 컨트롤러.
+ * Namespaces Controller 클래스.
  *
  * @author 최윤석
  * @version 1.0
@@ -22,16 +22,33 @@ public class NamespacesController {
 
     private final NamespacesService namespacesService;
 
+    /**
+     * Instantiates a Namespaces controller.
+     *
+     * @param namespacesService the namespaces service
+     */
     @Autowired
     public NamespacesController(NamespacesService namespacesService) {
         this.namespacesService = namespacesService;
     }
 
+    /**
+     * Gets namespaces.
+     *
+     * @param namespace the namespaces
+     * @return the namespaces
+     */
     @GetMapping("/namespaces/{namespace}")
     public Namespaces getNamespaces(@PathVariable("namespace") String namespace) {
         return namespacesService.getNamespaces(namespace);
     }
 
+    /**
+     * Gets ResourceQuotaList.
+     *
+     * @param namespace the namespaces
+     * @return the ResourceQuotaList
+     */
     @GetMapping("/namespaces/{namespace}/getResourceQuotaList")
     public ResourceQuotaList getResourceQuotaList(@PathVariable("namespace") String namespace) {
         return namespacesService.getResourceQuotaList(namespace);

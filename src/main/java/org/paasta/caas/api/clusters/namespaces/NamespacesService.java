@@ -12,9 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * Namespaces API 를 호출 받는 서비스.
+ * Namespaces Service 클래스.
  *
  * @author indra
  * @version 1.0
@@ -42,6 +41,7 @@ public class NamespacesService {
     /**
      * Gets namespaces.
      *
+     * @param namespace the namespaces
      * @return the namespaces
      */
     Namespaces getNamespaces(String namespace) {
@@ -53,6 +53,7 @@ public class NamespacesService {
     /**
      * Gets ResourceQuotaList.
      *
+     * @param namespace the namespaces
      * @return the ResourceQuotaList
      */
     ResourceQuotaList getResourceQuotaList(String namespace) {
