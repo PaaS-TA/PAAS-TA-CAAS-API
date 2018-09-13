@@ -42,13 +42,13 @@ public class EventsService {
     }
 
     /**
-     * Gets event list.
+     * Gets event list by resource name.
      *
-     * @param namespace the namespace
+     * @param namespace    the namespace
      * @param resourceName the resourceName
      * @return the event list
      */
-    public EventsList getEventList(String namespace, String resourceName) {
+    EventsList getEventList(String namespace, String resourceName) {
         String requestSelector = "?fieldSelector=involvedObject.name=" + resourceName;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -59,21 +59,27 @@ public class EventsService {
                 commonService.setResultObject(resultMap, EventsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+    /**
+     * Get event list by node name.
+     *
+     * @param namespace the namespace
+     * @param nodeName  the node name
+     * @return the event list
+     */
     EventsList getEventListByNode(String namespace, String nodeName) {
         String requestURL;
         if ("_all".equals(namespace)) {
             requestURL = propertyService.getCaasMasterApiListEventsAllListUrl();
-        }else {
+        } else {
             requestURL = propertyService.getCaasMasterApiListEventsListUrl().replace("{namespace}", namespace);
         }
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 requestURL, HttpMethod.GET, null, Map.class);
-        List<Map<String, Object>> originalItems = (List<Map<String, Object>>)resultMap.get("items");
-        List<Map<String, Object>> filterItems = new LinkedList<>();
-
-        for(Map<String, Object> item : originalItems) {
-            Map<String, Object> source = (Map<String, Object>)item.get("source");
+        List<Map> originalItems = (List<Map>) resultMap.get("items");
+        List<Map> filterItems = new LinkedList<>();
+        for (Map item : originalItems) {
+            Map source = (Map) item.get("source");
             if (null == source) {
                 continue;
             }
@@ -82,7 +88,6 @@ public class EventsService {
                 filterItems.add(item);
             }
         }
-
         resultMap.put("items", filterItems);
 
         return (EventsList) commonService.setResultModel(commonService.setResultObject(resultMap, EventsList.class), Constants.RESULT_STATUS_SUCCESS);

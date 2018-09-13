@@ -4,8 +4,6 @@ import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -22,8 +20,6 @@ import java.util.Map;
  */
 @Service
 public class NodesService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(NodesService.class);
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
@@ -53,8 +49,6 @@ public class NodesService {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListNodesListUrl(), HttpMethod.GET, null, Map.class);
 
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
-
         return (NodesList) commonService.setResultModel(commonService.setResultObject(resultMap, NodesList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
@@ -68,8 +62,6 @@ public class NodesService {
     Nodes getNode(String nodeName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListNodesGetUrl().replace("{name}", nodeName), HttpMethod.GET, null, Map.class);
-
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
         return (Nodes) commonService.setResultModel(commonService.setResultObject(resultMap, Nodes.class), Constants.RESULT_STATUS_SUCCESS);
     }

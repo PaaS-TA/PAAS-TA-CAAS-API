@@ -12,8 +12,8 @@ import java.util.Map;
  * @version 1.0
  * @since 2018.08.13
  */
-@RestController                 // included ResponseBody annotation.
-@RequestMapping( "/workloads" )
+@RestController
+@RequestMapping(value = "/workloads")
 public class DeploymentsController {
 
     private final DeploymentsService deploymentsService;
@@ -25,43 +25,47 @@ public class DeploymentsController {
 
     /**
      * Deployments 객체의 리스트를 조회한다. (전체 네임스페이스에서 조회)
-     * @param params request parameters
-     * @return DeploymentsList
+     *
+     * @param params the request parameters
+     * @return the deployment list
      */
-    @GetMapping( "/deployments" )
-    public DeploymentsList getDeploymentListByAllNamespace(@RequestParam Map<String, Object> params ) {
+    @GetMapping(value = "/deployments")
+    public DeploymentsList getDeploymentListByAllNamespace(@RequestParam Map<String, Object> params) {
         return deploymentsService.getDeploymentListByAllNamespace();
     }
 
     /**
      * Deployments 객체의 리스트를 조회한다. (지정한 네임스페이스에서 조회)
+     *
      * @param namespace 조회하려는 객체가 속한 namespace
-     * @return
+     * @return the deployment list
      */
-    @GetMapping( "/namespaces/{namespace}/deployments" )
-    public DeploymentsList getDeploymentList(@PathVariable String namespace) {
+    @GetMapping(value = "/namespaces/{namespace:.+}/deployments")
+    public DeploymentsList getDeploymentList(@PathVariable(value = "namespace") String namespace) {
         return deploymentsService.getDeploymentList(namespace);
     }
 
     /**
      * Deployments 객체를 조회한다. (지정한 네임스페이스에 있는 Deployment를 조회)
-     * @param namespace 조회하려는 객체가 속한 namespace
+     *
+     * @param namespace      조회하려는 객체가 속한 namespace
      * @param deploymentName 조회하려는 deployment 객체의 이름
-     * @return
+     * @return the deployment
      */
-    @GetMapping( "/namespaces/{namespace}/deployments/{deploymentName}" )
-    public Deployments getDeployment(@PathVariable String namespace, @PathVariable String deploymentName) {
+    @GetMapping(value = "/namespaces/{namespace:.+}/deployments/{deploymentName:.+}")
+    public Deployments getDeployment(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentName") String deploymentName) {
         return deploymentsService.getDeployment(namespace, deploymentName);
     }
 
     /**
      * Deployments 객체를 label Selector를 써서 조회한다.
-     * @param namespace namespace
-     * @param selectors selectors
-     * @return DeploymentsList
+     *
+     * @param namespace the namespace
+     * @param selector  the selector
+     * @return the deployment list
      */
-    @GetMapping(value = "/namespaces/{namespace}/deployments/resource/{selector}")
-    public DeploymentsList getDeploymentsListLabelSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
-        return deploymentsService.getDeploymentsListLabelSelector(namespace, selectors);
+    @GetMapping(value = "/namespaces/{namespace:.+}/deployments/resource/{selector:.+}")
+    public DeploymentsList getDeploymentsListLabelSelector(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "selector") String selector) {
+        return deploymentsService.getDeploymentsListLabelSelector(namespace, selector);
     }
 }

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
  * @author 최윤석
  * @author Hyungu Cho
  * @version 1.0
- * @since 2018.08.01 최초작성
+ * @since 2018.08.01
  */
 @RestController
-@RequestMapping( "/workloads/namespaces/{namespace:.+}/pods" )
+@RequestMapping(value = "/namespaces/{namespace:.+}/pods")
 public class PodsController {
     private final PodsService podsService;
 
@@ -34,24 +34,47 @@ public class PodsController {
      */
     @GetMapping
     @ResponseBody
-    public PodsList getPodList(@PathVariable("namespace") String namespace) {
+    public PodsList getPodList(@PathVariable(value = "namespace") String namespace) {
         return podsService.getPodList(namespace);
     }
 
+    /**
+     * Gets pod list by selector
+     *
+     * @param namespace the namespace
+     * @param selector  the selector
+     * @return the pod list
+     */
     @GetMapping(value = "/resource/{selector:.+}")
     @ResponseBody
-    public PodsList getPodListWithLabelSelector(@PathVariable("namespace") String namespace,
+    public PodsList getPodListWithLabelSelector(@PathVariable(value = "namespace") String namespace,
                                                 @PathVariable(value = "selector") String selector) {
         return podsService.getPodListWithLabelSelector(namespace, selector);
     }
 
-    @GetMapping( "/node/{nodeName:.+}" )
-    public PodsList getPodListByNode (@PathVariable String namespace, @PathVariable String nodeName ) {
-        return podsService.getPodListByNode( namespace, nodeName, false );
+    /**
+     * Gets pod list by node name
+     *
+     * @param namespace the namespace
+     * @param nodeName  the node name
+     * @return the pod list
+     */
+    @GetMapping(value = "/node/{nodeName:.+}")
+    public PodsList getPodListByNode(@PathVariable(value = "namespace") String namespace,
+                                     @PathVariable(value = "nodeName") String nodeName) {
+        return podsService.getPodListByNode(namespace, nodeName, false);
     }
 
-    @GetMapping( value = "/{podName:.+}" )
-    public Pods getPod (@PathVariable String namespace, @PathVariable String podName ) {
-        return podsService.getPod( namespace, podName );
+    /**
+     * Gets pod by pod name
+     *
+     * @param namespace the namespace
+     * @param podName   the pod name
+     * @return the pod
+     */
+    @GetMapping(value = "/{podName:.+}")
+    public Pods getPod(@PathVariable(value = "namespace") String namespace,
+                       @PathVariable(value = "podName") String podName) {
+        return podsService.getPod(namespace, podName);
     }
 }
