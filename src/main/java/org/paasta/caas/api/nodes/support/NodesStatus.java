@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * NodeData model 클래스
+ * Nodes status model 클래스
  *
  * @author Hyungu Cho
  * @version 1.0

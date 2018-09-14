@@ -4,8 +4,6 @@ import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -15,17 +13,14 @@ import java.util.Map;
 
 
 /**
- * CLUSTER Service
+ * Pods Service
  *
  * @author 최윤석
  * @version 1.0
- * @since 2018.8.01 최초작성
+ * @since 2018.8.01
  */
 @Service
 public class PodsService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(PodsService.class);
-
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
@@ -51,10 +46,8 @@ public class PodsService {
      * @return the pod list
      */
     public PodsList getPodList(String namespace) {
-        HashMap  resultMap = ( HashMap ) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListPodsListUrl().replace( "{namespace}", namespace ), HttpMethod.GET, null, Map.class );
-
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
         return (PodsList) commonService.setResultModel(commonService.setResultObject(resultMap, PodsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
@@ -68,56 +61,49 @@ public class PodsService {
      */
     public PodsList getPodListWithLabelSelector(String namespace, String selector) {
         String requestSelector = "?labelSelector=" + selector;
-
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-            propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
-
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
+                propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
 
         return (PodsList) commonService.setResultModel(commonService.setResultObject(resultMap, PodsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
      * Gets pod list by node
-     * @param namespace
-     * @param nodeName
-     * @param isIncludedSucceededPods
-     * @return
+     *
+     * @param namespace               the namespace
+     * @param nodeName                the node name
+     * @param isIncludedSucceededPods is included succeeded pods? (boolean)
+     * @return the pod list
      */
-    public PodsList getPodListByNode (String namespace, String nodeName, boolean isIncludedSucceededPods) {
-        String requestURL = propertyService.getCaasMasterApiListPodsListUrl().replace( "{namespace}", namespace )
+    public PodsList getPodListByNode(String namespace, String nodeName, boolean isIncludedSucceededPods) {
+        String requestURL = propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace)
                 + "/?fieldSelector=spec.nodeName=" + nodeName;
-        if ( !isIncludedSucceededPods )
+        if (!isIncludedSucceededPods) {
             requestURL += ",status.phase!=Succeeded";
+        }
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, requestURL,
+                HttpMethod.GET, null, Map.class);
 
-        HashMap resultMap = ( HashMap ) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API, requestURL,
-                HttpMethod.GET, null, Map.class );
-
-        LOGGER.info( "########## resultMap.toString() :: {}", resultMap.toString() );
-
-        return (PodsList) commonService.setResultModel( commonService.setResultObject( resultMap, PodsList.class ), Constants.RESULT_STATUS_SUCCESS );
+        return (PodsList) commonService.setResultModel(commonService.setResultObject(resultMap, PodsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
-     * Get pod.
+     * Get pod using namespace and pod's name.
+     *
      * @param namespace the namespace
-     * @param podName the pod's name
-     * @return
+     * @param podName   the pod's name
+     * @return the pod
      */
-    public Pods getPod (String namespace, String podName ) {
-        HashMap resultMap = (HashMap) restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
-            propertyService.getCaasMasterApiListPodsGetUrl().replace( "{namespace}", namespace ).replace( "{name}", podName ),
-            HttpMethod.GET, null, Map.class );
-
+    public Pods getPod(String namespace, String podName) {
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListPodsGetUrl().replace("{namespace}", namespace).replace("{name}", podName),
+                HttpMethod.GET, null, Map.class);
         // source type : YAML
-        String resultString = restTemplateService.send( Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListPodsGetUrl().replace( "{namespace}", namespace ).replace( "{name}", podName ),
-                HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML );
-
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListPodsGetUrl().replace("{namespace}", namespace).replace("{name}", podName),
+                HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
         //noinspection unchecked
         resultMap.put("sourceTypeYaml", resultString);
-
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
         return (Pods) commonService.setResultModel(commonService.setResultObject(resultMap, Pods.class), Constants.RESULT_STATUS_SUCCESS);
     }

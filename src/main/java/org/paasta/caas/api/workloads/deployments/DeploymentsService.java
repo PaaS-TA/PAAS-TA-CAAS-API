@@ -23,7 +23,6 @@ import java.util.Map;
  */
 @Service
 public class DeploymentsService {
-    private static final Logger LOGGER = LoggerFactory.getLogger( DeploymentsService.class );
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
@@ -39,89 +38,65 @@ public class DeploymentsService {
     /**
      * Deployments List 조회 (전체 네임스페이스 대상)
      *
-     * @return DeploymentsList
+     * @return the deployment list
      */
-    public DeploymentsList getDeploymentListByAllNamespace () {
-        DeploymentsList responseObject;
-        String resultCode;
-        String resultStatusMessage = "";
+    public DeploymentsList getDeploymentListByAllNamespace() {
         final String requestPath = propertyService.getCaasMasterApiListDeploymentAllList();
-        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
-        LOGGER.info( "#### getDeploymentList() :: hashMap.toString() :: {}", responseMap.toString() );
+        HashMap responseMap = (HashMap) restTemplateService.send(
+                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class);
 
-        responseObject = commonService.setResultObject(responseMap, DeploymentsList.class);
-        resultCode = Constants.RESULT_STATUS_SUCCESS;
-
-        return (DeploymentsList) commonService.setResultModel(responseObject, resultCode);
+        return (DeploymentsList) commonService.setResultModel(commonService.setResultObject(responseMap, DeploymentsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
      * Deployments List 조회 (특정 네임스페이스 대상)
      *
-     * @param namespace namespace
-     * @return DeploymentsList
+     * @param namespace the namespace
+     * @return the deployment list
      */
-    public DeploymentsList getDeploymentList (String namespace) {
-        DeploymentsList responseObject;
-        String resultCode;
-        String resultStatusMessage = "";
-        String requestPath = propertyService.getCaasMasterApiListDeploymentList().replace( "{namespace}", namespace );
-        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
-        LOGGER.info( "#### getDeploymentList({}) :: hashMap.toString() :: {}", namespace, responseMap.toString() );
+    public DeploymentsList getDeploymentList(String namespace) {
+        String requestPath = propertyService.getCaasMasterApiListDeploymentList().replace("{namespace}", namespace);
+        HashMap responseMap = (HashMap) restTemplateService.send(
+                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class);
 
-        responseObject = commonService.setResultObject(responseMap, DeploymentsList.class);
-        resultCode = Constants.RESULT_STATUS_SUCCESS;
-
-        return (DeploymentsList) commonService.setResultModel( responseObject, resultCode);
+        return (DeploymentsList) commonService.setResultModel(commonService.setResultObject(responseMap, DeploymentsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
      * Deployments 조회 (특정 네임스페이스에 있는 deployment)
      *
-     * @param namespace namespace
-     * @param deploymentName deployment name
-     * @return Deployments
+     * @param namespace      the namespace
+     * @param deploymentName the deployment name
+     * @return the deployment
      */
-    public Deployments getDeployment (String namespace, String deploymentName) {
-        Deployments responseObject;
-        String resultCode;
-        String resultStatusMessage = "";
+    public Deployments getDeployment(String namespace, String deploymentName) {
         String requestPath = propertyService.getCaasMasterApiListDeploymentGet()
-            .replace( "{namespace}", namespace ).replace( "{deploymentName}", deploymentName );
-        HashMap<String, Object> responseMap = ( HashMap<String, Object> ) restTemplateService.send(
-            Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class );
-
-
+                .replace("{namespace}", namespace).replace("{deploymentName}", deploymentName);
+        HashMap responseMap = (HashMap) restTemplateService.send(
+                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class);
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 requestPath, HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
 
         //noinspection unchecked
         responseMap.put("sourceTypeYaml", resultString);
+        //noinspection unchecked
+        responseMap.put("source", new LinkedHashMap<String, Object>());
 
-        responseMap.put("source",new LinkedHashMap(responseMap));
-        LOGGER.info( "#### getDeployment,({}, {}) :: hashMap.toString() :: {}",
-            namespace, deploymentName, responseMap.toString() );
-
-        responseObject = commonService.setResultObject(responseMap, Deployments.class);
-        resultCode = Constants.RESULT_STATUS_SUCCESS;
-
-        return (Deployments) commonService.setResultModel(responseObject, resultCode);
+        return (Deployments) commonService.setResultModel(commonService.setResultObject(responseMap, Deployments.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
-     * Deployments List Label 조회
+     * Deployment List 조회 (selector를 이용)
      *
-     * @return Map
+     * @param namespace the namespace
+     * @param selector  the selector
+     * @return the deployment list
      */
-    public DeploymentsList getDeploymentsListLabelSelector(String namespace, String selectors) {
-        String requestSelector = "?labelSelector=" + selectors;
+    public DeploymentsList getDeploymentsListLabelSelector(String namespace, String selector) {
+        String requestSelector = "?labelSelector=" + selector;
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListDeploymentList()
                         .replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
-
-        LOGGER.info("########## resultMap.toString() :: {}", resultMap.toString());
 
         return (DeploymentsList) commonService.setResultModel(commonService.setResultObject(resultMap, DeploymentsList.class), Constants.RESULT_STATUS_SUCCESS);
     }

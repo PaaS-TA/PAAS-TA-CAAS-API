@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018.08.13
  */
 @RestController
-@RequestMapping("/nodes")
+@RequestMapping(value = "/nodes")
 public class NodesController {
-
     private final NodesService nodesService;
 
     /**
@@ -25,7 +24,9 @@ public class NodesController {
      * @param nodesService the node service
      */
     @Autowired
-    public NodesController(NodesService nodesService) {this.nodesService = nodesService;}
+    public NodesController(NodesService nodesService) {
+        this.nodesService = nodesService;
+    }
 
     /**
      * Gets node list.
@@ -45,8 +46,7 @@ public class NodesController {
      * @return the node
      */
     @GetMapping(value = "/{nodeName:.+}")
-    public Nodes getNode(@PathVariable("nodeName") String nodeName) {
+    public Nodes getNode(@PathVariable(value = "nodeName") String nodeName) {
         return nodesService.getNode(nodeName);
     }
-
 }

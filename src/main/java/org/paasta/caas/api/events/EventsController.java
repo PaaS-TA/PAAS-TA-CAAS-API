@@ -25,12 +25,15 @@ public class EventsController {
      * @param eventsService the event service
      */
     @Autowired
-    public EventsController(EventsService eventsService) {this.eventsService = eventsService;}
+    public EventsController(EventsService eventsService) {
+        this.eventsService = eventsService;
+    }
 
 
     /**
      * Gets Events list.
-     * @param namespace the namespace
+     *
+     * @param namespace    the namespace
      * @param resourceName the resourceName
      * @return the event list
      */
@@ -40,8 +43,15 @@ public class EventsController {
         return eventsService.getEventList(namespace, resourceName);
     }
 
+    /**
+     * Get events list by node name.
+     *
+     * @param namespace the namespace
+     * @param nodeName  the node name
+     * @return the event list
+     */
     @GetMapping(value = "/node/{nodeName:.+}")
-    public EventsList getEventListByNode(@PathVariable("namespace") String namespace, @PathVariable("nodeName") String nodeName) {
+    public EventsList getEventListByNode(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "nodeName") String nodeName) {
         return eventsService.getEventListByNode(namespace, nodeName);
     }
 }
