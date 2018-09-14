@@ -58,38 +58,4 @@ public class EventsService {
         return (EventsList) commonService.setResultModel(
                 commonService.setResultObject(resultMap, EventsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
-
-    /**
-     * Get event list by node name.
-     *
-     * @param namespace the namespace
-     * @param nodeName  the node name
-     * @return the event list
-     */
-    EventsList getEventListByNode(String namespace, String nodeName) {
-        String requestURL;
-        if ("_all".equals(namespace)) {
-            requestURL = propertyService.getCaasMasterApiListEventsAllListUrl();
-        } else {
-            requestURL = propertyService.getCaasMasterApiListEventsListUrl().replace("{namespace}", namespace);
-        }
-
-        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                requestURL, HttpMethod.GET, null, Map.class);
-        List<Map> originalItems = (List<Map>) resultMap.get("items");
-        List<Map> filterItems = new LinkedList<>();
-        for (Map item : originalItems) {
-            Map source = (Map) item.get("source");
-            if (null == source) {
-                continue;
-            }
-            String sourceHostname = (String) source.get("host");
-            if (nodeName.equals(sourceHostname)) {
-                filterItems.add(item);
-            }
-        }
-        resultMap.put("items", filterItems);
-
-        return (EventsList) commonService.setResultModel(commonService.setResultObject(resultMap, EventsList.class), Constants.RESULT_STATUS_SUCCESS);
-    }
 }

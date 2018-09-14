@@ -42,16 +42,4 @@ public class EventsController {
             , @PathVariable("resourceName") String resourceName) {
         return eventsService.getEventList(namespace, resourceName);
     }
-
-    /**
-     * Get events list by node name.
-     *
-     * @param namespace the namespace
-     * @param nodeName  the node name
-     * @return the event list
-     */
-    @GetMapping(value = "/node/{nodeName:.+}")
-    public EventsList getEventListByNode(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "nodeName") String nodeName) {
-        return eventsService.getEventListByNode(namespace, nodeName);
-    }
 }
