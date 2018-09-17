@@ -19,6 +19,7 @@ public class Constants {
     public static final String TARGET_CAAS_MASTER_API = "caasMasterApi";
     public static final String STRING_DATE_TYPE = "yyyy-MM-dd HH:mm:ss";
     public static final String STRING_ORIGINAL_DATE_TYPE = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+    public static final String STRING_TIME_ZONE_ID = "Asia/Seoul";
     public static final String ACCEPT_TYPE_JSON = MediaType.APPLICATION_JSON_VALUE;
     public static final String ACCEPT_TYPE_YAML = String.valueOf(MediaType.valueOf("application/yaml"));
     static final String TARGET_COMMON_API = "commonApi";
