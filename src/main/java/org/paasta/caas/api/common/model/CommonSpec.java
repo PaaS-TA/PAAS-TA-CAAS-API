@@ -141,4 +141,6 @@ public class CommonSpec {
 //    @SerializedName("hostAliases")
 //    private List<HostAlias> hostAliases;
 
+    @SerializedName("externalIPs")
+    private List<String> externalIPs;
 }
