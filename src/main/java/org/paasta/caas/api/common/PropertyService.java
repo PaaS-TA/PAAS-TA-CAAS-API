@@ -49,12 +49,12 @@ public class PropertyService {
     private String caasMasterApiListNodesGetUrl;
 
     // ReplicaSets List
-    @Value("${caasMaster.api.list.replicasets.list}")
-    private String caasMasterApiListReplicasetsListUrl;
+    @Value("${caasMaster.api.list.replicaSets.list}")
+    private String caasMasterApiListReplicaSetsListUrl;
 
     // ReplicaSets
-    @Value("${caasMaster.api.list.replicasets.get}")
-    private String caasMasterApiListReplicasetsGetUrl;
+    @Value("${caasMaster.api.list.replicaSets.get}")
+    private String caasMasterApiListReplicaSetsGetUrl;
 
     // Persistentvolumes List
     @Value("${caasMaster.api.list.persistentvolumes.list}")

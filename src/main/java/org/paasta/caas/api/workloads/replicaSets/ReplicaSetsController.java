@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018.08.01
  */
 @RestController
-@RequestMapping("/namespaces/{namespace:.+}/replicasets")
+@RequestMapping("/namespaces/{namespace:.+}/replicaSets")
 public class ReplicaSetsController {
 
     private final ReplicaSetsService replicaSetsService;
 
     /**
-     * Instantiates a new Replicaset controller.
+     * Instantiates a new ReplicaSets controller.
      *
-     * @param replicaSetsService the replicaset service
+     * @param replicaSetsService the replicaSet service
      */
     @Autowired
     public ReplicaSetsController(ReplicaSetsService replicaSetsService) { this.replicaSetsService = replicaSetsService;}
@@ -31,35 +31,35 @@ public class ReplicaSetsController {
      * ReplicaSet 목록을 조회한다.
      *
      * @param namespace the namespace
-     * @return the replicaset list
+     * @return the replicaSet list
      */
     @GetMapping
-    public ReplicaSetsList getReplicasetList(@PathVariable("namespace") String namespace){
-        return replicaSetsService.getReplicasetList(namespace);
+    public ReplicaSetsList getReplicaSetsList(@PathVariable("namespace") String namespace){
+        return replicaSetsService.getReplicaSetsList(namespace);
     }
 
     /**
      * ReplicaSet 상세정보를 조회한다.
      *
      * @param namespace the namespace
-     * @param replicaSetName the replicasets name
-     * @return the replicaset
+     * @param replicaSetName the replicaSets name
+     * @return the replicaSets
      */
     @GetMapping(value = "/{replicaSetName:.+}")
-    public ReplicaSets getReplicaset(@PathVariable("namespace") String namespace, @PathVariable("replicaSetName") String replicaSetName) {
-        return replicaSetsService.getReplicaset(namespace, replicaSetName);
+    public ReplicaSets getReplicaSets(@PathVariable("namespace") String namespace, @PathVariable("replicaSetName") String replicaSetName) {
+        return replicaSetsService.getReplicaSets(namespace, replicaSetName);
     }
 
     /**
      * ReplicaSet YAML을 조회한다.
      *
      * @param namespace the namespace
-     * @param replicaSetName the service name
-     * @return the custom services yaml
+     * @param replicaSetName the replicaSets name
+     * @return the replicaSets yaml
      */
     @GetMapping(value = "/{replicaSetName:.+}/yaml")
-    public ReplicaSets getCustomServicesYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "replicaSetName") String replicaSetName) {
-        return replicaSetsService.getReplicasetYaml(namespace, replicaSetName); // , new HashMap<>()
+    public ReplicaSets getReplicaSetsYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "replicaSetName") String replicaSetName) {
+        return replicaSetsService.getReplicaSetsYaml(namespace, replicaSetName);
     }
 
     /**
@@ -67,11 +67,10 @@ public class ReplicaSetsController {
      * @param namespace namespace
      * @param selectors selectors
      * @return ReplicaSetsList
-     * @see ReplicaSetsService#getReplicaset
      */
-    @GetMapping(value = "/resource/{selector}")
-    public ReplicaSetsList getReplicasetLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
-        return replicaSetsService.getReplicasetListLabelSelector(namespace, selectors);
+    @GetMapping(value = "/resource/{selector:.+}")
+    public ReplicaSetsList getReplicaSetsLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
+        return replicaSetsService.getReplicaSetsListLabelSelector(namespace, selectors);
     }
 
 }

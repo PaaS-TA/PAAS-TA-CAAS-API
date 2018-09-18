@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
- * The type Custom services service test.
+ * The type ReplicaSets test.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -96,16 +96,16 @@ public class ReplicaSetsServiceTest {
      * Gets custom services list valid return model.
      */
     @Test
-    public void getReplicasetList_Valid_ReturnModel() {
+    public void getReplicaSetsList_Valid_ReturnModel() {
         // CONDITION
-        when(propertyService.getCaasMasterApiListReplicasetsListUrl()).thenReturn(LIST_URL);
+        when(propertyService.getCaasMasterApiListReplicaSetsListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, LIST_URL
                 .replace("{namespace}", NAMESPACE), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, ReplicaSetsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         // TEST
-        ReplicaSetsList resultModel = replicaSetsService.getReplicasetList(NAMESPACE);
+        ReplicaSetsList resultModel = replicaSetsService.getReplicaSetsList(NAMESPACE);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
@@ -117,9 +117,9 @@ public class ReplicaSetsServiceTest {
      * Gets custom services valid return model.
      */
     @Test
-    public void getReplicaset_Valid_ReturnModel() {
+    public void getReplicaSets_Valid_ReturnModel() {
         // CONDITION
-        when(propertyService.getCaasMasterApiListReplicasetsGetUrl()).thenReturn(GET_URL);
+        when(propertyService.getCaasMasterApiListReplicaSetsGetUrl()).thenReturn(GET_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, GET_URL
                 .replace("{namespace}", NAMESPACE)
                 .replace("{name}", SERVICE_NAME), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
@@ -127,7 +127,7 @@ public class ReplicaSetsServiceTest {
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
         // TEST
-        ReplicaSets resultModel = replicaSetsService.getReplicaset(NAMESPACE, SERVICE_NAME);
+        ReplicaSets resultModel = replicaSetsService.getReplicaSets(NAMESPACE, SERVICE_NAME);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
@@ -139,9 +139,9 @@ public class ReplicaSetsServiceTest {
      * Gets custom services yaml valid return model.
      */
     @Test
-    public void getReplicasetYaml_Valid_ReturnModel() {
+    public void getReplicaSetsYaml_Valid_ReturnModel() {
         // CONDITION
-        when(propertyService.getCaasMasterApiListReplicasetsGetUrl()).thenReturn(GET_URL);
+        when(propertyService.getCaasMasterApiListReplicaSetsGetUrl()).thenReturn(GET_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, GET_URL
                 .replace("{namespace}", NAMESPACE)
                 .replace("{name}", SERVICE_NAME), HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML)).thenReturn(YAML_STRING);
@@ -150,7 +150,7 @@ public class ReplicaSetsServiceTest {
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
         // TEST
-        ReplicaSets resultModel = replicaSetsService.getReplicasetYaml(NAMESPACE, SERVICE_NAME);
+        ReplicaSets resultModel = replicaSetsService.getReplicaSetsYaml(NAMESPACE, SERVICE_NAME);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
@@ -163,16 +163,16 @@ public class ReplicaSetsServiceTest {
      * Gets custom services list valid return model.
      */
     @Test
-    public void getReplicasetListLabelSelector_Valid_ReturnModel() {
+    public void getReplicaSetsListLabelSelector_Valid_ReturnModel() {
         // CONDITION
-        when(propertyService.getCaasMasterApiListReplicasetsListUrl()).thenReturn(LIST_URL);
+        when(propertyService.getCaasMasterApiListReplicaSetsListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, LIST_URL
                 .replace("{namespace}", NAMESPACE) + "?labelSelector=" + LABEL_SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, ReplicaSetsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         // TEST
-        ReplicaSetsList resultModel = replicaSetsService.getReplicasetListLabelSelector(NAMESPACE, LABEL_SELECTOR);
+        ReplicaSetsList resultModel = replicaSetsService.getReplicaSetsListLabelSelector(NAMESPACE, LABEL_SELECTOR);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
