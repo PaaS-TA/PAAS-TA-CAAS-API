@@ -1,11 +1,8 @@
 package org.paasta.caas.api.common.model;
 
-import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import org.paasta.caas.api.common.CommonService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,9 +21,6 @@ public class CommonSpec {
 
     @SerializedName("replicas")
     private int replicas;
-
-//    @SerializedName("selector")
-//    private CommonLabelSelector selector;
 
     @SerializedName("template")
     private CommonPodTemplateSpec template;
@@ -85,7 +79,6 @@ public class CommonSpec {
     @SerializedName("terminationGracePeriodSeconds")
     private long terminationGracePeriodSeconds;
 
-    // FOR SERVICE :: BEGIN
     @SerializedName("type")
     private String type;
 
@@ -100,46 +93,17 @@ public class CommonSpec {
 
     @SerializedName("selector")
     private Map selector;
-    // FOR SERVICE :: END
 
-    // FOR TEMPLATE SPEC :: START
     private List<CommonContainer> containers;
-    // FOR TEMPLATE SPEC :: END
 
-    // FOR NODES SPEC :: START
-    @SerializedName( "podCIDR" )
+    @SerializedName("podCIDR")
     private String podCIDR;
 
-    @SerializedName( "taints" )
+    @SerializedName("taints")
     private List<Map<String, Object>> taints;
-    // FOR NODES SPEC :: END
 
-
-
-//    @SerializedName("tolerations")
-//    private List<Toleration> tolerations;
-//
     @SerializedName("volumes")
     private List<Volume> volumes;
-//
-//    @SerializedName("affinity")
-//    private V1Affinity affinity;
-//
-//    @SerializedName("securityContext")
-//    private PodSecurityContext securityContext;
-//
-//    @SerializedName("imagePullSecrets")
-//    private List<V1LocalObjectReference> imagePullSecrets;
-//
-//    @SerializedName("initContainers")
-//    private List<V1Container> initContainers;
-//
-//
-//    @SerializedName("dnsConfig")
-//    private PodDNSConfig dnsConfig;
-//
-//    @SerializedName("hostAliases")
-//    private List<HostAlias> hostAliases;
 
     @SerializedName("externalIPs")
     private List<String> externalIPs;

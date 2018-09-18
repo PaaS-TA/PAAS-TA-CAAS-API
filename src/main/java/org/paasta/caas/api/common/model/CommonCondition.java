@@ -12,24 +12,12 @@ import lombok.Data;
  */
 @Data
 public class CommonCondition {
-
-    /**
-     * <pre>
-     * DeploymentConditionType : [ Available, Progressing, ReplicaFailure ]
-     * ReplicaSetConditionType : [ ReplicaFailure ]
-     * DaemonSetConditionType : [ ]
-     * </pre>
-     */
-    // FOR POD, NODE :: BEGIN
     private String type;
     private String status;
-    // FOR POD, NODE :: END
 
     private String message;
     private String reason;
 
-//
-//    private String lastTransitionTime;
-//    /* DeploymentCondition only variable. */
-//    private LocalDateTime lastUpdateTime;
+    private String lastHeartbeatTime;
+    private String lastTransitionTime;
 }

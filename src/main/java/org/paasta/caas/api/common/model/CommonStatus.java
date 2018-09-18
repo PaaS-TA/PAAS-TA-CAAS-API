@@ -15,7 +15,6 @@ import java.util.List;
 @Data
 public class CommonStatus {
 
-    // FOR REPLICA :: BEGIN
     @SerializedName("availableReplicas")
     private int availableReplicas;
 
@@ -30,27 +29,18 @@ public class CommonStatus {
 
     @SerializedName("replicas")
     private int replicas;
-    // FOR REPLICA :: END
 
-    // FOR POD :: BEGIN
-    @SerializedName("phase")  // used persistentVolume
+    @SerializedName("phase")
     private String phase;
 
     @SerializedName("containerStatuses")
     private List containerStatuses;
-    // FOR POD :: END
 
-    // FOR POD, NODE :: BEGIN
     private List<CommonCondition> conditions;
-    // FOR POD, NODE :: END
 
     @SerializedName("podIP")
     private String podIP;
 
     @SerializedName("qosClass")
     private String qosClass;
-
-    //@SerializedName("conditions")
-    //private List<ReplicaSetCondition> conditions;
-
 }
