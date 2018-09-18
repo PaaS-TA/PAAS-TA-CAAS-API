@@ -1,11 +1,9 @@
 package org.paasta.caas.api.events;
 
 import lombok.Data;
-import org.paasta.caas.api.common.Constants;
-import org.paasta.caas.api.common.model.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import org.paasta.caas.api.common.CommonUtils;
+import org.paasta.caas.api.common.model.CommonMetaData;
+import org.paasta.caas.api.common.model.CommonObjectReference;
 
 /**
  * Events Model 클래스
@@ -31,23 +29,27 @@ public class Events {
     private CommonObjectReference involvedObject;
 
     public String getFirstTimestamp() {
-        try {
-            this.firstTimestamp = (firstTimestamp != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE)
-                    .format(new SimpleDateFormat(Constants.STRING_ORIGINAL_DATE_TYPE).parse(firstTimestamp)) : null;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return firstTimestamp;
+//        TODO :: REMOVE AFTER CHECK
+//        try {
+//            this.firstTimestamp = (firstTimestamp != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE)
+//                    .format(new SimpleDateFormat(Constants.STRING_ORIGINAL_DATE_TYPE).parse(firstTimestamp)) : null;
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
+        return CommonUtils.procSetTimestamp(firstTimestamp);
     }
 
     public String getLastTimestamp() {
-        try {
-            this.lastTimestamp = (lastTimestamp != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE)
-                    .format(new SimpleDateFormat(Constants.STRING_ORIGINAL_DATE_TYPE).parse(lastTimestamp)) : null;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return lastTimestamp;
+//        TODO :: REMOVE AFTER CHECK
+//        try {
+//            this.lastTimestamp = (lastTimestamp != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE)
+//                    .format(new SimpleDateFormat(Constants.STRING_ORIGINAL_DATE_TYPE).parse(lastTimestamp)) : null;
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
+        return CommonUtils.procSetTimestamp(lastTimestamp);
     }
 
     @Data

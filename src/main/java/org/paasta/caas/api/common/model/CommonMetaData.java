@@ -3,10 +3,8 @@ package org.paasta.caas.api.common.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
-import org.paasta.caas.api.common.Constants;
+import org.paasta.caas.api.common.CommonUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -67,12 +65,13 @@ public class CommonMetaData {
     private String selfLink;
 
     public String getCreationTimestamp() {
-        try {
-            this.creationTimestamp = (creationTimestamp != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE).format(new SimpleDateFormat(Constants.STRING_ORIGINAL_DATE_TYPE).parse(creationTimestamp)) : null;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return creationTimestamp;
+//        TODO :: REMOVE AFTER CHECK
+//        try {
+//            this.creationTimestamp = (creationTimestamp != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE).format(new SimpleDateFormat(Constants.STRING_ORIGINAL_DATE_TYPE).parse(creationTimestamp)) : null;
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+        return CommonUtils.procSetTimestamp(creationTimestamp);
     }
 
     //@SerializedName("initializers")
