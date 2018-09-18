@@ -5,6 +5,8 @@ import org.paasta.caas.api.common.model.CommonMetaData;
 import org.paasta.caas.api.common.model.CommonSpec;
 import org.paasta.caas.api.common.model.CommonStatus;
 
+import java.util.Map;
+
 /**
  * Pods Model 클래스
  *
@@ -24,5 +26,7 @@ public class Pods {
     private String selector;
 
     // FOR DASHBOARD - YAML
+    private Map<String, Object> source;
     private String sourceTypeYaml;
+
 }
