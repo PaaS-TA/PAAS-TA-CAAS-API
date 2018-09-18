@@ -27,6 +27,13 @@ public class DeploymentsService {
     private final CommonService commonService;
     private final PropertyService propertyService;
 
+    /**
+     * Instantiates a new deployments service.
+     *
+     * @param restTemplateService the rest template service
+     * @param commonService       the common service
+     * @param propertyService     the property service
+     */
     @Autowired
     public DeploymentsService(RestTemplateService restTemplateService, CommonService commonService,
                               PropertyService propertyService) {

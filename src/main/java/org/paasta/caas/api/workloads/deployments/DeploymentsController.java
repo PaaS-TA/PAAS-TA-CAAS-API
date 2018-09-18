@@ -18,6 +18,11 @@ public class DeploymentsController {
 
     private final DeploymentsService deploymentsService;
 
+    /**
+     * Instantiates a new deployments controller.
+     *
+     * @param deploymentsService the deployments service
+     */
     @Autowired
     public DeploymentsController(DeploymentsService deploymentsService) {
         this.deploymentsService = deploymentsService;
