@@ -68,12 +68,25 @@ public class PodsController {
      * Pod를 조회한다.
      *
      * @param namespace the namespace
-     * @param podName   the pod name
+     * @param podName   the pod's name
      * @return the pod
      */
     @GetMapping(value = "/{podName:.+}")
     public Pods getPod(@PathVariable(value = "namespace") String namespace,
                        @PathVariable(value = "podName") String podName) {
         return podsService.getPod(namespace, podName);
+    }
+
+    /**
+     * Pod의 YAML을 조회한다.
+     *
+     * @param namespace the namespace
+     * @param podName   the pod's name
+     * @return the pods
+     */
+    @GetMapping(value = "/{podName:.+}/yaml")
+    public Pods getPodYaml(@PathVariable(value = "namespace") String namespace,
+                           @PathVariable(value = "podName") String podName) {
+        return podsService.getPodYaml(namespace, podName);
     }
 }
