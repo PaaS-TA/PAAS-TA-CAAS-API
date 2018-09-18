@@ -7,7 +7,7 @@ import lombok.Data;
  *
  * @author Hyungu Cho
  * @version 1.0
- * @since 2018.08.17
+ * @since 2018.09.17
  */
 @Data
 public class NodesAddress {
