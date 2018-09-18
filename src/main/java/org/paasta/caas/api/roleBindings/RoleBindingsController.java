@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2018-08-17
  */
 @RestController
-@RequestMapping(value = "/roleBindings")
+@RequestMapping(value = "/namespaces/{namespace:.+}/roleBindings")
 public class RoleBindingsController {
 
     private final RoleBindingsService roleBindingService;
@@ -32,7 +32,7 @@ public class RoleBindingsController {
      * @param namespace the namespace
      * @return the RoleBindingsList
      */
-    @GetMapping(value = "/namespaces/{namespace}/roleBindings")
+    @GetMapping
     public RoleBindingsList getRoleBindingList(@PathVariable("namespace") String namespace){
         return roleBindingService.getRoleBindingList(namespace);
     }
@@ -44,7 +44,7 @@ public class RoleBindingsController {
      * @param roleBindingName the roleBindingName
      * @return the RoleBindings
      */
-    @GetMapping(value = "/namespaces/{namespace}/roleBindings/{roleBindingName}")
+    @GetMapping(value = "/{roleBindingName:.+}")
     public RoleBindings getRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName){
         return roleBindingService.getRoleBinding(namespace, roleBindingName);
     }
@@ -56,7 +56,7 @@ public class RoleBindingsController {
      * @param roleBinding the roleBinding
      * @return the roleBindings
      */
-    @PostMapping(value = "/namespaces/{namespace}/rolebindings")
+    @PostMapping
     public RoleBindings createRoleBinding(@PathVariable("namespace") String namespace, @RequestBody RoleBindings roleBinding){
         return roleBindingService.createRoleBinding(namespace, roleBinding);
     }
@@ -68,7 +68,7 @@ public class RoleBindingsController {
      * @param roleBindingName the roleBindingName
      * @return String
      */
-    @DeleteMapping(value = "/namespaces/{namespace}/rolebindings/{roleBindingName}")
+    @DeleteMapping(value = "/{roleBindingName:.+}")
     public String deleteRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName){
         return roleBindingService.deleteRoleBinding(namespace, roleBindingName);
     }
@@ -81,7 +81,7 @@ public class RoleBindingsController {
      * @param yml the yml
      * @return String
      */
-    @PutMapping(value = "/namespaces/{namespace}/rolebindings/{roleBindingName}")
+    @PutMapping(value = "/{roleBindingName:.+}")
     public String updateRoleBinding(@PathVariable("namespace") String namespace, @PathVariable("roleBindingName") String roleBindingName, @RequestBody String yml){
         return roleBindingService.updateRoleBinding(namespace, roleBindingName, yml);
     }

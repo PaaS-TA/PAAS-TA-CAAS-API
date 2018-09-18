@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2018-09-03
  */
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/namespaces/{namespace:.+}/serviceAccounts")
 public class UsersController {
 
     private final UsersService usersService;
@@ -31,7 +31,7 @@ public class UsersController {
      * @param caasAccountName the caasAccountName
      * @return the Users
      */
-    @DeleteMapping(value = "/namespaces/{namespace}/serviceaccounts/{caasAccountName}")
+    @DeleteMapping(value = "/{caasAccountName:.+}")
     public Users deleteUser(@PathVariable("namespace") String namespace, @PathVariable("caasAccountName") String caasAccountName){
         return usersService.deleteServiceAccount(namespace, caasAccountName);
     }

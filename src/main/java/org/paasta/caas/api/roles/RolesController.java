@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2018-08-14
  */
 @RestController
-@RequestMapping("/roles")
+@RequestMapping(value = "/namespaces/{namespace:.+}/roles")
 public class RolesController {
 
     private final RolesService roleService;
@@ -58,7 +58,7 @@ public class RolesController {
      * @param roleName the roleName
      * @return String
      */
-    @DeleteMapping(value = "/namespaces/{namespace}/roles/{roleName}")
+    @DeleteMapping(value = "/{roleName:.+}")
     public String deleteRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName){
         return roleService.deleteRole(namespace, roleName);
     }
@@ -71,7 +71,7 @@ public class RolesController {
      * @param yml the yml
      * @return String
      */
-    @PutMapping(value = "/namespaces/{namespace}/roles/{roleName}")
+    @PutMapping(value = "/{roleName:.+}")
     public String updateRole(@PathVariable("namespace") String namespace, @PathVariable("roleName") String roleName, @RequestBody String yml){
         return roleService.updateRole(namespace, roleName, yml);
     }
