@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Nodes Service 클래스
  *
- * @author REX
+ * @author Hyungu Cho
  * @version 1.0
  * @since 2018.8.13
  */
@@ -41,7 +41,7 @@ public class NodesService {
 
 
     /**
-     * Gets node list.
+     * Node 목록을 조회한다.
      *
      * @return the node list
      */
@@ -54,7 +54,7 @@ public class NodesService {
 
 
     /**
-     * Gets node.
+     * Node를 조회한다.
      *
      * @param nodeName the node name
      * @return the node

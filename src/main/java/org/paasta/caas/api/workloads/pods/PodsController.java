@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 클러스터 API 를 호출 받는 컨트롤러이다.
+ * Pods Controller 클래스
  *
- * @author 최윤석
  * @author Hyungu Cho
  * @version 1.0
  * @since 2018.08.01
@@ -27,7 +26,7 @@ public class PodsController {
     }
 
     /**
-     * Gets pod list.
+     * Pod 목록을 조회한다.
      *
      * @param namespace the namespace
      * @return the pod list
@@ -39,7 +38,7 @@ public class PodsController {
     }
 
     /**
-     * Gets pod list by selector
+     * Selector를 이용해 Pod 목록을 조회한다. (특정 네임스페이스)
      *
      * @param namespace the namespace
      * @param selector  the selector
@@ -53,7 +52,7 @@ public class PodsController {
     }
 
     /**
-     * Gets pod list by node name
+     * Node 이름을 이용해 Pod 목록를 조회한다. (특정 네임스페이스)
      *
      * @param namespace the namespace
      * @param nodeName  the node name
@@ -66,7 +65,7 @@ public class PodsController {
     }
 
     /**
-     * Gets pod by pod name
+     * Pod를 조회한다.
      *
      * @param namespace the namespace
      * @param podName   the pod name

@@ -13,11 +13,11 @@ import java.util.Map;
 
 
 /**
- * Pods Service
+ * Pods Service 클래스
  *
- * @author 최윤석
+ * @author Hyungu Cho
  * @version 1.0
- * @since 2018.8.01
+ * @since 2018.08.01
  */
 @Service
 public class PodsService {
@@ -40,7 +40,7 @@ public class PodsService {
     }
 
     /**
-     * Gets pod list.
+     * Pod 목록을 조회한다.
      *
      * @param namespace the namespace
      * @return the pod list
@@ -53,7 +53,7 @@ public class PodsService {
     }
 
     /**
-     * Gets pod list.
+     * Selector를 이용해 Pod 목록을 조회한다.
      *
      * @param namespace the namespace
      * @param selector  the selector
@@ -68,7 +68,7 @@ public class PodsService {
     }
 
     /**
-     * Gets pod list by node
+     * Node 이름을 이용해 Pod 목록을 조회한다.
      *
      * @param namespace               the namespace
      * @param nodeName                the node name
@@ -88,7 +88,7 @@ public class PodsService {
     }
 
     /**
-     * Get pod using namespace and pod's name.
+     * Pod를 조회한다.
      *
      * @param namespace the namespace
      * @param podName   the pod's name
