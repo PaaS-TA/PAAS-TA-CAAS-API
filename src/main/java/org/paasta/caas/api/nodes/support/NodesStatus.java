@@ -1,6 +1,7 @@
 package org.paasta.caas.api.nodes.support;
 
 import lombok.Data;
+import org.paasta.caas.api.common.model.CommonCondition;
 
 import java.util.List;
 import java.util.Map;
@@ -17,11 +18,7 @@ public class NodesStatus {
     private Map<String, Object> capacity;
     private Map<String, Object> allocatable;
 
-    private List<Map<String, Object>> conditions;
-    private List<Map<String, Object>> addresses;
-    private Map<String, Object> nodeInfo;
-
-//    private List<Map<String, Object>> addresses;
-//    private Map<String, Object> daemonEndpoints;
-//    private Map<String, Object> images;
+    private List<CommonCondition> conditions;
+    private List<NodesAddress> addresses;
+    private NodesSystemInfo nodeInfo;
 }
