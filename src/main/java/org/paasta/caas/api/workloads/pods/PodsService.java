@@ -110,6 +110,7 @@ public class PodsService {
 
     /**
      * Pod의 YAML을 조회한다.
+     *
      * @param namespace the namespace
      * @param podName   the pod's name
      * @return the pods
@@ -119,7 +120,7 @@ public class PodsService {
                 propertyService.getCaasMasterApiListPodsGetUrl().replace("{namespace}", namespace).replace("{name}", podName),
                 HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
         //noinspection unchecked
-        HashMap<String,Object> resultMap = new HashMap<>();
+        HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("sourceTypeYaml", resultString);
 
         return (Pods) commonService.setResultModel(commonService.setResultObject(resultMap, Pods.class), Constants.RESULT_STATUS_SUCCESS);
