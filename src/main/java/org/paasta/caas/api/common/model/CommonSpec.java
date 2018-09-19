@@ -2,6 +2,7 @@ package org.paasta.caas.api.common.model;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+import org.paasta.caas.api.workloads.pods.support.Volume;
 
 import java.util.List;
 import java.util.Map;

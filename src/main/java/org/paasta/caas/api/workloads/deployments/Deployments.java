@@ -25,6 +25,4 @@ public class Deployments {
     private Map<String, Object> source;
     private String sourceTypeYaml;
 
-//    private String kind;
-//    private String apiVersion;
 }
