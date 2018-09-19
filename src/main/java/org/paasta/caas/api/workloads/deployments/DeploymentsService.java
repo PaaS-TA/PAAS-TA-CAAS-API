@@ -35,8 +35,7 @@ public class DeploymentsService {
      * @param propertyService     the property service
      */
     @Autowired
-    public DeploymentsService(RestTemplateService restTemplateService, CommonService commonService,
-                              PropertyService propertyService) {
+    public DeploymentsService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
         this.commonService = commonService;
         this.propertyService = propertyService;
@@ -80,7 +79,7 @@ public class DeploymentsService {
      * @param resultMap   the result map
      * @return the custom services yaml
      */
-    Deployments getDeploymentsYaml(String namespace, String deploymentsName, HashMap resultMap) {
+    public Deployments getDeploymentsYaml(String namespace, String deploymentsName, HashMap resultMap) {
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListDeploymentsGet()
                         .replace("{namespace}", namespace)

@@ -22,7 +22,6 @@ import org.paasta.caas.api.workloads.deployments.DeploymentsService;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.HttpClientErrorException;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource("classpath:application.yml")
@@ -31,6 +30,7 @@ public class DeploymentsServiceTest {
     private static final String NAMESPACE = "test-namespace";
     private static final String DEPLOYMENT_NAME = "test-deployment-name";
     private static final String LABEL_SELECTOR = "test-label-selector";
+    private static final String YAML_STRING = "test-yaml-string";
 
     private static HashMap gResultMap = null;
     
@@ -69,6 +69,7 @@ public class DeploymentsServiceTest {
         // 하나만 가져옴
         gResultModel = new Deployments();
         gFinalResultModel = new Deployments();
+        gFinalResultModel.setSourceTypeYaml(YAML_STRING);
         gFinalResultModel.setResultCode(Constants.RESULT_STATUS_SUCCESS);
         
         gFinalResultFailModel = new Deployments();
@@ -107,6 +108,25 @@ public class DeploymentsServiceTest {
 
         //compare result
         assertThat(result).isNotNull();
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, result.getResultCode());
+
+    }
+
+    @Test
+    public void getDeployment_Yaml_Valid_ReturnModel() {
+
+        //when
+        when(propertyService.getCaasMasterApiListDeploymentsGet()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments/{name}");
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments/" + DEPLOYMENT_NAME, HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML)).thenReturn(YAML_STRING);
+        when(commonService.setResultObject(gResultMap, Deployments.class)).thenReturn(gResultModel);
+        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
+
+        //call method
+        Deployments result = deploymentsService.getDeploymentsYaml(NAMESPACE, DEPLOYMENT_NAME, gResultMap);
+
+        //compare result
+        assertThat(result).isNotNull();
+        assertEquals(YAML_STRING, result.getSourceTypeYaml());
         assertEquals(Constants.RESULT_STATUS_SUCCESS, result.getResultCode());
 
     }
