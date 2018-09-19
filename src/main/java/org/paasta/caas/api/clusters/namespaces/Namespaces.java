@@ -8,7 +8,7 @@ import org.paasta.caas.api.common.model.CommonStatus;
 /**
  * Namespace Model 클래스
  *
- * @author kdh
+ * @author indra
  * @version 1.0
  * @since 2018.08.28
  */

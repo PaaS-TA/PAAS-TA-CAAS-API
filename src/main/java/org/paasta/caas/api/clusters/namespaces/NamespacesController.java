@@ -1,7 +1,5 @@
 package org.paasta.caas.api.clusters.namespaces;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,14 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Namespaces Controller 클래스.
  *
- * @author 최윤석
+ * @author indra
  * @version 1.0
  * @since 2018.08.01 최초작성
  */
 @RestController
-@RequestMapping("/clusters")
+@RequestMapping("/namespaces/{namespace:.+}")
 public class NamespacesController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NamespacesController.class);
 
     private final NamespacesService namespacesService;
 
@@ -33,23 +30,23 @@ public class NamespacesController {
     }
 
     /**
-     * Gets namespaces.
+     * Namespaces 상세정보를 조회한다.
      *
      * @param namespace the namespaces
      * @return the namespaces
      */
-    @GetMapping("/namespaces/{namespace}")
+    @GetMapping
     public Namespaces getNamespaces(@PathVariable("namespace") String namespace) {
         return namespacesService.getNamespaces(namespace);
     }
 
     /**
-     * Gets ResourceQuotaList.
+     * ResourceQuota 목록을 조회한다.
      *
      * @param namespace the namespaces
      * @return the ResourceQuotaList
      */
-    @GetMapping("/namespaces/{namespace}/getResourceQuotaList")
+    @GetMapping("/resourceQuotas")
     public ResourceQuotaList getResourceQuotaList(@PathVariable("namespace") String namespace) {
         return namespacesService.getResourceQuotaList(namespace);
     }

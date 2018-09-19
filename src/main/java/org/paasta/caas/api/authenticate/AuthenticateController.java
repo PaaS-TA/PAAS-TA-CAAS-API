@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * DashBoard 에서 인증을 위해 호출 받는 컨트롤러.
+ * AuthenticateController Controller 클래스.
  *
  * @author indra
  * @version 1.0
@@ -16,16 +16,21 @@ public class AuthenticateController {
 
     private final AuthenticateService authenticateService;
 
+    /**
+     * Instantiates a Authenticate controller.
+     *
+     * @param authenticateService the authenticate service
+     */
     @Autowired
     public AuthenticateController(AuthenticateService authenticateService) {
         this.authenticateService = authenticateService;
     }
 
     /**
-     * createUser 유저를 생성.
+     * 유저를 생성한다.
      *
-     * @param namespace
-     * @param yml
+     * @param namespace the namespace
+     * @param yml the yml
      * @return
      */
     @PostMapping(value = "/namespaces/{namespace}/serviceaccounts")
@@ -34,10 +39,10 @@ public class AuthenticateController {
     }
 
     /**
-     * createRole 롤을 생성.
+     * 롤을 생성한다.
      *
-     * @param namespace
-     * @param yml
+     * @param namespace the namespace
+     * @param yml the yml
      * @return
      */
     @PostMapping(value = "/namespaces/{namespace}/roles")
@@ -46,10 +51,10 @@ public class AuthenticateController {
     }
 
     /**
-     * createRoleBinding 롤을 바인딩.
+     * 롤을 바인딩한다.
      *
-     * @param namespace
-     * @param yml
+     * @param namespace the namespace
+     * @param yml the yml
      * @return
      */
     @PostMapping(value = "/namespaces/{namespace}/rolebindings")
@@ -58,10 +63,10 @@ public class AuthenticateController {
     }
 
     /**
-     * getToken 토큰을 조회.
+     * 토큰을 조회한다.
      *
-     * @param namespace
-     * @param userName
+     * @param namespace the namespace
+     * @param userName the user name
      * @return the String
      */
     @GetMapping(value = "/namespaces/{namespace}/serviceaccounts/{userName}")

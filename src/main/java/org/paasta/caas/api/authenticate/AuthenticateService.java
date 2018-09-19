@@ -1,20 +1,16 @@
 package org.paasta.caas.api.authenticate;
 
-import org.paasta.caas.api.clusters.namespaces.ResourceQuotaList;
-import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
+import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
- * DashBoard 에서 인증을 위해 호출 받는 서비스.
+ * AuthenticateController Service 클래스.
  *
  * @author indra
  * @version 1.0
@@ -23,58 +19,71 @@ import java.util.Map;
 @Service
 public class AuthenticateService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticateService.class);
-
     private final RestTemplateService restTemplateService;
-    private final CommonService commonService;
+    private final PropertyService propertyService;
 
+    /**
+     * Instantiates a Authenticate service.
+     *
+     * @param restTemplateService the rest template service
+     * @param propertyService     the property service
+     */
     @Autowired
-    public AuthenticateService(RestTemplateService restTemplateService, CommonService commonService) {
+    public AuthenticateService(RestTemplateService restTemplateService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
-        this.commonService = commonService;
+        this.propertyService = propertyService;
     }
 
     /**
-     * createUser 유저를 생성.
+     * 유저를 생성한다.
      *
-     * @param namespace
-     * @param yml
+     * @param namespace the namespace
+     * @param yml the yml
      * @return
      */
     public void createUser(String namespace, String yml) {
-        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES+"/"+namespace+"/serviceaccounts", HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+        restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListUsersCreateUrl()
+                        .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
     }
 
     /**
-     * createRole 롤을 생성.
+     * 롤을 생성한다.
      *
-     * @param namespace
-     * @param yml
+     * @param namespace the namespace
+     * @param yml the yml
      * @return
      */
     public void createRole(String namespace, String yml) {
-        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES+"/"+namespace+"/roles", HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+        restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListRolesCreateUrl()
+                        .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
     }
 
     /**
-     * createRoleBinding 롤을 바인딩.
+     * 롤을 바인딩한다.
      *
-     * @param namespace
-     * @param yml
+     * @param namespace the namespace
+     * @param yml the yml
      * @return
      */
     public void createRoleBinding(String namespace, String yml) {
-        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES+"/"+namespace+"/rolebindings", HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+        restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListRoleBindingsCreateUrl()
+                        .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
     }
 
     /**
-     * getToken 토큰을 조회.
+     * 토큰을 조회한다.
      *
-     * @param namespace
-     * @param userName
+     * @param namespace the namespace
+     * @param userName the user name
      * @return the String
      */
     public String getToken(String namespace, String userName) {
-        return restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.API_URL_NAMESPACES+"/"+namespace+"/serviceaccounts/"+userName, HttpMethod.GET, null, String.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
+        return restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListUsersGetUrl()
+                        .replace("{namespace}", namespace)
+                        .replace("{name}", userName), HttpMethod.GET, null, String.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
     }
 }

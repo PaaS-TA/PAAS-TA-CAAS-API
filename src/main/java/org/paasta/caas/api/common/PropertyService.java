@@ -88,6 +88,10 @@ public class PropertyService {
     @Value("${caasMaster.api.list.roles.get}")
     private String caasMasterApiListRolesGetUrl;
 
+    // Create Role By Specified Namespace
+    @Value("${caasMaster.api.list.roles.create}")
+    private String caasMasterApiListRolesCreateUrl;
+
     // Delete Role By Specified Namespace
     @Value("${caasMaster.api.list.roles.delete}")
     private String caasMasterApiListRolesDeleteUrl;
@@ -128,7 +132,21 @@ public class PropertyService {
     @Value("caasMaster.api.list.roleBindings.update")
     private String caasMasterApiListRoleBindingsUpdateUrl;
 
+    @Value("${caasMaster.api.list.users.get}")
+    private String caasMasterApiListUsersGetUrl;
+
+    @Value("${caasMaster.api.list.users.create}")
+    private String caasMasterApiListUsersCreateUrl;
+
     @Value("${caasMaster.api.list.users.delete}")
     private String caasMasterApiListUsersDeleteUrl;
+
+    // Namespaces
+    @Value("${caasMaster.api.list.namespaces.get}")
+    private String caasMasterApiListNamespaceGetUrl;
+
+    // Namespaces
+    @Value("${caasMaster.api.list.resourceQuotas.list}")
+    private String caasMasterApiListResourceQuotasListUrl;
 
 }

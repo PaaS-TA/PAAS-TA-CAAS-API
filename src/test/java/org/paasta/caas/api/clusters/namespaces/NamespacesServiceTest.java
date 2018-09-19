@@ -1,6 +1,5 @@
 package org.paasta.caas.api.clusters.namespaces;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
+import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,6 +23,8 @@ import static org.mockito.Mockito.*;
 public class NamespacesServiceTest {
 
     private static final String NAMESPACE = "test-namespace";
+    private static final String LIST_URL = "test-list-url";
+    private static final String GET_URL = "test-get-url";
 
     private static HashMap resultMap = null;
     private static Namespaces nResultModel = null;
@@ -37,6 +39,8 @@ public class NamespacesServiceTest {
     RestTemplateService restTemplateService;
     @Mock
     CommonService commonService;
+    @Mock
+    PropertyService propertyService;
     @InjectMocks
     NamespacesService namespacesService;
 
@@ -59,14 +63,14 @@ public class NamespacesServiceTest {
 
         rqFinalResultFailModel = new ResourceQuotaList();
         rqFinalResultFailModel.setResultCode(Constants.RESULT_STATUS_FAIL);
-
-//        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testGetNamespaces() {
         // CONDITION
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/api/v1/namespaces/"+NAMESPACE, HttpMethod.GET, null, Map.class)).thenReturn(resultMap);
+        when(propertyService.getCaasMasterApiListNamespaceGetUrl()).thenReturn(GET_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, GET_URL
+                .replace("{namespace}", NAMESPACE), HttpMethod.GET, null, Map.class)).thenReturn(resultMap);
         when(commonService.setResultModel(nResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(nFinalResultModel);
         when(commonService.setResultObject(resultMap, Namespaces.class)).thenReturn(nResultModel);
 
@@ -81,7 +85,9 @@ public class NamespacesServiceTest {
     @Test
     public void testGetResourceQuotaList() {
         //when
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/api/v1/namespaces/"+NAMESPACE+"/resourcequotas", HttpMethod.GET, null, Map.class)).thenReturn(resultMap);
+        when(propertyService.getCaasMasterApiListResourceQuotasListUrl()).thenReturn(LIST_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, LIST_URL
+                .replace("{namespace}", NAMESPACE), HttpMethod.GET, null, Map.class)).thenReturn(resultMap);
         when(commonService.setResultModel(rqResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(rqFinalResultModel);
         when(commonService.setResultObject(resultMap, ResourceQuotaList.class)).thenReturn(rqResultModel);
 
