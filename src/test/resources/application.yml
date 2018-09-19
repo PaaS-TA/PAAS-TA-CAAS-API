@@ -33,7 +33,7 @@ caasMaster:
       nodes:
         list: "/api/v1/nodes"
         get: "/api/v1/nodes/{name}"
-      replicasets:
+      replicaSets:
         list: "/apis/apps/v1/namespaces/{namespace}/replicasets"
         get: "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}"
       horizontalpodautoscalers:
@@ -50,10 +50,10 @@ caasMaster:
         get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
         delete: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
         update: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
-      deployment:
+      deployments:
         allList: "/apis/apps/v1/deployments"
         list: "/apis/apps/v1/namespaces/{namespace}/deployments"
-        get: "/apis/apps/v1/namespaces/{namespace}/deployments/{deploymentName}"
+        get: "/apis/apps/v1/namespaces/{namespace}/deployments/{name}"
       roleBindings:
         allList: "/apis/rbac.authorization.k8s.io/v1/rolebindings"
         list: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings"
@@ -63,6 +63,8 @@ caasMaster:
         update: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
       users:
         delete: "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
+      secrets:
+        get: "/api/v1/namespaces/{namespace}/secrets/{name}"
 
 ---
 spring:

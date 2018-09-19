@@ -36,6 +36,7 @@ public class CommonStatus {
     @SerializedName("containerStatuses")
     private List containerStatuses;
 
+    @SerializedName("conditions")
     private List<CommonCondition> conditions;
 
     @SerializedName("podIP")

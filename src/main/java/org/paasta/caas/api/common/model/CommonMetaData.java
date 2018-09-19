@@ -63,6 +63,9 @@ public class CommonMetaData {
 
     @SerializedName("selfLink")
     private String selfLink;
+    
+    @SerializedName("ownerReferences")
+    private List<CommonOwnerReferences> ownerReferences;
 
     public String getCreationTimestamp() {
 //        TODO :: REMOVE AFTER CHECK
@@ -74,9 +77,7 @@ public class CommonMetaData {
         return CommonUtils.procSetTimestamp(creationTimestamp);
     }
 
-    //@SerializedName("initializers")
-    //private V1Initializers initializers;
-
-    @SerializedName("ownerReferences")
-    private List<OwnerReferences> ownerReferences;
+    public String getDeletionTimestamp() {
+        return CommonUtils.procSetTimestamp(deletionTimestamp);
+    }
 }

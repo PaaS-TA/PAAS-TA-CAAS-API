@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workloads.Pods;
+package org.paasta.caas.api.workloads.pods;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,10 +9,6 @@ import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.paasta.caas.api.workloads.deployments.DeploymentsList;
-import org.paasta.caas.api.workloads.pods.Pods;
-import org.paasta.caas.api.workloads.pods.PodsList;
-import org.paasta.caas.api.workloads.pods.PodsService;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -32,6 +28,7 @@ public class PodsServiceTest {
     private static final String PODS_NAME = "test-pods-name";
     private static final String SELECTOR = "test-selector";
     private static final String NODE_NAME = "test-node";
+    private static final String YAML_STRING = "test-yaml-string";
 
     private static HashMap gResultMap = null;
 
@@ -55,10 +52,11 @@ public class PodsServiceTest {
     @InjectMocks
     PodsService podsService;
 
+    /**
+     * Sets up.
+     */
     @Before
     public void setUp() {
-
-        // 리스트가져옴
         gResultMap = new HashMap();
         gResultListModel = new PodsList();
         gFinalResultListModel = new PodsList();
@@ -67,7 +65,6 @@ public class PodsServiceTest {
         gFinalResultListFailModel = new PodsList();
         gFinalResultListFailModel.setResultCode(Constants.RESULT_STATUS_FAIL);
 
-        // 하나만 가져옴
         gResultModel = new Pods();
         gFinalResultModel = new Pods();
         gFinalResultModel.setResultCode(Constants.RESULT_STATUS_SUCCESS);
@@ -77,88 +74,106 @@ public class PodsServiceTest {
 
     }
 
+    /**
+     * Pods 목록을 조회할 때에 대한 테스트 케이스.
+     */
     @Test
     public void getPodsList_Valid_ReturnModel() {
-
-        //when 서술
         when(propertyService.getCaasMasterApiListPodsListUrl()).thenReturn("/apis/apps/v1/pods");
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/pods", HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, PodsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
-        //실제 테스트할 함수 호출
         PodsList resultList = podsService.getPodList(NAMESPACE);
-        //실제 결과 값 비교
+
         assertThat(resultList).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
     }
 
+    /**
+     * Label Selector를 이용해 Pods 목록을 조회할 때에 대한 테스트 케이스.
+     */
     @Test
     public void getPodListWithLabelSelector_Valid_ReturnModel() {
-
-        //when 서술
         when(propertyService.getCaasMasterApiListPodsListUrl()).thenReturn("/apis/apps/v1/pods");
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/pods?labelSelector=" + SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, PodsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
-        //실제 테스트할 함수 호출
+
         PodsList resultList = podsService.getPodListWithLabelSelector(NAMESPACE, SELECTOR);
-        //실제 결과 값 비교
+
         assertThat(resultList).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
     }
 
-
+    /**
+     * Node 이름을 이용해 Pods 목록을 조회할 때에 대한 테스트 케이스.
+     */
     @Test
     public void getPodListByNode_NAMESPACE_Valid_ReturnModel() {
-
-        //when 서술
         when(propertyService.getCaasMasterApiListPodsListUrl()).thenReturn("/api/v1/namespaces/{namespace}/pods");
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/api/v1/namespaces/" + NAMESPACE + "/pods/?fieldSelector=spec.nodeName=" + NODE_NAME, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, PodsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
-        //실제 테스트할 함수 호출
         PodsList resultList = podsService.getPodListByNode(NAMESPACE, NODE_NAME, true);
-        //실제 결과 값 비교
+
         assertThat(resultList).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
 
     }
 
+    /**
+     * Node 이름을 이용해 Pods 목록을 조회할 때 유효하지 않은 부분에 대한 테스트 케이스.
+     */
     @Test
     public void getPodListByNode_NAMESPACE_False_Valid_ReturnModel() {
-
-        //when 서술  /api/v1/namespaces/{namespace}/pods
         when(propertyService.getCaasMasterApiListPodsListUrl()).thenReturn("/api/v1/namespaces/{namespace}/pods");
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/api/v1/namespaces/" + NAMESPACE + "/pods/?fieldSelector=spec.nodeName=" + NODE_NAME + ",status.phase!=Succeeded", HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, PodsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
-        //실제 테스트할 함수 호출
         PodsList resultList = podsService.getPodListByNode(NAMESPACE, NODE_NAME, false);
-        //실제 결과 값 비교
+
         assertThat(resultList).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
-
     }
 
+    /**
+     * Pods를 조회할 때에 대한 테스트 케이스.
+     */
     @Test
     public void getPod_Valid_ReturnModel() {
-
-        //when
         when(propertyService.getCaasMasterApiListPodsGetUrl()).thenReturn("/apis/apps/v1/namespaces/{namespace}/pods/{name}");
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/pods/" + PODS_NAME, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE + "/pods/" + PODS_NAME, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, Pods.class)).thenReturn(gResultModel);
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
-        //call method
         Pods result = podsService.getPod(NAMESPACE, PODS_NAME);
 
-        //compare result
         assertThat(result).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, result.getResultCode());
+    }
 
+    /**
+     * Pods의 원본 YAML을 조회할 때에 대한 테스트 케이스.
+     */
+    @Test
+    public void getPodYaml_Valid_ReturnModel() {
+        gResultMap.put("sourceTypeYaml", YAML_STRING);
+        gResultModel.setSourceTypeYaml(YAML_STRING);
+        gFinalResultModel.setSourceTypeYaml(YAML_STRING);
+
+        when(propertyService.getCaasMasterApiListPodsGetUrl()).thenReturn("/apis/apps/v1/namespaces/{namespace}/pods/{name}");
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE + "/pods/" + PODS_NAME, HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML)).thenReturn(YAML_STRING);
+        when(commonService.setResultObject(gResultMap, Pods.class)).thenReturn(gResultModel);
+        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
+
+        Pods result = podsService.getPodYaml(NAMESPACE, PODS_NAME);
+
+        assertThat(result).isNotNull();
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, result.getResultCode());
+        assertEquals(YAML_STRING, result.getSourceTypeYaml());
     }
 }

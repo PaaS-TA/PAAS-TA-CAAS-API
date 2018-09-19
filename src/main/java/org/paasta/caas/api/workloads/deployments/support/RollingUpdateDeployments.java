@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
- * RollingUpdateDeployments
+ * RollingUpdateDeployments Model 클래스
  *
  * @author Hyungu Cho
  * @version 1.0

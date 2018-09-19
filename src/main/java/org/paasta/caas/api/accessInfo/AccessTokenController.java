@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018-09-04
  */
 @RestController
-@RequestMapping("/accessInfo")
+@RequestMapping("/namespaces/{namespace:.+}/secrets")
 public class AccessTokenController {
 
     private final AccessTokenService accessTokenService;
@@ -36,7 +36,7 @@ public class AccessTokenController {
      * @param accessTokenName the accessTokenName
      * @return the AccessToken
      */
-    @RequestMapping(value = "/namespaces/{namespace}/secrets/{accessTokenName}")
+    @RequestMapping(value = "/{accessTokenName:.+}")
     @ResponseBody
     public AccessToken getSecret(@PathVariable("namespace") String namespace, @PathVariable("accessTokenName") String accessTokenName){
         return accessTokenService.getSecret(namespace, accessTokenName);

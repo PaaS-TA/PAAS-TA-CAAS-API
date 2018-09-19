@@ -77,36 +77,36 @@ public class NodesServiceTest {
 
     }
 
+    /**
+     * Nodes 목록을 조회할 때에 대한 테스트 케이스.
+     */
     @Test
     public void getNodesList_Valid_ReturnModel() {
-        // CONDITION
         when(propertyService.getCaasMasterApiListNodesListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 LIST_URL, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, NodesList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
-        // TEST
         NodesList resultModel = nodesService.getNodeList();
 
-        // VERIFY
         assertThat(resultModel).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
     }
 
+    /**
+     * Nodes를 조회할 때에 대한 테스트 케이스.
+     */
     @Test
     public void getNodes_Valid_ReturnModel() {
-        // CONDITION
         when(propertyService.getCaasMasterApiListNodesGetUrl()).thenReturn(GET_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 GET_URL, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, Nodes.class)).thenReturn(gResultModel);
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
-        // TEST
         Nodes resultModel = nodesService.getNode(NODE_NAME);
-
-        // VERIFY
+        
         assertThat(resultModel).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
     }

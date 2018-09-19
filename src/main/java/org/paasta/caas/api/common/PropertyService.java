@@ -100,14 +100,14 @@ public class PropertyService {
     private String caasMasterApiListRolesUpdateUrl;
 
     // Deployments List for all namespaces
-    @Value("${caasMaster.api.list.deployment.allList}")
-    private String caasMasterApiListDeploymentAllList;
+    @Value("${caasMaster.api.list.deployments.allList}")
+    private String caasMasterApiListDeploymentsAllList;
 
-    @Value("${caasMaster.api.list.deployment.list}")
-    private String caasMasterApiListDeploymentList;
+    @Value("${caasMaster.api.list.deployments.list}")
+    private String caasMasterApiListDeploymentsList;
 
-    @Value("${caasMaster.api.list.deployment.get}")
-    private String caasMasterApiListDeploymentGet;
+    @Value("${caasMaster.api.list.deployments.get}")
+    private String caasMasterApiListDeploymentsGet;
 
     // RoleBinding List By All Namespaces
     @Value("${caasMaster.api.list.roleBindings.allList}")
@@ -149,4 +149,6 @@ public class PropertyService {
     @Value("${caasMaster.api.list.resourceQuotas.list}")
     private String caasMasterApiListResourceQuotasListUrl;
 
+    @Value("${caasMaster.api.list.secrets.get}")
+    private String caasMasterApiListSecretsGetUrl;
 }

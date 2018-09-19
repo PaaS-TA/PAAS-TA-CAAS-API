@@ -1,13 +1,11 @@
 package org.paasta.caas.api.accessInfo;
 
 import org.paasta.caas.api.common.Constants;
+import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Base64;
 import java.util.HashMap;
@@ -23,16 +21,18 @@ import java.util.Map;
 @Service
 public class AccessTokenService {
     private final RestTemplateService restTemplateService;
-    private static final Logger LOGGER = LoggerFactory.getLogger(AccessTokenService.class);
+    private final PropertyService propertyService;
 
     /**
      * Instantiates a new accessToken service
      *
      * @param restTemplateService the rest template service
+     * @param propertyService the property service
      */
     @Autowired
-    public AccessTokenService(RestTemplateService restTemplateService) {
+    public AccessTokenService(RestTemplateService restTemplateService, PropertyService propertyService) {
         this.restTemplateService = restTemplateService;
+        this.propertyService = propertyService;
     }
 
     /**
@@ -43,11 +43,14 @@ public class AccessTokenService {
      * @return the AccessToken
      */
     AccessToken getSecret(String namespace, String accessTokenName){
-        String caCertToken = null;
-        String userToken = null;
-        String requestUrl = "/api/v1/namespaces/" + namespace + "/secrets/" + accessTokenName;
+        String caCertToken;
+        String userToken;
 
-        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, requestUrl, HttpMethod.GET, null, Map.class);
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListSecretsGetUrl()
+                        .replace("{namespace}", namespace)
+                        .replace("{name}", accessTokenName), HttpMethod.GET, null, Map.class);
+
         Map map = (Map) responseMap.get("data");
 
         caCertToken = map.get("ca.crt").toString();
