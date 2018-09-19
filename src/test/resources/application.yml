@@ -33,7 +33,7 @@ caasMaster:
       nodes:
         list: "/api/v1/nodes"
         get: "/api/v1/nodes/{name}"
-      replicasets:
+      replicaSets:
         list: "/apis/apps/v1/namespaces/{namespace}/replicasets"
         get: "/apis/apps/v1/namespaces/{namespace}/replicasets/{name}"
       horizontalpodautoscalers:
