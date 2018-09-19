@@ -131,4 +131,6 @@ public class PropertyService {
     @Value("${caasMaster.api.list.users.delete}")
     private String caasMasterApiListUsersDeleteUrl;
 
+    @Value("${caasMaster.api.list.secrets.get}")
+    private String caasMasterApiListSecretsGetUrl;
 }

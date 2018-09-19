@@ -63,6 +63,8 @@ caasMaster:
         update: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
       users:
         delete: "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
+      secrets:
+        get: "/api/v1/namespaces/{namespace}/secrets/{name}"
 
 ---
 spring:
