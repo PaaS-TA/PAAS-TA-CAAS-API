@@ -77,27 +77,10 @@ public class DeploymentsServiceTest {
     }
 
     @Test
-    public void getDeploymentListByAllNamespace_Valid_ReturnModel() {
-
-        //when 서술
-        when(propertyService.getCaasMasterApiListDeploymentAllList()).thenReturn("/apis/apps/v1/deployments");
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/deployments", HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
-        when(commonService.setResultObject(gResultMap, DeploymentsList.class)).thenReturn(gResultListModel);
-        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
-
-        //실제 테스트할 함수 호출
-        DeploymentsList resultList = deploymentsService.getDeploymentListByAllNamespace();
-        //실제 결과 값 비교
-        assertThat(resultList).isNotNull();
-        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
-    }
-
-
-    @Test
     public void getDeploymentList_Valid_ReturnModel() {
 
         //when
-        when(propertyService.getCaasMasterApiListDeploymentList()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments");
+        when(propertyService.getCaasMasterApiListDeploymentsList()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments");
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments", HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, DeploymentsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
@@ -114,7 +97,7 @@ public class DeploymentsServiceTest {
     public void getDeployment_Valid_ReturnModel() {
 
         //when
-        when(propertyService.getCaasMasterApiListDeploymentGet()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments/{deploymentName}");
+        when(propertyService.getCaasMasterApiListDeploymentsGet()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments/{name}");
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments/" + DEPLOYMENT_NAME, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, Deployments.class)).thenReturn(gResultModel);
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
@@ -132,7 +115,7 @@ public class DeploymentsServiceTest {
     public void getDeploymentsListLabelSelector_Valid_ReturnModel() {
 
         //when
-        when(propertyService.getCaasMasterApiListDeploymentList()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments");
+        when(propertyService.getCaasMasterApiListDeploymentsList()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments");
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments?labelSelector="+LABEL_SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, DeploymentsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
