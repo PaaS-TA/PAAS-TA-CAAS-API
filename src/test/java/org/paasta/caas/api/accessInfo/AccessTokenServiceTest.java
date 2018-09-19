@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 
 public class AccessTokenServiceTest {
     private static final String NAMESPACE = "test-namespace";
+    private static final String GET_URL = "test-get-url";
     private static final String ACCESS_TOKEN_NAME = "test-access-token-name";
     private static final String ENCODE_TOKEN = "YWNjZXNzVG9rZW4=";
     private static final String DECODE_TOKEN = "accessToken";
@@ -40,7 +41,10 @@ public class AccessTokenServiceTest {
     private static HashMap gResultDataMap = null;
 
     @Mock
-    RestTemplateService restTemplateService;
+    private RestTemplateService restTemplateService;
+
+    @Mock
+    private PropertyService propertyService;
 
     @InjectMocks
     AccessTokenService accessTokenService;
@@ -65,7 +69,10 @@ public class AccessTokenServiceTest {
 
         String token = "accessToken";
         // CONDITION
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/api/v1/namespaces/test-namespace/secrets/test-access-token-name", HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+        when(propertyService.getCaasMasterApiListSecretsGetUrl()).thenReturn(GET_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, GET_URL
+                .replace("{namespace}", NAMESPACE)
+                .replace("{accessTokenName}", ACCESS_TOKEN_NAME), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
 
         // TEST
         AccessToken resultModel = accessTokenService.getSecret(NAMESPACE, ACCESS_TOKEN_NAME);
