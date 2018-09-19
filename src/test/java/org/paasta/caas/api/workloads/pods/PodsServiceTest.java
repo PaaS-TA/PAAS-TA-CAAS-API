@@ -28,6 +28,7 @@ public class PodsServiceTest {
     private static final String PODS_NAME = "test-pods-name";
     private static final String SELECTOR = "test-selector";
     private static final String NODE_NAME = "test-node";
+    private static final String YAML_STRING = "test-yaml-string";
 
     private static HashMap gResultMap = null;
 
@@ -156,5 +157,28 @@ public class PodsServiceTest {
         assertThat(result).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, result.getResultCode());
 
+    }
+
+    @Test
+    public void getPodYaml_Valid_ReturnModel() {
+        // YAML_STRING
+        // set resultMap
+        gResultMap.put("sourceTypeYaml", YAML_STRING);
+        gResultModel.setSourceTypeYaml(YAML_STRING);
+        gFinalResultModel.setSourceTypeYaml(YAML_STRING);
+
+        //when
+        when(propertyService.getCaasMasterApiListPodsGetUrl()).thenReturn("/apis/apps/v1/namespaces/{namespace}/pods/{name}");
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE + "/pods/" + PODS_NAME, HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML)).thenReturn(YAML_STRING);
+        when(commonService.setResultObject(gResultMap, Pods.class)).thenReturn(gResultModel);
+        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
+
+        //call method
+        Pods result = podsService.getPodYaml(NAMESPACE, PODS_NAME);
+
+        //compare result
+        assertThat(result).isNotNull();
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, result.getResultCode());
+        assertEquals(YAML_STRING, result.getSourceTypeYaml());
     }
 }

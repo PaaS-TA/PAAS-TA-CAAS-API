@@ -13,7 +13,7 @@ import java.util.List;
  * @since 2018.08.13
  */
 @Data
-class NodesList {
+public class NodesList {
     private String resultCode;
 
     private List<Nodes> items = new ArrayList<>();

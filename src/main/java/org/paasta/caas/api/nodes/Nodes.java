@@ -13,7 +13,7 @@ import org.paasta.caas.api.nodes.support.NodesStatus;
  * @since 2018.08.13
  */
 @Data
-class Nodes {
+public class Nodes {
     private String resultCode;
 
     private CommonMetaData metadata;
