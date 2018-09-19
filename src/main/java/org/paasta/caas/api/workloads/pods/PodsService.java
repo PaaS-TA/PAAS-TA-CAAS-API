@@ -98,12 +98,6 @@ public class PodsService {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPodsGetUrl().replace("{namespace}", namespace).replace("{name}", podName),
                 HttpMethod.GET, null, Map.class);
-        // source type : YAML
-        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListPodsGetUrl().replace("{namespace}", namespace).replace("{name}", podName),
-                HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
-        //noinspection unchecked
-        resultMap.put("sourceTypeYaml", resultString);
 
         return (Pods) commonService.setResultModel(commonService.setResultObject(resultMap, Pods.class), Constants.RESULT_STATUS_SUCCESS);
     }
