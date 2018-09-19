@@ -1,6 +1,7 @@
 package org.paasta.caas.api.common.model;
 
 import lombok.Data;
+import org.paasta.caas.api.common.CommonUtils;
 
 /**
  * Common Condition Model 클래스
@@ -20,4 +21,12 @@ public class CommonCondition {
 
     private String lastHeartbeatTime;
     private String lastTransitionTime;
+    
+    public String getLastHeartbeatTime() {
+        return CommonUtils.procSetTimestamp(lastHeartbeatTime);
+    }
+
+    public String getLastTransitionTime() {
+        return CommonUtils.procSetTimestamp(lastTransitionTime);
+    }
 }

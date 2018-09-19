@@ -40,7 +40,7 @@ public class DeploymentsController {
     }
 
     /**
-     * Deployments 객체를 조회한다. (지정한 네임스페이스에 있는 Deployment를 조회한다)
+     * Deployments 객체를 조회한다. (지정한 네임스페이스에 있는 Deployments를 조회한다)
      *
      * @param namespace      the namespace
      * @param deploymentsName the deploymentsName name
@@ -68,7 +68,7 @@ public class DeploymentsController {
      *
      * @param namespace the namespace
      * @param selector  the selector
-     * @return the deployment list
+     * @return the deployments list
      */
     @GetMapping(value = "/resource/{selector:.+}")
     public DeploymentsList getDeploymentsListLabelSelector(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "selector") String selector) {

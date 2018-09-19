@@ -1,4 +1,4 @@
-package org.paasta.caas.api.workloads.Pods;
+package org.paasta.caas.api.workloads.pods;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,10 +9,6 @@ import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.paasta.caas.api.workloads.deployments.DeploymentsList;
-import org.paasta.caas.api.workloads.pods.Pods;
-import org.paasta.caas.api.workloads.pods.PodsList;
-import org.paasta.caas.api.workloads.pods.PodsService;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -149,7 +145,7 @@ public class PodsServiceTest {
 
         //when
         when(propertyService.getCaasMasterApiListPodsGetUrl()).thenReturn("/apis/apps/v1/namespaces/{namespace}/pods/{name}");
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/pods/" + PODS_NAME, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE + "/pods/" + PODS_NAME, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, Pods.class)).thenReturn(gResultModel);
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
