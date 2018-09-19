@@ -3,10 +3,10 @@ package org.paasta.caas.api.workloads.deployments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.HashMap;
 
 /**
- * Deployments 관련 API에 대해 호출을 받는 컨트롤러이다.
+ * Deployments Controller 클래스
  *
  * @author Hyungu Cho
  * @version 1.0
@@ -31,8 +31,8 @@ public class DeploymentsController {
     /**
      * Deployments 객체의 리스트를 조회한다. (지정한 네임스페이스에서 조회)
      *
-     * @param namespace 조회하려는 객체가 속한 namespace
-     * @return the deployment list
+     * @param namespace the namespace
+     * @return the deployments list
      */
     @GetMapping
     public DeploymentsList getDeploymentList(@PathVariable(value = "namespace") String namespace) {
@@ -40,15 +40,27 @@ public class DeploymentsController {
     }
 
     /**
-     * Deployments 객체를 조회한다. (지정한 네임스페이스에 있는 Deployment를 조회)
+     * Deployments 객체를 조회한다. (지정한 네임스페이스에 있는 Deployment를 조회한다)
      *
-     * @param namespace      조회하려는 객체가 속한 namespace
-     * @param deploymentName 조회하려는 deployment 객체의 이름
-     * @return the deployment
+     * @param namespace      the namespace
+     * @param deploymentsName the deploymentsName name
+     * @return the deployments
      */
-    @GetMapping(value = "/{deploymentName:.+}")
-    public Deployments getDeployment(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentName") String deploymentName) {
-        return deploymentsService.getDeployment(namespace, deploymentName);
+    @GetMapping(value = "/{deploymentsName:.+}")
+    public Deployments getDeployment(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentsName") String deploymentsName) {
+        return deploymentsService.getDeployment(namespace, deploymentsName);
+    }
+
+    /**
+     * Deployments YAML을 조회한다.
+     *
+     * @param namespace   the namespace
+     * @param deploymentsName the deploymentsName name
+     * @return the deployments yaml
+     */
+    @GetMapping(value = "/{deploymentsName:.+}/yaml")
+    public Deployments getDeploymentsYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentsName") String deploymentsName) {
+        return deploymentsService.getDeploymentsYaml(namespace, deploymentsName, new HashMap<>());
     }
 
     /**

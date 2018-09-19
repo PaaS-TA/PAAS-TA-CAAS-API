@@ -15,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Deployments 관련 API에 대해 CaaS API를 향해 호출하고, 결과값을 처리하는 서비스이다.
+ * Deployments Service 클래스
  *
  * @author Hyungu Cho
  * @version 1.0
@@ -43,26 +43,13 @@ public class DeploymentsService {
     }
 
     /**
-     * Deployments List 조회 (전체 네임스페이스 대상)
-     *
-     * @return the deployment list
-     */
-    public DeploymentsList getDeploymentListByAllNamespace() {
-        final String requestPath = propertyService.getCaasMasterApiListDeploymentAllList();
-        HashMap responseMap = (HashMap) restTemplateService.send(
-                Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class);
-
-        return (DeploymentsList) commonService.setResultModel(commonService.setResultObject(responseMap, DeploymentsList.class), Constants.RESULT_STATUS_SUCCESS);
-    }
-
-    /**
-     * Deployments List 조회 (특정 네임스페이스 대상)
+     * 특정 네임스페이스 대상 Deployments List를 조회한다
      *
      * @param namespace the namespace
      * @return the deployment list
      */
     public DeploymentsList getDeploymentList(String namespace) {
-        String requestPath = propertyService.getCaasMasterApiListDeploymentList().replace("{namespace}", namespace);
+        String requestPath = propertyService.getCaasMasterApiListDeploymentsList().replace("{namespace}", namespace);
         HashMap responseMap = (HashMap) restTemplateService.send(
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class);
 
@@ -70,30 +57,43 @@ public class DeploymentsService {
     }
 
     /**
-     * Deployments 조회 (특정 네임스페이스에 있는 deployment)
+     * 특정 네임스페이스에 있는 Deployments를  조회한다
      *
      * @param namespace      the namespace
-     * @param deploymentName the deployment name
+     * @param deploymentsName the deployments name
      * @return the deployment
      */
-    public Deployments getDeployment(String namespace, String deploymentName) {
-        String requestPath = propertyService.getCaasMasterApiListDeploymentGet()
-                .replace("{namespace}", namespace).replace("{deploymentName}", deploymentName);
+    public Deployments getDeployment(String namespace, String deploymentsName) {
+        String requestPath = propertyService.getCaasMasterApiListDeploymentsGet()
+                .replace("{namespace}", namespace).replace("{name}", deploymentsName);
         HashMap responseMap = (HashMap) restTemplateService.send(
                 Constants.TARGET_CAAS_MASTER_API, requestPath, HttpMethod.GET, null, Map.class);
-        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                requestPath, HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
-
-        //noinspection unchecked
-        responseMap.put("sourceTypeYaml", resultString);
-        //noinspection unchecked
-        responseMap.put("source", new LinkedHashMap<String, Object>());
 
         return (Deployments) commonService.setResultModel(commonService.setResultObject(responseMap, Deployments.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
     /**
-     * Deployment List 조회 (selector를 이용)
+     * Deployments YAML을 조회한다.
+     *
+     * @param namespace   the namespace
+     * @param deploymentsName the deployments name
+     * @param resultMap   the result map
+     * @return the custom services yaml
+     */
+    Deployments getDeploymentsYaml(String namespace, String deploymentsName, HashMap resultMap) {
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListDeploymentsGet()
+                        .replace("{namespace}", namespace)
+                        .replace("{name}", deploymentsName), HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+
+        //noinspection unchecked
+        resultMap.put("sourceTypeYaml", resultString);
+
+        return (Deployments) commonService.setResultModel(commonService.setResultObject(resultMap, Deployments.class), Constants.RESULT_STATUS_SUCCESS);
+    }
+
+    /**
+     * selector를 이용해 Deployment List를 조회한다
      *
      * @param namespace the namespace
      * @param selector  the selector
@@ -102,7 +102,7 @@ public class DeploymentsService {
     public DeploymentsList getDeploymentsListLabelSelector(String namespace, String selector) {
         String requestSelector = "?labelSelector=" + selector;
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListDeploymentList()
+                propertyService.getCaasMasterApiListDeploymentsList()
                         .replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
 
         return (DeploymentsList) commonService.setResultModel(commonService.setResultObject(resultMap, DeploymentsList.class), Constants.RESULT_STATUS_SUCCESS);
