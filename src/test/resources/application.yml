@@ -50,7 +50,7 @@ caasMaster:
         get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
         delete: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
         update: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
-      deployment:
+      deployments:
         allList: "/apis/apps/v1/deployments"
         list: "/apis/apps/v1/namespaces/{namespace}/deployments"
         get: "/apis/apps/v1/namespaces/{namespace}/deployments/{deploymentName}"
