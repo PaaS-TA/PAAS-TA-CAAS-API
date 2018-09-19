@@ -39,10 +39,10 @@ public class ReplicaSetsService {
     }
 
     /**
-     * ReplicaSet 목록을 조회한다.
+     * ReplicaSets 목록을 조회한다.
      *
      * @param namespace the namespace
-     * @return the replicaSet list
+     * @return the replicaSets list
      */
     public ReplicaSetsList getReplicaSetsList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -53,7 +53,7 @@ public class ReplicaSetsService {
     }
 
     /**
-     * ReplicaSet 상세 정보를 조회한다.
+     * ReplicaSets 상세 정보를 조회한다.
      *
      * @param namespace       the namespace
      * @param replicaSetsName the replicaSets name
@@ -70,7 +70,7 @@ public class ReplicaSetsService {
     }
 
     /**
-     * ReplicaSet YAML을 조회한다.
+     * ReplicaSets YAML을 조회한다.
      *
      * @param namespace   the namespace
      * @param replicaSetsName the ReplicaSets name
@@ -90,11 +90,11 @@ public class ReplicaSetsService {
     }
 
     /**
-     * ReplicaSet 목록을 조회한다. (Label Selector)
+     * ReplicaSets 목록을 조회한다. (Label Selector)
      *
      * @param namespace the namespace
      * @param selectors the selectors
-     * @return the replicaSet list
+     * @return the replicaSets list
      */
     public ReplicaSetsList getReplicaSetsListLabelSelector(String namespace, String selectors) {
         String requestSelector = "?labelSelector=" + selectors;
