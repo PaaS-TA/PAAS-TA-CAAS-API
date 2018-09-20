@@ -14,9 +14,7 @@ import java.util.List;
 @Data
 public class ReplicaSetsList {
 
-    private String kind;
-    private String apiVersion;
-    private CommonMetaData metadata;
-    private List<ReplicaSets> items;
     private String resultCode;
+    private List<ReplicaSets> items;
+
 }

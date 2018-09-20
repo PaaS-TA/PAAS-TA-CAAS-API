@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Replica Sets Controller 클래스
+ * ReplicaSets Controller 클래스
  *
  * @author CISS
  * @version 1.0
@@ -22,7 +22,7 @@ public class ReplicaSetsController {
     /**
      * Instantiates a new ReplicaSets controller.
      *
-     * @param replicaSetsService the replicaSet service
+     * @param replicaSetsService the replicaSets service
      */
     @Autowired
     public ReplicaSetsController(ReplicaSetsService replicaSetsService) { this.replicaSetsService = replicaSetsService;}
@@ -63,7 +63,7 @@ public class ReplicaSetsController {
     }
 
     /**
-     * ReplicaSets 객체를 label Selector를 써서 조회한다.
+     * ReplicaSets 목록을 조회한다.(Label Selector)
      * @param namespace namespace
      * @param selectors selectors
      * @return ReplicaSetsList

@@ -9,9 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
- * ReplicaSet Service 클래스
+ * ReplicaSets Service 클래스
  *
  * @author CISS
  * @version 1.0
@@ -25,7 +24,7 @@ public class ReplicaSetsService {
     private final PropertyService propertyService;
 
     /**
-     * Instantiates a new Custom service service.
+     * Instantiates a new ReplicaSet service.
      *
      * @param restTemplateService the rest template service
      * @param commonService       the common service
