@@ -1,6 +1,5 @@
 package org.paasta.caas.api.common.model;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
@@ -12,13 +11,6 @@ import lombok.Data;
  */
 @Data
 public class CommonAddresses {
-
-    // FOR ENDPOINT :: BEGIN
-    @SerializedName("ip")
-    private  String ip;
-
-    @SerializedName("nodeName")
-    private  String nodeName;
-    // FOR ENDPOINT :: BEGIN
-
+    private String ip;
+    private String nodeName;
 }
