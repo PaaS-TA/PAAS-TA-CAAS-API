@@ -27,7 +27,6 @@ caasMaster:
         list: "/api/v1/namespaces/{namespace}/endpoints"
         get: "/api/v1/namespaces/{namespace}/endpoints/{name}"
       pods:
-        allList: "/api/v1/pods"
         list: "/api/v1/namespaces/{namespace}/pods"
         get: "/api/v1/namespaces/{namespace}/pods/{name}"
       nodes:
@@ -48,6 +47,7 @@ caasMaster:
         allList: "/apis/rbac.authorization.k8s.io/v1/roles"
         list: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles"
         get: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
+        create: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles"
         delete: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
         update: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/roles/{name}"
       deployments:
@@ -62,7 +62,13 @@ caasMaster:
         delete: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
         update: "/apis/rbac.authorization.k8s.io/v1/namespaces/{namespace}/rolebindings/{name}"
       users:
+        get: "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
+        create: "/api/v1/namespaces/{namespace}/serviceaccounts"
         delete: "/api/v1/namespaces/{namespace}/serviceaccounts/{name}"
+      namespaces:
+        get: "/api/v1/namespaces/{namespace}"
+      resourceQuotas:
+        list: "/api/v1/namespaces/{namespace}/resourcequotas"
       secrets:
         get: "/api/v1/namespaces/{namespace}/secrets/{name}"
 
