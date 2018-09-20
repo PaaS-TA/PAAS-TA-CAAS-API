@@ -15,13 +15,11 @@ import org.paasta.caas.api.common.CommonUtils;
 public class CommonCondition {
     private String type;
     private String status;
-
     private String message;
     private String reason;
-
     private String lastHeartbeatTime;
     private String lastTransitionTime;
-    
+
     public String getLastHeartbeatTime() {
         return CommonUtils.procSetTimestamp(lastHeartbeatTime);
     }

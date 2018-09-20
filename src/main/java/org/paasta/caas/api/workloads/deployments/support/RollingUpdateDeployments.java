@@ -1,6 +1,5 @@
 package org.paasta.caas.api.workloads.deployments.support;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
@@ -12,9 +11,6 @@ import lombok.Data;
  */
 @Data
 public class RollingUpdateDeployments {
-    @SerializedName("maxSurge")
     private String maxSurge;
-
-    @SerializedName("maxUnavailable")
     private String maxUnavailable;
 }

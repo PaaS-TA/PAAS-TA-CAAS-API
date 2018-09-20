@@ -14,5 +14,5 @@ import java.util.List;
  */
 @Data
 public class CommonPodSpec {
-    private List<CommonContainer> containers = new ArrayList<CommonContainer>();
+    private List<CommonContainer> containers = new ArrayList<>();
 }

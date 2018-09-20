@@ -17,5 +17,4 @@ public class PodsList {
     private String resultCode;
 
     private List<Pods> items = new ArrayList<>();
-
 }

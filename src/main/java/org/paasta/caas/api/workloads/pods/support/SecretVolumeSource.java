@@ -1,6 +1,5 @@
 package org.paasta.caas.api.workloads.pods.support;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
@@ -11,11 +10,7 @@ import lombok.Data;
  * @since 2018.09.04
  */
 @Data
-class SecretVolumeSource {
-
-    @SerializedName(value = "secretName")
+public class SecretVolumeSource {
     private String secretName;
-
-    @SerializedName(value = "defaultMode")
     private String defaultMode;
 }

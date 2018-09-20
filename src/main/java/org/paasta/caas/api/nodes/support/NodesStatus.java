@@ -17,7 +17,6 @@ import java.util.Map;
 public class NodesStatus {
     private Map<String, Object> capacity;
     private Map<String, Object> allocatable;
-
     private List<CommonCondition> conditions;
     private List<NodesAddress> addresses;
     private NodesSystemInfo nodeInfo;
