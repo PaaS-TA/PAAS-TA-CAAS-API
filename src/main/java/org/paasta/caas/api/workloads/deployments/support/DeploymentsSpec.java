@@ -1,5 +1,6 @@
 package org.paasta.caas.api.workloads.deployments.support;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonContainer;
 import org.paasta.caas.api.common.model.CommonLabelSelector;
@@ -28,18 +29,28 @@ public class DeploymentsSpec {
     private CommonLabelSelector selector;
     private DeploymentsStrategy strategy;
     private CommonPodTemplateSpec template;
-    private Set<String> images;
 
     public Set<String> getImages() {
-        final List<CommonContainer> containers = getTemplate().getSpec().getContainers();
-        if (null != containers) {
-            final Set<String> imageSet = new HashSet<>(containers.size());
-            for (CommonContainer container : containers)
-                imageSet.add( container.getImage() );
-
-            return imageSet;
-        } else {
+        CommonPodTemplateSpec podTemplate = getTemplate();
+        if (null == podTemplate) {
             return Collections.EMPTY_SET;
         }
+
+        CommonPodSpec podSpec = podTemplate.getSpec();
+        if (null == podSpec) {
+            return Collections.EMPTY_SET;
+        }
+
+        final List<CommonContainer> containers = podSpec.getContainers();
+        if (null == containers) {
+            return Collections.EMPTY_SET;
+        }
+
+        Set<String> images = new HashSet<>(containers.size());
+        for (CommonContainer container : containers) {
+            images.add(container.getImage());
+        }
+
+        return images;
     }
 }
