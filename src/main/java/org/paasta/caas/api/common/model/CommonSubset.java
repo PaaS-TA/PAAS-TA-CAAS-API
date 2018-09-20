@@ -13,11 +13,7 @@ import java.util.List;
  */
 @Data
 public class CommonSubset {
-
-    // FOR ENDPOINT :: BEGIN
     private List<CommonAddresses> addresses;
     private List<CommonNotReadyAddresses> notReadyAddresses;
     private List<CommonPort> ports;
-    // FOR ENDPOINT :: END
-
 }

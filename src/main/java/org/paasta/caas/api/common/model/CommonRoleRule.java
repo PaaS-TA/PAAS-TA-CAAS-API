@@ -1,6 +1,5 @@
 package org.paasta.caas.api.common.model;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.util.List;
@@ -12,12 +11,7 @@ import java.util.List;
  */
 @Data
 public class CommonRoleRule {
-    @SerializedName(value = "apiGroups")
     private List<String> apiGroups;
-
-    @SerializedName(value = "resources")
     private List<String> resources;
-
-    @SerializedName(value = "verbs")
     private List<String> verbs;
 }

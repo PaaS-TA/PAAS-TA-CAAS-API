@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 2018.09.17
  */
 @Data
-class NodesSystemInfo {
+public class NodesSystemInfo {
     private String architecture;
     private String bootID;
     private String containerRuntimeVersion;

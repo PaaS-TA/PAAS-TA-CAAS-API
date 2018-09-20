@@ -4,9 +4,13 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonContainer;
 import org.paasta.caas.api.common.model.CommonLabelSelector;
+import org.paasta.caas.api.common.model.CommonPodSpec;
 import org.paasta.caas.api.common.model.CommonPodTemplateSpec;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * DeploymentsSpec Model 클래스
@@ -17,41 +21,36 @@ import java.util.*;
  */
 @Data
 public class DeploymentsSpec {
-    @SerializedName("minReadySeconds")
     private int minReadySeconds;
-
-    @SerializedName("paused")
     private boolean paused;
-
-    @SerializedName("progressDeadlineSeconds")
     private int progressDeadlineSeconds;
-
-    @SerializedName("replicas")
     private int replicas;
-
-    @SerializedName("revisionHistoryLimit")
     private int revisionHistoryLimit;
-
-    @SerializedName("selector")
     private CommonLabelSelector selector;
-
-    @SerializedName("strategy")
     private DeploymentsStrategy strategy;
-
-    @SerializedName("template")
     private CommonPodTemplateSpec template;
 
-    @SerializedName( "images" )
     public Set<String> getImages() {
-        final List<CommonContainer> containers = getTemplate().getSpec().getContainers();
-        if (null != containers) {
-            final Set<String> imageSet = new HashSet<>(containers.size());
-            for (CommonContainer container : containers)
-                imageSet.add( container.getImage() );
-
-            return imageSet;
-        } else {
+        CommonPodTemplateSpec podTemplate = getTemplate();
+        if (null == podTemplate) {
             return Collections.EMPTY_SET;
         }
+
+        CommonPodSpec podSpec = podTemplate.getSpec();
+        if (null == podSpec) {
+            return Collections.EMPTY_SET;
+        }
+
+        final List<CommonContainer> containers = podSpec.getContainers();
+        if (null == containers) {
+            return Collections.EMPTY_SET;
+        }
+
+        Set<String> images = new HashSet<>(containers.size());
+        for (CommonContainer container : containers) {
+            images.add(container.getImage());
+        }
+
+        return images;
     }
 }

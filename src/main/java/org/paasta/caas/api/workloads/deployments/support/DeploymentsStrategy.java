@@ -1,6 +1,5 @@
 package org.paasta.caas.api.workloads.deployments.support;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
@@ -12,9 +11,6 @@ import lombok.Data;
  */
 @Data
 public class DeploymentsStrategy {
-    @SerializedName("type")
     private String type;
-
-    @SerializedName("rollingUpdate")
     private RollingUpdateDeployments rollingUpdate;
 }
