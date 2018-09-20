@@ -11,10 +11,6 @@ import lombok.Data;
  */
 @Data
 class CommonNotReadyAddresses {
-
-    // FOR ENDPOINT :: BEGIN
-    private  String ip;
-    private  String nodeName;
-    // FOR ENDPOINT :: BEGIN
-
+    private String ip;
+    private String nodeName;
 }

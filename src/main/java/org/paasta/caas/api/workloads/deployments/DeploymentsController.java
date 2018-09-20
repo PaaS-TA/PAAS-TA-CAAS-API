@@ -1,7 +1,10 @@
 package org.paasta.caas.api.workloads.deployments;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
@@ -42,7 +45,7 @@ public class DeploymentsController {
     /**
      * Deployments 객체를 조회한다. (지정한 네임스페이스에 있는 Deployments를 조회한다)
      *
-     * @param namespace      the namespace
+     * @param namespace       the namespace
      * @param deploymentsName the deploymentsName name
      * @return the deployments
      */
@@ -54,7 +57,7 @@ public class DeploymentsController {
     /**
      * Deployments YAML을 조회한다.
      *
-     * @param namespace   the namespace
+     * @param namespace       the namespace
      * @param deploymentsName the deploymentsName name
      * @return the deployments yaml
      */

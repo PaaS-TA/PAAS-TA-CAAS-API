@@ -21,10 +21,8 @@ public class Pods {
     private CommonMetaData metadata;
     private CommonSpec spec;
     private CommonStatus status;
-
     private String selector;
 
     private Map<String, Object> source;
     private String sourceTypeYaml;
-
 }

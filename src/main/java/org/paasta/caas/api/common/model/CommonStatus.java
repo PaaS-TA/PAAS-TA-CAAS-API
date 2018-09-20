@@ -1,6 +1,5 @@
 package org.paasta.caas.api.common.model;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.util.List;
@@ -14,34 +13,14 @@ import java.util.List;
  */
 @Data
 public class CommonStatus {
-
-    @SerializedName("availableReplicas")
     private int availableReplicas;
-
-    @SerializedName("fullyLabeledReplicas")
     private int fullyLabeledReplicas;
-
-    @SerializedName("observedGeneration")
     private long observedGeneration;
-
-    @SerializedName("readyReplicas")
     private int readyReplicas;
-
-    @SerializedName("replicas")
     private int replicas;
-
-    @SerializedName("phase")
     private String phase;
-
-    @SerializedName("containerStatuses")
     private List containerStatuses;
-
-    @SerializedName("conditions")
     private List<CommonCondition> conditions;
-
-    @SerializedName("podIP")
     private String podIP;
-
-    @SerializedName("qosClass")
     private String qosClass;
 }

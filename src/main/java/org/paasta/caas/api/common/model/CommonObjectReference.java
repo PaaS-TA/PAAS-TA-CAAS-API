@@ -1,6 +1,5 @@
 package org.paasta.caas.api.common.model;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 /**
@@ -12,26 +11,11 @@ import lombok.Data;
  */
 @Data
 public class CommonObjectReference {
-
-    @SerializedName("apiVersion")
     private String apiVersion;
-
-    @SerializedName("fieldPath")
     private String fieldPath;
-
-    @SerializedName("kind")
     private String kind;
-
-    @SerializedName("name")
     private String name;
-
-    @SerializedName("namespace")
     private String namespace;
-
-    @SerializedName("resourceVersion")
     private String resourceVersion;
-
-    @SerializedName("uid")
     private String uid;
-
 }

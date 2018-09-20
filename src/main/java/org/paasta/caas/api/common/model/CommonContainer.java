@@ -16,11 +16,11 @@ import java.util.Map;
  */
 @Data
 public class CommonContainer {
-   String name;
-   String image;
-   List<String> args;
-   List<Map> env;
-   List<CommonPort> ports;
-   CommonResourceRequirement resources;
-   List<String> command;
+    private String name;
+    private String image;
+    private List<String> args;
+    private List<Map> env;
+    private List<CommonPort> ports;
+    private CommonResourceRequirement resources;
+    private List<String> command;
 }

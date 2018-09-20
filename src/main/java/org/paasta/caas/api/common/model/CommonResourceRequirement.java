@@ -13,6 +13,6 @@ import java.util.Map;
  */
 @Data
 public class CommonResourceRequirement {
-    Map<String, String> limits;
-    Map<String, String> requests;
+    private Map<String, Object> limits;
+    private Map<String, Object> requests;
 }

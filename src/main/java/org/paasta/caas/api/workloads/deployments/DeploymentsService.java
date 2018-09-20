@@ -4,14 +4,11 @@ import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -58,7 +55,7 @@ public class DeploymentsService {
     /**
      * 특정 네임스페이스에 있는 Deployments를  조회한다
      *
-     * @param namespace      the namespace
+     * @param namespace       the namespace
      * @param deploymentsName the deployments name
      * @return the deployment
      */
@@ -74,9 +71,9 @@ public class DeploymentsService {
     /**
      * Deployments YAML을 조회한다.
      *
-     * @param namespace   the namespace
+     * @param namespace       the namespace
      * @param deploymentsName the deployments name
-     * @param resultMap   the result map
+     * @param resultMap       the result map
      * @return the custom services yaml
      */
     public Deployments getDeploymentsYaml(String namespace, String deploymentsName, HashMap resultMap) {

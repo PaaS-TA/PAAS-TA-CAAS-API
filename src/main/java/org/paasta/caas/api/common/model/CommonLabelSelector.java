@@ -1,6 +1,5 @@
 package org.paasta.caas.api.common.model;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import java.util.Map;
@@ -14,10 +13,5 @@ import java.util.Map;
  */
 @Data
 public class CommonLabelSelector {
-
-    @SerializedName("matchLabels")
     private Map<String, String> matchLabels;
-
-    //@SerializedName("matchExpressions")
-    //private List<V1LabelSelectorRequirement> matchExpressions = null;
 }
