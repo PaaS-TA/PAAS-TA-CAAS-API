@@ -129,7 +129,7 @@ public class PropertyService {
     @Value("${caasMaster.api.list.roleBindings.delete}")
     private String caasMasterApiListRoleBindingsDeleteUrl;
 
-    @Value("caasMaster.api.list.roleBindings.update")
+    @Value("${caasMaster.api.list.roleBindings.update}")
     private String caasMasterApiListRoleBindingsUpdateUrl;
 
     @Value("${caasMaster.api.list.users.get}")
