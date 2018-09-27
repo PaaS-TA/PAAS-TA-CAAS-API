@@ -14,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Locale;
 
 /**
- * org.paasta.cass.api.exception
+ * Api ExceptionHandler 클래스
  *
- * @author 최윤석
+ * @author CISS
  * @version 1.0
  * @since 2018.08.01
  */
@@ -83,7 +82,6 @@ public class GlobalControllerExceptionHandler {
        return result;
     }
 
-    //common message To-Be 위 지정외 에러시 에러 처리 추가
     private boolean errorResponse(Throwable throwable, HttpStatus status, HttpServletResponse response) throws IOException {
         LOGGER.info(response.toString());
         //response.sendError(status.value(), messageSource.getMessage(status.toString(), null, DEFAULT_LOCALE));

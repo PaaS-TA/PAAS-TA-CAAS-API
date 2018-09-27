@@ -3,7 +3,6 @@ package org.paasta.caas.api.users;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +14,6 @@ import java.util.Map;
 @Data
 public class Users {
     private String resultCode;
-
     private CommonMetaData metadata;
-    private List<Map> secrets = new ArrayList<>();
+    private List<Map> secrets;
 }

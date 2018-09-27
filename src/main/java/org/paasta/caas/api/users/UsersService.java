@@ -15,11 +15,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * User(Service Account) Service 클래스
+ * Users(Service Account) Service 클래스
  *
  * @author hrjin
  * @version 1.0
- * @since 2018-09-03
+ * @since 2018 -09-03
  */
 @Service
 public class UsersService {
@@ -32,8 +32,8 @@ public class UsersService {
      * Instantiates a new Users service
      *
      * @param restTemplateService the rest template service
-     * @param commonService the common service
-     * @param propertyService the property service
+     * @param commonService       the common service
+     * @param propertyService     the property service
      */
     @Autowired
     public UsersService(RestTemplateService restTemplateService, CommonService commonService, PropertyService propertyService) {
@@ -46,7 +46,7 @@ public class UsersService {
     /**
      * Service Account 를 삭제한다.
      *
-     * @param namespace the namespace
+     * @param namespace       the namespace
      * @param caasAccountName the caasAccountNmae
      * @return the Users
      */
@@ -55,11 +55,10 @@ public class UsersService {
         String resultCode;
 
         String apiUrl = propertyService.getCaasMasterApiListUsersDeleteUrl()
-                .replaceAll("\\{" + "namespace" + "\\}", namespace)
-                .replaceAll("\\{" + "name" + "\\}", caasAccountName);
+                .replace("{namespace}", namespace)
+                .replace("{name}", caasAccountName);
 
-        HashMap<String, Object> responseMap = (HashMap<String, Object>) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
-        LOGGER.info("########## deleteServiceAccount() :: responseMap.toString() :: {}", responseMap.toString());
+        HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.DELETE, null, Map.class);
 
         responseObject = commonService.setResultObject(responseMap, Users.class);
         resultCode = Constants.RESULT_STATUS_SUCCESS;

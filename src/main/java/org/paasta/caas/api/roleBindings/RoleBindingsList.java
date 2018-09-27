@@ -1,7 +1,7 @@
 package org.paasta.caas.api.roleBindings;
 
 import lombok.Data;
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -15,6 +15,5 @@ import java.util.List;
 public class RoleBindingsList {
 
     private String resultCode;
-
-    private List<RoleBindings> items = new ArrayList<>();
+    private List<RoleBindings> items;
 }

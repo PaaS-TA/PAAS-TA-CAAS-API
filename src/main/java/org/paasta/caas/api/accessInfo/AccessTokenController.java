@@ -32,13 +32,13 @@ public class AccessTokenController {
     /**
      * Secret 상세 정보를 조회한다.
      *
-     * @param namespace the namespace
+     * @param namespace       the namespace
      * @param accessTokenName the accessTokenName
      * @return the AccessToken
      */
     @RequestMapping(value = "/{accessTokenName:.+}")
     @ResponseBody
-    public AccessToken getSecret(@PathVariable("namespace") String namespace, @PathVariable("accessTokenName") String accessTokenName){
+    public AccessToken getSecret(@PathVariable("namespace") String namespace, @PathVariable("accessTokenName") String accessTokenName) {
         return accessTokenService.getSecret(namespace, accessTokenName);
     }
 }

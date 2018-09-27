@@ -66,10 +66,10 @@ public class ReplicaSetsController {
      * ReplicaSets 목록을 조회한다.(Label Selector)
      * @param namespace namespace
      * @param selectors selectors
-     * @return ReplicaSetsList
+     * @return the replicaSets list
      */
     @GetMapping(value = "/resource/{selector:.+}")
-    public ReplicaSetsList getReplicaSetsLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
+    public ReplicaSetsList getReplicaSetsListLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
         return replicaSetsService.getReplicaSetsListLabelSelector(namespace, selectors);
     }
 

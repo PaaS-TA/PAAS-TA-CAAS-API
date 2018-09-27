@@ -27,7 +27,7 @@ public class AccessTokenService {
      * Instantiates a new accessToken service
      *
      * @param restTemplateService the rest template service
-     * @param propertyService the property service
+     * @param propertyService     the property service
      */
     @Autowired
     public AccessTokenService(RestTemplateService restTemplateService, PropertyService propertyService) {
@@ -38,11 +38,11 @@ public class AccessTokenService {
     /**
      * Secret 에서 cluster certification token 과 user token 을 조회한다.
      *
-     * @param namespace the namespace
+     * @param namespace       the namespace
      * @param accessTokenName the accessTokenName
      * @return the AccessToken
      */
-    AccessToken getSecret(String namespace, String accessTokenName){
+    AccessToken getSecret(String namespace, String accessTokenName) {
         String caCertToken;
         String userToken;
 
