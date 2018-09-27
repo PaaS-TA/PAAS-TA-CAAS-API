@@ -42,8 +42,6 @@ public class RoleBindingsServiceTest {
     private static final String UPDATE_URL = "test-update-url";
     private static final String RESULT_MAP_STATUS_SUCCESS = "Success";
     private static final String YML = "test-yml";
-    private static final String ACCEPT_TYPE_YML = "application/json,application/yaml,text/html";
-    private static final String CONTENT_TYPE_YML = "application/yaml;charset=UTF-8";
 
     private static HashMap<String, String> gResultMap = null;
     private static RoleBindingsList gResultListModel = null;
@@ -213,7 +211,7 @@ public class RoleBindingsServiceTest {
         when(propertyService.getCaasMasterApiListRoleBindingsUpdateUrl()).thenReturn(UPDATE_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, UPDATE_URL
                 .replace("{namespace}", NAMESPACE)
-                .replace("{name}", ROLE_BINDING_NAME), HttpMethod.PUT, YML, Map.class, ACCEPT_TYPE_YML, CONTENT_TYPE_YML)).thenReturn(gResultMap);
+                .replace("{name}", ROLE_BINDING_NAME), HttpMethod.PUT, YML, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML)).thenReturn("result");
 
         // TEST
         String resultString = roleBindingsService.updateRoleBinding(NAMESPACE, ROLE_BINDING_NAME, YML);
@@ -233,7 +231,7 @@ public class RoleBindingsServiceTest {
         when(propertyService.getCaasMasterApiListRoleBindingsUpdateUrl()).thenReturn(UPDATE_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, UPDATE_URL
                 .replace("{namespace}", NAMESPACE)
-                .replace("{name}", ROLE_BINDING_NAME), HttpMethod.PUT, YML, Map.class, ACCEPT_TYPE_YML, CONTENT_TYPE_YML)).thenReturn(null);
+                .replace("{name}", ROLE_BINDING_NAME), HttpMethod.PUT, YML, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML)).thenReturn(null);
 
         // TEST
         String resultString = roleBindingsService.updateRoleBinding(NAMESPACE, ROLE_BINDING_NAME, YML);

@@ -4,7 +4,6 @@ import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
 import org.paasta.caas.api.common.model.CommonRoleRule;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,8 +17,7 @@ import java.util.List;
 public class Roles {
 
     private String resultCode;
-
     private CommonMetaData metadata;
-    private List<CommonRoleRule> rules = new ArrayList<>();
+    private List<CommonRoleRule> rules;
 
 }

@@ -2,7 +2,6 @@ package org.paasta.caas.api.common.model;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,5 +13,5 @@ import java.util.List;
  */
 @Data
 public class CommonPodSpec {
-    private List<CommonContainer> containers = new ArrayList<>();
+    private List<CommonContainer> containers;
 }

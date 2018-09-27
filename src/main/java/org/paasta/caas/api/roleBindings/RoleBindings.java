@@ -3,7 +3,6 @@ package org.paasta.caas.api.roleBindings;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonMetaData;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,7 @@ public class RoleBindings {
     private String kind;
 
     private CommonMetaData metadata;
-    private List<Map> subjects = new ArrayList<>();
+    private List<Map> subjects;
     private Map<String, String> roleRef;
 
 }

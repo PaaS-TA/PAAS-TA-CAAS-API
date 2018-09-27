@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 @TestPropertySource("classpath:application.yml")
 public class RolesServiceTest {
 
-    private static final String TEST_URL ="test-url";
+    private static final String TEST_URL = "test-url";
     private static final String NAMESPACE = "test-namespace";
     private static final String ROLE_NAME = "test-role-name";
     private static final String TEST_YML = "test-yml";
@@ -73,7 +73,7 @@ public class RolesServiceTest {
     @Test
     public void updateRole_Valid_ReturnModel() {
 
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + NAMESPACE + "/roles/" + ROLE_NAME, HttpMethod.PUT, TEST_YML, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8")).thenReturn(gResultMap);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + NAMESPACE + "/roles/" + ROLE_NAME, HttpMethod.PUT, TEST_YML, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML)).thenReturn("result");
         String resultStr = rolesService.updateRole(NAMESPACE, ROLE_NAME, TEST_YML);
 
         assertThat(resultStr).isNotNull();
@@ -83,7 +83,7 @@ public class RolesServiceTest {
     @Test
     public void updateRole_Fail_ReturnModel() {
 
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + NAMESPACE + "/roles/" + ROLE_NAME, HttpMethod.PUT, TEST_YML, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8")).thenReturn(null);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + NAMESPACE + "/roles/" + ROLE_NAME, HttpMethod.PUT, TEST_YML, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML)).thenReturn(null);
         String resultStr = rolesService.updateRole(NAMESPACE, ROLE_NAME, TEST_YML);
 
         assertThat(resultStr).isNotNull();
