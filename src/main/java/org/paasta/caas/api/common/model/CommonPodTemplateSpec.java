@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * CommonPodTemplateSpec Model 클래스
  *
- * @author 최윤석
+ * @author CISS
  * @version 1.0
  * @since 2018.08.07
  */

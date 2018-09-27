@@ -32,7 +32,7 @@ public class DeploymentsController {
     }
 
     /**
-     * Deployments 객체의 리스트를 조회한다. (지정한 네임스페이스에서 조회)
+     * Deployments 목록을 조회한다.
      *
      * @param namespace the namespace
      * @return the deployments list
@@ -43,7 +43,7 @@ public class DeploymentsController {
     }
 
     /**
-     * Deployments 객체를 조회한다. (지정한 네임스페이스에 있는 Deployments를 조회한다)
+     * Deployments 상세정보를 조회한다.
      *
      * @param namespace       the namespace
      * @param deploymentsName the deploymentsName name
@@ -67,7 +67,7 @@ public class DeploymentsController {
     }
 
     /**
-     * Deployments 객체를 label Selector를 써서 조회한다.
+     * Deployments  목록을 조회한다.(Label Selector)
      *
      * @param namespace the namespace
      * @param selector  the selector
