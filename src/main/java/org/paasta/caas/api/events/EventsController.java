@@ -42,4 +42,15 @@ public class EventsController {
             , @PathVariable("resourceName") String resourceName) {
         return eventsService.getEventList(namespace, resourceName);
     }
+
+    /**
+     * Gets namespace event list by resource name.
+     *
+     * @param namespace    the namespace
+     * @return the event list
+     */
+    @GetMapping
+    public EventsList getNamespaceEventList(@PathVariable("namespace") String namespace) {
+        return eventsService.getNamespaceEventList(namespace);
+    }
 }

@@ -118,4 +118,21 @@ public class EventsServiceTest {
         assertThat(resultModel).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
     }
+
+    @Test
+    public void getNamespaceEventList_Valid_ReturnModel() {
+        // CONDITION
+        when(propertyService.getCaasMasterApiListEventsListUrl()).thenReturn(LIST_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                LIST_URL, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+        when(commonService.setResultObject(gResultMap, EventsList.class)).thenReturn(gResultListModel);
+        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
+
+        // TEST
+        EventsList resultModel = eventsService.getNamespaceEventList(NAMESPACE);
+
+        // VERIFY
+        assertThat(resultModel).isNotNull();
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
+    }
 }

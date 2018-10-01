@@ -58,4 +58,19 @@ public class EventsService {
         return (EventsList) commonService.setResultModel(
                 commonService.setResultObject(resultMap, EventsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
+
+    /**
+     * Gets namespace event list by resource name.
+     *
+     * @param namespace    the namespace
+     * @return the event list
+     */
+    EventsList getNamespaceEventList(String namespace) {
+        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListEventsListUrl()
+                        .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
+
+        return (EventsList) commonService.setResultModel(
+                commonService.setResultObject(resultMap, EventsList.class), Constants.RESULT_STATUS_SUCCESS);
+    }
 }
