@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 /**
- * AuthenticateController Service 클래스.
+ * Authenticate Service 클래스.
  *
  * @author indra
  * @version 1.0
