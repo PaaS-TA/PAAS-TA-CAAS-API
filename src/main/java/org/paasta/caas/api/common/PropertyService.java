@@ -60,11 +60,6 @@ public class PropertyService {
     @Value("${caasMaster.api.list.persistentvolumes.get}")
     private String caasMasterApiListPersistentvolumesGetUrl;
 
-    // TODO :: REMOVE AFTER CHECK
-    // horizontalpodautoscalers
-//    @Value("${caasMaster.api.list.horizontalpodautoscalers.get}")
-//    private String caasMasterApiListHorizontalpodautoscalersGetUrl;
-
     @Value("${caasMaster.api.list.events.allList}")
     private String caasMasterApiListEventsAllListUrl;
 
@@ -133,4 +128,5 @@ public class PropertyService {
 
     @Value("${caasMaster.api.list.secrets.get}")
     private String caasMasterApiListSecretsGetUrl;
+
 }
