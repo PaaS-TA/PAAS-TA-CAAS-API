@@ -65,8 +65,10 @@ public class RolesService {
      * @return String string
      */
     String updateRole(String namespace, String roleName, String yml) {
-        // TODO :: MODIFY URI
-        String apiUrl = Constants.APIS_URL_NAMESPACES + "/" + namespace + "/roles/" + roleName;
+        String apiUrl = propertyService.getCaasMasterApiListRolesUpdateUrl()
+                .replace("{namespace}", namespace)
+                .replace("{name}", roleName);
+
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, apiUrl, HttpMethod.PUT, yml, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML);
 
         if (resultString != null) {
