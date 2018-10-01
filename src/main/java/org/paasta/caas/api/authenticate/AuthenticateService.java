@@ -38,10 +38,9 @@ public class AuthenticateService {
      * 유저를 생성한다.
      *
      * @param namespace the namespace
-     * @param yml the yml
-     * @return
+     * @param yml       the yml
      */
-    public void createUser(String namespace, String yml) {
+    void createUser(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListUsersCreateUrl()
                         .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
@@ -51,10 +50,9 @@ public class AuthenticateService {
      * 롤을 생성한다.
      *
      * @param namespace the namespace
-     * @param yml the yml
-     * @return
+     * @param yml       the yml
      */
-    public void createRole(String namespace, String yml) {
+    void createRole(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListRolesCreateUrl()
                         .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
@@ -64,10 +62,9 @@ public class AuthenticateService {
      * 롤을 바인딩한다.
      *
      * @param namespace the namespace
-     * @param yml the yml
-     * @return
+     * @param yml       the yml
      */
-    public void createRoleBinding(String namespace, String yml) {
+    void createRoleBinding(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListRoleBindingsCreateUrl()
                         .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
@@ -77,10 +74,10 @@ public class AuthenticateService {
      * 토큰을 조회한다.
      *
      * @param namespace the namespace
-     * @param userName the user name
+     * @param userName  the user name
      * @return the String
      */
-    public String getToken(String namespace, String userName) {
+    String getToken(String namespace, String userName) {
         return restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListUsersGetUrl()
                         .replace("{namespace}", namespace)

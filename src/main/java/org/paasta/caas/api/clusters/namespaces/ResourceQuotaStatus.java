@@ -2,7 +2,6 @@ package org.paasta.caas.api.clusters.namespaces;
 
 import lombok.Data;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,8 +14,7 @@ import java.util.Map;
 @Data
 public class ResourceQuotaStatus {
 
-  private Map<String, String> hard;
-  private Map<String, String> used;
+    private Map<String, String> hard;
+    private Map<String, String> used;
 
 }
-
