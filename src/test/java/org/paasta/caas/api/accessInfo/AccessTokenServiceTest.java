@@ -40,11 +40,17 @@ public class AccessTokenServiceTest {
     private static HashMap gResultMap = null;
     private static HashMap gResultDataMap = null;
 
+    private static AccessToken gResultModel = null;
+    private static AccessToken gFinalResultModel = null;
+
     @Mock
     private RestTemplateService restTemplateService;
 
     @Mock
     private PropertyService propertyService;
+
+    @Mock
+    private CommonService commonService;
 
     @InjectMocks
     AccessTokenService accessTokenService;
@@ -57,6 +63,10 @@ public class AccessTokenServiceTest {
         gResultDataMap.put("token", ENCODE_TOKEN);
         gResultDataMap.put("ca.crt", ENCODE_CERT_TOKEN);
         gResultMap.put("data", gResultDataMap);
+
+        gResultModel = new AccessToken();
+        gFinalResultModel = new AccessToken();
+        gFinalResultModel.setResultCode(Constants.RESULT_STATUS_SUCCESS);
 
     }
 
@@ -73,14 +83,16 @@ public class AccessTokenServiceTest {
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, GET_URL
                 .replace("{namespace}", NAMESPACE)
                 .replace("{accessTokenName}", ACCESS_TOKEN_NAME), HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+        gResultModel.setCaCertToken(DECODE_CERT_TOKEN);
+        gResultModel.setUserAccessToken(DECODE_TOKEN);
+        when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
         // TEST
         AccessToken resultModel = accessTokenService.getSecret(NAMESPACE, ACCESS_TOKEN_NAME);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
-        assertEquals(resultModel.getUserAccessToken(), DECODE_TOKEN);
-        assertEquals(resultModel.getCaCertToken(), DECODE_CERT_TOKEN);
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
     }
 
 }
