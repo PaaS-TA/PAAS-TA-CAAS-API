@@ -45,7 +45,7 @@ public class PodsService {
      * @param namespace the namespace
      * @return the pod list
      */
-    public PodsList getPodList(String namespace) {
+    PodsList getPodList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
 
@@ -59,7 +59,7 @@ public class PodsService {
      * @param selector  the selector
      * @return the pod list
      */
-    public PodsList getPodListWithLabelSelector(String namespace, String selector) {
+    PodsList getPodListWithLabelSelector(String namespace, String selector) {
         String requestSelector = "?labelSelector=" + selector;
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
@@ -75,7 +75,7 @@ public class PodsService {
      * @param isIncludedSucceededPods is included succeeded pods? (boolean)
      * @return the pod list
      */
-    public PodsList getPodListByNode(String namespace, String nodeName, boolean isIncludedSucceededPods) {
+    PodsList getPodListByNode(String namespace, String nodeName, boolean isIncludedSucceededPods) {
         String requestURL = propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace)
                 + "/?fieldSelector=spec.nodeName=" + nodeName;
         if (!isIncludedSucceededPods) {
@@ -94,7 +94,7 @@ public class PodsService {
      * @param podName   the pod's name
      * @return the pod
      */
-    public Pods getPod(String namespace, String podName) {
+    Pods getPod(String namespace, String podName) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPodsGetUrl().replace("{namespace}", namespace).replace("{name}", podName),
                 HttpMethod.GET, null, Map.class);
@@ -109,7 +109,7 @@ public class PodsService {
      * @param podName   the pod's name
      * @return the pods
      */
-    public Pods getPodYaml(String namespace, String podName) {
+    Pods getPodYaml(String namespace, String podName) {
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListPodsGetUrl().replace("{namespace}", namespace).replace("{name}", podName),
                 HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
