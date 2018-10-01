@@ -112,7 +112,7 @@ public class EventsServiceTest {
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         // TEST
-        EventsList resultModel = eventsService.getEventList(NAMESPACE, RESOURCE);
+        EventsList resultModel = eventsService.getEventsList(NAMESPACE, RESOURCE);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
@@ -129,7 +129,7 @@ public class EventsServiceTest {
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         // TEST
-        EventsList resultModel = eventsService.getNamespaceEventList(NAMESPACE);
+        EventsList resultModel = eventsService.getNamespaceEventsList(NAMESPACE);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
