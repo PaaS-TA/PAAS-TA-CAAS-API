@@ -42,13 +42,13 @@ public class EventsService {
     }
 
     /**
-     * Gets event list by resource name.
+     * Events 목록을 조회한다.
      *
      * @param namespace    the namespace
      * @param resourceName the resourceName
-     * @return the event list
+     * @return the events list
      */
-    EventsList getEventList(String namespace, String resourceName) {
+    EventsList getEventsList(String namespace, String resourceName) {
         String requestSelector = "?fieldSelector=involvedObject.name=" + resourceName;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -60,12 +60,12 @@ public class EventsService {
     }
 
     /**
-     * Gets namespace event list by resource name.
+     * Events 목록을 조회한다.(for namespace)
      *
      * @param namespace    the namespace
-     * @return the event list
+     * @return the events list
      */
-    EventsList getNamespaceEventList(String namespace) {
+    EventsList getNamespaceEventsList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListEventsListUrl()
                         .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);

@@ -43,7 +43,7 @@ public class NamespacesService {
      * Namespaces 상세정보를 조회한다.
      *
      * @param namespace the namespaces
-     * @return the namespaces
+     * @return Namespaces the namespaces
      */
     public Namespaces getNamespaces(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -57,7 +57,7 @@ public class NamespacesService {
      * ResourceQuota 목록을 조회한다.
      *
      * @param namespace the namespaces
-     * @return the ResourceQuotaList
+     * @return ResourceQuotaList the ResourceQuotaList
      */
     public ResourceQuotaList getResourceQuotaList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,

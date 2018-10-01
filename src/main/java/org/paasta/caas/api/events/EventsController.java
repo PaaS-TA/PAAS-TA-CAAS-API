@@ -20,9 +20,9 @@ public class EventsController {
     private final EventsService eventsService;
 
     /**
-     * Instantiates a new event controller.
+     * Instantiates a new Events controller.
      *
-     * @param eventsService the event service
+     * @param eventsService the events service
      */
     @Autowired
     public EventsController(EventsService eventsService) {
@@ -31,26 +31,26 @@ public class EventsController {
 
 
     /**
-     * Gets Events list.
+     * Events 목록을 조회한다.
      *
      * @param namespace    the namespace
      * @param resourceName the resourceName
-     * @return the event list
+     * @return the events list
      */
     @GetMapping(value = "/resource/{resourceName:.+}")
-    public EventsList getEventList(@PathVariable("namespace") String namespace
+    public EventsList getEventsList(@PathVariable("namespace") String namespace
             , @PathVariable("resourceName") String resourceName) {
-        return eventsService.getEventList(namespace, resourceName);
+        return eventsService.getEventsList(namespace, resourceName);
     }
 
     /**
-     * Gets namespace event list by resource name.
+     * Events 목록을 조회한다.(for namespace)
      *
      * @param namespace    the namespace
-     * @return the event list
+     * @return the events list
      */
     @GetMapping
-    public EventsList getNamespaceEventList(@PathVariable("namespace") String namespace) {
-        return eventsService.getNamespaceEventList(namespace);
+    public EventsList getNamespaceEventsList(@PathVariable("namespace") String namespace) {
+        return eventsService.getNamespaceEventsList(namespace);
     }
 }

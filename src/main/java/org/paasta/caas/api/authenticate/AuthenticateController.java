@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * AuthenticateController Controller 클래스.
+ * Authenticate Controller 클래스.
  *
  * @author indra
  * @version 1.0

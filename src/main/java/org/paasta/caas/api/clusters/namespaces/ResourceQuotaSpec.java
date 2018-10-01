@@ -16,7 +16,6 @@ import java.util.Map;
 public class ResourceQuotaSpec {
 
   private Map<String, String> hard = null;
-//  private V1ScopeSelector scopeSelector = null;
   private List<String> scopes = null;
 
 }
