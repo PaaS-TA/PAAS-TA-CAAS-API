@@ -31,7 +31,6 @@ public class AuthenticateController {
      *
      * @param namespace the namespace
      * @param yml the yml
-     * @return
      */
     @PostMapping(value = "/namespaces/{namespace}/serviceaccounts")
     public void createUser(@PathVariable("namespace") String namespace, @RequestBody String yml){
@@ -43,7 +42,6 @@ public class AuthenticateController {
      *
      * @param namespace the namespace
      * @param yml the yml
-     * @return
      */
     @PostMapping(value = "/namespaces/{namespace}/roles")
     public void createRole(@PathVariable("namespace") String namespace, @RequestBody String yml){
@@ -55,7 +53,6 @@ public class AuthenticateController {
      *
      * @param namespace the namespace
      * @param yml the yml
-     * @return
      */
     @PostMapping(value = "/namespaces/{namespace}/rolebindings")
     public void createRoleBinding(@PathVariable("namespace") String namespace, @RequestBody String yml){

@@ -45,7 +45,7 @@ public class NamespacesService {
      * @param namespace the namespaces
      * @return Namespaces the namespaces
      */
-    public Namespaces getNamespaces(String namespace) {
+    Namespaces getNamespaces(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListNamespaceGetUrl()
                         .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);
@@ -59,7 +59,7 @@ public class NamespacesService {
      * @param namespace the namespaces
      * @return ResourceQuotaList the ResourceQuotaList
      */
-    public ResourceQuotaList getResourceQuotaList(String namespace) {
+    ResourceQuotaList getResourceQuotaList(String namespace) {
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListResourceQuotasListUrl()
                         .replace("{namespace}", namespace), HttpMethod.GET, null, Map.class);

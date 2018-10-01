@@ -39,9 +39,8 @@ public class AuthenticateService {
      *
      * @param namespace the namespace
      * @param yml the yml
-     * @return
      */
-    public void createUser(String namespace, String yml) {
+    void createUser(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListUsersCreateUrl()
                         .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
@@ -52,9 +51,8 @@ public class AuthenticateService {
      *
      * @param namespace the namespace
      * @param yml the yml
-     * @return
      */
-    public void createRole(String namespace, String yml) {
+    void createRole(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListRolesCreateUrl()
                         .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
@@ -65,9 +63,8 @@ public class AuthenticateService {
      *
      * @param namespace the namespace
      * @param yml the yml
-     * @return
      */
-    public void createRoleBinding(String namespace, String yml) {
+    void createRoleBinding(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListRoleBindingsCreateUrl()
                         .replace("{namespace}", namespace), HttpMethod.POST, yml, Map.class, "application/json,application/yaml,text/html", "application/yaml;charset=UTF-8");
@@ -80,7 +77,7 @@ public class AuthenticateService {
      * @param userName the user name
      * @return the String
      */
-    public String getToken(String namespace, String userName) {
+    String getToken(String namespace, String userName) {
         return restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListUsersGetUrl()
                         .replace("{namespace}", namespace)

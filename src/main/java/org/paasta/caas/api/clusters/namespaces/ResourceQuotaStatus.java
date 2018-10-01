@@ -2,7 +2,6 @@ package org.paasta.caas.api.clusters.namespaces;
 
 import lombok.Data;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
