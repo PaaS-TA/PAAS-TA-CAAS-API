@@ -13,6 +13,7 @@ import java.util.Map;
  */
 @Data
 public class CommonResourceRequirement {
+    // TODO :: USE MODEL
     private Map<String, Object> limits;
     private Map<String, Object> requests;
 }

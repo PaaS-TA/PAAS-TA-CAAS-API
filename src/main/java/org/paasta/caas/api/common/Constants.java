@@ -11,22 +11,24 @@ import org.springframework.http.MediaType;
  */
 public class Constants {
 
-    /*RESULT STATUS*/
     public static final String RESULT_STATUS_SUCCESS = "SUCCESS";
     public static final String RESULT_STATUS_FAIL = "FAIL";
 
-    /*TARGET API*/
     public static final String TARGET_CAAS_MASTER_API = "caasMasterApi";
     public static final String ACCEPT_TYPE_YAML = String.valueOf(MediaType.valueOf("application/yaml"));
     public static final String APIS_URL_NAMESPACES = "/apis/rbac.authorization.k8s.io/v1/namespaces";
+
+    static final String TARGET_COMMON_API = "commonApi";
+
     static final String STRING_DATE_TYPE = "yyyy-MM-dd HH:mm:ss";
     static final String STRING_ORIGINAL_DATE_TYPE = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     static final String STRING_TIME_ZONE_ID = "Asia/Seoul";
+
     static final String ACCEPT_TYPE_JSON = MediaType.APPLICATION_JSON_VALUE;
-    static final String TARGET_COMMON_API = "commonApi";
 
 
     public Constants() {
         throw new IllegalStateException();
     }
+
 }
