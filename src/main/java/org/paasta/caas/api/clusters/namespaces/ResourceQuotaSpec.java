@@ -15,7 +15,8 @@ import java.util.Map;
 @Data
 public class ResourceQuotaSpec {
 
-    private Map<String, String> hard;
-    private List<String> scopes;
+  private Map<String, String> hard;
+  private List<String> scopes;
 
 }
+

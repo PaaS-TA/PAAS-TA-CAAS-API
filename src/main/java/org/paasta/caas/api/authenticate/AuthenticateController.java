@@ -30,10 +30,10 @@ public class AuthenticateController {
      * 유저를 생성한다.
      *
      * @param namespace the namespace
-     * @param yml       the yml
+     * @param yml the yml
      */
     @PostMapping(value = "/namespaces/{namespace}/serviceaccounts")
-    public void createUser(@PathVariable("namespace") String namespace, @RequestBody String yml) {
+    public void createUser(@PathVariable("namespace") String namespace, @RequestBody String yml){
         authenticateService.createUser(namespace, yml);
     }
 
@@ -41,10 +41,10 @@ public class AuthenticateController {
      * 롤을 생성한다.
      *
      * @param namespace the namespace
-     * @param yml       the yml
+     * @param yml the yml
      */
     @PostMapping(value = "/namespaces/{namespace}/roles")
-    public void createRole(@PathVariable("namespace") String namespace, @RequestBody String yml) {
+    public void createRole(@PathVariable("namespace") String namespace, @RequestBody String yml){
         authenticateService.createRole(namespace, yml);
     }
 
@@ -52,10 +52,10 @@ public class AuthenticateController {
      * 롤을 바인딩한다.
      *
      * @param namespace the namespace
-     * @param yml       the yml
+     * @param yml the yml
      */
     @PostMapping(value = "/namespaces/{namespace}/rolebindings")
-    public void createRoleBinding(@PathVariable("namespace") String namespace, @RequestBody String yml) {
+    public void createRoleBinding(@PathVariable("namespace") String namespace, @RequestBody String yml){
         authenticateService.createRoleBinding(namespace, yml);
     }
 
@@ -63,11 +63,11 @@ public class AuthenticateController {
      * 토큰을 조회한다.
      *
      * @param namespace the namespace
-     * @param userName  the user name
+     * @param userName the user name
      * @return the String
      */
     @GetMapping(value = "/namespaces/{namespace}/serviceaccounts/{userName}")
-    public String getToken(@PathVariable("namespace") String namespace, @PathVariable("userName") String userName) {
+    public String getToken(@PathVariable("namespace") String namespace, @PathVariable("userName") String userName){
         return authenticateService.getToken(namespace, userName);
     }
 }

@@ -38,7 +38,7 @@ public class AuthenticateService {
      * 유저를 생성한다.
      *
      * @param namespace the namespace
-     * @param yml       the yml
+     * @param yml the yml
      */
     void createUser(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -50,7 +50,7 @@ public class AuthenticateService {
      * 롤을 생성한다.
      *
      * @param namespace the namespace
-     * @param yml       the yml
+     * @param yml the yml
      */
     void createRole(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -62,7 +62,7 @@ public class AuthenticateService {
      * 롤을 바인딩한다.
      *
      * @param namespace the namespace
-     * @param yml       the yml
+     * @param yml the yml
      */
     void createRoleBinding(String namespace, String yml) {
         restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -74,7 +74,7 @@ public class AuthenticateService {
      * 토큰을 조회한다.
      *
      * @param namespace the namespace
-     * @param userName  the user name
+     * @param userName the user name
      * @return the String
      */
     String getToken(String namespace, String userName) {
