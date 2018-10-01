@@ -72,8 +72,8 @@ public class RolesServiceTest {
 
     @Test
     public void updateRole_Valid_ReturnModel() {
-
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + NAMESPACE + "/roles/" + ROLE_NAME, HttpMethod.PUT, TEST_YML, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML)).thenReturn("result");
+        when(propertyService.getCaasMasterApiListRolesUpdateUrl()).thenReturn(TEST_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, TEST_URL, HttpMethod.PUT, TEST_YML, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML)).thenReturn("result");
         String resultStr = rolesService.updateRole(NAMESPACE, ROLE_NAME, TEST_YML);
 
         assertThat(resultStr).isNotNull();
@@ -82,8 +82,8 @@ public class RolesServiceTest {
 
     @Test
     public void updateRole_Fail_ReturnModel() {
-
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, Constants.APIS_URL_NAMESPACES + "/" + NAMESPACE + "/roles/" + ROLE_NAME, HttpMethod.PUT, TEST_YML, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML)).thenReturn(null);
+        when(propertyService.getCaasMasterApiListRolesUpdateUrl()).thenReturn(TEST_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, TEST_URL, HttpMethod.PUT, TEST_YML, String.class, Constants.ACCEPT_TYPE_YAML, Constants.ACCEPT_TYPE_YAML)).thenReturn(null);
         String resultStr = rolesService.updateRole(NAMESPACE, ROLE_NAME, TEST_YML);
 
         assertThat(resultStr).isNotNull();
