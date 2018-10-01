@@ -35,7 +35,9 @@ public class GlobalControllerExceptionHandler {
 
         String message =
                 "{\"resultMessage\":\""+ex.getStatusText()+"\"" +
-                ",\"resultCode\":\""+ex.getStatusCode()+"\"}";
+                //",\"resultCode\":\""+ex.getStatusCode()+"\"}";
+                ",\"resultCode\":\""+"FAIL"+"\"}";
+        // errorCode를 받지만, 에러를 "FAIL"로 코드 통일
 
         // CAAS-API 통신 성공을 위한 SC_OK(200) 및 kubernetes API 에러코드 및 메시지 전달
         response.resetBuffer();
