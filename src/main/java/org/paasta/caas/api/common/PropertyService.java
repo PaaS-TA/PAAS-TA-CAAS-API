@@ -60,14 +60,8 @@ public class PropertyService {
     @Value("${caasMaster.api.list.persistentvolumes.get}")
     private String caasMasterApiListPersistentvolumesGetUrl;
 
-    @Value("${caasMaster.api.list.events.allList}")
-    private String caasMasterApiListEventsAllListUrl;
-
     @Value("${caasMaster.api.list.events.list}")
     private String caasMasterApiListEventsListUrl;
-
-    @Value("${caasMaster.api.list.roles.allList}")
-    private String caasMasterApiListRolesAllListUrl;
 
     @Value("${caasMaster.api.list.roles.list}")
     private String caasMasterApiListRolesListUrl;
@@ -84,17 +78,11 @@ public class PropertyService {
     @Value("${caasMaster.api.list.roles.update}")
     private String caasMasterApiListRolesUpdateUrl;
 
-    @Value("${caasMaster.api.list.deployments.allList}")
-    private String caasMasterApiListDeploymentsAllList;
-
     @Value("${caasMaster.api.list.deployments.list}")
     private String caasMasterApiListDeploymentsList;
 
     @Value("${caasMaster.api.list.deployments.get}")
     private String caasMasterApiListDeploymentsGet;
-
-    @Value("${caasMaster.api.list.roleBindings.allList}")
-    private String caasMasterApiListRoleBindingsAllListUrl;
 
     @Value("${caasMaster.api.list.roleBindings.list}")
     private String caasMasterApiListRoleBindingsListUrl;
