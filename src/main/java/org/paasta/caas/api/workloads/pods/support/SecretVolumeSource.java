@@ -10,7 +10,7 @@ import lombok.Data;
  * @since 2018.09.04
  */
 @Data
-public class SecretVolumeSource {
+class SecretVolumeSource {
     private String secretName;
     private String defaultMode;
 }
