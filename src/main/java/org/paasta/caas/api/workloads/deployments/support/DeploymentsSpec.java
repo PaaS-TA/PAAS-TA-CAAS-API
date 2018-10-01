@@ -1,6 +1,5 @@
 package org.paasta.caas.api.workloads.deployments.support;
 
-import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import org.paasta.caas.api.common.model.CommonContainer;
 import org.paasta.caas.api.common.model.CommonLabelSelector;
