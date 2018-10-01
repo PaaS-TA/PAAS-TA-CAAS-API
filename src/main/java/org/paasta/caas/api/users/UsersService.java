@@ -4,9 +4,6 @@ import org.paasta.caas.api.common.CommonService;
 import org.paasta.caas.api.common.Constants;
 import org.paasta.caas.api.common.PropertyService;
 import org.paasta.caas.api.common.RestTemplateService;
-import org.paasta.caas.api.roles.RolesService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -23,7 +20,6 @@ import java.util.Map;
  */
 @Service
 public class UsersService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RolesService.class);
     private final RestTemplateService restTemplateService;
     private final CommonService commonService;
     private final PropertyService propertyService;
