@@ -76,7 +76,7 @@ public class CustomServicesController {
      * @return the custom services list
      */
     @GetMapping(value = "/resource/{selector:.+}")
-    public CustomServicesList getCustomServicesListLabeSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors) {
+    public CustomServicesList getCustomServicesListLabelSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors) {
         return customServicesService.getCustomServicesListLabelSelector(namespace, selectors);
     }
 

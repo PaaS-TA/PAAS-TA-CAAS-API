@@ -29,28 +29,14 @@ public class Events {
     private CommonObjectReference involvedObject;
 
     public String getFirstTimestamp() {
-//        TODO :: REMOVE AFTER CHECK
-//        try {
-//            this.firstTimestamp = (firstTimestamp != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE)
-//                    .format(new SimpleDateFormat(Constants.STRING_ORIGINAL_DATE_TYPE).parse(firstTimestamp)) : null;
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
         return CommonUtils.procSetTimestamp(firstTimestamp);
     }
 
-    public String getLastTimestamp() {
-//        TODO :: REMOVE AFTER CHECK
-//        try {
-//            this.lastTimestamp = (lastTimestamp != null) ? new SimpleDateFormat(Constants.STRING_DATE_TYPE)
-//                    .format(new SimpleDateFormat(Constants.STRING_ORIGINAL_DATE_TYPE).parse(lastTimestamp)) : null;
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
 
+    public String getLastTimestamp() {
         return CommonUtils.procSetTimestamp(lastTimestamp);
     }
+
 
     @Data
     public class EventSource {
