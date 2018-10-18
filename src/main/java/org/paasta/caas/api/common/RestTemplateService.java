@@ -1,5 +1,6 @@
 package org.paasta.caas.api.common;
 
+import org.paasta.caas.api.adminToken.AdminToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,6 @@ public class RestTemplateService {
     private static final String AUTHORIZATION_HEADER_KEY = "Authorization";
     private static final String CONTENT_TYPE = "Content-Type";
     private final String commonApiBase64Authorization;
-    private final String caasApiBase64Authorization;
     private final RestTemplate restTemplate;
     private final PropertyService propertyService;
     private String base64Authorization;
@@ -33,23 +33,20 @@ public class RestTemplateService {
 
     /**
      * Instantiates a new Rest template service.
-     *
      * @param restTemplate                   the rest template
      * @param commonApiAuthorizationId       the common api authorization id
      * @param commonApiAuthorizationPassword the common api authorization password
-     * @param caasApiToken                   the caas api token
      * @param propertyService                the property service
+//    *@param adminTokenService
      */
     @Autowired
     public RestTemplateService(RestTemplate restTemplate,
                                @Value("${commonApi.authorization.id}") String commonApiAuthorizationId,
                                @Value("${commonApi.authorization.password}") String commonApiAuthorizationPassword,
-                               @Value("${caasMaster.api.token}") String caasApiToken,
                                PropertyService propertyService) {
         this.restTemplate = restTemplate;
         this.propertyService = propertyService;
 
-        this.caasApiBase64Authorization = "Bearer " + caasApiToken;
         this.commonApiBase64Authorization = "Basic "
                 + Base64Utils.encodeToString(
                 (commonApiAuthorizationId + ":" + commonApiAuthorizationPassword).getBytes(StandardCharsets.UTF_8));
@@ -139,7 +136,7 @@ public class RestTemplateService {
         // CAAS MASTER API
         if (Constants.TARGET_CAAS_MASTER_API.equals(reqApi)) {
             apiUrl = propertyService.getCaasMasterApiUrl();
-            authorization = caasApiBase64Authorization;
+            authorization = "Bearer " + this.getAdminToken().getTokenValue();
         }
 
         // COMMON API
@@ -150,6 +147,13 @@ public class RestTemplateService {
 
         this.base64Authorization = authorization;
         this.baseUrl = apiUrl;
+    }
+
+    public AdminToken getAdminToken() {
+        this.setApiUrlAuthorization(Constants.TARGET_COMMON_API);
+        String reqUrl = Constants.URI_COMMON_API_ADMIN_TOKEN_DETAIL.replace("{token_name:.+}",Constants.TOKEN_KEY);
+        AdminToken resultObject = this.send(Constants.TARGET_COMMON_API, reqUrl, HttpMethod.GET, null, AdminToken.class);
+        return resultObject;
     }
 
 }

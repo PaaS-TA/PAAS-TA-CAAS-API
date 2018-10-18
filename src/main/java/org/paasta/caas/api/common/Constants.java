@@ -18,7 +18,11 @@ public class Constants {
     public static final String ACCEPT_TYPE_YAML = String.valueOf(MediaType.valueOf("application/yaml"));
     public static final String APIS_URL_NAMESPACES = "/apis/rbac.authorization.k8s.io/v1/namespaces";
 
-    static final String TARGET_COMMON_API = "commonApi";
+    public static final String TOKEN_KEY = "caas_admin";
+
+    public static final String TARGET_COMMON_API = "commonApi";
+
+    public static final String URI_COMMON_API_ADMIN_TOKEN_DETAIL = "/adminToken/{token_name:.+}";
 
     static final String STRING_DATE_TYPE = "yyyy-MM-dd HH:mm:ss";
     static final String STRING_ORIGINAL_DATE_TYPE = "yyyy-MM-dd'T'HH:mm:ss'Z'";
