@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.StandardCharsets;
 
+import static org.paasta.caas.api.common.Constants.TARGET_COMMON_API;
+
 /**
  * RestTemplate Service 클래스
  *
@@ -140,7 +142,7 @@ public class RestTemplateService {
         }
 
         // COMMON API
-        if (Constants.TARGET_COMMON_API.equals(reqApi)) {
+        if (TARGET_COMMON_API.equals(reqApi)) {
             apiUrl = propertyService.getCommonApiUrl();
             authorization = commonApiBase64Authorization;
         }
@@ -150,10 +152,9 @@ public class RestTemplateService {
     }
 
     public AdminToken getAdminToken() {
-        this.setApiUrlAuthorization(Constants.TARGET_COMMON_API);
+        this.setApiUrlAuthorization(TARGET_COMMON_API);
         String reqUrl = Constants.URI_COMMON_API_ADMIN_TOKEN_DETAIL.replace("{token_name:.+}",Constants.TOKEN_KEY);
-        AdminToken resultObject = this.send(Constants.TARGET_COMMON_API, reqUrl, HttpMethod.GET, null, AdminToken.class);
-        return resultObject;
+        return this.send(TARGET_COMMON_API, reqUrl, HttpMethod.GET, null, AdminToken.class);
     }
 
 }
