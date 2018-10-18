@@ -18,9 +18,6 @@ public class PropertyService {
     @Value("${caasMaster.api.url}")
     private String caasMasterApiUrl;
 
-    @Value("${caasMaster.api.token}")
-    private String caasMasterApiToken;
-
     @Value("${commonApi.url}")
     private String commonApiUrl;
 
