@@ -49,7 +49,7 @@ public class EventsService {
      * @return the events list
      */
     EventsList getEventsList(String namespace, String resourceName) {
-        String requestSelector = "?fieldSelector=involvedObject.name=" + resourceName;
+        String requestSelector = "?fieldSelector=involvedObject.uid=" + resourceName;
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListEventsListUrl()
