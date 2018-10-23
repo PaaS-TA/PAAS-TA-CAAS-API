@@ -34,13 +34,13 @@ public class EventsController {
      * Events 목록을 조회한다.
      *
      * @param namespace    the namespace
-     * @param resourceName the resourceName
+     * @param resourceUid the resourceUid
      * @return the events list
      */
-    @GetMapping(value = "/resource/{resourceName:.+}")
+    @GetMapping(value = "/resource/{resourceUid:.+}")
     public EventsList getEventsList(@PathVariable("namespace") String namespace
-            , @PathVariable("resourceName") String resourceName) {
-        return eventsService.getEventsList(namespace, resourceName);
+            , @PathVariable("resourceUid") String resourceUid) {
+        return eventsService.getEventsList(namespace, resourceUid);
     }
 
     /**
