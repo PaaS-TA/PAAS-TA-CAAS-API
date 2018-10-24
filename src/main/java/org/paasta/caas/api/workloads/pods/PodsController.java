@@ -46,7 +46,7 @@ public class PodsController {
      */
     @GetMapping(value = "/resource/{selector:.+}")
     @ResponseBody
-    public PodsList getPodListWithLabelSelector(@PathVariable(value = "namespace") String namespace,
+    public PodsList getPodListBySelector(@PathVariable(value = "namespace") String namespace,
                                                 @PathVariable(value = "selector") String selector) {
         return podsService.getPodListWithLabelSelector(namespace, selector);
     }
@@ -61,7 +61,7 @@ public class PodsController {
     @GetMapping(value = "/node/{nodeName:.+}")
     public PodsList getPodListByNode(@PathVariable(value = "namespace") String namespace,
                                      @PathVariable(value = "nodeName") String nodeName) {
-        return podsService.getPodListByNode(namespace, nodeName, false);
+        return podsService.getPodListByNode(namespace, nodeName);
     }
 
     /**

@@ -87,7 +87,7 @@ public class DeploymentsServiceTest {
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         //call method
-        DeploymentsList resultList = deploymentsService.getDeploymentList(NAMESPACE);
+        DeploymentsList resultList = deploymentsService.getDeploymentsList(NAMESPACE);
 
         //compare result
         assertThat(resultList).isNotNull();
@@ -104,7 +104,7 @@ public class DeploymentsServiceTest {
         when(commonService.setResultModel(gResultModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultModel);
 
         //call method
-        Deployments result = deploymentsService.getDeployment(NAMESPACE, DEPLOYMENT_NAME);
+        Deployments result = deploymentsService.getDeployments(NAMESPACE, DEPLOYMENT_NAME);
 
         //compare result
         assertThat(result).isNotNull();
@@ -131,26 +131,21 @@ public class DeploymentsServiceTest {
 
     }
 
-    @Test
-    public void getDeploymentsListLabelSelector_Valid_ReturnModel() {
-
-        //when
-        when(propertyService.getCaasMasterApiListDeploymentsList()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments");
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments?labelSelector="+LABEL_SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
-        when(commonService.setResultObject(gResultMap, DeploymentsList.class)).thenReturn(gResultListModel);
-        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
-
-        //call method
-        DeploymentsList resultList = deploymentsService.getDeploymentsListLabelSelector(NAMESPACE,LABEL_SELECTOR);
-
-        //compare result
-        assertThat(resultList).isNotNull();
-        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
-    }
-
-
-
-
-
+//    @Test
+//    public void getDeploymentsListLabelSelector_Valid_ReturnModel() {
+//
+//        //when
+//        when(propertyService.getCaasMasterApiListDeploymentsList()).thenReturn("/apis/apps/v1/namespaces/{namespace}/deployments");
+//        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/apis/apps/v1/namespaces/" + NAMESPACE +"/deployments?labelSelector="+LABEL_SELECTOR, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+//        when(commonService.setResultObject(gResultMap, DeploymentsList.class)).thenReturn(gResultListModel);
+//        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
+//
+//        //call method
+//        DeploymentsList resultList = deploymentsService.getDeploymentsListLabelSelector(NAMESPACE,LABEL_SELECTOR);
+//
+//        //compare result
+//        assertThat(resultList).isNotNull();
+//        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
+//    }
 
 }

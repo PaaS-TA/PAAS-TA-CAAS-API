@@ -38,8 +38,8 @@ public class DeploymentsController {
      * @return the deployments list
      */
     @GetMapping
-    public DeploymentsList getDeploymentList(@PathVariable(value = "namespace") String namespace) {
-        return deploymentsService.getDeploymentList(namespace);
+    public DeploymentsList getDeploymentsList(@PathVariable(value = "namespace") String namespace) {
+        return deploymentsService.getDeploymentsList(namespace);
     }
 
     /**
@@ -50,8 +50,8 @@ public class DeploymentsController {
      * @return the deployments
      */
     @GetMapping(value = "/{deploymentsName:.+}")
-    public Deployments getDeployment(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentsName") String deploymentsName) {
-        return deploymentsService.getDeployment(namespace, deploymentsName);
+    public Deployments getDeployments(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentsName") String deploymentsName) {
+        return deploymentsService.getDeployments(namespace, deploymentsName);
     }
 
     /**
@@ -66,15 +66,15 @@ public class DeploymentsController {
         return deploymentsService.getDeploymentsYaml(namespace, deploymentsName, new HashMap<>());
     }
 
-    /**
-     * Deployments  목록을 조회한다.(Label Selector)
-     *
-     * @param namespace the namespace
-     * @param selector  the selector
-     * @return the deployments list
-     */
-    @GetMapping(value = "/resource/{selector:.+}")
-    public DeploymentsList getDeploymentsListLabelSelector(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "selector") String selector) {
-        return deploymentsService.getDeploymentsListLabelSelector(namespace, selector);
-    }
+//    /**
+//     * Deployments  목록을 조회한다.(Label Selector)
+//     *
+//     * @param namespace the namespace
+//     * @param selector  the selector
+//     * @return the deployments list
+//     */
+//    @GetMapping(value = "/resource/{selector:.+}")
+//    public DeploymentsList getDeploymentsListLabelSelector(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "selector") String selector) {
+//        return deploymentsService.getDeploymentsListLabelSelector(namespace, selector);
+//    }
 }

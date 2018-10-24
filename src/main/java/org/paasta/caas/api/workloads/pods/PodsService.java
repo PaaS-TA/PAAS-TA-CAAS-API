@@ -72,18 +72,14 @@ public class PodsService {
      *
      * @param namespace               the namespace
      * @param nodeName                the node name
-     * @param isIncludedSucceededPods is included succeeded pods? (boolean)
      * @return the pod list
      */
-    PodsList getPodListByNode(String namespace, String nodeName, boolean isIncludedSucceededPods) {
+    PodsList getPodListByNode(String namespace, String nodeName) {
         String requestURL = propertyService.getCaasMasterApiListPodsListUrl().replace("{namespace}", namespace)
                 + "/?fieldSelector=spec.nodeName=" + nodeName;
-        if (!isIncludedSucceededPods) {
-            requestURL += ",status.phase!=Succeeded";
-        }
+
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, requestURL,
                 HttpMethod.GET, null, Map.class);
-
         return (PodsList) commonService.setResultModel(commonService.setResultObject(resultMap, PodsList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 

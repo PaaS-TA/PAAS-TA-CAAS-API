@@ -117,27 +117,11 @@ public class PodsServiceTest {
         when(commonService.setResultObject(gResultMap, PodsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
-        PodsList resultList = podsService.getPodListByNode(NAMESPACE, NODE_NAME, true);
+        PodsList resultList = podsService.getPodListByNode(NAMESPACE, NODE_NAME);
 
         assertThat(resultList).isNotNull();
         assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
 
-    }
-
-    /**
-     * Node 이름을 이용해 Pods 목록을 조회할 때 유효하지 않은 부분에 대한 테스트 케이스.
-     */
-    @Test
-    public void getPodListByNode_NAMESPACE_False_Valid_ReturnModel() {
-        when(propertyService.getCaasMasterApiListPodsListUrl()).thenReturn("/api/v1/namespaces/{namespace}/pods");
-        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API, "/api/v1/namespaces/" + NAMESPACE + "/pods/?fieldSelector=spec.nodeName=" + NODE_NAME + ",status.phase!=Succeeded", HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
-        when(commonService.setResultObject(gResultMap, PodsList.class)).thenReturn(gResultListModel);
-        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
-
-        PodsList resultList = podsService.getPodListByNode(NAMESPACE, NODE_NAME, false);
-
-        assertThat(resultList).isNotNull();
-        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultList.getResultCode());
     }
 
     /**
