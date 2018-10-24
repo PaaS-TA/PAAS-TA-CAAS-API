@@ -107,7 +107,7 @@ public class EventsServiceTest {
         // CONDITION
         when(propertyService.getCaasMasterApiListEventsListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                LIST_URL + "?fieldSelector=involvedObject.name=" + RESOURCE, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+                LIST_URL + "?fieldSelector=involvedObject.uid=" + RESOURCE, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
         when(commonService.setResultObject(gResultMap, EventsList.class)).thenReturn(gResultListModel);
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
