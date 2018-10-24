@@ -43,6 +43,7 @@ public class EventsServiceTest {
     private static final String SOURCEHOST_METAKEY = "source";
     private static final String SOURCEHOST_KEY = "host";
     private static final String SOURCEHOST_VALUE = NODE_NAME;
+    private static final String TYPE = "type";
 
     private static HashMap gResultMap = null;
     private static EventsList gResultListModel = null;
@@ -103,7 +104,7 @@ public class EventsServiceTest {
     }
 
     @Test
-    public void getEventList_Valid_ReturnModel() {
+    public void getEventList_Type_Null_Valid_ReturnModel() {
         // CONDITION
         when(propertyService.getCaasMasterApiListEventsListUrl()).thenReturn(LIST_URL);
         when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
@@ -112,7 +113,24 @@ public class EventsServiceTest {
         when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
 
         // TEST
-        EventsList resultModel = eventsService.getEventsList(NAMESPACE, RESOURCE);
+        EventsList resultModel = eventsService.getEventsList(NAMESPACE, RESOURCE, null);
+
+        // VERIFY
+        assertThat(resultModel).isNotNull();
+        assertEquals(Constants.RESULT_STATUS_SUCCESS, resultModel.getResultCode());
+    }
+
+    @Test
+    public void getEventList_Type_Not_Null_Valid_ReturnModel() {
+        // CONDITION
+        when(propertyService.getCaasMasterApiListEventsListUrl()).thenReturn(LIST_URL);
+        when(restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                LIST_URL + "?fieldSelector=involvedObject.name=" + RESOURCE, HttpMethod.GET, null, Map.class)).thenReturn(gResultMap);
+        when(commonService.setResultObject(gResultMap, EventsList.class)).thenReturn(gResultListModel);
+        when(commonService.setResultModel(gResultListModel, Constants.RESULT_STATUS_SUCCESS)).thenReturn(gFinalResultListModel);
+
+        // TEST
+        EventsList resultModel = eventsService.getEventsList(NAMESPACE, RESOURCE, TYPE);
 
         // VERIFY
         assertThat(resultModel).isNotNull();
