@@ -45,11 +45,15 @@ public class EventsService {
      * Events 목록을 조회한다.
      *
      * @param namespace    the namespace
-     * @param resourceName the resourceName
+     * @param resourceUid the resourceUid
      * @return the events list
      */
-    EventsList getEventsList(String namespace, String resourceUid) {
+    EventsList getEventsList(String namespace, String resourceUid, String type) {
         String requestSelector = "?fieldSelector=involvedObject.uid=" + resourceUid;
+
+        if(type != null) {
+            requestSelector = "?fieldSelector=involvedObject.name=" + resourceUid;
+        }
 
         HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListEventsListUrl()

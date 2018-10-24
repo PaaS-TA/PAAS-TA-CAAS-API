@@ -1,10 +1,7 @@
 package org.paasta.caas.api.events;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Events Controller 클래스
@@ -38,9 +35,8 @@ public class EventsController {
      * @return the events list
      */
     @GetMapping(value = "/resource/{resourceUid:.+}")
-    public EventsList getEventsList(@PathVariable("namespace") String namespace
-            , @PathVariable("resourceUid") String resourceUid) {
-        return eventsService.getEventsList(namespace, resourceUid);
+    public EventsList getEventsList(@PathVariable("namespace") String namespace, @PathVariable("resourceUid") String resourceUid, @RequestParam(value="type", required=false) String type) {
+        return eventsService.getEventsList(namespace, resourceUid, type);
     }
 
     /**
