@@ -66,15 +66,4 @@ public class DeploymentsController {
         return deploymentsService.getDeploymentsYaml(namespace, deploymentsName, new HashMap<>());
     }
 
-//    /**
-//     * Deployments  목록을 조회한다.(Label Selector)
-//     *
-//     * @param namespace the namespace
-//     * @param selector  the selector
-//     * @return the deployments list
-//     */
-//    @GetMapping(value = "/resource/{selector:.+}")
-//    public DeploymentsList getDeploymentsListLabelSelector(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "selector") String selector) {
-//        return deploymentsService.getDeploymentsListLabelSelector(namespace, selector);
-//    }
 }
