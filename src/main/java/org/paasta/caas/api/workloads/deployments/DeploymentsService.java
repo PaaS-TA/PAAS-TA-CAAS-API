@@ -90,19 +90,4 @@ public class DeploymentsService {
         return (Deployments) commonService.setResultModel(commonService.setResultObject(resultMap, Deployments.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
-//    /**
-//     * Deployments 목록을 조회한다. (Label Selector)
-//     *
-//     * @param namespace the namespace
-//     * @param selector  the selector
-//     * @return the deployments list
-//     */
-//    public DeploymentsList getDeploymentsListLabelSelector(String namespace, String selector) {
-//        String requestSelector = "?labelSelector=" + selector;
-//        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-//                propertyService.getCaasMasterApiListDeploymentsList()
-//                        .replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
-//
-//        return (DeploymentsList) commonService.setResultModel(commonService.setResultObject(resultMap, DeploymentsList.class), Constants.RESULT_STATUS_SUCCESS);
-//    }
 }
