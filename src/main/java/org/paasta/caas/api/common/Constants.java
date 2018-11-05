@@ -16,7 +16,6 @@ public class Constants {
 
     public static final String TARGET_CAAS_MASTER_API = "caasMasterApi";
     public static final String ACCEPT_TYPE_YAML = String.valueOf(MediaType.valueOf("application/yaml"));
-    public static final String APIS_URL_NAMESPACES = "/apis/rbac.authorization.k8s.io/v1/namespaces";
 
     public static final String TOKEN_KEY = "caas_admin";
 

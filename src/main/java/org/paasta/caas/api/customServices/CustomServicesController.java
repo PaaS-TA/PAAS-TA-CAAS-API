@@ -67,17 +67,4 @@ public class CustomServicesController {
         return customServicesService.getCustomServicesYaml(namespace, serviceName, new HashMap<>());
     }
 
-
-    /**
-     * Services 목록을 조회한다. (Label Selector)
-     *
-     * @param namespace namespace
-     * @param selectors selectors
-     * @return the custom services list
-     */
-    @GetMapping(value = "/resource/{selector:.+}")
-    public CustomServicesList getCustomServicesListLabelSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors) {
-        return customServicesService.getCustomServicesListLabelSelector(namespace, selectors);
-    }
-
 }

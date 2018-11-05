@@ -92,19 +92,4 @@ public class CustomServicesService {
         return (CustomServices) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServices.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
-    /**
-     * Services 목록을 조회한다. (Label Selector)
-     *
-     * @param namespace the namespace
-     * @param selectors the selectors
-     * @return the custom services list
-     */
-    CustomServicesList getCustomServicesListLabelSelector(String namespace, String selectors) {
-        String requestSelector = "?labelSelector=" + selectors;
-        HashMap resultMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListServicesListUrl()
-                        .replace("{namespace}", namespace) + requestSelector, HttpMethod.GET, null, Map.class);
-
-        return (CustomServicesList) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServicesList.class), Constants.RESULT_STATUS_SUCCESS);
-    }
 }
