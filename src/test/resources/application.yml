@@ -3,8 +3,8 @@ spring:
   application:
     name: caas-api
   security:
-    username:
-    password:
+    username: admin
+    password: PaaS-TA
 
 project:
   name: caas-api
@@ -13,6 +13,7 @@ project:
 
 management:
   security:
+    #Actuator endpoint(health,info..)의 인증여부
     enabled: false
 
 caasMaster:
