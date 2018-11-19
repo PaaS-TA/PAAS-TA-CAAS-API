@@ -46,24 +46,24 @@ public class DeploymentsController {
      * Deployments 상세정보를 조회한다.
      *
      * @param namespace       the namespace
-     * @param deploymentsName the deploymentsName name
+     * @param deploymentName the deploymentName name
      * @return the deployments
      */
-    @GetMapping(value = "/{deploymentsName:.+}")
-    public Deployments getDeployments(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentsName") String deploymentsName) {
-        return deploymentsService.getDeployments(namespace, deploymentsName);
+    @GetMapping(value = "/{deploymentName:.+}")
+    public Deployments getDeployments(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentName") String deploymentName) {
+        return deploymentsService.getDeployments(namespace, deploymentName);
     }
 
     /**
      * Deployments YAML을 조회한다.
      *
      * @param namespace       the namespace
-     * @param deploymentsName the deploymentsName name
+     * @param deploymentName the deploymentName name
      * @return the deployments yaml
      */
-    @GetMapping(value = "/{deploymentsName:.+}/yaml")
-    public Deployments getDeploymentsYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentsName") String deploymentsName) {
-        return deploymentsService.getDeploymentsYaml(namespace, deploymentsName, new HashMap<>());
+    @GetMapping(value = "/{deploymentName:.+}/yaml")
+    public Deployments getDeploymentsYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentName") String deploymentName) {
+        return deploymentsService.getDeploymentsYaml(namespace, deploymentName, new HashMap<>());
     }
 
 }

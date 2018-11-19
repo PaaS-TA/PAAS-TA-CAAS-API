@@ -57,14 +57,14 @@ public class DeploymentsService {
      * Deployments 상세 정보를 조회한다.
      *
      * @param namespace       the namespace
-     * @param deploymentsName the deployments name
+     * @param deploymentName the deployments name
      * @return the deployments
      */
-    public Deployments getDeployments(String namespace, String deploymentsName) {
+    public Deployments getDeployments(String namespace, String deploymentName) {
         HashMap responseMap = (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListDeploymentsGet()
                         .replace("{namespace}", namespace)
-                        .replace("{name}", deploymentsName)
+                        .replace("{name}", deploymentName)
                         , HttpMethod.GET, null, Map.class);
 
         return (Deployments) commonService.setResultModel(commonService.setResultObject(responseMap, Deployments.class), Constants.RESULT_STATUS_SUCCESS);
@@ -74,15 +74,15 @@ public class DeploymentsService {
      * Deployments YAML을 조회한다.
      *
      * @param namespace       the namespace
-     * @param deploymentsName the deployments name
+     * @param deploymentName the deployments name
      * @param resultMap       the result map
      * @return the deployments yaml
      */
-    public Deployments getDeploymentsYaml(String namespace, String deploymentsName, HashMap resultMap) {
+    public Deployments getDeploymentsYaml(String namespace, String deploymentName, HashMap resultMap) {
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
                 propertyService.getCaasMasterApiListDeploymentsGet()
                         .replace("{namespace}", namespace)
-                        .replace("{name}", deploymentsName), HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+                        .replace("{name}", deploymentName), HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
 
         //noinspection unchecked
         resultMap.put("sourceTypeYaml", resultString);
