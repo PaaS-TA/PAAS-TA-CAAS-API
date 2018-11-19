@@ -12,6 +12,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * Spring Security WebSecurityConfigurer implements
+ *
+ * @author ciss
+ * @version 1.0
+ * @since 2018.11.14
+ */
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -21,14 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${spring.security.password}")
     String password;
-
-    /**
-     * Spring Security WebSecurityConfigurer implements
-     *
-     * @author ciss
-     * @version 1.0
-     * @since 2018.11.14
-     */
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -58,8 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/**").permitAll()
                 .antMatchers("/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
