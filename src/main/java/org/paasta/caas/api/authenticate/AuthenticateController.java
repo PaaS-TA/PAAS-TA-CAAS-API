@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
  * @since 2018.09.05 최초작성
  */
 @RestController
-@RequestMapping(value = "/authenticate")
 public class AuthenticateController {
 
     private final AuthenticateService authenticateService;
