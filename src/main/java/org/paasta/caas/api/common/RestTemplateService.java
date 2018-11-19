@@ -153,7 +153,7 @@ public class RestTemplateService {
 
     public AdminToken getAdminToken() {
         this.setApiUrlAuthorization(TARGET_COMMON_API);
-        String reqUrl = Constants.URI_COMMON_API_ADMIN_TOKEN_DETAIL.replace("{token_name:.+}",Constants.TOKEN_KEY);
+        String reqUrl = Constants.URI_COMMON_API_ADMIN_TOKEN_DETAIL.replace("{tokenName:.+}",Constants.TOKEN_KEY);
         return this.send(TARGET_COMMON_API, reqUrl, HttpMethod.GET, null, AdminToken.class);
     }
 

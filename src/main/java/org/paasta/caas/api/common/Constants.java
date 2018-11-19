@@ -21,7 +21,7 @@ public class Constants {
 
     public static final String TARGET_COMMON_API = "commonApi";
 
-    public static final String URI_COMMON_API_ADMIN_TOKEN_DETAIL = "/adminToken/{token_name:.+}";
+    public static final String URI_COMMON_API_ADMIN_TOKEN_DETAIL = "/adminToken/{tokenName:.+}";
 
     static final String STRING_DATE_TYPE = "yyyy-MM-dd HH:mm:ss";
     static final String STRING_ORIGINAL_DATE_TYPE = "yyyy-MM-dd'T'HH:mm:ss'Z'";
