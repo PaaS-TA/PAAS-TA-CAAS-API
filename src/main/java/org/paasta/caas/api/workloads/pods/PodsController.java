@@ -44,7 +44,7 @@ public class PodsController {
      * @param selector  the selector
      * @return the pod list
      */
-    @GetMapping(value = "/resource/{selector:.+}")
+    @GetMapping(value = "/resources/{selector:.+}")
     @ResponseBody
     public PodsList getPodListBySelector(@PathVariable(value = "namespace") String namespace,
                                                 @PathVariable(value = "selector") String selector) {
@@ -58,7 +58,7 @@ public class PodsController {
      * @param nodeName  the node name
      * @return the pod list
      */
-    @GetMapping(value = "/node/{nodeName:.+}")
+    @GetMapping(value = "/nodes/{nodeName:.+}")
     public PodsList getPodListByNode(@PathVariable(value = "namespace") String namespace,
                                      @PathVariable(value = "nodeName") String nodeName) {
         return podsService.getPodListByNode(namespace, nodeName);

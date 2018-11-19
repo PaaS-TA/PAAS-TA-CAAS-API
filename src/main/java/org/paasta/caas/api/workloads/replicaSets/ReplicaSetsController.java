@@ -68,7 +68,7 @@ public class ReplicaSetsController {
      * @param selectors selectors
      * @return the replicaSets list
      */
-    @GetMapping(value = "/resource/{selector:.+}")
+    @GetMapping(value = "/resources/{selector:.+}")
     public ReplicaSetsList getReplicaSetsListLabelSelector(@PathVariable("namespace") String namespace, @PathVariable("selector") String selectors ) {
         return replicaSetsService.getReplicaSetsListLabelSelector(namespace, selectors);
     }
