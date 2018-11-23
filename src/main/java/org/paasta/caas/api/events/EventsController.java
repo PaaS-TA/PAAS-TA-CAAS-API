@@ -34,7 +34,7 @@ public class EventsController {
      * @param resourceUid the resourceUid
      * @return the events list
      */
-    @GetMapping(value = "/resource/{resourceUid:.+}")
+    @GetMapping(value = "/resources/{resourceUid:.+}")
     public EventsList getEventsList(@PathVariable("namespace") String namespace, @PathVariable("resourceUid") String resourceUid, @RequestParam(value="type", required=false) String type) {
         return eventsService.getEventsList(namespace, resourceUid, type);
     }
