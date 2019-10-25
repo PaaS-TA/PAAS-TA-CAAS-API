@@ -57,6 +57,12 @@ public class PropertyService {
     @Value("${caasMaster.api.list.persistentvolumes.get}")
     private String caasMasterApiListPersistentvolumesGetUrl;
 
+    @Value("${caasMaster.api.list.persistentVolumeClaims.list}")
+    private String caasMasterApiListPersistentVolumeClaimsListUrl;
+
+    @Value("${caasMaster.api.list.persistentVolumeClaims.get}")
+    private String caasMasterApiListPersistentVolumeClaimsGetUrl;
+
     @Value("${caasMaster.api.list.events.list}")
     private String caasMasterApiListEventsListUrl;
 
