@@ -60,7 +60,7 @@ public class PersistentVolumeClaimsService {
      * PersistentVolumeClaims 상세 정보를 조회한다.
      *
      * @param namespace                     the namespace
-     * @param persistentVolumeClaimName  the PersistentVolumeClaims
+     * @param persistentVolumeClaimName  the PersistentVolumeClaim name
      * @return the PersistentVolumeClaims
      */
     public PersistentVolumeClaims getPersistentVolumeClaims(String namespace, String persistentVolumeClaimName) {
@@ -71,5 +71,26 @@ public class PersistentVolumeClaimsService {
                 , HttpMethod.GET, null, Map.class);
 
         return (PersistentVolumeClaims) commonService.setResultModel(commonService.setResultObject(responseMap, PersistentVolumeClaims.class), Constants.RESULT_STATUS_SUCCESS);
+    }
+
+
+    /**
+     * PersistentVolumeClaims YAML 을 조회한다.
+     *
+     * @param namespace                    the namespace
+     * @param persistentVolumeClaimName the PersistentVolumeClaim name
+     * @param resultMap                    the result map
+     * @return the PersistentVolumeClaims
+     */
+    public PersistentVolumeClaims getPersistentVolumeClaimsYaml(String namespace, String persistentVolumeClaimName, HashMap resultMap) {
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListPersistentVolumeClaimsGetUrl()
+                        .replace("{namespace}", namespace)
+                        .replace("{name}", persistentVolumeClaimName), HttpMethod.GET, null, String.class, Constants.ACCEPT_TYPE_YAML);
+
+        //noinspection unchecked
+        resultMap.put("sourceTypeYaml", resultString);
+
+        return (PersistentVolumeClaims) commonService.setResultModel(commonService.setResultObject(resultMap, PersistentVolumeClaims.class), Constants.RESULT_STATUS_SUCCESS);
     }
 }

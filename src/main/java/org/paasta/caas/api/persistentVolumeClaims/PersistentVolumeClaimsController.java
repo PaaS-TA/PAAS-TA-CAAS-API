@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 /**
  * PersistentVolumeClaims Controller 클래스
  *
@@ -31,8 +33,8 @@ public class PersistentVolumeClaimsController {
     /**
      * PersistentVolumeClaims 목록을 조회한다.
      *
-     * @param namespace
-     * @return
+     * @param namespace the namespace
+     * @return the PersistentVolumeClaims List
      */
     @GetMapping
     public PersistentVolumeClaimsList getPersistentVolumeClaimsList(@PathVariable(value = "namespace") String namespace) {
@@ -42,12 +44,24 @@ public class PersistentVolumeClaimsController {
     /**
      * PersistentVolumeClaims 상세 정보를 조회한다.
      *
-     * @param namespace
-     * @param persistentVolumeClaimName
-     * @return
+     * @param namespace the namespace
+     * @param persistentVolumeClaimName the PersistentVolumeClaims
+     * @return the PersistentVolumeClaims
      */
     @GetMapping(value = "/{persistentVolumeClaimName:.+}")
     public PersistentVolumeClaims getPersistentVolumeClaims(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "persistentVolumeClaimName") String persistentVolumeClaimName) {
         return persistentVolumeClaimsService.getPersistentVolumeClaims(namespace, persistentVolumeClaimName);
+    }
+
+    /**
+     * PersistentVolumeClaims YAML 을 조회한다.
+     *
+     * @param namespace the namespace
+     * @param persistentVolumeClaimName the PersistentVolumeClaims
+     * @return the PersistentVolumeClaims
+     */
+    @GetMapping(value = "/{persistentVolumeClaimName:.+}/yaml")
+    public PersistentVolumeClaims getPersistentVolumeClaimsYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "persistentVolumeClaimName") String persistentVolumeClaimName) {
+        return persistentVolumeClaimsService.getPersistentVolumeClaimsYaml(namespace, persistentVolumeClaimName, new HashMap<>());
     }
 }
