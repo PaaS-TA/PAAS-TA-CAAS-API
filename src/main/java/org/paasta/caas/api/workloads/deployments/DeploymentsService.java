@@ -90,4 +90,40 @@ public class DeploymentsService {
         return (Deployments) commonService.setResultModel(commonService.setResultObject(resultMap, Deployments.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+    /**
+     * Deployments 를 생성한다.
+     *
+     * @param namespace       the namespace
+     * @param deployments     the deployments
+     * @param resultMap       the result map
+     * @return the deployments yaml
+     */
+    public Map<?,?> createDeploymentsYaml(String namespace, Object deployments, HashMap resultMap) {
+        System.out.println("namespace:::::" + namespace );
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListDeploymentsPost()
+                        .replace("{namespace}", namespace), HttpMethod.POST, deployments, String.class, Constants.ACCEPT_TYPE_YAML);
+        resultMap.put("sourceTypeYaml", resultString);
+
+        return resultMap;
+    }
+
+    /**
+     * Deployments 를 삭제한다.
+     *
+     * @param namespace       the namespace
+     * @param name             the deployments name
+     * @param resultMap       the result map
+     * @return the deployments yaml
+     */
+    public Map<?,?> deleteDeploymentsYaml(String namespace, String name, HashMap resultMap) {
+        System.out.println("namespace:::::" + namespace );
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListDeploymentsDelete()
+                        .replace("{namespace}", namespace).replace("{name}", name), HttpMethod.DELETE, null, String.class, Constants.ACCEPT_TYPE_YAML);
+        resultMap.put("sourceTypeYaml", resultString);
+
+        return resultMap;
+    }
+
 }

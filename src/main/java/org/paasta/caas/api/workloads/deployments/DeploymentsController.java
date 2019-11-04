@@ -1,12 +1,10 @@
 package org.paasta.caas.api.workloads.deployments;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Deployments Controller 클래스
@@ -64,6 +62,30 @@ public class DeploymentsController {
     @GetMapping(value = "/{deploymentName:.+}/yaml")
     public Deployments getDeploymentsYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "deploymentName") String deploymentName) {
         return deploymentsService.getDeploymentsYaml(namespace, deploymentName, new HashMap<>());
+    }
+
+    /**
+     * Deployments를 생성한다.
+     *
+     * @param namespace       the namespace
+     * @param deployment      the Deployments
+     * @return the deployments yaml
+     */
+    @PostMapping
+    public Map<?,?> createDeploymentsYaml(@PathVariable(value = "namespace") String namespace, @RequestBody Object deployment) {
+        return deploymentsService.createDeploymentsYaml(namespace, deployment, new HashMap<>());
+    }
+
+    /**
+     * Deployments를 삭제한다.
+     *
+     * @param namespace       the namespace
+     * @param name             the Deployments name
+     * @return the deployments yaml
+     */
+    @DeleteMapping("/{name}")
+    public Map<?,?> deleteDeploymentsYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "name") String name) {
+        return deploymentsService.deleteDeploymentsYaml(namespace, name, new HashMap<>());
     }
 
 }

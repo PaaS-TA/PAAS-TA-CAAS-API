@@ -27,6 +27,12 @@ public class PropertyService {
     @Value("${caasMaster.api.list.services.get}")
     private String caasMasterApiListServicesGetUrl;
 
+    @Value("${caasMaster.api.list.services.post}")
+    private String caasMasterApiListServicesPost;
+
+    @Value("${caasMaster.api.list.services.delete}")
+    private String caasMasterApiListServicesDelete;
+
     @Value("${caasMaster.api.list.endpoints.list}")
     private String caasMasterApiListEndpointsListUrl;
 
@@ -86,6 +92,12 @@ public class PropertyService {
 
     @Value("${caasMaster.api.list.deployments.get}")
     private String caasMasterApiListDeploymentsGet;
+
+    @Value("${caasMaster.api.list.deployments.post}")
+    private String caasMasterApiListDeploymentsPost;
+
+    @Value("${caasMaster.api.list.deployments.delete}")
+    private String caasMasterApiListDeploymentsDelete;
 
     @Value("${caasMaster.api.list.roleBindings.list}")
     private String caasMasterApiListRoleBindingsListUrl;

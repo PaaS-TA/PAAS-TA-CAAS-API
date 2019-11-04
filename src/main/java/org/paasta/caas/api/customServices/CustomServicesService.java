@@ -92,4 +92,36 @@ public class CustomServicesService {
         return (CustomServices) commonService.setResultModel(commonService.setResultObject(resultMap, CustomServices.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+
+    /**
+     * Services를 생성한다.
+     *
+     * @param namespace       the namespace
+     * @param service         the Services
+     * @return                 return is succeeded
+     */
+    public Map<?,?> createServicesYaml(String namespace, Object service, HashMap resultMap) {
+        System.out.println("namespace:::::" + namespace );
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListServicesPost()
+                        .replace("{namespace}", namespace), HttpMethod.POST, service, String.class, Constants.ACCEPT_TYPE_YAML);
+        resultMap.put("sourceTypeYaml", resultString);
+        return resultMap;
+    }
+
+    /**
+     * Services를 제거한다.
+     *
+     * @param namespace       the namespace
+     * @param name             the Services name
+     * @return                 return is succeeded
+     */
+    public Map<?,?> deleteServicesYaml(String namespace, String name, HashMap resultMap) {
+        System.out.println("namespace:::::" + namespace );
+        String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListServicesDelete()
+                        .replace("{namespace}", namespace).replace("{name}", name), HttpMethod.DELETE, null, String.class, Constants.ACCEPT_TYPE_YAML);
+        resultMap.put("sourceTypeYaml", resultString);
+        return resultMap;
+    }
 }

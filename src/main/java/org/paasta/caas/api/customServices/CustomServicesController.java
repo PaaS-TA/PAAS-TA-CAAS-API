@@ -1,12 +1,10 @@
 package org.paasta.caas.api.customServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Custom Services Controller 클래스
@@ -67,4 +65,29 @@ public class CustomServicesController {
         return customServicesService.getCustomServicesYaml(namespace, serviceName, new HashMap<>());
     }
 
+
+    /**
+     * Services를 생성한다.
+     *
+     * @param namespace       the namespace
+     * @param services        the Services
+     * @return                 return is succeeded
+     */
+    @PostMapping
+    public Map<?,?> createServicesYaml(@PathVariable(value = "namespace") String namespace, @RequestBody Object services) {
+        return customServicesService.createServicesYaml(namespace, services, new HashMap<>());
+    }
+
+
+    /**
+     * Services를 제거한다.
+     *
+     * @param namespace       the namespace
+     * @param name             the Services name
+     * @return                 return is succeeded
+     */
+    @DeleteMapping("/{name}")
+    public Map<?,?> deleteServicesYaml(@PathVariable(value = "namespace") String namespace, @PathVariable(value = "name") String name) {
+        return customServicesService.deleteServicesYaml(namespace, name, new HashMap<>());
+    }
 }
