@@ -101,7 +101,7 @@ public class DeploymentsService {
     public Map<?,?> createDeploymentsYaml(String namespace, Object deployments, HashMap resultMap) {
         System.out.println("namespace:::::" + namespace );
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListDeploymentsPost()
+                propertyService.getCaasMasterApiListDeploymentsCreate()
                         .replace("{namespace}", namespace), HttpMethod.POST, deployments, String.class, Constants.ACCEPT_TYPE_YAML);
         resultMap.put("sourceTypeYaml", resultString);
 

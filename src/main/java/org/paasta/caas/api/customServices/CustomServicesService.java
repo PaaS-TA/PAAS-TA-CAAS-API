@@ -103,7 +103,7 @@ public class CustomServicesService {
     public Map<?,?> createServicesYaml(String namespace, Object service, HashMap resultMap) {
         System.out.println("namespace:::::" + namespace );
         String resultString = restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
-                propertyService.getCaasMasterApiListServicesPost()
+                propertyService.getCaasMasterApiListServicesCreate()
                         .replace("{namespace}", namespace), HttpMethod.POST, service, String.class, Constants.ACCEPT_TYPE_YAML);
         resultMap.put("sourceTypeYaml", resultString);
         return resultMap;
