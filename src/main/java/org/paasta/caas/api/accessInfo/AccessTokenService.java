@@ -7,6 +7,8 @@ import org.paasta.caas.api.common.RestTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Base64;
 import java.util.HashMap;
@@ -69,4 +71,13 @@ public class AccessTokenService {
 
         return (AccessToken) commonService.setResultModel(accessToken, Constants.RESULT_STATUS_SUCCESS);
     }
+
+
+    public Map createSecret(String namespace, Object secret){
+        return (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListSecretsCreateUrl()
+                        .replace("{namespace}", namespace), HttpMethod.POST, secret, Map.class);
+
+    }
+
 }

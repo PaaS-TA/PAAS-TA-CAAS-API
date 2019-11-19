@@ -67,4 +67,16 @@ public class NamespacesService {
         return (ResourceQuotaList) commonService.setResultModel(commonService.setResultObject(resultMap, ResourceQuotaList.class), Constants.RESULT_STATUS_SUCCESS);
     }
 
+
+    /**
+     * NameSpace를 생성한다.
+     *
+     * @param namespace the namespaces
+     * @return ResourceQuotaList the ResourceQuotaList
+     */
+    Map createNamespaces(Object namespace){
+        return (HashMap) restTemplateService.send(Constants.TARGET_CAAS_MASTER_API,
+                propertyService.getCaasMasterApiListNamespaceCreateUrl(), HttpMethod.POST, namespace, Map.class);
+    }
+
 }

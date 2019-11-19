@@ -126,10 +126,15 @@ public class PropertyService {
     @Value("${caasMaster.api.list.namespaces.get}")
     private String caasMasterApiListNamespaceGetUrl;
 
+    @Value("${caasMaster.api.list.namespaces.create}")
+    private String caasMasterApiListNamespaceCreateUrl;
+
     @Value("${caasMaster.api.list.resourceQuotas.list}")
     private String caasMasterApiListResourceQuotasListUrl;
 
     @Value("${caasMaster.api.list.secrets.get}")
     private String caasMasterApiListSecretsGetUrl;
 
+    @Value("${caasMaster.api.list.secrets.create}")
+    private String caasMasterApiListSecretsCreateUrl;
 }

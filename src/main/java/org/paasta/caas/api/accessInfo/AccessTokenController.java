@@ -1,10 +1,9 @@
 package org.paasta.caas.api.accessInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * AccessToken Controller 클래스
@@ -40,5 +39,10 @@ public class AccessTokenController {
     @ResponseBody
     public AccessToken getSecret(@PathVariable("namespace") String namespace, @PathVariable("accessTokenName") String accessTokenName) {
         return accessTokenService.getSecret(namespace, accessTokenName);
+    }
+
+    @PostMapping()
+    public Map<?,?> createSecret(@PathVariable("namespace") String namespace, @RequestBody Object secret){
+        return accessTokenService.createSecret(namespace, secret);
     }
 }
